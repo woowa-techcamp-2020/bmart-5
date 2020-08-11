@@ -1,0 +1,36 @@
+# mysql
+.DS_Store
+
+# api document
+apidoc
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional eslint cache
+.eslintcache
+
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+config.env
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# client build files
+dist
+
+# Gatsby files
+.cache/
