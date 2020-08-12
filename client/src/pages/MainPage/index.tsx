@@ -1,12 +1,12 @@
-import React from 'react'
-import { Header } from '../../components/Header';
+import React from 'react';
+import { Header } from '../../components/modules/Header';
 
-const MainPage:React.FC = () => {
+const MainPage: React.FC = () => {
   return (
     <div>
-      <Header/>
+      <Header />
     </div>
-  )
-}
+  );
+};
 
 export default MainPage;
