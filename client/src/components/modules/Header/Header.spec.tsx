@@ -11,6 +11,10 @@ describe('<Header />', () => {
   });
 
   it('shows the elemnts correctly', () => {
-    const utils = render(<Header />);
+    const { getByRole, getByAltText } = render(<Header />);
+    getByRole('ArrowLeft');
+    getByAltText('logo');
+    getByRole('Search');
+    getByRole('Bars');
   });
 });
