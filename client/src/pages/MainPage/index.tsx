@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import React from 'react'
 import { Header } from '../../components/Header';
 
-const MainPage:FunctionComponent = ():ReactElement => {
+const MainPage:React.FC = () => {
   return (
     <div>
       <Header/>
