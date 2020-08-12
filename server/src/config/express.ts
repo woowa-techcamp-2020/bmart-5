@@ -23,7 +23,7 @@ app.use(passport.initialize());
 passport.use(strategies.jwt);
 passport.use(strategies.google);
 
-app.use('/', router);
+app.use('/api', router);
 app.use(errorHandler);
 
 export default app;
