@@ -1,10 +1,13 @@
-import React, { ReactNode } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 
-const App:Function = ():ReactNode => {
+const App:FunctionComponent = ():ReactElement => {
   return (
     <div className="App">
-      <MainPage/>
+      <Switch>
+        <Route exact path="/" component={ MainPage }/>
+      </Switch>
     </div>
   );
 }

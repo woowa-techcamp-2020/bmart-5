@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
+import React, { FunctionComponent, ReactElement } from 'react'
 
-export const Header:Function = ():ReactNode => {
+export const Header:FunctionComponent = ():ReactElement => {
   return (
       <div className='header'>
         헤더
