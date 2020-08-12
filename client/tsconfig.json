@@ -1,5 +1,21 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "module": "esnext"
+  }
 }
