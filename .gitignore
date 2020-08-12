@@ -38,6 +38,7 @@ config.env
 
 # testing
 ./client/coverage
+__snapshots__
 
 # production
 ./client/build
