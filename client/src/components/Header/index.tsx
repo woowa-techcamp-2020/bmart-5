@@ -1,9 +1,17 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import React from 'react'
+import styled from 'styled-components';
 
-export const Header:FunctionComponent = ():ReactElement => {
+const StyledHeader = styled.div`
+  border-radius: 5px;
+  padding: 5px;
+  min-height: 30px;
+  background-color: white;
+  font-weight: 600;
+  border: 2px solid black;
+`;
+
+export const Header:React.FC = () => {
   return (
-      <div className='header'>
-        헤더
-      </div>
+    <StyledHeader className="header">헤더</StyledHeader>
   )
 }
