@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MainPage from '@pages/MainPage';
 import Normalize from '@commons/styles/Normalize';
 
@@ -8,9 +8,11 @@ const App: React.FC = () => {
     <React.Fragment>
       <Normalize />
       <div className="App">
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+          </Switch>
+        </BrowserRouter>
       </div>
     </React.Fragment>
   );
