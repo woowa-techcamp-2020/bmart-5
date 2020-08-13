@@ -1,50 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as S from './style';
+import ProductCard from '../ProductCard';
+import ContainerHeader from '../ContainerHeader';
 
-const StyledSlidableContainer = styled.div`
-  display: flex;
-  width: 300px;
-  height: 100px;
-  overflow-x: scroll;
-  background-color: red;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-      display: none;
-  }
-`;
-
-type Props = {
-    children: React.FC;
+type ItemType = {
+  name: string;
+  price: number;
 };
 
-const onClick = () => {
-    console.log('hello world');
-};
+type ItemArrType = Array<ItemType>;
 
 export const SlidableContainer: React.FC = () => {
-    return (
-        <>
-        <div>Maeng2418님을 위해 준비한 상품</div>
-        <StyledSlidableContainer>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-            <img src={require('../../../assets/images/coke.jpeg')} alt='coke' style={{width: '100px', height: '100px'}}></img>
-        </StyledSlidableContainer>
-        </>
-    );
+
+	const coke: ItemType = { name: '콜라 355ml', price: 3000 };
+	const itemArr: ItemArrType = [];
+
+	for (let i = 0; i<100; i++) {
+		itemArr[i] = coke;
+	}
+
+  return (
+    <>
+      <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
+      <S.SlidableContainer>
+        {itemArr.map((item) => {
+          return <ProductCard name={item.name} price={item.price} />;
+        })}
+      </S.SlidableContainer>
+    </>
+  );
 };
