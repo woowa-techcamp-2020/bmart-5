@@ -36,13 +36,13 @@ const onClick = () => {
 export const Header: React.FC = () => {
   return (
     <StyledHeader className="header">
-      <Icon icon="ArrowLeft" size={24} onClick={onClick} />
+      <Icon icon="ArrowLeft" size={1.5} onClick={onClick} />
       <div className="logo-wrap">
-        <Logo alt="logo" src="logo" size={80} />
+        <Logo alt="logo" src="logo" size={5} />
       </div>
       <div className="wrap">
-        <Icon icon="Search" size={24} onClick={onClick} />
-        <Icon icon="Bars" size={24} onClick={onClick} />
+        <Icon icon="Search" size={1.5} onClick={onClick} />
+        <Icon icon="Bars" size={1.5} onClick={onClick} />
       </div>
     </StyledHeader>
   );

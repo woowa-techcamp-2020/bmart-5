@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from './images/logo.png';
-import { fontSize } from '../../../utils/helper';
 
 type Props = {
   src: string;
@@ -11,8 +10,7 @@ type Props = {
 
 const StyledLogo = styled.img<{ size: number }>`
   display: inline-block;
-  font-size: ${(props) => fontSize(props.size)};
-  width: 1em;
+  width: ${(props) => props.size}rem;
   box-sizing: border-box;
 `;
 

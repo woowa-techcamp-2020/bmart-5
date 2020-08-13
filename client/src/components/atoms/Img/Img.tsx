@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fontSize } from '../../../utils/helper';
 
 type Props = {
   src: string;
@@ -17,8 +16,7 @@ const findImg = (src: string) => {
 
 const StyledImg = styled.img<{ size: number }>`
   display: inline-block;
-  font-size: ${(props) => fontSize(props.size)};
-  width: 1em;
+  width: ${(props) => props.size}rem;
   box-sizing: border-box;
 `;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaSearch, FaBars } from 'react-icons/fa';
-import { fontSize } from '../../../utils/helper';
 
 type Props = {
   icon: string;
@@ -24,8 +23,7 @@ const findIcon = (iconName: string) => {
 
 const StyledIcon = styled.i<{ size: number }>`
   display: flex;
-  font-size: ${(props) => fontSize(props.size)};
-  width: 1em;
+  width: ${(props) => props.size}rem;
   box-sizing: border-box;
   & > svg {
     justify-content: space-between;
