@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as S from './styled';
 
 type Props = {
   src: string;
@@ -14,12 +14,6 @@ const findImg = (src: string) => {
   }
 };
 
-const StyledImg = styled.img<{ size: number }>`
-  display: inline-block;
-  width: ${(props) => props.size}rem;
-  box-sizing: border-box;
-`;
-
 export const Img: React.FC<Props> = ({ alt, src, ...props }) => {
-  return <StyledImg alt={alt} src={findImg(src)} {...props} />;
+  return <S.Img alt={alt} src={findImg(src)} {...props} />;
 };
