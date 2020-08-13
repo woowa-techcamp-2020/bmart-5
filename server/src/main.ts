@@ -1,5 +1,5 @@
 import http from 'http';
-import { env, port, migrate } from './config/consts';
+import { env, port, migrate } from './config/constants';
 import logger from './config/logger';
 import app from './config/express';
 import { dbService } from './modules/database';

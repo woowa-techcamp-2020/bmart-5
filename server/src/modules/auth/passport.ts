@@ -3,7 +3,7 @@ import { Strategy as JwtStrategy } from 'passport-jwt';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import logger from '../../config/logger';
 import { Request } from 'express';
-import { jwtSecret, googleCredentials } from '../../config/consts';
+import { jwtSecret, googleCredentials } from '../../config/constants';
 
 const jwtFromRequest = (req: Request) => {
   let token = null;
