@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './style';
+import * as S from './styled';
 import ProductCard from '../ProductCard';
 import ContainerHeader from '../ContainerHeader';
 
@@ -11,13 +11,12 @@ type ItemType = {
 type ItemArrType = Array<ItemType>;
 
 export const SlidableContainer: React.FC = () => {
+  const coke: ItemType = { name: '콜라 355ml', price: 3000 };
+  const itemArr: ItemArrType = [];
 
-	const coke: ItemType = { name: '콜라 355ml', price: 3000 };
-	const itemArr: ItemArrType = [];
-
-	for (let i = 0; i<100; i++) {
-		itemArr[i] = coke;
-	}
+  for (let i = 0; i < 100; i++) {
+    itemArr[i] = coke;
+  }
 
   return (
     <>

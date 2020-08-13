@@ -9,7 +9,7 @@ export const SlidableContainer = styled.div`
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
-  };
+  }
   &::after {
     content: '';
     margin-right: 1rem;
