@@ -1,4 +1,4 @@
-import { databaseConfig } from '../../config/constants';
+import { databaseConfig } from '@config/constants';
 
 const connection = {
   ...databaseConfig,

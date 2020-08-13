@@ -4,7 +4,7 @@
   "main": "main.ts",
   "scripts": {
     "test": "jest",
-    "start": "nodemon --exec ts-node ./src/main.ts --config nodemon.json",
+    "start": "nodemon --exec ts-node -r tsconfig-paths/register ./src/main.ts --config nodemon.json",
     "apidoc": "apidoc -i src -o apidoc"
   },
   "dependencies": {
@@ -36,10 +36,13 @@
     "@types/passport-google-oauth20": "^2.0.3",
     "@types/passport-jwt": "^3.0.3",
     "@types/winston": "^2.4.4",
+    "apidoc": "^0.24.0",
     "jest": "^26.3.0",
+    "module-alias": "^2.2.2",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.2.0",
     "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
   }
 }

@@ -1,7 +1,7 @@
 import http from 'http';
-import { env, port, migrate } from './config/constants';
-import logger from './config/logger';
-import app from './config/express';
+import { env, port, migrate } from '@config/constants';
+import logger from '@config/logger';
+import app from '@config/express';
 import { dbService } from './modules/database';
 
 const stopServer = async (server: http.Server, signal?: string) => {
