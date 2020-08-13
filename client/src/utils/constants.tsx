@@ -16,3 +16,9 @@ export enum IconType {
   'RegHeart' = REG_HEART,
   'Search' = SEARCH,
 }
+
+export enum HeaderMainType {
+  LOGO = 'Logo',
+  TEXT = 'Text',
+  SEARCH_BAR = 'SearchBar',
+}
