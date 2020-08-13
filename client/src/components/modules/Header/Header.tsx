@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
 import Logo from '../../atoms/Logo';
+import { IconType } from '../../../utils/constants';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -36,13 +37,13 @@ const onClick = () => {
 export const Header: React.FC = () => {
   return (
     <StyledHeader className="header">
-      <Icon icon="ArrowLeft" size={1.5} onClick={onClick} />
+      <Icon icon={IconType.ARROW_LEFT} size={1.5} onClick={onClick} />
       <div className="logo-wrap">
         <Logo alt="logo" src="logo" size={5} />
       </div>
       <div className="wrap">
-        <Icon icon="Search" size={1.5} onClick={onClick} />
-        <Icon icon="Bars" size={1.5} onClick={onClick} />
+        <Icon icon={IconType.SEARCH} size={1.5} onClick={onClick} />
+        <Icon icon={IconType.BARS} size={1.5} onClick={onClick} />
       </div>
     </StyledHeader>
   );

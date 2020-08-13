@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaSearch, FaBars } from 'react-icons/fa';
+import { IconType } from '../../../utils/constants';
 
 type Props = {
   icon: string;
@@ -9,12 +10,12 @@ type Props = {
 };
 
 const findIcon = (iconName: string) => {
-  switch (iconName) {
-    case 'ArrowLeft':
+  switch (IconType[iconName]) {
+    case IconType.ARROW_LEFT:
       return <FaArrowLeft />;
-    case 'Search':
+    case IconType.SEARCH:
       return <FaSearch />;
-    case 'Bars':
+    case IconType.BARS:
       return <FaBars />;
     default:
       return;
