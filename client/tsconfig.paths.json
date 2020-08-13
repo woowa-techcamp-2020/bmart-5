@@ -1,10 +1,12 @@
-{ 
+{
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
       "@pages/*": ["src/pages/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@commons/*": ["src/commons/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }
