@@ -1,12 +1,18 @@
 export enum IconType {
   ARROW_LEFT = 'ArrowLeft',
-  SEARCH = 'Search',
   BARS = 'Bars',
-  REG_HEART = 'RegHeart',
+  CLOSE = 'Close',
   HEART = 'Heart',
+  NOTIFICATION = 'Notification',
+  REFRESH = 'Refresh',
+  REG_HEART = 'RegHeart',
+  SEARCH = 'Search',
   'ArrowLeft' = ARROW_LEFT,
-  'Search' = SEARCH,
   'Bars' = BARS,
+  'Close' = CLOSE,
+  'Heart' = HEART,
+  'Notification' = NOTIFICATION,
+  'Refresh' = REFRESH,
   'RegHeart' = REG_HEART,
-  'Heart' = HEART
+  'Search' = SEARCH,
 }
