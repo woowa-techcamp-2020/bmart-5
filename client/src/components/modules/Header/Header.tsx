@@ -2,11 +2,16 @@ import React from 'react';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import Logo from '@components/atoms/Logo';
-import { IconType } from '@utils/constants';
+import { HeaderMainType } from '@utils/constants';
+
+type MainType = {
+  type: string;
+  content?: string;
+};
 
 type Props = {
   left?: string;
-  main?: string;
+  main?: MainType;
   right?: Array<string>;
 };
 
@@ -24,7 +29,13 @@ export const Header: React.FC<Props> = ({ left, main, right }) => {
       )}
       {main && (
         <div className="main-wrap">
-          {main === 'Logo' ? <Logo alt="logo" src="logo" size={4} /> : `${main}`}
+          {main.type === HeaderMainType.LOGO ? (
+            <Logo alt="logo" src="logo" size={4} />
+          ) : main.type === HeaderMainType.SEARCH_BAR ? (
+            `--검색 인풋 구현--`
+          ) : (
+            `${main.content}`
+          )}
         </div>
       )}
       {right && (
