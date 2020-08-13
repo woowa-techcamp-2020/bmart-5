@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as S from './styled';
 import { FaArrowLeft, FaSearch, FaBars } from 'react-icons/fa';
 import { IconType } from '../../../utils/constants';
 
@@ -22,21 +22,10 @@ const findIcon = (iconName: string) => {
   }
 };
 
-const StyledIcon = styled.i<{ size: number }>`
-  display: flex;
-  width: ${(props) => props.size}rem;
-  box-sizing: border-box;
-  & > svg {
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 export const Icon: React.FC<Props> = ({ icon, onClick, ...props }) => {
   return (
-    <StyledIcon role={icon} onClick={onClick} {...props}>
+    <S.Icon role={icon} onClick={onClick} {...props}>
       {findIcon(icon)}
-    </StyledIcon>
+    </S.Icon>
   );
 };
