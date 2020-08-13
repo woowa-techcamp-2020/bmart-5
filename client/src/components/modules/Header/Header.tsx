@@ -5,24 +5,35 @@ import Logo from '@components/atoms/Logo';
 import { IconType } from '@utils/constants';
 
 type Props = {
-  children: React.FC;
+  left?: string;
+  main?: string;
+  right?: Array<string>;
 };
 
 const onClick = () => {
   console.log('hello world');
 };
 
-export const Header: React.FC = () => {
+export const Header: React.FC<Props> = ({ left, main, right }) => {
   return (
     <S.Header className="header">
-      <Icon icon={IconType.ARROW_LEFT} size={1.5} onClick={onClick} />
-      <div className="logo-wrap">
-        <Logo alt="logo" src="logo" size={5} />
-      </div>
-      <div className="wrap">
-        <Icon icon={IconType.SEARCH} size={1.5} onClick={onClick} />
-        <Icon icon={IconType.BARS} size={1.5} onClick={onClick} />
-      </div>
+      {left && (
+        <div className="left-wrap">
+          <Icon icon={left} size={1.1} onClick={onClick} />
+        </div>
+      )}
+      {main && (
+        <div className="main-wrap">
+          {main === 'Logo' ? <Logo alt="logo" src="logo" size={4} /> : `${main}`}
+        </div>
+      )}
+      {right && (
+        <div className="right-wrap">
+          {right.map((iconType) => (
+            <Icon icon={iconType} size={1.1} onClick={onClick} />
+          ))}
+        </div>
+      )}
     </S.Header>
   );
 };
