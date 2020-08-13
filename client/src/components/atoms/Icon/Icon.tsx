@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styled';
 import { FaArrowLeft, FaSearch, FaBars } from 'react-icons/fa';
-import { IconType } from '../../../utils/constants';
+import { IconType } from '@utils/constants';
 
 type Props = {
   icon: string;

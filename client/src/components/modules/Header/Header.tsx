@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './styled';
-import Icon from '../../atoms/Icon';
-import Logo from '../../atoms/Logo';
-import { IconType } from '../../../utils/constants';
+import Icon from '@components/atoms/Icon';
+import Logo from '@components/atoms/Logo';
+import { IconType } from '@utils/constants';
 
 type Props = {
   children: React.FC;
