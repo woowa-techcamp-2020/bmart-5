@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as S from './styled';
 import logo from './images/logo.png';
 
 type Props = {
@@ -8,12 +8,6 @@ type Props = {
   size: number;
 };
 
-const StyledLogo = styled.img<{ size: number }>`
-  display: inline-block;
-  width: ${(props) => props.size}rem;
-  box-sizing: border-box;
-`;
-
 export const Logo: React.FC<Props> = ({ alt, src, ...props }) => {
-  return <StyledLogo alt={alt} src={logo} {...props} />;
+  return <S.Logo alt={alt} src={logo} {...props} />;
 };
