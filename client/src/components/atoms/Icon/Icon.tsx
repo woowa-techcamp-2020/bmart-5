@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styled';
-import { FaArrowLeft, FaSearch, FaBars } from 'react-icons/fa';
+import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { IconType } from '@utils/constants';
 
 type Props = {
@@ -17,6 +17,10 @@ const findIcon = (iconName: string) => {
       return <FaSearch />;
     case IconType.BARS:
       return <FaBars />;
+    case IconType.REG_HEART:
+      return <FaRegHeart />;
+    case IconType.HEART:
+      return <FaHeart />;
     default:
       return;
   }
