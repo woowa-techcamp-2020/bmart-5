@@ -17,16 +17,18 @@ echo "import { ${FILE_NAME} } from './${FILE_NAME}';\n\nexport default ${FILE_NA
 # react file
 echo "create '${FILE_NAME}/${FILE_NAME}.tsx'"
 echo "import React from 'react';
-import styled from 'styled-components';
+import * as S from './styled';
 
 type Props = {};
 
-const Styled${FILE_NAME} = styled.div<Props>\`\`;
-
 export const ${FILE_NAME}: React.FC<Props> = (props) => {
-  return <Styled${FILE_NAME} />;
+  return <S.${FILE_NAME} />;
 };
 " > src/${FOLDER}/${FILE_NAME}/${FILE_NAME}.tsx
+
+# styled file
+echo "create 'styled.tsx'"
+echo "import styled from 'styled-components';\n\nexport const ${FILE_NAME} = styled.div<{}>\`\`" > src/${FOLDER}/${FILE_NAME}/styled.tsx
 
 # test file
 echo "create '${FILE_NAME}/${FILE_NAME}.spec.tsx'"
