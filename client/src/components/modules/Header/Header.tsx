@@ -2,27 +2,49 @@ import React from 'react';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import Logo from '@components/atoms/Logo';
-import { IconType } from '@utils/constants';
+import { HeaderMainType } from '@utils/constants';
+
+type MainType = {
+  type: string;
+  content?: string;
+};
 
 type Props = {
-  children: React.FC;
+  left?: string;
+  main?: MainType;
+  right?: Array<string>;
 };
 
 const onClick = () => {
   console.log('hello world');
 };
 
-export const Header: React.FC = () => {
+export const Header: React.FC<Props> = ({ left, main, right }) => {
   return (
     <S.Header className="header">
-      <Icon icon={IconType.ARROW_LEFT} size={1.5} onClick={onClick} />
-      <div className="logo-wrap">
-        <Logo alt="logo" src="logo" size={5} />
-      </div>
-      <div className="wrap">
-        <Icon icon={IconType.SEARCH} size={1.5} onClick={onClick} />
-        <Icon icon={IconType.BARS} size={1.5} onClick={onClick} />
-      </div>
+      {left && (
+        <div className="left-wrap">
+          <Icon icon={left} size={1.1} onClick={onClick} />
+        </div>
+      )}
+      {main && (
+        <div className="main-wrap">
+          {main.type === HeaderMainType.LOGO ? (
+            <Logo alt="logo" src="logo" size={4} />
+          ) : main.type === HeaderMainType.SEARCH_BAR ? (
+            `--검색 인풋 구현--`
+          ) : (
+            `${main.content}`
+          )}
+        </div>
+      )}
+      {right && (
+        <div className="right-wrap">
+          {right.map((iconType) => (
+            <Icon icon={iconType} size={1.1} onClick={onClick} />
+          ))}
+        </div>
+      )}
     </S.Header>
   );
 };

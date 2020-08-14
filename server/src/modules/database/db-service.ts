@@ -1,6 +1,6 @@
 import database from './database';
-import logger from '../../config/logger';
-import { databaseConfig, env } from '../../config/consts';
+import logger from '@config/logger';
+import { databaseConfig, env } from '@config/constants';
 
 const dbService = (migrate: boolean) => {
   const authenticateDB = () => database.authenticate();
