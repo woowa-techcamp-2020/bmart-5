@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styled';
-import logo from './images/logo.png';
+import logo from './images/logo.svg';
 
 type Props = {
   src: string;
