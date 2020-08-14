@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const tonext = keyframes`
+const slideAni = keyframes`
   0%,
   23% {
     transform: translateX(-100%);
@@ -42,7 +42,7 @@ export const Banner = styled.div<{}>`
     min-width: 100%;
     height: 100%;
     scroll-snap-align: center;
-    animation: ${tonext} 5s linear 0s infinite;
+    animation: ${slideAni} 5s linear 0s infinite;
   }
 
   & article:last-child {
