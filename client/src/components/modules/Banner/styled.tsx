@@ -3,22 +3,22 @@ import styled, { keyframes } from 'styled-components';
 const tonext = keyframes`
   0%,
   23% {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
   25%,
   48% {
-    transform: translateX(-100%);
+    transform: translateX(-200%);
   }
   50%,
   73% {
-    transform: translateX(-200%);
+    transform: translateX(-300%);
   }
   75%,
   98% {
-    transform: translateX(-300%);
+    transform: translateX(-400%);
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(-500%);
   }
 `;
 
@@ -45,6 +45,10 @@ export const Banner = styled.div<{}>`
     animation: ${tonext} 5s linear 0s infinite;
   }
 
+  & article:last-child {
+    animation-fill-mode: backwards;
+  }
+
   &:hover {
     & article {
       -webkit-animation-play-state: paused;
@@ -53,15 +57,21 @@ export const Banner = styled.div<{}>`
   }
 
   & article:nth-child(1) {
-    background-color: #92abd1;
+    background-color: #5f488b;
   }
   & article:nth-child(2) {
-    background-color: #0f4c81;
+    background-color: #92abd1;
   }
   & article:nth-child(3) {
-    background-color: #ff6f61;
+    background-color: #0f4c81;
   }
   & article:nth-child(4) {
+    background-color: #ff6f61;
+  }
+  & article:nth-child(5) {
     background-color: #5f488b;
+  }
+  & article:nth-child(6) {
+    background-color: #92abd1;
   }
 `;
