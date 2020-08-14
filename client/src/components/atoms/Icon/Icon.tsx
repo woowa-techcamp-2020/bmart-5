@@ -1,6 +1,8 @@
 import React from 'react';
 import * as S from './styled';
-import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart } from 'react-icons/fa';
+import { AiOutlineNotification } from 'react-icons/ai';
+import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { IconType } from '@utils/constants';
 
 type Props = {
@@ -21,6 +23,12 @@ const findIcon = (iconName: string) => {
       return <FaRegHeart />;
     case IconType.HEART:
       return <FaHeart />;
+    case IconType.REFRESH:
+      return <FaUndoAlt />;
+    case IconType.CLOSE:
+      return <IoMdCloseCircleOutline />;
+    case IconType.NOTIFICATION:
+      return <AiOutlineNotification />;
     default:
       return;
   }

@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { env } from './consts';
+import { env } from './constants';
 const { combine, timestamp, printf } = winston.format;
 const winstonDaily = require('winston-daily-rotate-file');
 const myFormat = printf(({ level, message, timestamp }) => `${timestamp} [${level}] ${message}`);

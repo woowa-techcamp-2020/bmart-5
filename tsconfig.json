@@ -17,10 +17,6 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "baseUrl": "./",
-    "paths": {
-      "@shared/*": ["shared/*"]
-    }
+    "experimentalDecorators": true
   }
 }

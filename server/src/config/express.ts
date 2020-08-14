@@ -5,7 +5,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
 import { LoggerStream } from './logger';
-import { logs } from './consts';
+import { logs } from './constants';
 import errorHandler from '../modules/exception/error-handler';
 import passport from 'passport';
 import strategies from '../modules/auth/passport';
