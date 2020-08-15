@@ -49,3 +49,8 @@ export const ProductBenefitDesc = (data: { rate: number }) => {
 export const ProductCountryOfOriginDesc = () => {
   return `하단 상세 내용 참고`;
 };
+
+//dotenv로 관리 필요
+export const baseURL = 'http://localhost:3000/api';
+
+export const LatestProductsLimit = 9;
