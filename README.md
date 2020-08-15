@@ -5,7 +5,7 @@
 
 ## 서비스 배포 링크
 
-[Bmart Web Service](http://13.125.26.131:3000)<br />
+[Bmart Web Service](http://13.125.22.71/:3000)<br />
 [API Document](https://documenter.getpostman.com/view/2322914/T1LPC6xM?version=latest)
 
 ## Quick Start
