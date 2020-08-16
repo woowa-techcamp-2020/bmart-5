@@ -2,6 +2,31 @@
 
 모바일 B마트 5팀 - 김명성, 이종구, 추연호
 
+## 기술 스택
+
+![title](https://img.shields.io/badge/-React-61DAFB?&logo=React&logoColor=white)
+![title](https://img.shields.io/badge/-Typescript-4075bb?&logo=TypeScript&logoColor=white)
+![title](https://img.shields.io/badge/-Next.js-000000?&logo=Next.js&logoColor=white)
+![title](https://img.shields.io/badge/-Jest-c21325?&logo=Jest&logoColor=white)
+![title](https://img.shields.io/badge/-TestingLibrary-c21325?&logo=&logoColor=white)
+![title](https://img.shields.io/badge/-Yarn-488DB7?&logo=Yarn&logoColor=white)
+![title](https://img.shields.io/badge/-Prettier-F7B93E?&logo=Prettier&logoColor=white)
+![title](https://img.shields.io/badge/-StyledComponent-CF7692?&logo=styled-components&logoColor=white)
+![title](https://img.shields.io/badge/-Node.js-339933?&logo=Node.js&logoColor=white)
+![title](https://img.shields.io/badge/-Express-191919?&logo=Node.js&logoColor=white)
+![title](https://img.shields.io/badge/-JWT-000000?&logo=JSON-Web-Tokens&logoColor=white)
+![title](https://img.shields.io/badge/-Passport-32dd65?&logo=&logoColor=white)
+![title](https://img.shields.io/badge/-MySQL-4479A1?&logo=MySQL&logoColor=white)
+![title](https://img.shields.io/badge/-Redis-dc382d?&logo=Redis&logoColor=white)
+![title](https://img.shields.io/badge/-Sequelize-4baee9?&logo=&logoColor=white)
+![title](https://img.shields.io/badge/-ElasticSearch-005571?&logo=Elasticsearch&logoColor=white)
+![title](https://img.shields.io/badge/-EC2-232F3E?&logo=Amazon-AWS&logoColor=white)
+![title](https://img.shields.io/badge/-Postman-ff6c37?&logo=Postman&logoColor=white)
+![title](https://img.shields.io/badge/-Github-181717?&logo=Github&logoColor=white)
+![title](https://img.shields.io/badge/-Notion-000000?&logo=Notion&logoColor=white)
+![title](https://img.shields.io/badge/-Slack-4A154B?&logo=Slack&logoColor=white)
+![title](https://img.shields.io/badge/-AdobeXD-FF26BE?&logo=Adobe-XD&logoColor=white)
+
 ## 서비스 배포 링크
 
 <div>
