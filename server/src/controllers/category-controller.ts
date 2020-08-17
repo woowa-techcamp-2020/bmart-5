@@ -75,9 +75,29 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
+  const { body } = req;
+
+  try {
+    const categories = await Category.bulkCreate(body);
+    res
+      .status(HttpStatus.CREATED)
+      .json(
+        JsonResponse(
+          HttpStatus.CREATED,
+          `categories bulk inserted: ${categories.length}`,
+          categories
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   create,
   findAll,
   softDelete,
   update,
+  bulkCreate,
 };
