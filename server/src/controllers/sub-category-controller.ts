@@ -116,10 +116,30 @@ const findByCategoryId = async (req: Request, res: Response, next: NextFunction)
   }
 };
 
+const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
+  const { body } = req;
+
+  try {
+    const subCategories = await SubCategory.bulkCreate(body);
+    res
+      .status(HttpStatus.CREATED)
+      .json(
+        JsonResponse(
+          HttpStatus.CREATED,
+          `sub categories bulk inserted: ${subCategories.length}`,
+          subCategories
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   create,
   findAll,
   softDelete,
   update,
   findByCategoryId,
+  bulkCreate,
 };

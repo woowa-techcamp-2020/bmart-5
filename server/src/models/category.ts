@@ -27,6 +27,7 @@ Category.init(
     orderWeight: {
       type: DataTypes.DOUBLE,
       allowNull: false,
+      unique: false,
     },
     deletedAt: {
       type: DataTypes.DATE,

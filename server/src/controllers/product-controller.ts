@@ -16,7 +16,16 @@ const findLatest = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const products = await Product.findAll({
-      attributes: ['id', 'name', 'price', 'content', 'discount', 'subCategoryId', 'outOfStockAt'],
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
       where: {
         deletedAt: {
           [Op.is]: null,
@@ -39,7 +48,16 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const product = await Product.findByPk(paramId, {
-      attributes: ['id', 'name', 'price', 'content', 'discount', 'subCategoryId', 'outOfStockAt'],
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
     });
     res
       .status(HttpStatus.OK)
@@ -56,7 +74,16 @@ const findBySubCategoryId = async (req: Request, res: Response, next: NextFuncti
 
   try {
     const products = await Product.findAll({
-      attributes: ['id', 'name', 'price', 'content', 'discount', 'subCategoryId', 'outOfStockAt'],
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
       where: {
         [Op.and]: [
           { subCategoryId: paramSubCategoryId },
@@ -141,6 +168,21 @@ const setOutOfStock = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
+  const { body } = req;
+
+  try {
+    const products = await Product.bulkCreate(body);
+    res
+      .status(HttpStatus.CREATED)
+      .json(
+        JsonResponse(HttpStatus.CREATED, `products bulk inserted: ${products.length}`, products)
+      );
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   findLatest,
   findById,
@@ -149,4 +191,5 @@ export default {
   update,
   softDelete,
   setOutOfStock,
+  bulkCreate,
 };

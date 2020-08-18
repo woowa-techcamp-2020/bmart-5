@@ -10,5 +10,6 @@ router.delete('/:id', ProductController.softDelete);
 router.patch('/out/:id', ProductController.setOutOfStock);
 router.get('/latest/:limit', ProductController.findLatest);
 router.get('/sub/:subCategoryId/:limit', ProductController.findBySubCategoryId);
+router.post('/bulkcreate', ProductController.bulkCreate);
 
 export default router;
