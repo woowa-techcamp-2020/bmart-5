@@ -37,7 +37,9 @@ jobs:
         run: |
           cd shared
           touch .env
-          echo ${{ secrets.ENV }} >> .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
+          EOF
           cat .env
 
       - name: Make zip file
