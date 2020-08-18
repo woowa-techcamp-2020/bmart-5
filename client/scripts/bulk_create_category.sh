@@ -41,6 +41,82 @@ curl --location --request POST ${url}/api/category/bulkcreate \
         {
             "name": "hair",
             "orderWeight": 90000
+        },
+        {
+            "name": "set_menu",
+            "orderWeight": 100000
+        },
+        {
+            "name": "bongji",
+            "orderWeight": 110000
+        },
+        {
+            "name": "dosirak",
+            "orderWeight": 120000
+        },
+        {
+            "name": "ramen",
+            "orderWeight": 130000
+        },
+        {
+            "name": "soup",
+            "orderWeight": 140000
+        },
+        {
+            "name": "cook",
+            "orderWeight": 150000
+        },
+        {
+            "name": "water",
+            "orderWeight": 160000
+        },
+        {
+            "name": "sauce",
+            "orderWeight": 170000
+        },
+        {
+            "name": "ham",
+            "orderWeight": 180000
+        },
+        {
+            "name": "healthy",
+            "orderWeight": 190000
+        },
+        {
+            "name": "detergent",
+            "orderWeight": 200000
+        },
+        {
+            "name": "tissue",
+            "orderWeight": 210000
+        },
+        {
+            "name": "beauty",
+            "orderWeight": 220000
+        },
+        {
+            "name": "clean",
+            "orderWeight": 230000
+        },
+        {
+            "name": "fashion",
+            "orderWeight": 240000
+        },
+        {
+            "name": "kitchen",
+            "orderWeight": 250000
+        },
+        {
+            "name": "pet",
+            "orderWeight": 260000
+        },
+        {
+            "name": "woowa_supply",
+            "orderWeight": 270000
+        },
+        {
+            "name": "supply",
+            "orderWeight": 280000
         }
     ]'
 
