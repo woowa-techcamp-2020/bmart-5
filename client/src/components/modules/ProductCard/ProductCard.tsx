@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import * as S from './styled';
 import { IconType } from '@utils/constants';
 import Icon from '@components/atoms/Icon';
@@ -13,7 +13,8 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ id, name, price, url }) => {
   const [Liked, setLiked] = useState(false);
 
-  const onLikeHandler = () => {
+  const onLikeHandler = (event: MouseEvent) => {
+    event.stopPropagation();
     setLiked(!Liked);
   };
 
@@ -22,7 +23,7 @@ export const ProductCard: React.FC<Props> = ({ id, name, price, url }) => {
   };
 
   return (
-    <S.ProductCard>
+    <S.ProductCard onClick={onItemClickHandler}>
       <S.ProductImg width={200} height={200} src={url}>
         <div onClick={onLikeHandler}>
           {Liked ? (
@@ -32,7 +33,7 @@ export const ProductCard: React.FC<Props> = ({ id, name, price, url }) => {
           )}
         </div>
       </S.ProductImg>
-      <div onClick={onItemClickHandler}>
+      <div>
         <div className="item-name">{name}</div>
         <div className="item-price">{price}원</div>
       </div>
