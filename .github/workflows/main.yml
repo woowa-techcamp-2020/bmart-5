@@ -33,15 +33,6 @@ jobs:
           yarn build
           cd ..
 
-      - name: Create env file
-        run: |
-          cd shared
-          touch .env
-          cat << EOF >> .env
-          ${{ secrets.ENV }}
-          EOF
-          cat .env
-
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
