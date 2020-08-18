@@ -1,3 +1,4 @@
-import { CategoryContainer } from './CategoryContainer';
+import { CategoryContainer, CategoryType } from './CategoryContainer';
 
+export type { CategoryType };
 export default CategoryContainer;

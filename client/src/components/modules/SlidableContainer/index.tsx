@@ -1,3 +1,4 @@
-import { SlidableContainer } from './SlidableContainer';
+import { SlidableContainer, ProductType } from './SlidableContainer';
 
+export type { ProductType };
 export default SlidableContainer;
