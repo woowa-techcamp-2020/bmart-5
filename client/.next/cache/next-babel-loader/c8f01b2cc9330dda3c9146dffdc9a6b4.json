@@ -1,1 +1,0 @@
-{"ast":null,"code":"import styled from 'styled-components';\nexport const Footer = styled.footer.withConfig({\n  displayName: \"styled__Footer\",\n  componentId: \"axluo7-0\"\n})([\"background-color:#efefef;\"]);","map":null,"metadata":{},"sourceType":"module"}

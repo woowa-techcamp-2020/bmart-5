@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { Icon } from './Icon';\nexport default Icon;","map":{"version":3,"sources":["/Users/woowahan2/Desktop/bmart-5/client/src/components/atoms/Icon/index.tsx"],"names":["Icon"],"mappings":"AAAA,SAASA,IAAT,QAAqB,QAArB;AAEA,eAAeA,IAAf","sourcesContent":["import { Icon } from './Icon';\n\nexport default Icon;\n"]},"metadata":{},"sourceType":"module"}
