@@ -1,0 +1,1 @@
+{"ast":null,"code":"import styled from 'styled-components';\nexport var Logo = styled.img.withConfig({\n  displayName: \"styled__Logo\",\n  componentId: \"sc-1mskk4s-0\"\n})([\"display:inline-block;width:\", \"rem;box-sizing:border-box;\"], function (props) {\n  return props.size;\n});","map":null,"metadata":{},"sourceType":"module"}
