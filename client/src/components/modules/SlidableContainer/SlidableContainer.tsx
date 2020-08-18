@@ -31,7 +31,7 @@ export const SlidableContainer: React.FC<SlidableContainerState> = (props) => {
               id={item.id}
               name={item.name}
               price={(item.price * (100 - item.discount)) / 100}
-              url={item.url}
+              url={item.imgUrl}
             />
           );
         })}
