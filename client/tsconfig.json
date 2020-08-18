@@ -1,21 +1,23 @@
 {
-  "extends": "./tsconfig.paths.json",
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
-  ],
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "baseUrl": "./",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@components/*": ["src/components/*"],
+      "@commons/*": ["src/commons/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["assets/*"]
+    },
+    "alwaysStrict": true,
     "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"],
     "noEmit": true,
-    "jsx": "react",
-    "module": "esnext"
-  }
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "exclude": ["node_modules", "**/*.test.ts"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
