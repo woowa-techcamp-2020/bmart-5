@@ -1,54 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as S from './styled';
-import { ProductDeliveryDesc, OrderedCategoriesLimit } from '@utils/constants';
-import API from '@utils/API';
+import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '../ContainerHeader';
 import CategoryIcon from '../CategoryIcon';
-import HttpStatus from 'http-status';
 
 type Props = {
-  data: dataType;
-};
-
-type dataType = {
+  categories: Array<CategoryType>;
   earliest: number;
   latest: number;
 };
 
-type CategoryType = {
+export type CategoryType = {
   id: number;
   name: string;
+  orderWeight: string;
   url: string;
 };
 
-type CategoryContainerState = {
-  categories: Array<CategoryType>;
-};
-
-export const CategoryContainer: React.FC<Props> = ({ data }) => {
-  const [state, setState] = useState<CategoryContainerState>({
-    categories: [],
-  });
-
-  useEffect(() => {
-    const asyncFetchCategories = async (limit: number) => {
-      let { status, result, message } = (await API.get(`/category/${limit}`)).data;
-      console.info(message);
-      if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-        const categories = [...result].map((category) => {
-          category.url = require(`@assets/images/main-${category.name}.png`);
-          return category;
-        });
-        setState({ categories: categories });
-      } else {
-        console.error(`not defined status code: ${status}`);
-        setState({ categories: [] });
-      }
-    };
-
-    asyncFetchCategories(OrderedCategoriesLimit);
-  }, []);
-
+export const CategoryContainer = (props: Props) => {
   const showMoreIcon = require('@assets/images/more.png');
 
   const showMoreClickHandler = () => {
@@ -59,20 +28,21 @@ export const CategoryContainer: React.FC<Props> = ({ data }) => {
   return (
     <>
       <ContainerHeader>
-        {ProductDeliveryDesc({ earliest: data.earliest, latest: data.latest })}
+        {ProductDeliveryDesc({ earliest: props.earliest, latest: props.latest })}
         {' | 24시까지 주문 가능'}
       </ContainerHeader>
       <S.WrapperContainer>
         <S.CategoryContainer>
-          {state.categories.map((category) => (
-            <CategoryIcon
-              width={50}
-              height={70}
-              id={category.id}
-              name={category.name}
-              url={category.url}
-            />
-          ))}
+          {props.categories &&
+            props.categories.map((category: CategoryType) => (
+              <CategoryIcon
+                width={50}
+                height={70}
+                id={category.id}
+                name={category.name}
+                url={category.url}
+              />
+            ))}
           {
             <CategoryIcon
               width={50}
