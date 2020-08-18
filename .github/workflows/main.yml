@@ -29,7 +29,8 @@ jobs:
 
       - name: Build
         run: |
-          yarn run build
+          cd client
+          yarn build
           cd ..
 
       - name: Create env file
