@@ -3,6 +3,7 @@ import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '../ContainerHeader';
 import CategoryIcon from '../CategoryIcon';
+import { More } from '@assets/images';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -18,8 +19,6 @@ export type CategoryType = {
 };
 
 export const CategoryContainer = (props: Props) => {
-  const showMoreIcon = require('@assets/images/more.png');
-
   const showMoreClickHandler = () => {
     alert('show more');
   };
@@ -48,7 +47,7 @@ export const CategoryContainer = (props: Props) => {
               width={50}
               height={70}
               name={showMoreName}
-              url={showMoreIcon}
+              url={More}
               onClick={showMoreClickHandler}
             />
           }

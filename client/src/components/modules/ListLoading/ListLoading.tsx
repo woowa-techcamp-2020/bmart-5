@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import ProductCard from '../ProductCard';
 import { LatestProductsLimit } from '@utils/constants';
+import { Coke as LoadingImg } from '@assets/images';
 
 export const ListLoading: React.FC = () => {
   const items = Array(LatestProductsLimit).fill({
@@ -9,12 +10,12 @@ export const ListLoading: React.FC = () => {
     name: 'loading...',
     price: 10000,
   });
-  const loadingImg = require('@assets/images/coke.jpeg');
+
   return (
     <>
       <S.LoadingContainer>
         {items.map((item) => (
-          <ProductCard id={item.id} name={item.name} price={item.price} url={loadingImg} />
+          <ProductCard id={item.id} name={item.name} price={item.price} url={LoadingImg} />
         ))}
       </S.LoadingContainer>
     </>

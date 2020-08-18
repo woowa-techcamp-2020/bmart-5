@@ -7,6 +7,8 @@ import SlidableContainer, { ProductType } from '@components/modules/SlidableCont
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
+import * as Images from '@assets/images';
+import { capitalize } from '@utils/helper';
 
 type ProductArrType = {
   products: Array<ProductType>;
@@ -58,7 +60,7 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
-      category.url = require(`@assets/images/main-${category.name}.png`);
+      category.url = Images[`Main${capitalize(category.name)}`];
       return category;
     });
     return { categories: categories };
