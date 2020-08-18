@@ -22,7 +22,7 @@ Product.init(
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(200),
       allowNull: false,
     },
     price: {
@@ -37,6 +37,11 @@ Product.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       defaultValue: 0,
+    },
+    imgUrl: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      defaultValue: null,
     },
     outOfStockAt: {
       type: DataTypes.DATE,

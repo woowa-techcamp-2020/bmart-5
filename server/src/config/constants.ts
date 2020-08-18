@@ -22,5 +22,16 @@ const databaseConfig = {
 };
 
 const migrate = process.env.MIGRATE === 'true' ? true : false;
+const parserLimit = 5000000;
 
-export { env, logs, port, jwtSecret, googleCredentials, tokenExpiresIn, databaseConfig, migrate };
+export {
+  env,
+  logs,
+  port,
+  jwtSecret,
+  googleCredentials,
+  tokenExpiresIn,
+  databaseConfig,
+  migrate,
+  parserLimit,
+};

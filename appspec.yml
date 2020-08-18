@@ -1,17 +1,16 @@
 version: 0.0
-os: linux
+os: ubuntu
 
 files:
   - source: /
     destination: /home/ubuntu/bmart-5
-# permissions:
-#   - object: /opt/testapp/
-#     owner: ubuntu
-#     group: ubuntu
-#     mode: 755
-# hooks:
-#   AfterInstall:
-#     # location은 프로젝트의 root경로를 기준
-#     - location: deploy.sh
-#       timeout: 60
-#       runas: root
+permissions:
+  - object: /home/ubuntu/bmart-5
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 60
+      runas: root
