@@ -50,4 +50,4 @@ __snapshots__
 ./client/.env.production.local
 
 # .next
-./client/.next/
+.next/
