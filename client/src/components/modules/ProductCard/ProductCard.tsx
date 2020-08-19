@@ -19,7 +19,9 @@ export const ProductCard: React.FC<Props> = ({ id, name, price, url }) => {
   };
 
   const onItemClickHandler = () => {
-    alert(`clicked ${name}(${id}) item`);
+    (document.querySelector('html') as HTMLElement).style.overflow = 'hidden';
+    (document.querySelector('.modal') as HTMLElement).style.display = 'block';
+    //alert(`clicked ${name}(${id}) item`); // 토스트 올라오게 만들기
   };
 
   return (

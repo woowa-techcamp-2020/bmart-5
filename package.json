@@ -2,7 +2,8 @@
   "name": "bmart-5",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm run --prefix client start\" \"npm run --prefix server start\""
+    "start": "concurrently \"npm run --prefix client start\" \"npm run --prefix server start\"",
+    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server start\""
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
