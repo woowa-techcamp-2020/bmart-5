@@ -1,4 +1,5 @@
 export enum IconType {
+  ARROW_FORWARD = 'ArrowForward',
   ARROW_LEFT = 'ArrowLeft',
   BARS = 'Bars',
   CLOSE = 'Close',
@@ -7,6 +8,7 @@ export enum IconType {
   REFRESH = 'Refresh',
   REG_HEART = 'RegHeart',
   SEARCH = 'Search',
+  'ArrowForward' = ARROW_FORWARD,
   'ArrowLeft' = ARROW_LEFT,
   'Bars' = BARS,
   'Close' = CLOSE,

@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
-import { IoMdCloseCircleOutline } from 'react-icons/io';
+import { IoMdCloseCircleOutline, IoIosArrowForward } from 'react-icons/io';
 import { IconType } from '@utils/constants';
 
 type Props = {
@@ -13,6 +13,8 @@ type Props = {
 
 const findIcon = (iconName: string) => {
   switch (IconType[iconName]) {
+    case IconType.ARROW_FORWARD:
+      return <IoIosArrowForward />;
     case IconType.ARROW_LEFT:
       return <FaArrowLeft />;
     case IconType.SEARCH:
