@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styled';
 import CounterBtn from '@components/atoms/CounterBtn';
 
 export const ToastModal: React.FC = (props) => {
+  const [count, setCount] = useState<number>(1);
+
   return (
     <S.ToastModal className="modal">
       <S.ModalContainer>
@@ -18,7 +20,7 @@ export const ToastModal: React.FC = (props) => {
             <div>2,490원</div>
           </div>
           <div className="counter">
-            <CounterBtn />
+            <CounterBtn count={count} setCount={setCount} />
           </div>
         </S.ModalContent>
         <S.BottomBtn priceTag={true}>

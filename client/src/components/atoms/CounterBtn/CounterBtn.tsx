@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './styled';
 
-type Props = {};
+type Props = {
+  count: number;
+  setCount: Function;
+};
 
-export const CounterBtn: React.FC<Props> = (props) => {
-  const [count, setCount] = useState(1);
-
+export const CounterBtn: React.FC<Props> = ({ count, setCount }) => {
   return (
     <S.CounterBtn>
       <button
