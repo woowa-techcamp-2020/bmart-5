@@ -7,6 +7,8 @@ fi
 FOLDER="components/$1"
 FILE_NAME=$2
 
+cd .. 
+
 echo "make directory 'src/${FOLDER}/${FILE_NAME}'"
 mkdir src/${FOLDER}/${FILE_NAME}
 
