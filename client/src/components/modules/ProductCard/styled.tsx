@@ -58,9 +58,6 @@ export const ProductImg = styled.img`
   border: 1px solid #ddd;
   width: 100%;
   height: auto;
-  background-position: center;
-  background-repeat: none;
-  background-size: cover;
 `;
 
 export const ProductInfo = styled.div`
