@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as S from './styled';
 import CounterBtn from '@components/atoms/CounterBtn';
 import BottomBtn from '@components/atoms/BottomBtn';
 
 export const ToastModal: React.FC = (props) => {
   const [count, setCount] = useState<number>(1);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const ModalClose = () => {
+    (modalRef.current as HTMLDivElement).style.display = 'none';
+  };
 
   return (
-    <S.ToastModal className="modal">
+    <S.ToastModal className="modal" ref={modalRef}>
       <S.ModalContainer>
         <S.ModalHeader>
           <div className="title">마미드림 깐대파 100g</div>
-          <div className="close-btn">닫기</div>
+          <div className="close-btn" onClick={ModalClose}>
+            닫기
+          </div>
         </S.ModalHeader>
         <S.ModalContent className="modal-content">
           <img alt="item" src={require('@assets/images/coke.jpeg')} />
@@ -26,7 +33,7 @@ export const ToastModal: React.FC = (props) => {
         </S.ModalContent>
         <BottomBtn name={'1개 담기'} tag={'1,999원'} />
       </S.ModalContainer>
-      <S.ModalBG />
+      <S.ModalBG onClick={ModalClose} />
     </S.ToastModal>
   );
 };
