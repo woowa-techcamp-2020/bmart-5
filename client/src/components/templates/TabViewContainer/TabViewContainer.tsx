@@ -10,6 +10,32 @@ export const TabViewContainer: React.FC<Props> = (props) => {
     <S.TabViewContainer>
       <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
       <div className="content">
+        <div className="images-container">
+          <div className="image-container">
+            <img
+              id="1"
+              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
+            />
+          </div>
+          <div className="image-container">
+            <img
+              id="2"
+              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
+            />
+          </div>
+          <div className="image-container">
+            <img
+              id="2"
+              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
+            />
+          </div>
+          <div className="image-container">
+            <img
+              id="2"
+              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
+            />
+          </div>
+        </div>
         <ProductCard
           id={1}
           name="친환경 인증 팽이버섯, 150g, 3팩"
