@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styled';
 import CounterBtn from '@components/atoms/CounterBtn';
+import BottomBtn from '@components/atoms/BottomBtn';
 
 export const ToastModal: React.FC = (props) => {
   const [count, setCount] = useState<number>(1);
@@ -23,10 +24,7 @@ export const ToastModal: React.FC = (props) => {
             <CounterBtn count={count} setCount={setCount} />
           </div>
         </S.ModalContent>
-        <S.BottomBtn priceTag={true}>
-          <span>1개 담기</span>
-          <span className="price-tag">1,990원</span>
-        </S.BottomBtn>
+        <BottomBtn name={'1개 담기'} tag={'1,999원'} />
       </S.ModalContainer>
       <S.ModalBG />
     </S.ToastModal>

@@ -78,16 +78,3 @@ export const ModalContent = styled.div`
     margin: auto 2rem auto auto;
   }
 `;
-
-export const BottomBtn = styled.button<{ priceTag: boolean }>`
-  position: relative;
-  background: rgb(120, 196, 192);
-  margin: 2rem 1rem 1rem 1rem;
-  padding: 1rem;
-  border-radius: 0.3rem;
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  font-size: 1.5rem;
-  ${({ priceTag }) => priceTag && `& .price-tag {position: absolute; right: 1rem;`}
-`;
