@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styled';
-import ProductCard from '../ProductCard';
-import ContainerHeader from '../ContainerHeader';
+import ProductCard from '@components/modules/ProductCard';
+import ContainerHeader from '@components/modules/ContainerHeader';
 
 export type ProductType = {
   id: number;
