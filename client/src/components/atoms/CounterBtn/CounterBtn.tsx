@@ -6,6 +6,7 @@ type Props = {
   setCount: Function;
 };
 
+// 상위 컴포넌트에서 count와 setCount 가져와서 사용.
 export const CounterBtn: React.FC<Props> = ({ count, setCount }) => {
   return (
     <S.CounterBtn>

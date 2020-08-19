@@ -11,6 +11,7 @@ export const CounterBtn = styled.div`
     border: none;
     font-weight: 600;
     font-size: 1.5rem;
+    outline: none;
   }
 
   & .number {
