@@ -22,20 +22,22 @@ type SlidableContainerState = {
 
 export const SlidableContainer: React.FC<SlidableContainerState> = (props) => {
   return (
-    <>
+    <S.SlidableContainer>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
-      <S.SlidableContainer>
+      <div className="content">
         {props.products.map((item: any) => {
           return (
             <ProductCard
               id={item.id}
               name={item.name}
-              price={(item.price * (100 - item.discount)) / 100}
+              price={item.price}
+              rate={item.discount}
               url={item.imgUrl}
+              className="slide"
             />
           );
         })}
-      </S.SlidableContainer>
-    </>
+      </div>
+    </S.SlidableContainer>
   );
 };
