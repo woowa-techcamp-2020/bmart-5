@@ -5,7 +5,7 @@ import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'r
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import { IconType } from '@utils/constants';
 
-type Props = {
+export type Props = {
   icon: string;
   size: number;
   onClick?: () => void;
