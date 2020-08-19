@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
@@ -24,14 +24,24 @@ type Props = {
   products: Array<ProductType>;
 };
 
-const MainPage: NextPage<Props> = (props) => (
-  <Layout title="연습용">
-    <Banner />
-    <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-    <SlidableContainer products={props.products} />
-    <ToastModal />
-  </Layout>
-);
+const MainPage: NextPage<Props> = (props) => {
+  const [select, setSelect] = useState<ProductType>();
+  useEffect(() => {
+    if (select) {
+      (document.querySelector('html') as HTMLElement).style.overflow = 'hidden';
+      (document.querySelector('.modal') as HTMLElement).style.display = 'block';
+    }
+  }, [select]);
+
+  return (
+    <Layout title="연습용">
+      <Banner />
+      <CategoryContainer earliest={24} latest={50} categories={props.categories} />
+      <SlidableContainer products={props.products} setSelect={setSelect} />
+      <ToastModal select={select} />
+    </Layout>
+  );
+};
 
 MainPage.getInitialProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();

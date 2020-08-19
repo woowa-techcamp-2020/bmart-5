@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import ProductCard from '../ProductCard';
 import ContainerHeader from '../ContainerHeader';
@@ -18,22 +18,16 @@ type ProductArrType = Array<ProductType>;
 
 type SlidableContainerState = {
   products: ProductArrType;
+  setSelect: Function;
 };
 
-export const SlidableContainer: React.FC<SlidableContainerState> = (props) => {
+export const SlidableContainer: React.FC<SlidableContainerState> = ({ products, setSelect }) => {
   return (
     <>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
       <S.SlidableContainer>
-        {props.products.map((item: any) => {
-          return (
-            <ProductCard
-              id={item.id}
-              name={item.name}
-              price={(item.price * (100 - item.discount)) / 100}
-              url={item.imgUrl}
-            />
-          );
+        {products.map((item: ProductType) => {
+          return <ProductCard item={item} setSelect={setSelect} />;
         })}
       </S.SlidableContainer>
     </>
