@@ -54,7 +54,6 @@ export const ProductCard = styled.div`
 `;
 
 export const ProductImg = styled.img`
-  display: flex;
   border: 1px solid #ddd;
   width: 100%;
   height: auto;
