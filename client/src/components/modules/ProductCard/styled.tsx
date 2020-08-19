@@ -1,46 +1,80 @@
 import styled from 'styled-components';
 
-type ProductProps = {
-  width: number;
-  height: number;
-  src: string;
-};
-
 export const ProductCard = styled.div`
+  /* common */
   display: flex;
   flex-direction: column;
-  margin-right: 1rem;
-  & .item-name,
-  & .item-price {
-    font-size: 1.2rem;
-    padding: 0.2rem 0;
-  }
-  & .item-price {
-    font-weight: 600;
-  }
-  &:first-child {
-    margin-left: 1rem;
-  }
-  &:last-child {
-    margin-right: 0rem;
-  }
   cursor: pointer;
+  & .image-container {
+    position: relative;
+  }
+  & .sale-badge {
+    position: absolute;
+    top: 6%;
+    left: 5%;
+  }
+  & .like-icon {
+    position: absolute;
+    bottom: 6%;
+    right: 5%;
+    & svg {
+      color: red;
+    }
+  }
+
+  /* slide */
+  &.slide {
+    width: 32vw;
+    margin-right: 1rem;
+    &:first-child {
+      margin-left: 1rem;
+    }
+    &:last-child {
+      margin-right: 0rem;
+    }
+  }
+
+  /* sale */
+  &.sale {
+    & .image-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      padding-top: 75%;
+    }
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      height: auto;
+      transform: translate(0, -12.5%);
+    }
+  }
 `;
 
-export const ProductImg = styled.div<ProductProps>`
+export const ProductImg = styled.img`
   display: flex;
   border: 1px solid #ddd;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-  background: url(${(props) => props.src});
+  width: 100%;
+  height: auto;
   background-position: center;
   background-repeat: none;
   background-size: cover;
-  margin-bottom: 1rem;
-  & > div {
-    margin: auto 0.5rem 0.5rem auto;
+`;
+
+export const ProductInfo = styled.div`
+  font-size: 1rem;
+  & .item-name {
+    padding: 0.2rem 0;
   }
-  & svg {
-    color: red;
+  & .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & .item-price {
+    padding: 0.2rem 0;
+    font-weight: 600;
   }
 `;
