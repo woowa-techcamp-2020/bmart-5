@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { Op } from 'sequelize';
+import HttpStatus from 'http-status';
 import { Product } from '../models';
 import { JsonResponse } from '../modules/utils';
-import HttpStatus from 'http-status';
+import CustomError from '../modules/exception/custom-error';
 
 /**
  * TODO
@@ -69,7 +70,7 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
 
 const findBySubCategoryId = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
-  const paramSubCategoryId = params.subCategoryId;
+  const paramSubCategoryId = parseInt(params.subCategoryId);
   const paramLimit = parseInt(params.limit);
 
   try {
@@ -129,7 +130,11 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   const paramId = parseInt(params.id);
 
   try {
-    const product = await Product.update(body, { where: { id: paramId } });
+    const product = await Product.findByPk(paramId);
+    if (!product)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no product with id ${paramId}`, '');
+    product.update(body);
+
     res
       .status(HttpStatus.OK)
       .json(JsonResponse(HttpStatus.OK, `product updated: ${paramId}`, product));
@@ -144,10 +149,16 @@ const softDelete = async (req: Request, res: Response, next: NextFunction) => {
   const now = new Date();
 
   try {
-    const product = await Product.update({ deletedAt: now }, { where: { id: paramId } });
-    res
-      .status(HttpStatus.OK)
-      .json(JsonResponse(HttpStatus.OK, `product soft deleted: ${paramId}`, product));
+    const product = await Product.findByPk(paramId);
+    if (!product)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no product with id ${paramId}`, '');
+    product.update({ deletedAt: now });
+
+    res.status(HttpStatus.OK).json(
+      JsonResponse(HttpStatus.OK, `product soft deleted: ${paramId}`, {
+        completed: product[0] ? true : false,
+      })
+    );
   } catch (err) {
     next(err);
   }
@@ -159,7 +170,11 @@ const setOutOfStock = async (req: Request, res: Response, next: NextFunction) =>
   const now = new Date();
 
   try {
-    const product = await Product.update({ outOfStockAt: now }, { where: { id: paramId } });
+    const product = await Product.findByPk(paramId);
+    if (!product)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no product with id ${paramId}`, '');
+    product.update({ outOfStockAt: now });
+
     res
       .status(HttpStatus.OK)
       .json(JsonResponse(HttpStatus.OK, `product out of stock: ${paramId}`, product));
