@@ -59,4 +59,6 @@ export const baseURL = 'http://localhost:3000/api';
 
 export const LatestProductsLimit = 9;
 
+export const HighestOffProductsLimit = 4;
+
 export const OrderedCategoriesLimit = 9;

@@ -8,7 +8,11 @@ import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
-import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
+import {
+  LatestProductsLimit,
+  HighestOffProductsLimit,
+  OrderedCategoriesLimit,
+} from '@utils/constants';
 import * as Images from '@assets/images';
 import { capitalize } from '@utils/helper';
 
@@ -27,6 +31,10 @@ type LatestProductArrType = {
   latestProducts: Array<ProductType>;
 };
 
+type HighestOffProductArrType = {
+  highestOffProducts: Array<ProductType>;
+};
+
 type CategoryArrType = {
   categories: Array<CategoryType>;
 };
@@ -34,6 +42,7 @@ type CategoryArrType = {
 type Props = {
   categories: Array<CategoryType>;
   latestProducts: Array<ProductType>;
+  highestOffProducts: Array<ProductType>;
 };
 
 const MainPage: NextPage<Props> = (props) => {
@@ -51,7 +60,7 @@ const MainPage: NextPage<Props> = (props) => {
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer products={props.latestProducts} setSelect={setSelect} />
-      <TabViewContainer setSelect={setSelect} />
+      <TabViewContainer products={props.highestOffProducts} setSelect={setSelect} />
       <ToastModal select={select} setSelect={setSelect} />
     </Layout>
   );
@@ -59,8 +68,9 @@ const MainPage: NextPage<Props> = (props) => {
 
 MainPage.getInitialProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();
+  const tabViewResponse = await tabViewContainerFetch();
   const categoryResponse = await categoryContainerFetch();
-  return { ...slidalbeResponse, ...categoryResponse };
+  return { ...slidalbeResponse, ...tabViewResponse, ...categoryResponse };
 };
 
 const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
@@ -76,6 +86,22 @@ const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
   } else {
     console.error(`not defined status code: ${status}`);
     return { latestProducts: [] };
+  }
+};
+
+const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
+  let highestOffProducts = (await API.get(`/product/latest/${HighestOffProductsLimit}`)).data;
+
+  console.info(highestOffProducts.message);
+  if (
+    highestOffProducts.status === HttpStatus.OK ||
+    highestOffProducts.status === HttpStatus.NOT_MODIFIED
+  ) {
+    const products = [...highestOffProducts.result];
+    return { highestOffProducts: products };
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return { highestOffProducts: [] };
   }
 };
 
