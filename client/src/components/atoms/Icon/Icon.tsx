@@ -6,7 +6,7 @@ import { IoMdCloseCircleOutline, IoIosArrowForward } from 'react-icons/io';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { IconType } from '@utils/constants';
 
-type Props = {
+export type Props = {
   icon: string;
   size: number;
   onClick?: () => void;

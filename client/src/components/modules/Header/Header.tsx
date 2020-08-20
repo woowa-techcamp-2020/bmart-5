@@ -9,7 +9,7 @@ type MainType = {
   content?: string;
 };
 
-type Props = {
+export type Props = {
   left?: string;
   main?: MainType;
   right?: Array<string>;

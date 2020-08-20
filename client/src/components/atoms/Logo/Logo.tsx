@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import logo from './images/logo.svg';
 
-type Props = {
+export type Props = {
   src: string;
   alt: string;
   size: number;
