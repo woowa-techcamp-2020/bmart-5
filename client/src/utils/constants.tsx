@@ -62,3 +62,5 @@ export const LatestProductsLimit = 9;
 export const HighestOffProductsLimit = 4;
 
 export const OrderedCategoriesLimit = 9;
+
+export const TabViewProductsCount = 4;

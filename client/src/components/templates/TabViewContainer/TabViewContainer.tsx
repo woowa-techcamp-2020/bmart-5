@@ -3,6 +3,7 @@ import * as S from './styled';
 import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
+import { TabViewProductsCount } from '@utils/constants';
 
 type ProductArrType = Array<ProductType>;
 
@@ -13,7 +14,9 @@ type Props = {
 
 export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const imageRefs = Array.from({ length: 4 }, () => useRef<HTMLDivElement>(null));
+  const imageRefs = Array.from({ length: TabViewProductsCount }, () =>
+    useRef<HTMLDivElement>(null)
+  );
 
   useEffect(() => {
     imageRefs[0].current?.classList.add('current-tab');
