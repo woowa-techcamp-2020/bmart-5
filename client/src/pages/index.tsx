@@ -12,8 +12,6 @@ import {
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
 } from '@utils/constants';
-import * as Images from '@assets/images';
-import { capitalize } from '@utils/helper';
 import { Context } from '@commons/Context';
 
 export type ProductType = {
@@ -110,7 +108,7 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
-      category.url = Images[`Main${capitalize(category.name)}`];
+      category.url = `./assets/images/categories/main-${category.name}.png`;
       return category;
     });
     return { categories };

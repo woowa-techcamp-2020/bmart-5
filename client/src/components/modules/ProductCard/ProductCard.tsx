@@ -3,7 +3,7 @@ import * as S from './styled';
 import { IconType } from '@utils/constants';
 import Icon from '@components/atoms/Icon';
 import Badge from '@components/atoms/Badge';
-import { ProductType } from '@components/templates/SlidableContainer';
+import { ProductType } from '@pages/index';
 import { Context } from '@commons/Context';
 
 type Props = {

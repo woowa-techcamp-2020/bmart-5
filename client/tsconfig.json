@@ -6,8 +6,7 @@
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
       "@commons/*": ["src/commons/*"],
-      "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"]
+      "@utils/*": ["src/utils/*"]
     },
     "alwaysStrict": true,
     "isolatedModules": true,

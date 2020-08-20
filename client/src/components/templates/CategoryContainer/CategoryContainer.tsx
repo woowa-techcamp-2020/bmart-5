@@ -3,7 +3,6 @@ import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import CategoryIcon from '@components/modules/CategoryIcon';
-import { More } from '@assets/images';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -47,7 +46,7 @@ export const CategoryContainer = (props: Props) => {
               width={7}
               height={9}
               name={showMoreName}
-              url={More}
+              url={'./assets/images/categories/more.png'}
               onClick={showMoreClickHandler}
             />
           }
