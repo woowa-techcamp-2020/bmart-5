@@ -2,8 +2,9 @@ import React from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
-import CategoryContainer, { CategoryType } from '@components/modules/CategoryContainer';
-import SlidableContainer, { ProductType } from '@components/modules/SlidableContainer';
+import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
+import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
+import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
@@ -28,6 +29,7 @@ const MainPage: NextPage<Props> = (props) => (
     <Banner />
     <CategoryContainer earliest={24} latest={50} categories={props.categories} />
     <SlidableContainer products={props.products} />
+    <TabViewContainer></TabViewContainer>
   </Layout>
 );
 

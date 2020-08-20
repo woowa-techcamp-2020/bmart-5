@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
-import ContainerHeader from '../ContainerHeader';
-import CategoryIcon from '../CategoryIcon';
+import ContainerHeader from '@components/modules/ContainerHeader';
+import CategoryIcon from '@components/modules/CategoryIcon';
 import { More } from '@assets/images';
 
 type Props = {
