@@ -3,9 +3,25 @@ import * as S from './styled';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import ProductCard from '@components/modules/ProductCard';
 
-type Props = {};
+type Props = {
+  // products: ProductArrType; <--- 나중에 이걸로 가져와서 map으로 처리.
+  setSelect: Function;
+};
 
-export const TabViewContainer: React.FC<Props> = (props) => {
+// 임시 데이터
+const item = {
+  content: '',
+  discount: 8,
+  id: 608,
+  imgUrl:
+    'http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg',
+  name: '친환경 인증 팽이버섯, 150g, 3팩',
+  outOfStockAt: null,
+  price: 1480,
+  subCategoryId: 2,
+};
+
+export const TabViewContainer: React.FC<Props> = ({ setSelect }) => {
   return (
     <S.TabViewContainer>
       <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
@@ -36,14 +52,7 @@ export const TabViewContainer: React.FC<Props> = (props) => {
             />
           </div>
         </div>
-        <ProductCard
-          id={1}
-          name="친환경 인증 팽이버섯, 150g, 3팩"
-          price={30000}
-          rate={40}
-          url="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
-          className="sale"
-        ></ProductCard>
+        <ProductCard setSelect={setSelect} item={item} className="sale"></ProductCard>
       </div>
     </S.TabViewContainer>
   );

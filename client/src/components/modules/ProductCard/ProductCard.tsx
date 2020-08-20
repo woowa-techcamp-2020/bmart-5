@@ -8,7 +8,7 @@ import { ProductType } from '@components/templates/SlidableContainer';
 type Props = {
   item: ProductType;
   setSelect: Function;
-  className: 'slide' | 'grid' | 'main' | 'sale';
+  className?: 'slide' | 'grid' | 'main' | 'sale';
 };
 
 export const ProductCard: React.FC<Props> = ({ item, setSelect, className }) => {

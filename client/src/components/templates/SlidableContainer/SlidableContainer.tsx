@@ -16,12 +16,12 @@ export type ProductType = {
 
 type ProductArrType = Array<ProductType>;
 
-type SlidableContainerState = {
+type Props = {
   products: ProductArrType;
   setSelect: Function;
 };
 
-export const SlidableContainer: React.FC<SlidableContainerState> = ({ products, setSelect }) => {
+export const SlidableContainer: React.FC<Props> = ({ products, setSelect }) => {
   return (
     <S.SlidableContainer>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>

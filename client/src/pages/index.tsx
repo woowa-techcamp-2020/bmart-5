@@ -40,8 +40,8 @@ const MainPage: NextPage<Props> = (props) => {
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer products={props.products} setSelect={setSelect} />
-      <TabViewContainer></TabViewContainer>
-      <ToastModal select={select} />
+      <TabViewContainer setSelect={setSelect} />
+      <ToastModal select={select} setSelect={setSelect} />
     </Layout>
   );
 };
