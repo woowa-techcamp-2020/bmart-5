@@ -10,8 +10,7 @@ type Props = {
   title?: string;
 };
 
-// const Layout = ({ children, title = 'This is the default title' }: Props) => (
-export const Layout = ({ children, title = 'default title' }: Props) => (
+export const Layout = ({ children, title = 'B 마트' }: Props) => (
   <>
     <Normalize />
     <Head>

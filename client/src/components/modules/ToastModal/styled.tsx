@@ -4,7 +4,6 @@ export const ToastModal = styled.div<{}>`
   display: none;
   font-size: 16px;
   z-index: 2;
-  width: 100%;
 `;
 
 export const ModalContainer = styled.div`
@@ -12,7 +11,10 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   position: fixed;
   bottom: 0;
+  left: 50%;
   width: 100%;
+  max-width: 48rem;
+  transform: translateX(-50%);
   background: rgb(255, 255, 255);
   z-index: 1500;
   opacity: 1;

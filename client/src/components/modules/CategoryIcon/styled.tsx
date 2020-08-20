@@ -13,15 +13,11 @@ type IconContainerProps = {
 
 export const IconContainer = styled.div<IconContainerProps>`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
 `;
 
 export const CategoryImg = styled.div<CategoryProps>`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+  width: ${(props) => props.width}rem;
+  height: ${(props) => props.height}rem;
   background: url(${(props) => props.src});
   background-size: cover;
   cursor: pointer;

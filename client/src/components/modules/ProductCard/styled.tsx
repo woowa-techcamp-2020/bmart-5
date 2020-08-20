@@ -24,7 +24,7 @@ export const ProductCard = styled.div`
 
   /* slide */
   &.slide {
-    width: 32vw;
+    width: 16rem;
     margin-right: 1rem;
     &:first-child {
       margin-left: 1rem;
