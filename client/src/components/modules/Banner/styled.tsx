@@ -23,6 +23,7 @@ export const SlideBox = styled.div`
 
 export const SlideList = styled.div`
   display: flex;
+  transition: 300ms;
 
   & .slide_content {
     min-width: 100%;
