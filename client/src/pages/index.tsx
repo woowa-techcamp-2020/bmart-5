@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
-import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
+import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
@@ -11,6 +11,17 @@ import HttpStatus from 'http-status';
 import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
 import * as Images from '@assets/images';
 import { capitalize } from '@utils/helper';
+
+export type ProductType = {
+  id: number;
+  name: string;
+  price: number;
+  content: string;
+  discount: number;
+  outOfStockAt: Date | null;
+  subCategoryId: number;
+  imgUrl: string;
+};
 
 type ProductArrType = {
   products: Array<ProductType>;
