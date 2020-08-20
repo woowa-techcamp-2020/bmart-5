@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import * as S from './styled';
 import CounterBtn from '@components/atoms/CounterBtn';
 import BottomBtn from '@components/atoms/BottomBtn';
-import { ProductType } from '@components/modules/SlidableContainer';
+import { ProductType } from '@components/templates/SlidableContainer';
 
 type Props = {
+  setSelect: Function;
   select?: ProductType;
 };
 
-export const ToastModal: React.FC<Props> = ({ select }) => {
+export const ToastModal: React.FC<Props> = ({ setSelect, select }) => {
   const [count, setCount] = useState<number>(1);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const ModalClose = () => {
+    setSelect();
     (modalRef.current as HTMLDivElement).style.display = 'none';
     (document.querySelector('html') as HTMLElement).style.overflow = 'scroll';
   };

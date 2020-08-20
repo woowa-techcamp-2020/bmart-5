@@ -9,13 +9,14 @@ export const ListLoading: React.FC = () => {
     id: 0,
     name: 'loading...',
     price: 10000,
+    imgUrl: LoadingImg,
   });
 
   return (
     <>
       <S.LoadingContainer>
         {items.map((item) => (
-          <ProductCard id={item.id} name={item.name} price={item.price} url={LoadingImg} />
+          <ProductCard item={item} className={'main'} setSelect={() => console.log('loading')} />
         ))}
       </S.LoadingContainer>
     </>
