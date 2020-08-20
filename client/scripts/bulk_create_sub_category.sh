@@ -1,4 +1,4 @@
-url='http://localhost:4000'
+url='http://localhost:3000'
 base_id=$1   #첫번째 카테고리 id
 # init each category id with base_id
 ########################################

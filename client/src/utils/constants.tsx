@@ -55,7 +55,7 @@ export const ProductCountryOfOriginDesc = () => {
 };
 
 //dotenv로 관리 필요
-export const baseURL = 'http://localhost:4000/api';
+export const baseURL = 'http://localhost:3000/api';
 
 export const LatestProductsLimit = 9;
 
