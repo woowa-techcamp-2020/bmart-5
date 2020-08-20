@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import Normalize from '../../../commons/styles/Normalize';
-import Header from '../../modules/Header';
-import Footer from '../../modules/Footer';
+import Normalize from '@commons/styles/Normalize';
+import Header from '@components/modules/Header';
+import Footer from '@components/modules/Footer';
 import Head from 'next/head';
 import { IconType, HeaderMainType } from '@utils/constants';
 

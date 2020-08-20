@@ -9,7 +9,6 @@ type ProductArrType = Array<ProductType>;
 
 type Props = {
   products: ProductArrType;
-  setSelect: Function;
 };
 
 export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
@@ -36,6 +35,7 @@ export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
     return imageRefs[target].current;
   };
 
+export const TabViewContainer: React.FC<Props> = () => {
   return (
     <S.TabViewContainer>
       <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
@@ -49,11 +49,8 @@ export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
             );
           })}
         </div>
-        <ProductCard
-          setSelect={setSelect}
-          item={products[currentTab]}
-          className="sale"
-        ></ProductCard>
+
+        <ProductCard item={item} className="sale"></ProductCard>
       </div>
     </S.TabViewContainer>
   );

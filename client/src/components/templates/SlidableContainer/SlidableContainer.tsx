@@ -8,16 +8,15 @@ type ProductArrType = Array<ProductType>;
 
 type Props = {
   products: ProductArrType;
-  setSelect: Function;
 };
 
-export const SlidableContainer: React.FC<Props> = ({ products, setSelect }) => {
+export const SlidableContainer: React.FC<Props> = ({ products }) => {
   return (
     <S.SlidableContainer>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
       <div className="content">
         {products.map((item: ProductType) => {
-          return <ProductCard item={item} setSelect={setSelect} className={'slide'} />;
+          return <ProductCard item={item} className={'slide'} />;
         })}
       </div>
     </S.SlidableContainer>

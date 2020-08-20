@@ -1,17 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import * as S from './styled';
 import CounterBtn from '@components/atoms/CounterBtn';
 import BottomBtn from '@components/atoms/BottomBtn';
-import { ProductType } from '@components/templates/SlidableContainer';
+import { Context } from '@commons/Context';
 
-type Props = {
-  setSelect: Function;
-  select?: ProductType;
-};
-
-export const ToastModal: React.FC<Props> = ({ setSelect, select }) => {
+export const ToastModal: React.FC = () => {
   const [count, setCount] = useState<number>(1);
   const modalRef = useRef<HTMLDivElement>(null);
+  const { select, setSelect } = useContext(Context);
 
   const ModalClose = () => {
     setSelect();

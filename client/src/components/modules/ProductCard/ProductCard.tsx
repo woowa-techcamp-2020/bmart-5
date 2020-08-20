@@ -1,18 +1,19 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, useContext, MouseEvent } from 'react';
 import * as S from './styled';
 import { IconType } from '@utils/constants';
 import Icon from '@components/atoms/Icon';
 import Badge from '@components/atoms/Badge';
 import { ProductType } from '@components/templates/SlidableContainer';
+import { Context } from '@commons/Context';
 
 type Props = {
   item: ProductType;
-  setSelect: Function;
   className: 'slide' | 'grid' | 'main' | 'sale';
 };
 
-export const ProductCard: React.FC<Props> = ({ item, setSelect, className }) => {
+export const ProductCard: React.FC<Props> = ({ item, className }) => {
   const [Liked, setLiked] = useState(false);
+  const setSelect = useContext(Context).setSelect;
 
   const onLikeHandler = (event: MouseEvent) => {
     event.stopPropagation();
