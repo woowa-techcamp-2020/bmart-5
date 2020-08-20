@@ -90,7 +90,7 @@ const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
 };
 
 const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
-  let highestOffProducts = (await API.get(`/product/latest/${HighestOffProductsLimit}`)).data;
+  let highestOffProducts = (await API.get(`/product/highest-off/${HighestOffProductsLimit}`)).data;
 
   console.info(highestOffProducts.message);
   if (
