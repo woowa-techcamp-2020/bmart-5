@@ -2,18 +2,37 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
-import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
+import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
-import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
+import {
+  LatestProductsLimit,
+  HighestOffProductsLimit,
+  OrderedCategoriesLimit,
+} from '@utils/constants';
 import * as Images from '@assets/images';
 import { capitalize } from '@utils/helper';
 import { Context } from '@commons/Context';
 
-type ProductArrType = {
-  products: Array<ProductType>;
+export type ProductType = {
+  id: number;
+  name: string;
+  price: number;
+  content: string;
+  discount: number;
+  outOfStockAt: Date | null;
+  subCategoryId: number;
+  imgUrl: string;
+};
+
+type LatestProductArrType = {
+  latestProducts: Array<ProductType>;
+};
+
+type HighestOffProductArrType = {
+  highestOffProducts: Array<ProductType>;
 };
 
 type CategoryArrType = {
@@ -22,7 +41,8 @@ type CategoryArrType = {
 
 type Props = {
   categories: Array<CategoryType>;
-  products: Array<ProductType>;
+  latestProducts: Array<ProductType>;
+  highestOffProducts: Array<ProductType>;
 };
 
 const MainPage: NextPage<Props> = (props) => {
@@ -48,25 +68,40 @@ const MainPage: NextPage<Props> = (props) => {
 
 MainPage.getInitialProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();
+  const tabViewResponse = await tabViewContainerFetch();
   const categoryResponse = await categoryContainerFetch();
-  return { ...slidalbeResponse, ...categoryResponse };
+  return { ...slidalbeResponse, ...tabViewResponse, ...categoryResponse };
 };
 
-const slidableContainerFetch = async (): Promise<ProductArrType> => {
-  let lastestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
+const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
+  let latestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
 
-  console.info(lastestProducts.message);
+  console.info(latestProducts.message);
   if (
-    lastestProducts.status === HttpStatus.OK ||
-    lastestProducts.status === HttpStatus.NOT_MODIFIED
+    latestProducts.status === HttpStatus.OK ||
+    latestProducts.status === HttpStatus.NOT_MODIFIED
   ) {
-    const products = [...lastestProducts.result];
-    return {
-      products: products,
-    };
+    const products = [...latestProducts.result];
+    return { latestProducts: products };
   } else {
     console.error(`not defined status code: ${status}`);
-    return { products: [] };
+    return { latestProducts: [] };
+  }
+};
+
+const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
+  let highestOffProducts = (await API.get(`/product/highest-off/${HighestOffProductsLimit}`)).data;
+
+  console.info(highestOffProducts.message);
+  if (
+    highestOffProducts.status === HttpStatus.OK ||
+    highestOffProducts.status === HttpStatus.NOT_MODIFIED
+  ) {
+    const products = [...highestOffProducts.result];
+    return { highestOffProducts: products };
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return { highestOffProducts: [] };
   }
 };
 
@@ -78,7 +113,7 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
       category.url = Images[`Main${capitalize(category.name)}`];
       return category;
     });
-    return { categories: categories };
+    return { categories };
   } else {
     console.error(`not defined status code: ${status}`);
     return { categories: [] };

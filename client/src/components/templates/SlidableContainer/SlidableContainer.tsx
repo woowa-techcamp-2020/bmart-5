@@ -1,18 +1,8 @@
 import React from 'react';
 import * as S from './styled';
 import ProductCard from '@components/modules/ProductCard';
+import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
-
-export type ProductType = {
-  id: number;
-  name: string;
-  price: number;
-  content: string;
-  discount: number;
-  outOfStockAt: Date | null;
-  subCategoryId: number;
-  imgUrl: string;
-};
 
 type ProductArrType = Array<ProductType>;
 

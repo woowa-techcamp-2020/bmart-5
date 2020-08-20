@@ -1,24 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, MouseEvent } from 'react';
 import * as S from './styled';
-import ContainerHeader from '@components/modules/ContainerHeader';
 import ProductCard from '@components/modules/ProductCard';
+import { ProductType } from '@pages/index';
+import ContainerHeader from '@components/modules/ContainerHeader';
+import { TabViewProductsCount } from '@utils/constants';
+
+type ProductArrType = Array<ProductType>;
 
 type Props = {
-  // products: ProductArrType; <--- 나중에 이걸로 가져와서 map으로 처리.
+  products: ProductArrType;
 };
 
-// 임시 데이터
-const item = {
-  content: '',
-  discount: 8,
-  id: 608,
-  imgUrl:
-    'http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg',
-  name: '친환경 인증 팽이버섯, 150g, 3팩',
-  outOfStockAt: null,
-  price: 1480,
-  subCategoryId: 2,
-};
+export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
+  const [currentTab, setCurrentTab] = useState<number>(0);
+  const imageRefs = Array.from({ length: TabViewProductsCount }, () =>
+    useRef<HTMLDivElement>(null)
+  );
+
+  useEffect(() => {
+    imageRefs[0].current?.classList.add('current-tab');
+  }, []);
+
+  const onTabClickHandler = (event: MouseEvent) => {
+    const target = parseInt((event.target as HTMLImageElement).id, 10);
+    resetCurrentTab(target);
+    setCurrentTab(target);
+  };
+
+  const resetCurrentTab = (target: number) => {
+    imageRefs.forEach((ref) => {
+      ref.current?.classList.remove('current-tab');
+    });
+    imageRefs[target].current?.classList.add('current-tab');
+    return imageRefs[target].current;
+  };
 
 export const TabViewContainer: React.FC<Props> = () => {
   return (
@@ -26,31 +41,15 @@ export const TabViewContainer: React.FC<Props> = () => {
       <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
       <div className="content">
         <div className="images-container">
-          <div className="image-container">
-            <img
-              id="1"
-              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
-            />
-          </div>
-          <div className="image-container">
-            <img
-              id="2"
-              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
-            />
-          </div>
-          <div className="image-container">
-            <img
-              id="2"
-              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
-            />
-          </div>
-          <div className="image-container">
-            <img
-              id="2"
-              src="http://thumbnail10.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/432437954992902-8c4ac85e-1400-4da1-8d45-62bda8b9bd79.jpg"
-            />
-          </div>
+          {products.map((item: ProductType, idx) => {
+            return (
+              <S.ImageContainer ref={imageRefs[idx]}>
+                <img id={`${idx}`} src={item.imgUrl} onClick={onTabClickHandler} />
+              </S.ImageContainer>
+            );
+          })}
         </div>
+
         <ProductCard item={item} className="sale"></ProductCard>
       </div>
     </S.TabViewContainer>
