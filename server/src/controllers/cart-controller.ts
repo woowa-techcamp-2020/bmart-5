@@ -172,7 +172,7 @@ const softDeleteCart = async (req: Request, res: Response, next: NextFunction) =
     cart.update({ deletedAt: now });
 
     res.status(HttpStatus.OK).json(
-      JsonResponse(HttpStatus.OK, `cart product soft deleted: ${paramId}`, {
+      JsonResponse(HttpStatus.OK, `cart soft deleted: ${paramId}`, {
         completed: true,
       })
     );

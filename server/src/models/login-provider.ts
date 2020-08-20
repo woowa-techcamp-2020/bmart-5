@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
+import User from './user';
 
 class LoginProvider extends Model {
   public id!: string;
@@ -32,5 +33,11 @@ LoginProvider.init(
   },
   { timestamps: true, tableName: 'login_provider', sequelize }
 );
+
+LoginProvider.belongsTo(User, {
+  targetKey: 'id',
+  foreignKey: { name: 'userId', allowNull: false },
+  as: 'user',
+});
 
 export default LoginProvider;

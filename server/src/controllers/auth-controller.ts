@@ -12,6 +12,7 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const emailUser = await LoginProvider.findOne({
       attributes: ['id', 'email', 'provider', 'password', 'userId'],
+      include: { model: User, as: 'user' },
       where: {
         email: body.email,
         provider: 'email',
@@ -23,16 +24,9 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
     if (emailUser.password !== crypto.createHash('sha256').update(body.password).digest('base64'))
       throw new CustomError(HttpStatus.BAD_REQUEST, 'not matched password', '');
 
-    const user = await User.findOne({
-      attributes: ['id', 'email', 'username', 'imgUrl', 'isAdmin'],
-      where: {
-        id: emailUser.getDataValue('userId'),
-      },
-    });
-
     const token = jwt.sign(
       {
-        data: user,
+        data: emailUser.getDataValue('user'),
       },
       jwtSecret,
       { expiresIn: tokenExpiresIn }

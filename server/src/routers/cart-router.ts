@@ -6,7 +6,7 @@ const router = Router();
 router.post('/', CartController.insertCartProduct);
 
 router.get('/user/:id', CartController.findByUserId);
-router.get('/cart/:id', CartController.findByCartId);
+router.get('/:id', CartController.findByCartId);
 
 router.patch('/:id', CartController.updateCount);
 router.patch('/purchase/:id', CartController.purchase);

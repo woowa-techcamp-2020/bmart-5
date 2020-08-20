@@ -41,7 +41,7 @@ Category.init(
 Category.hasMany(SubCategory, {
   sourceKey: 'id',
   foreignKey: { name: 'categoryId', allowNull: false },
-  as: 'sub_categories',
+  as: 'subCategories',
 });
 
 export default Category;

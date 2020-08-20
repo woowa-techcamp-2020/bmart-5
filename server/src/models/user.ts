@@ -43,12 +43,6 @@ User.init(
   { timestamps: true, tableName: 'user', sequelize }
 );
 
-User.hasMany(LoginProvider, {
-  sourceKey: 'id',
-  foreignKey: { name: 'userId', allowNull: false },
-  as: 'loginProviders',
-});
-
 User.hasMany(Cart, {
   sourceKey: 'id',
   foreignKey: { name: 'userId', allowNull: false },

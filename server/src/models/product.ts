@@ -58,10 +58,4 @@ Product.init(
   { timestamps: true, tableName: 'product', sequelize }
 );
 
-Product.hasMany(CartProduct, {
-  sourceKey: 'id',
-  foreignKey: { name: 'productId', allowNull: false },
-  as: 'cartProducts',
-});
-
 export default Product;
