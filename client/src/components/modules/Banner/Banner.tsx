@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useInterval } from '@utils/customHooks';
 import * as S from './styled';
+import { MainBannerCount } from '@utils/constants';
 
 export const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,7 +30,7 @@ export const Banner = () => {
 
   useInterval(
     () => {
-      if (currentSlide === 4) {
+      if (currentSlide === MainBannerCount - 1) {
         setCurrentSlide(0);
       } else {
         setCurrentSlide(currentSlide + 1);
@@ -42,21 +43,14 @@ export const Banner = () => {
     <S.Banner>
       <S.SlideBox className="slide_box">
         <S.SlideList className="slide_list" ref={slideRef}>
-          <div className="slide_content slide01">
-            <p>1</p>
-          </div>
-          <div className="slide_content slide02">
-            <p>2</p>
-          </div>
-          <div className="slide_content slide03">
-            <p>3</p>
-          </div>
-          <div className="slide_content slide04">
-            <p>4</p>
-          </div>
-          <div className="slide_content slide05">
-            <p>5</p>
-          </div>
+          {Array.from({ length: MainBannerCount }, (_, idx) => (
+            <div className="slide_content">
+              <img
+                className="banner-image"
+                src={`./assets/images/banners/big/banner-big-${idx + 1}.gif`}
+              />
+            </div>
+          ))}
         </S.SlideList>
       </S.SlideBox>
     </S.Banner>
