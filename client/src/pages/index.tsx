@@ -64,17 +64,14 @@ MainPage.getInitialProps = async () => {
 };
 
 const slidableContainerFetch = async (): Promise<ProductArrType> => {
-  let lastestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
+  let latestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
 
-  console.info(lastestProducts.message);
+  console.info(latestProducts.message);
   if (
-    lastestProducts.status === HttpStatus.OK ||
-    lastestProducts.status === HttpStatus.NOT_MODIFIED
+    latestProducts.status === HttpStatus.OK ||
+    latestProducts.status === HttpStatus.NOT_MODIFIED
   ) {
-    const products = [...lastestProducts.result];
-    return {
-      products: products,
-    };
+    const products = [...latestProducts.result];
   } else {
     console.error(`not defined status code: ${status}`);
     return { products: [] };
