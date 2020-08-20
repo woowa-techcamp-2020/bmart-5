@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
+import CartProduct from './cart-product';
 
 class Product extends Model {
   public id!: number;

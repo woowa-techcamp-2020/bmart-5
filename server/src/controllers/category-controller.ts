@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { Op } from 'sequelize';
+import HttpStatus from 'http-status';
 import { Category } from '../models';
 import { JsonResponse } from '../modules/utils';
-import HttpStatus from 'http-status';
+import CustomError from '../modules/exception/custom-error';
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
@@ -48,12 +49,14 @@ const softDelete = async (req: Request, res: Response, next: NextFunction) => {
   const now = new Date();
 
   try {
-    const category = await Category.update({ deletedAt: now }, { where: { id: paramId } });
+    const category = await Category.findByPk(paramId);
+    if (!category)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no category with id ${paramId}`, '');
+    category.update({ deletedAt: now });
+
     res
       .status(HttpStatus.OK)
-      .json(
-        JsonResponse(HttpStatus.OK, `category soft deleted: ${paramId}`, { completed: category[0] })
-      );
+      .json(JsonResponse(HttpStatus.OK, `category soft deleted: ${paramId}`, { completed: true }));
   } catch (err) {
     next(err);
   }
@@ -64,12 +67,14 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   const paramId = parseInt(params.id);
 
   try {
-    const category = await Category.update(body, { where: { id: paramId } });
+    const category = await Category.findByPk(paramId);
+    if (!category)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no category with id ${paramId}`, '');
+    category.update(body);
+
     res
       .status(HttpStatus.OK)
-      .json(
-        JsonResponse(HttpStatus.OK, `category updated: ${paramId}`, { completed: category[0] })
-      );
+      .json(JsonResponse(HttpStatus.OK, `category updated: ${paramId}`, { completed: true }));
   } catch (err) {
     next(err);
   }

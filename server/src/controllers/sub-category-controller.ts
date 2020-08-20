@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { Op } from 'sequelize';
+import HttpStatus from 'http-status';
 import { SubCategory } from '../models';
 import { JsonResponse } from '../modules/utils';
-import HttpStatus from 'http-status';
+import CustomError from '../modules/exception/custom-error';
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
@@ -54,10 +55,14 @@ const softDelete = async (req: Request, res: Response, next: NextFunction) => {
   const now = new Date();
 
   try {
-    const subCategory = await SubCategory.update({ deletedAt: now }, { where: { id: paramId } });
+    const subCategory = await SubCategory.findByPk(paramId);
+    if (!subCategory)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no sub-category with id ${paramId}`, '');
+    subCategory.update({ deletedAt: now });
+
     res.status(HttpStatus.OK).json(
       JsonResponse(HttpStatus.OK, `sub category soft deleted: ${paramId}`, {
-        completed: subCategory[0],
+        completed: subCategory[0] ? true : false,
       })
     );
   } catch (err) {
@@ -70,10 +75,14 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   const paramId = parseInt(params.id);
 
   try {
-    const subCategory = await SubCategory.update(body, { where: { id: paramId } });
+    const subCategory = await SubCategory.findByPk(paramId);
+    if (!subCategory)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no sub-category with id ${paramId}`, '');
+    subCategory.update(body);
+
     res.status(HttpStatus.OK).json(
       JsonResponse(HttpStatus.OK, `sub category updated: ${paramId}`, {
-        completed: subCategory[0],
+        completed: subCategory[0] ? true : false,
       })
     );
   } catch (err) {
