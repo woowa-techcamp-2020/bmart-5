@@ -1,17 +1,16 @@
 import React, { ReactNode } from 'react';
 import Normalize from '@commons/styles/Normalize';
-import Header from '@components/modules/Header';
+import Header, { HeaderProps } from '@components/modules/Header';
 import Footer from '@components/modules/Footer';
 import Head from 'next/head';
-import { IconType, HeaderMainType } from '@utils/constants';
 
-type Props = {
+export type Props = {
   children?: ReactNode;
   title?: string;
+  headerProps: HeaderProps;
 };
 
-// const Layout = ({ children, title = 'This is the default title' }: Props) => (
-export const Layout = ({ children, title = 'default title' }: Props) => (
+export const Layout = ({ children, title = 'default title', headerProps }: Props) => (
   <>
     <Normalize />
     <Head>
@@ -19,12 +18,7 @@ export const Layout = ({ children, title = 'default title' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Header
-      left={IconType.ARROW_LEFT}
-      main={{ type: HeaderMainType.LOGO }}
-      right={[IconType.SEARCH, IconType.BARS]}
-    />
-    {/* 페이지에서 들어올 children */}
+    <Header left={headerProps.left} main={headerProps.main} right={headerProps.right} />
     {children}
     <Footer />
   </>

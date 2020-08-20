@@ -1,3 +1,4 @@
-import { Layout } from './Layout';
+import { Layout, Props } from './Layout';
 
+export type LayoutProps = Props;
 export default Layout;
