@@ -1,5 +1,5 @@
 import React, { useState, ReactNode } from 'react';
-import { ProductType } from '@components/templates/SlidableContainer';
+import { ProductType } from '@pages/index';
 
 type Props = {
   children: ReactNode;
