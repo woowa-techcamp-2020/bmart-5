@@ -23,7 +23,7 @@ export const TabViewContainer: React.FC<Props> = ({ products, setSelect }) => {
   }, []);
 
   const onTabClickHandler = (event: MouseEvent) => {
-    const target = (event.target as any).id;
+    const target = parseInt((event.target as HTMLImageElement).id, 10);
     resetCurrentTab(target);
     setCurrentTab(target);
   };
