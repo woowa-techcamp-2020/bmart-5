@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Layout from '../../components/templates/Layout';
+import Layout from '@commons/Layout';
 
 const AboutPage = () => (
   <Layout title="About페이지">

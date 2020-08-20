@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
 import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
@@ -11,6 +10,7 @@ import HttpStatus from 'http-status';
 import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
 import * as Images from '@assets/images';
 import { capitalize } from '@utils/helper';
+import { Context } from '@commons/Context';
 
 type ProductArrType = {
   products: Array<ProductType>;
@@ -26,7 +26,7 @@ type Props = {
 };
 
 const MainPage: NextPage<Props> = (props) => {
-  const [select, setSelect] = useState<ProductType>();
+  const { select } = useContext(Context);
 
   useEffect(() => {
     if (select) {
@@ -36,13 +36,13 @@ const MainPage: NextPage<Props> = (props) => {
   }, [select]);
 
   return (
-    <Layout title="연습용">
+    <>
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.products} setSelect={setSelect} />
-      <TabViewContainer setSelect={setSelect} />
-      <ToastModal select={select} setSelect={setSelect} />
-    </Layout>
+      <SlidableContainer products={props.products} />
+      <TabViewContainer />
+      <ToastModal />
+    </>
   );
 };
 

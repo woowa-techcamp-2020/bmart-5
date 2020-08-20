@@ -5,7 +5,6 @@ import ProductCard from '@components/modules/ProductCard';
 
 type Props = {
   // products: ProductArrType; <--- 나중에 이걸로 가져와서 map으로 처리.
-  setSelect: Function;
 };
 
 // 임시 데이터
@@ -21,7 +20,7 @@ const item = {
   subCategoryId: 2,
 };
 
-export const TabViewContainer: React.FC<Props> = ({ setSelect }) => {
+export const TabViewContainer: React.FC<Props> = () => {
   return (
     <S.TabViewContainer>
       <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
@@ -52,7 +51,7 @@ export const TabViewContainer: React.FC<Props> = ({ setSelect }) => {
             />
           </div>
         </div>
-        <ProductCard setSelect={setSelect} item={item} className="sale"></ProductCard>
+        <ProductCard item={item} className="sale"></ProductCard>
       </div>
     </S.TabViewContainer>
   );
