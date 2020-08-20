@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const CounterBtn = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   border: 2px solid #dfdfdf;
   border-radius: 1rem;
   padding: 0 0.5rem;
@@ -15,7 +19,7 @@ export const CounterBtn = styled.div`
   }
 
   & .number {
-    margin: 0 2rem;
+    margin: 0 1rem;
     font-size: 1.2rem;
   }
 `;
