@@ -16,7 +16,7 @@ export const ListLoading: React.FC = () => {
     <>
       <S.LoadingContainer>
         {items.map((item) => (
-          <ProductCard item={item} setSelect={() => console.log('loading')} />
+          <ProductCard item={item} className={'main'} setSelect={() => console.log('loading')} />
         ))}
       </S.LoadingContainer>
     </>
