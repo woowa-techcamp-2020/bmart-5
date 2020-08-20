@@ -43,6 +43,41 @@ const findLatest = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const findHighestOff = async (req: Request, res: Response, next: NextFunction) => {
+  const { params } = req;
+  const paramLimit = parseInt(params.limit);
+
+  try {
+    const products = await Product.findAll({
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
+      where: {
+        deletedAt: {
+          [Op.is]: null,
+        },
+      },
+      limit: paramLimit,
+      order: [
+        ['discount', 'DESC'],
+        ['outOfStockAt', 'ASC'],
+      ],
+    });
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `find product list with limit: ${paramLimit}`, products));
+  } catch (err) {
+    next(err);
+  }
+};
+
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
   const paramId = parseInt(params.id);
@@ -200,6 +235,7 @@ const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   findLatest,
+  findHighestOff,
   findById,
   findBySubCategoryId,
   create,
