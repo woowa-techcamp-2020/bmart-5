@@ -4,9 +4,19 @@ const Normalize = createGlobalStyle`
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
+    background: #efefef;
   }
+
+  @media(max-width: 768px) {
+    html {
+      font-size: 12px;
+    }
+  }
+
   body {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 48rem;
+    background: #fff;
   }
   main {
     display: block;

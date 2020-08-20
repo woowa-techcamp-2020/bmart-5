@@ -24,13 +24,13 @@ export const Header: React.FC<Props> = ({ left, main, right }) => {
     <S.Header className="header">
       {left && (
         <div className="left-wrap">
-          <Icon icon={left} size={1.1} onClick={onClick} />
+          <Icon icon={left} size={1.5} onClick={onClick} />
         </div>
       )}
       {main && (
         <div className="main-wrap">
           {main.type === HeaderMainType.LOGO ? (
-            <Logo alt="logo" src="logo" size={4} />
+            <Logo alt="logo" src="logo" size={5} />
           ) : main.type === HeaderMainType.SEARCH_BAR ? (
             `--검색 인풋 구현--`
           ) : (
@@ -41,7 +41,7 @@ export const Header: React.FC<Props> = ({ left, main, right }) => {
       {right && (
         <div className="right-wrap">
           {right.map((iconType) => (
-            <Icon icon={iconType} size={1.1} onClick={onClick} />
+            <Icon icon={iconType} size={1.5} onClick={onClick} />
           ))}
         </div>
       )}
