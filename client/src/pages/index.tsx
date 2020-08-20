@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
-import CategoryContainer, { CategoryType } from '@components/modules/CategoryContainer';
-import SlidableContainer, { ProductType } from '@components/modules/SlidableContainer';
+import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
+import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
+import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { LatestProductsLimit, OrderedCategoriesLimit } from '@utils/constants';
@@ -26,6 +27,7 @@ type Props = {
 
 const MainPage: NextPage<Props> = (props) => {
   const [select, setSelect] = useState<ProductType>();
+
   useEffect(() => {
     if (select) {
       (document.querySelector('html') as HTMLElement).style.overflow = 'hidden';
@@ -38,6 +40,7 @@ const MainPage: NextPage<Props> = (props) => {
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer products={props.products} setSelect={setSelect} />
+      <TabViewContainer></TabViewContainer>
       <ToastModal select={select} />
     </Layout>
   );

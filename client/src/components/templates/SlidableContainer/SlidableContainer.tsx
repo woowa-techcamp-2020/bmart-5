@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as S from './styled';
-import ProductCard from '../ProductCard';
-import ContainerHeader from '../ContainerHeader';
+import ProductCard from '@components/modules/ProductCard';
+import ContainerHeader from '@components/modules/ContainerHeader';
 
 export type ProductType = {
   id: number;
@@ -23,13 +23,13 @@ type SlidableContainerState = {
 
 export const SlidableContainer: React.FC<SlidableContainerState> = ({ products, setSelect }) => {
   return (
-    <>
+    <S.SlidableContainer>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
-      <S.SlidableContainer>
+      <div className="content">
         {products.map((item: ProductType) => {
-          return <ProductCard item={item} setSelect={setSelect} />;
+          return <ProductCard item={item} setSelect={setSelect} className={'slide'} />;
         })}
-      </S.SlidableContainer>
-    </>
+      </div>
+    </S.SlidableContainer>
   );
 };
