@@ -18,7 +18,7 @@ export const CounterBtn: React.FC<Props> = ({ count, setCount }) => {
       >
         -
       </button>
-      <span className="number">{count}</span>
+      <div className="number">{count}</div>
       <button className="plus-btn" onClick={() => setCount(count + 1)}>
         +
       </button>

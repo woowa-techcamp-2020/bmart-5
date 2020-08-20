@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const ToastModal = styled.div<{}>`
   display: none;
-  font-size: 1rem;
+  font-size: 16px;
   z-index: 2;
-  width: 100%;
 `;
 
 export const ModalContainer = styled.div`
@@ -12,7 +11,10 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   position: fixed;
   bottom: 0;
-  width: 48rem;
+  left: 50%;
+  width: 100%;
+  max-width: 48rem;
+  transform: translateX(-50%);
   background: rgb(255, 255, 255);
   z-index: 1500;
   opacity: 1;
@@ -61,7 +63,6 @@ export const ModalContent = styled.div`
   }
 
   & .item-detail div:nth-child(1) {
-    width: 24rem;
     font-size: 1.5rem;
   }
 
