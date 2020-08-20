@@ -4,10 +4,11 @@ export const CounterBtn = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+                   
   border: 2px solid #dfdfdf;
   border-radius: 1rem;
   padding: 0 0.5rem;
+  margin-left: 1rem;
 
   & .minus-btn,
   & .plus-btn {

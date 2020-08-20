@@ -66,3 +66,5 @@ export const OrderedCategoriesLimit = 9;
 export const TabViewProductsCount = 4;
 
 export const userId = 1;
+        
+export const MainBannerCount = 5;

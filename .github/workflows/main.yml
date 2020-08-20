@@ -33,6 +33,15 @@ jobs:
           yarn build
           cd ..
 
+      - name: Create env file
+        run: |
+          cd shared	
+          touch .env	
+          cat << EOF >> .env	
+          ${{ secrets.ENV }}	
+          EOF	
+          cat .env
+
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
@@ -48,4 +57,4 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://bmart5-s3-bucket/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name bmart5-deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart5-deploy-group --s3-location bucket=bmart5-s3-bucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name bmart5-deploy --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart5-deploy-group --s3-location bucket=bmart5-s3-bucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip

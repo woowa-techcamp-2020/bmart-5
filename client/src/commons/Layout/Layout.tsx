@@ -10,7 +10,7 @@ export type Props = {
   headerProps: HeaderProps;
 };
 
-export const Layout = ({ children, title = 'default title', headerProps }: Props) => (
+export const Layout = ({ children, title = 'B 마트', headerProps }: Props) => (
   <>
     <Normalize />
     <Head>
