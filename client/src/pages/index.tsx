@@ -59,8 +59,8 @@ const MainPage: NextPage<Props> = (props) => {
     <>
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.products} />
-      <TabViewContainer />
+      <SlidableContainer products={props.latestProducts} />
+      <TabViewContainer products={props.highestOffProducts} />
       <ToastModal />
     </>
   );
