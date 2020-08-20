@@ -18,24 +18,16 @@ type ProductArrType = Array<ProductType>;
 
 type SlidableContainerState = {
   products: ProductArrType;
+  setSelect: Function;
 };
 
-export const SlidableContainer: React.FC<SlidableContainerState> = (props) => {
+export const SlidableContainer: React.FC<SlidableContainerState> = ({ products, setSelect }) => {
   return (
     <S.SlidableContainer>
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
       <div className="content">
-        {props.products.map((item: any) => {
-          return (
-            <ProductCard
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              rate={item.discount}
-              url={item.imgUrl}
-              className="slide"
-            />
-          );
+        {products.map((item: ProductType) => {
+          return <ProductCard item={item} setSelect={setSelect} className={'slide'} />;
         })}
       </div>
     </S.SlidableContainer>

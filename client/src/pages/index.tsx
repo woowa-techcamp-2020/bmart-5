@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/templates/Layout';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
 import SlidableContainer, { ProductType } from '@components/templates/SlidableContainer';
+import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
@@ -24,14 +25,26 @@ type Props = {
   products: Array<ProductType>;
 };
 
-const MainPage: NextPage<Props> = (props) => (
-  <Layout title="연습용">
-    <Banner />
-    <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-    <SlidableContainer products={props.products} />
-    <TabViewContainer></TabViewContainer>
-  </Layout>
-);
+const MainPage: NextPage<Props> = (props) => {
+  const [select, setSelect] = useState<ProductType>();
+
+  useEffect(() => {
+    if (select) {
+      (document.querySelector('html') as HTMLElement).style.overflow = 'hidden';
+      (document.querySelector('.modal') as HTMLElement).style.display = 'block';
+    }
+  }, [select]);
+
+  return (
+    <Layout title="연습용">
+      <Banner />
+      <CategoryContainer earliest={24} latest={50} categories={props.categories} />
+      <SlidableContainer products={props.products} setSelect={setSelect} />
+      <TabViewContainer></TabViewContainer>
+      <ToastModal select={select} />
+    </Layout>
+  );
+};
 
 MainPage.getInitialProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();
