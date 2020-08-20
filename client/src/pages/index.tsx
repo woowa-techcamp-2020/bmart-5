@@ -23,8 +23,8 @@ export type ProductType = {
   imgUrl: string;
 };
 
-type ProductArrType = {
-  products: Array<ProductType>;
+type LatestProductArrType = {
+  latestProducts: Array<ProductType>;
 };
 
 type CategoryArrType = {
@@ -33,7 +33,7 @@ type CategoryArrType = {
 
 type Props = {
   categories: Array<CategoryType>;
-  products: Array<ProductType>;
+  latestProducts: Array<ProductType>;
 };
 
 const MainPage: NextPage<Props> = (props) => {
@@ -50,7 +50,7 @@ const MainPage: NextPage<Props> = (props) => {
     <Layout title="연습용">
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.products} setSelect={setSelect} />
+      <SlidableContainer products={props.latestProducts} setSelect={setSelect} />
       <TabViewContainer setSelect={setSelect} />
       <ToastModal select={select} setSelect={setSelect} />
     </Layout>
@@ -63,7 +63,7 @@ MainPage.getInitialProps = async () => {
   return { ...slidalbeResponse, ...categoryResponse };
 };
 
-const slidableContainerFetch = async (): Promise<ProductArrType> => {
+const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
   let latestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
 
   console.info(latestProducts.message);
@@ -72,10 +72,10 @@ const slidableContainerFetch = async (): Promise<ProductArrType> => {
     latestProducts.status === HttpStatus.NOT_MODIFIED
   ) {
     const products = [...latestProducts.result];
-    return { products };
+    return { latestProducts: products };
   } else {
     console.error(`not defined status code: ${status}`);
-    return { products: [] };
+    return { latestProducts: [] };
   }
 };
 
