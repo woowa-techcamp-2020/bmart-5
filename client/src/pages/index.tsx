@@ -12,7 +12,7 @@ import {
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
 } from '@utils/constants';
-import * as Images from '@assets/images';
+import * as Images from '@assets/images/categories';
 import { capitalize } from '@utils/helper';
 import { Context } from '@commons/Context';
 

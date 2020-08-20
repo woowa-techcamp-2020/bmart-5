@@ -1,4 +1,3 @@
-export { default as Coke } from './coke.jpeg';
 export { default as MainBread } from './main-bread.png';
 export { default as MainChoco } from './main-choco.png';
 export { default as MainEgg } from './main-egg.png';

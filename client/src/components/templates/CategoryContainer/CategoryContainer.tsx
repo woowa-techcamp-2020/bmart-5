@@ -3,7 +3,7 @@ import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import CategoryIcon from '@components/modules/CategoryIcon';
-import { More } from '@assets/images';
+import { More } from '@assets/images/categories';
 
 type Props = {
   categories: Array<CategoryType>;
