@@ -72,6 +72,7 @@ const slidableContainerFetch = async (): Promise<ProductArrType> => {
     latestProducts.status === HttpStatus.NOT_MODIFIED
   ) {
     const products = [...latestProducts.result];
+    return { products };
   } else {
     console.error(`not defined status code: ${status}`);
     return { products: [] };
@@ -86,7 +87,7 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
       category.url = Images[`Main${capitalize(category.name)}`];
       return category;
     });
-    return { categories: categories };
+    return { categories };
   } else {
     console.error(`not defined status code: ${status}`);
     return { categories: [] };
