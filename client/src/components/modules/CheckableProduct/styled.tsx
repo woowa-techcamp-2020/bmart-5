@@ -61,5 +61,5 @@ export const PriceSpan = styled.span`
 `;
 
 export const CounterSactor = styled.div`
-  width: 100px;
+  margin: auto auto 0 0;
 `;
