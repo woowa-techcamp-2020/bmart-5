@@ -19,7 +19,7 @@ export const CounterBtn: React.FC<Props> = ({ count, setCount }) => {
         -
       </button>
       <div className="number">{count}</div>
-      <button className="plus-btn" onClick={() => setCount(count + 1)}>
+      <button className="plus-btn" onClick={() => count < 10 && setCount(count + 1)}>
         +
       </button>
     </S.CounterBtn>

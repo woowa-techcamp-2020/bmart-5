@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
+import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
 import SlidableContainer from '@components/templates/SlidableContainer';
@@ -11,6 +12,8 @@ import {
   LatestProductsLimit,
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
+  IconType,
+  HeaderMainType,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 
@@ -43,6 +46,14 @@ type Props = {
   highestOffProducts: Array<ProductType>;
 };
 
+const layoutProps: LayoutProps = {
+  title: 'Bmart Home',
+  headerProps: {
+    main: { type: HeaderMainType.LOGO },
+    right: [IconType.SEARCH, IconType.BARS],
+  },
+};
+
 const MainPage: NextPage<Props> = (props) => {
   const { select } = useContext(Context);
 
@@ -54,13 +65,13 @@ const MainPage: NextPage<Props> = (props) => {
   }, [select]);
 
   return (
-    <>
+    <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <Banner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer products={props.latestProducts} />
       <TabViewContainer products={props.highestOffProducts} />
       <ToastModal />
-    </>
+    </Layout>
   );
 };
 

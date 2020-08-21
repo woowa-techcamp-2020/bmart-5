@@ -1,6 +1,5 @@
 import { NextComponentType } from 'next';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
-import Layout from '@commons/Layout';
 import { Provider } from '@commons/Context';
 
 const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
@@ -9,9 +8,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
 }) => {
   return (
     <Provider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </Provider>
   );
 };

@@ -1,50 +1,59 @@
 import React from 'react';
+import Link from 'next/link';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import Logo from '@components/atoms/Logo';
-import { HeaderMainType } from '@utils/constants';
+import { HeaderMainType, IconType } from '@utils/constants';
 
-type MainType = {
-  type: string;
+export type MainType = {
+  type: HeaderMainType;
   content?: string;
 };
 
 export type Props = {
-  left?: string;
+  left?: IconType;
   main?: MainType;
   right?: Array<string>;
 };
 
-const onClick = () => {
-  console.log('hello world');
+const onClickRightBtn = () => {
+  alert('right btn');
 };
 
-export const Header: React.FC<Props> = ({ left, main, right }) => {
+export const Header: React.FC<Props> = (props) => {
   return (
     <S.Header className="header">
-      {left && (
-        <div className="left-wrap">
-          <Icon icon={left} size={1.5} onClick={onClick} />
-        </div>
-      )}
-      {main && (
-        <div className="main-wrap">
-          {main.type === HeaderMainType.LOGO ? (
-            <Logo alt="logo" src="logo" size={5} />
-          ) : main.type === HeaderMainType.SEARCH_BAR ? (
-            `--검색 인풋 구현--`
-          ) : (
-            `${main.content}`
-          )}
-        </div>
-      )}
-      {right && (
-        <div className="right-wrap">
-          {right.map((iconType) => (
-            <Icon icon={iconType} size={1.5} onClick={onClick} />
-          ))}
-        </div>
-      )}
+      <div className="left-wrap">
+        {props.left && (
+          <Link href="/">
+            <a>
+              <Icon icon={props.left} size={1.1} />
+            </a>
+          </Link>
+        )}
+      </div>
+      <div className="main-wrap">
+        {props.main && (
+          <>
+            {props.main.type === HeaderMainType.LOGO ? (
+              <Logo alt="logo" src="logo" size={4} />
+            ) : props.main.type === HeaderMainType.SEARCH_BAR ? (
+              `--검색 인풋 구현--`
+            ) : (
+              `${props.main.content}`
+            )}
+          </>
+        )}
+      </div>
+      <div className="right-wrap">
+        {props.right && (
+          <>
+            {props.right.map((iconType) => (
+              <Icon icon={iconType} size={1.1} onClick={onClickRightBtn} />
+            ))}
+          </>
+        )}
+      </div>
     </S.Header>
   );
 };
