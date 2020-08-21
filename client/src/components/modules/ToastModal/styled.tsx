@@ -36,6 +36,7 @@ export const ModalHeader = styled.div`
   border-bottom: 1px solid #efefef;
 
   & .title {
+    text-align: center;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 1;
