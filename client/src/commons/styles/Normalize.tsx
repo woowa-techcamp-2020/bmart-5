@@ -7,9 +7,15 @@ const Normalize = createGlobalStyle`
     background: #efefef;
   }
 
-  @media(max-width: 768px) {
+  @media all and (min-width:1024px) {
+      html {
+        font-size: 16px;
+      }
+  }
+
+  @media(min-width:320px) and (max-width:768px)  {
     html {
-      font-size: 12px;
+      font-size: 8px;
     }
   }
 
