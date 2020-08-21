@@ -30,7 +30,7 @@
 ## 서비스 배포 링크
 
 <div>
-<a href="http://ec2-13-125-148-221.ap-northeast-2.compute.amazonaws.com/" target="_blank">
+<a href="http://15.165.76.241/" target="_blank">
 <img src="https://user-images.githubusercontent.com/48426991/90333516-6dcd9480-e001-11ea-8edd-d7f700449713.jpg" alt="live demo" width="295px" />
 </a>
 </div>
