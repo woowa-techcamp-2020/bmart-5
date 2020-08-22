@@ -2,4 +2,4 @@
 REPOSITORY=/home/ubuntu/bmart-5
 cd $REPOSITORY
 
-yarn restart:all
+yarn start:all
