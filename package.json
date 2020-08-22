@@ -4,7 +4,7 @@
   "scripts": {
     "install:server": "cd server && yarn install",
     "install:client": "cd client && yarn install",
-    "install:all": "concurrently --kill-others-on-fail \"yarn install:server\" \"yarn install:client\"",
+    "install:all": "yarn install && concurrently --kill-others-on-fail \"yarn install:server\" \"yarn install:client\"",
     "server": "cd server && yarn pm2:start",
     "server-dev": "cd server && yarn pm2:start-dev",
     "client": "cd client && yarn pm2:start",
