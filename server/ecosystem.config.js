@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'bmart-api',
-      script: 'ts-node -r tsconfig-paths/register ./src/main.ts',
+      script: 'node ./node_modules/ts-node/dist/bin.js -r tsconfig-paths/register ./src/main.ts',
       watch: true,
       ignore_watch: [
         'logs',
