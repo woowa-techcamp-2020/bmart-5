@@ -1,3 +1,5 @@
+import getConfig from 'next/config';
+
 export enum IconType {
   ARROW_FORWARD = 'ArrowForward',
   ARROW_LEFT = 'ArrowLeft',
@@ -54,8 +56,11 @@ export const ProductCountryOfOriginDesc = () => {
   return `하단 상세 내용 참고`;
 };
 
-//dotenv로 관리 필요
-export const baseURL = 'http://localhost:3000/api';
+const { publicRuntimeConfig } = getConfig();
+
+export const env = publicRuntimeConfig.NODE_ENV || 'development';
+
+export const baseURL = publicRuntimeConfig.API_END_POINT || 'http://localhost:3000/api';
 
 export const LatestProductsLimit = 9;
 
@@ -66,5 +71,5 @@ export const OrderedCategoriesLimit = 9;
 export const TabViewProductsCount = 4;
 
 export const userId = 1;
-        
+
 export const MainBannerCount = 5;
