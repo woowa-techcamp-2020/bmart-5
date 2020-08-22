@@ -2,8 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'bmart-api',
-      script:
-        'node ./node_modules/nodemon/bin/nodemon --exec ts-node -r tsconfig-paths/register ./src/main.ts --config nodemon.json',
+      script: 'ts-node -r tsconfig-paths/register ./src/main.ts',
       watch: true,
       ignore_watch: [
         'logs',

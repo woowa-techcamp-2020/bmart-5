@@ -5,10 +5,9 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/main.ts --config nodemon.json",
-    "pm2:start": "if pm2 show bmart-api ; then yarn run pm2:stop && yarn run pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
-    "pm2:start-dev": "if pm2 show bmart-api ; then yarn run pm2:stop && yarn run pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
+    "pm2:start": "if pm2 show bmart-api ; then yarn pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
+    "pm2:start-dev": "if pm2 show bmart-api ; then yarn pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
     "pm2:restart": "if pm2 show bmart-api ; then pm2 restart bmart-api ; else echo 'No PM2 instance for bmart-api' ; fi",
-    "pm2:stop": "if pm2 show bmart-api ; then pm2 stop bmart-api ; else echo 'No PM2 instance for bmart-api' ; fi",
     "pm2:delete": "if pm2 show bmart-api ; then pm2 delete bmart-api ; else echo 'No PM2 instance for bmart-api' ; fi",
     "apidoc": "apidoc -i src -o apidoc"
   },

@@ -4,10 +4,9 @@
   "scripts": {
     "dev": "NODE_ENV=development && next -p 80",
     "build": "next build",
-    "pm2:start": "if pm2 show bmart-web ; then yarn run pm2:stop && yarn run pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
-    "pm2:start-dev": "if pm2 show bmart-web ; then yarn run pm2:stop && yarn run pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
+    "pm2:start": "if pm2 show bmart-web ; then yarn pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
+    "pm2:start-dev": "if pm2 show bmart-web ; then yarn pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
     "pm2:restart": "if pm2 show bmart-web ; then pm2 restart bmart-web ; else echo 'No PM2 instance for bmart-web' ; fi",
-    "pm2:stop": "if pm2 show bmart-web ; then pm2 stop bmart-web ; else echo 'No PM2 instance for bmart-web' ; fi",
     "pm2:delete": "if pm2 show bmart-web ; then pm2 delete bmart-web ; else echo 'No PM2 instance for bmart-web' ; fi",
     "type-check": "tsc",
     "storybook": "start-storybook -p 6006",
