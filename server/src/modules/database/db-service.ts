@@ -1,6 +1,7 @@
 import database from './database';
 import logger from '@config/logger';
 import { databaseConfig, env } from '@config/constants';
+import bulkData from '../../bulk-data';
 
 const dbService = (migrate: boolean) => {
   const authenticateDB = () => database.authenticate();
@@ -13,6 +14,9 @@ const dbService = (migrate: boolean) => {
     logger.info(
       `connection to the database has been established successfully: ${databaseConfig.host}(${env})`
     );
+
+  const successfulMigrate = () =>
+    logger.info(`success migrating category, sub_category, product(fruit, vegetable), and Admin`);
 
   const errorDBStart = (err: Error) =>
     logger.info(`unable to connect to the database: ${databaseConfig.host}(${env})`);
@@ -32,6 +36,8 @@ const dbService = (migrate: boolean) => {
       await dropDB();
       await syncDB();
       successfulDBStart();
+      await bulkData();
+      successfulMigrate();
     } catch (err) {
       errorDBStart(err);
       throw err;
@@ -41,6 +47,7 @@ const dbService = (migrate: boolean) => {
   const start = async () => {
     try {
       await authenticateDB();
+      logger.info(`DB migrate: ${migrate}`);
       if (migrate) {
         return startMigrateTrue();
       }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Header, Props } from './Header';
+import { HeaderMainType } from '@utils/constants';
 
 export default {
   title: 'Modules/Header',
@@ -11,40 +12,30 @@ const Template: Story<Props> = (args) => <Header {...args} />;
 
 export const Main = Template.bind({});
 Main.args = {
-  left: 'ArrowLeft',
-  main: { type: 'Logo' },
+  main: { type: HeaderMainType.LOGO },
   right: ['Search', 'Bars'],
-};
-
-export const Back = Template.bind({});
-Back.args = {
-  left: 'ArrowLeft',
 };
 
 export const BackAndTitle = Template.bind({});
 BackAndTitle.args = {
-  left: 'ArrowLeft',
-  main: { type: 'Text', content: '장바구니' },
+  main: { type: HeaderMainType.TEXT, content: '장바구니' },
 };
 
 export const Category = Template.bind({});
 Category.args = {
-  left: 'ArrowLeft',
-  main: { type: 'Text', content: '정육・수산・계란' },
+  main: { type: HeaderMainType.TEXT, content: '정육・수산・계란' },
   right: ['Search', 'Bars'],
 };
 
 // TODO
 export const SearchBar = Template.bind({});
 SearchBar.args = {
-  left: 'ArrowLeft',
-  main: { type: 'SearchBar' },
+  main: { type: HeaderMainType.SEARCH_BAR },
   right: ['Search'],
 };
 
 export const OrderList = Template.bind({});
 OrderList.args = {
-  left: 'Notification',
-  main: { type: 'Text', content: '주문내역' },
+  main: { type: HeaderMainType.TEXT, content: '주문내역' },
   right: ['Refresh'],
 };

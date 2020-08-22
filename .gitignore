@@ -53,3 +53,5 @@ __snapshots__
 
 # .next
 .next/
+
+.storybook/

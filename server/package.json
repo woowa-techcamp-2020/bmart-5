@@ -4,7 +4,11 @@
   "main": "main.ts",
   "scripts": {
     "test": "jest",
-    "start": "nodemon --exec ts-node -r tsconfig-paths/register ./src/main.ts --config nodemon.json",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/main.ts --config nodemon.json",
+    "pm2:start": "if pm2 show bmart-api ; then yarn pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
+    "pm2:start-dev": "if pm2 show bmart-api ; then yarn pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
+    "pm2:restart": "if pm2 show bmart-api ; then pm2 restart bmart-api ; else echo 'No PM2 instance for bmart-api' ; fi",
+    "pm2:delete": "if pm2 show bmart-api ; then pm2 delete bmart-api ; else echo 'No PM2 instance for bmart-api' ; fi",
     "apidoc": "apidoc -i src -o apidoc"
   },
   "dependencies": {
@@ -12,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fs": "^0.0.1-security",
     "helmet": "^4.0.0",
     "http": "0.0.1-security",
     "http-status": "^1.4.2",
@@ -21,6 +26,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
     "sequelize": "^6.3.4",
+    "shelljs": "^0.8.4",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   },
@@ -28,6 +34,7 @@
     "@types/compression": "^1.7.0",
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.7",
+    "@types/glob": "^7.1.3",
     "@types/helmet": "0.0.47",
     "@types/http-status": "^1.1.2",
     "@types/jest": "^26.0.9",
@@ -35,6 +42,7 @@
     "@types/passport": "^1.0.4",
     "@types/passport-google-oauth20": "^2.0.3",
     "@types/passport-jwt": "^3.0.3",
+    "@types/shelljs": "^0.8.8",
     "@types/winston": "^2.4.4",
     "apidoc": "^0.24.0",
     "jest": "^26.3.0",
