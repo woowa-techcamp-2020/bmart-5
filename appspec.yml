@@ -8,7 +8,6 @@ permissions:
   - object: /home/ubuntu/bmart-5
     owner: ubuntu
     group: ubuntu
-    mode: 755
 hooks:
   BeforeInstall:
     - location: scripts/before_deploy.sh
