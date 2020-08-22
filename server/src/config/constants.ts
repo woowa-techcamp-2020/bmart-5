@@ -15,7 +15,7 @@ const googleCredentials = {
 const tokenExpiresIn = '30m';
 
 const databaseConfig = {
-  database: env === 'production' ? (process.env.PORD_DB as string) : (process.env.DEV_DB as string),
+  database: env === 'production' ? (process.env.PROD_DB as string) : (process.env.DEV_DB as string),
   username: process.env.DB_USER as string,
   password: process.env.DB_PW as string,
   host: process.env.DB_HOST as string,
