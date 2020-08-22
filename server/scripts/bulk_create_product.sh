@@ -1,3 +1,5 @@
+#!/bin/bash
+
 url='http://localhost:3000'
 base_id=$1   #첫번째 하위 카테고리 id 533
 # init each sub category id with base_id
@@ -33,9 +35,8 @@ do
             },"
 done < ./data/fruits.txt
 bodyData="${bodyData:0:$((${#bodyData}-1))}]"
-curl --location --request POST $url/api/product/bulkcreate \
-        --header 'Content-Type: application/json' \
-        --data-raw "${bodyData}"
+
+echo ${bodyData} > ./fruits.json
 
 bodyData="["
 while IFS="|" read -r name category price discount imgUrl;
@@ -61,8 +62,7 @@ do
             },"
 done < ./data/vegetables.txt
 bodyData="${bodyData:0:$((${#bodyData}-1))}]"
-curl --location --request POST $url/api/product/bulkcreate \
-        --header 'Content-Type: application/json' \
-        --data-raw "${bodyData}"
+
+echo ${bodyData} > ./vegetables.json
 
 echo end product bulk

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 url='http://localhost:3000'
 
 echo start category bulk

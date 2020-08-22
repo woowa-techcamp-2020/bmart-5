@@ -1,3 +1,5 @@
+#!/bin/bash
+
 url='http://localhost:3000'
 base_id=$1   #첫번째 카테고리 id
 # init each category id with base_id
