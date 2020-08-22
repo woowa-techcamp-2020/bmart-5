@@ -1,0 +1,57 @@
+# mysql
+.DS_Store
+
+# api document
+apidoc
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional eslint cache
+.eslintcache
+
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.development
+.env.production
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# Gatsby files
+.cache/
+
+# pnp files
+./client/.pnp
+./client.pnp.js
+
+# testing
+./client/coverage
+__snapshots__
+
+# production
+./client/build
+
+# misc
+./client/.DS_Store
+./client/.env.local
+./client/.env.development.local
+./client/.env.test.local
+./client/.env.production.local
+
+# .next
+.next/
+
+.storybook/

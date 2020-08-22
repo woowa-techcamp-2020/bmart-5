@@ -1,0 +1,49 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "NODE_ENV=development next -p 80",
+    "build": "next build",
+    "pm2:start": "if pm2 show bmart-web ; then yarn pm2:delete && yarn pm2:start ; else NODE_ENV=production pm2 start ecosystem.config.js ; fi",
+    "pm2:start-dev": "if pm2 show bmart-web ; then yarn pm2:delete && yarn pm2:start-dev ; else NODE_ENV=development pm2 start ecosystem.config.js ; fi",
+    "pm2:restart": "if pm2 show bmart-web ; then pm2 restart bmart-web ; else echo 'No PM2 instance for bmart-web' ; fi",
+    "pm2:delete": "if pm2 show bmart-web ; then pm2 delete bmart-web ; else echo 'No PM2 instance for bmart-web' ; fi",
+    "type-check": "tsc",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "http-status": "^1.4.2",
+    "next": "latest",
+    "next-images": "^1.4.1",
+    "path": "^0.12.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.12.0",
+    "react-icons": "^3.10.0",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@storybook/addon-actions": "^6.0.13",
+    "@storybook/addon-essentials": "^6.0.13",
+    "@storybook/addon-links": "^6.0.13",
+    "@storybook/react": "^6.0.13",
+    "@types/http-status": "^1.1.2",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.4",
+    "@types/styled-components": "^5.1.2",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-styled-components": "^1.11.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "react-is": "^16.13.1",
+    "typescript": "3.7.3",
+    "webpack": "^4.44.1"
+  },
+  "license": "ISC"
+}

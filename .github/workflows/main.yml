@@ -1,0 +1,50 @@
+name: Build & Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@master
+
+      - name: Install Dependencies
+        run: |
+          yarn install
+          cd server
+          yarn install
+          cd ../client
+          yarn install
+
+      - name: Build
+        run: |
+          cd client
+          yarn build
+          cd ..
+
+      - name: Create env file
+        run: |
+          cd shared	
+          touch .env	
+          cat << EOF >> .env	
+          ${{ secrets.ENV }}
+
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://bmart5-s3-bucket/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name bmart5-deploy --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart5-deploy-group --s3-location bucket=bmart5-s3-bucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
