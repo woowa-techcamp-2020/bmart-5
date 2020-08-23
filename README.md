@@ -67,7 +67,7 @@
 
 ```
 Ubuntu Server v18.04 LTS (HVM)
-node v14.7.0
+node v14.8.0
 mysql v8.0.21
 yarn v1.22.4
 pm2 v4.4.1
@@ -84,7 +84,7 @@ yarn client-build
 
 #### ENV 설정
 
-**shared/.env.sample 파일을 참고하여 shared/.env 파일을 생성해주시기 바랍니다.**
+**[shared/.env.sample](https://github.com/woowa-techcamp-2020/bmart-5/blob/develop/shared/.env.sample) 파일을 참고하여 shared/.env 파일을 생성해주시기 바랍니다.**
 
 - 각 옵션에 대한 가이드입니다.
 
