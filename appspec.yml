@@ -5,12 +5,14 @@ files:
   - source: /
     destination: /home/ubuntu/bmart-5
 permissions:
-  - object: /home/ubuntu/bmart-5
+  - object: /home/ubuntu/
+    pattern: '**'
     owner: ubuntu
     group: ubuntu
-    mode: 755
 hooks:
+  BeforeInstall:
+    - location: scripts/before_deploy.sh
+      runas: ubuntu
   AfterInstall:
-    - location: deploy.sh
-      timeout: 60
+    - location: scripts/after_deploy.sh
       runas: ubuntu

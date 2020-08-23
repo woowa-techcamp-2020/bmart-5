@@ -8,16 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout source code.
-        uses: actions/checkout@master
-
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
       - name: Install Dependencies
         run: |
           yarn install
-          cd server
-          yarn install
-          cd ../client
-          yarn install
+          yarn install:client
+          yarn install:server
 
       - name: Build
         run: |
@@ -32,8 +32,8 @@ jobs:
           cat << EOF >> .env	
           ${{ secrets.ENV }}
 
-      - name: Make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+      - name: Make tar file
+        run: tar -cpvzf ./$GITHUB_SHA.tgz *
         shell: bash
 
       - name: Configure AWS credentials
@@ -44,7 +44,10 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://bmart5-s3-bucket/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: |
+          aws s3 cp \
+            --region ap-northeast-2 \
+            ./$GITHUB_SHA.tgz s3://bmart5-s3-bucket/$PROJECT_NAME/$GITHUB_SHA.tgz
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name bmart5-deploy --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart5-deploy-group --s3-location bucket=bmart5-s3-bucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name bmart5-deploy --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart5-deploy-group --s3-location bucket=bmart5-s3-bucket,bundleType=tgz,key=$PROJECT_NAME/$GITHUB_SHA.tgz
