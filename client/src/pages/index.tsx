@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { NextPage } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
@@ -75,11 +75,11 @@ const MainPage: NextPage<Props> = (props) => {
   );
 };
 
-MainPage.getInitialProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();
   const tabViewResponse = await tabViewContainerFetch();
   const categoryResponse = await categoryContainerFetch();
-  return { ...slidalbeResponse, ...tabViewResponse, ...categoryResponse };
+  return { props: { ...slidalbeResponse, ...tabViewResponse, ...categoryResponse } };
 };
 
 const slidableContainerFetch = async (): Promise<LatestProductArrType> => {

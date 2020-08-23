@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import HttpStatus from 'http-status';
 import Layout, { LayoutProps } from '@commons/Layout';
 import { IconType, HeaderMainType, userId } from '@utils/constants';
@@ -29,7 +29,7 @@ const CartPage: NextPage<Props> = (props) => {
   );
 };
 
-CartPage.getInitialProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { status, message, result } = (await API.get(`/cart/user/${userId}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
@@ -57,9 +57,9 @@ CartPage.getInitialProps = async () => {
           imgUrl: item.product.imgUrl,
         };
       });
-    return { products, soldOutProducts };
+    return { props: { products, soldOutProducts } };
   } else {
-    return { products: [], soldOutProducts: [] };
+    return { props: { products: [], soldOutProducts: [] } };
   }
 };
 
