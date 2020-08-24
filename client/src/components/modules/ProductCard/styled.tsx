@@ -61,7 +61,7 @@ export const ProductImg = styled.img`
 
 export const ProductInfo = styled.div`
   font-size: 2rem;
-  x & .item-name {
+  & .item-name {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
