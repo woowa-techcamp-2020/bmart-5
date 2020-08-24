@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Banner = styled.div`
-  display: flex;
   margin: auto;
 
   overflow: hidden;
@@ -33,5 +32,33 @@ export const SlideContent = styled.div`
   & .banner-image {
     width: 100%;
     height: auto;
+  }
+`;
+
+export const IndicatorContainer = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Indicator = styled.div`
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 2.5rem;
+  border-radius: 10rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: background-color 300ms;
+
+  &.current {
+    background-color: #ffffff;
+    box-shadow: 0 0 0 1px #ffffff;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 `;

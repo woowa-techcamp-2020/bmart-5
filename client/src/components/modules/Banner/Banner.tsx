@@ -11,10 +11,12 @@ export const Banner = () => {
   const bannerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentsRef = useRef<Array<HTMLDivElement>>([]);
+  const indicatorsRef = useRef<Array<HTMLDivElement>>([]);
 
   const banner = bannerRef.current as HTMLDivElement;
   const container = containerRef.current as HTMLDivElement;
   const contents = contentsRef.current as HTMLDivElement[];
+  const indicators = indicatorsRef.current as HTMLDivElement[];
 
   useEffect(() => {
     addTouchEvent();
@@ -51,7 +53,12 @@ export const Banner = () => {
     });
   };
 
-  useEffect(() => {}, [currentSlide]);
+  useEffect(() => {
+    indicators.forEach((indicator) => {
+      indicator.classList.remove('current');
+    });
+    indicators[currentSlide].classList.add('current');
+  }, [currentSlide]);
 
   useInterval(
     () => {
@@ -79,7 +86,15 @@ export const Banner = () => {
           </S.SlideContent>
         ))}
       </S.SlideList>
-      <div></div>
+      <S.IndicatorContainer>
+        {Array.from({ length: MainBannerCount }, (_, idx) => (
+          <S.Indicator
+            ref={(el: HTMLDivElement) => {
+              indicatorsRef.current[idx] = el;
+            }}
+          />
+        ))}
+      </S.IndicatorContainer>
     </S.Banner>
   );
 };
