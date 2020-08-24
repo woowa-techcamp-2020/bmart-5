@@ -182,9 +182,7 @@ const Normalize = createGlobalStyle`
     display: none;
   }
 
-  a:link { color: red; text-decoration: none;}
-  a:visited { color: black; text-decoration: none;}
-  a:hover { color: blue; text-decoration: underline;}
+  a:link, a:visited, a:hover { color: black; text-decoration: none;}
 `;
 
 export default Normalize;
