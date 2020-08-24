@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const Header = styled.header`
   position: relative;
   display: flex;
-  min-height: 2rem;
+  min-height: 4rem;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
   & > div.left-wrap {
     display: flex;
     justify-content: space-between;
@@ -15,7 +15,7 @@ export const Header = styled.header`
     display: flex;
     position: absolute;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 2rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -24,7 +24,7 @@ export const Header = styled.header`
     display: flex;
     justify-content: space-between;
     & > :last-child {
-      margin-left: 1rem;
+      margin-left: 2rem;
     }
   }
 `;
