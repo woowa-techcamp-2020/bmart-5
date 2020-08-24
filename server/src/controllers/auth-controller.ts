@@ -20,9 +20,9 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     if (!emailUser)
-      throw new CustomError(HttpStatus.BAD_REQUEST, `no email user with ${body.email}`, '');
+      throw new CustomError(HttpStatus.ACCEPTED, `no email user with ${body.email}`, '');
     if (emailUser.password !== crypto.createHash('sha256').update(body.password).digest('base64'))
-      throw new CustomError(HttpStatus.BAD_REQUEST, 'not matched password', '');
+      throw new CustomError(HttpStatus.ACCEPTED, 'not matched password', '');
 
     const token = jwt.sign(
       {

@@ -2,23 +2,23 @@ import React from 'react';
 import { NextPage } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import { IconType, HeaderMainType } from '@utils/constants';
-import SignUpContainer from '@components/templates/SignUpContainer';
+import SignInContainer from '@components/templates/SignInContainer';
 
 type Props = {};
 
-const SignUpPage: NextPage<Props> = () => {
+const SignInPage: NextPage<Props> = () => {
   const layoutProps: LayoutProps = {
-    title: 'Bmart 회원가입',
+    title: 'Bmart 로그인',
     headerProps: {
       left: IconType.ARROW_LEFT,
-      main: { type: HeaderMainType.TEXT, content: '회원가입' },
+      main: { type: HeaderMainType.TEXT, content: '로그인' },
     },
   };
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
-      <SignUpContainer />
+      <SignInContainer />
     </Layout>
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

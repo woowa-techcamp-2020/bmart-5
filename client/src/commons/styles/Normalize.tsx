@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
-  html, body, #__next {
+  html, body {
     height: 100%;
   }
   html {
@@ -37,6 +37,7 @@ const Normalize = createGlobalStyle`
   #__next {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
   }
 
   main {

@@ -10,14 +10,15 @@ export type MainType = {
   content?: string;
 };
 
+export type RightBtnType = {
+  type: string;
+  onClick?: (e: MouseEvent) => void;
+};
+
 export type Props = {
   left?: IconType;
   main?: MainType;
-  right?: Array<string>;
-};
-
-const onClickRightBtn = () => {
-  alert('right btn');
+  right?: Array<RightBtnType>;
 };
 
 export const Header: React.FC<Props> = (props) => {
@@ -49,7 +50,7 @@ export const Header: React.FC<Props> = (props) => {
         {props.right && (
           <>
             {props.right.map((iconType) => (
-              <Icon icon={iconType} size={2.2} onClick={onClickRightBtn} />
+              <Icon icon={iconType.type} size={2.2} onClick={iconType.onClick} />
             ))}
           </>
         )}

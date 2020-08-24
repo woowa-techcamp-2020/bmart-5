@@ -4,25 +4,19 @@ import BottomBtn from '@components/atoms/BottomBtn';
 import API from '@utils/API';
 import { useRouter } from 'next/router';
 import Input from '@components/atoms/Input';
+import HttpStatus from 'http-status';
+import GoogleLoginBtn from '@components/atoms/GoogleLoginBtn';
 
 type Props = {};
 
-export const SignUpContainer: React.FC<Props> = () => {
+export const SignInContainer: React.FC<Props> = () => {
   const router = useRouter();
-  const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   return (
     <>
-      <S.SignUpContainer>
-        <Input
-          value={name}
-          type="text"
-          name="Name"
-          placeholder="홍길동"
-          onChange={(e: ChangeEvent) => setName((e.target as HTMLInputElement).value)}
-        />
+      <S.SignInContainer>
         <Input
           value={email}
           type="email"
@@ -37,18 +31,28 @@ export const SignUpContainer: React.FC<Props> = () => {
           placeholder="password"
           onChange={(e: ChangeEvent) => setPassword((e.target as HTMLInputElement).value)}
         />
-      </S.SignUpContainer>
+      </S.SignInContainer>
       <BottomBtn
-        name={'회원가입'}
+        name={'로그인'}
         onClick={async (event: MouseEvent) => {
           event.stopPropagation();
-          await API.post(`/auth/email/signup`, {
-            username: name,
+          await API.post(`/auth/email`, {
             email: email,
             password: password,
-          }).then(() => router.push('/'));
+          }).then(({ status }) => {
+            if (status === HttpStatus.OK) {
+              console.log(status);
+              router.push('/');
+            } else {
+              alert('로그인에 실패하였습니다.');
+              setEmail('');
+              setPassword('');
+              return;
+            }
+          });
         }}
       />
+      <GoogleLoginBtn />
     </>
   );
 };
