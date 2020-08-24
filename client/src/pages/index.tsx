@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import CarouselBanner from '@components/modules/CarouselBanner';
+import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
@@ -70,6 +71,7 @@ const MainPage: NextPage<Props> = (props) => {
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer products={props.latestProducts} />
       <TabViewContainer products={props.highestOffProducts} />
+      <Banner />
       <ToastModal />
     </Layout>
   );
