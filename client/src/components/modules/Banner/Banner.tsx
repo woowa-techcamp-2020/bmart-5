@@ -4,55 +4,82 @@ import * as S from './styled';
 import { MainBannerCount } from '@utils/constants';
 
 export const Banner = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const delay = 2000;
+  const delay = 3000;
   const [isRunning, setIsRunning] = useState(true);
-  const slideRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(1);
+
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentsRef = useRef<Array<HTMLDivElement>>([]);
+
+  const banner = bannerRef.current as HTMLDivElement;
+  const container = containerRef.current as HTMLDivElement;
+  const contents = contentsRef.current as HTMLDivElement[];
 
   useEffect(() => {
-    const slideList = slideRef.current;
-    if (!slideList) return;
+    addTouchEvent();
+    createIntersectionObserver();
+  }, []);
 
-    slideList.addEventListener('touchstart', () => {
+  const addTouchEvent = () => {
+    containerRef.current?.addEventListener('touchstart', () => {
       setIsRunning(false);
     });
-    slideList.addEventListener('touchend', () => {
+    containerRef.current?.addEventListener('touchend', () => {
       setIsRunning(true);
     });
-  });
+  };
 
-  useEffect(() => {
-    const slideList = slideRef.current;
-    if (!slideList) return;
+  const createIntersectionObserver = () => {
+    const bannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setCurrentSlide(() => contents.indexOf(entry.target as HTMLDivElement));
+        }
+      });
+    };
 
-    slideList.style.transform = `translateX(-${100 * currentSlide}%)`;
-  }, [currentSlide]);
+    const options = {
+      root: banner,
+      threshold: 0.9,
+    };
+
+    const observer = new IntersectionObserver(bannerObserveHandler, options);
+
+    contents.forEach((content) => {
+      observer.observe(content);
+    });
+  };
+
+  useEffect(() => {}, [currentSlide]);
 
   useInterval(
     () => {
-      if (currentSlide === MainBannerCount - 1) {
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
+      const containerWidth = MainBannerCount * innerWidth;
+      container.style.scrollBehavior = 'smooth';
+      container.scrollLeft = (container.scrollLeft + innerWidth) % containerWidth;
     },
     isRunning ? delay : null
   );
 
   return (
-    <S.Banner>
-      <S.SlideBox className="slide_box">
-        <S.SlideList className="slide_list" ref={slideRef}>
-          {Array.from({ length: MainBannerCount }, (_, idx) => (
-            <div className="slide_content">
-              <img
-                className="banner-image"
-                src={`./assets/images/banners/big/banner-big-${idx + 1}.gif`}
-              />
-            </div>
-          ))}
-        </S.SlideList>
-      </S.SlideBox>
+    <S.Banner ref={bannerRef}>
+      <S.SlideList ref={containerRef}>
+        {Array.from({ length: MainBannerCount }, (_, idx) => (
+          <S.SlideContent
+            className="slide_content"
+            ref={(el: HTMLDivElement) => {
+              contentsRef.current[idx] = el;
+            }}
+          >
+            <img
+              className="banner-image"
+              src={`./assets/images/banners/big/banner-big-${idx + 1}.gif`}
+            />
+          </S.SlideContent>
+        ))}
+      </S.SlideList>
+      <div></div>
     </S.Banner>
   );
 };
