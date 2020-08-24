@@ -61,13 +61,22 @@ export const ProductImg = styled.img`
 
 export const ProductInfo = styled.div`
   font-size: 2rem;
-  & .item-name {
+  x & .item-name {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
   }
+
+  & .price-row {
+    display: flex;
+  }
+
+  & .price-row i {
+    margin-left: auto;
+  }
+
   & .item-price {
     margin: 1rem 0;
     font-weight: 600;

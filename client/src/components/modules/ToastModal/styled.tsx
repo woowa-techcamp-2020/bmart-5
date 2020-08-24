@@ -19,6 +19,12 @@ export const ModalContainer = styled.div`
   z-index: 1500;
   opacity: 1;
   border-radius: 0.5rem 0.5rem 0 0;
+
+  @media all and (max-width: 1024px) {
+    & {
+      max-width: 64rem;
+    }
+  }
 `;
 
 export const ModalBG = styled.div`
