@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
+  html, body, #__next {
+    height: 100%;
+  }
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -29,6 +32,11 @@ const Normalize = createGlobalStyle`
     body {
       max-width: 100%;
     }
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
   }
 
   main {
