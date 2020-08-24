@@ -27,7 +27,7 @@ export const Header: React.FC<Props> = (props) => {
         {props.left && (
           <Link href="/">
             <a>
-              <Icon icon={props.left} size={1.1} />
+              <Icon icon={props.left} size={2.2} />
             </a>
           </Link>
         )}
@@ -36,7 +36,7 @@ export const Header: React.FC<Props> = (props) => {
         {props.main && (
           <>
             {props.main.type === HeaderMainType.LOGO ? (
-              <Logo alt="logo" src="logo" size={4} />
+              <Logo alt="logo" src="logo" size={8} />
             ) : props.main.type === HeaderMainType.SEARCH_BAR ? (
               `--검색 인풋 구현--`
             ) : (
@@ -49,7 +49,7 @@ export const Header: React.FC<Props> = (props) => {
         {props.right && (
           <>
             {props.right.map((iconType) => (
-              <Icon icon={iconType} size={1.1} onClick={onClickRightBtn} />
+              <Icon icon={iconType} size={2.2} onClick={onClickRightBtn} />
             ))}
           </>
         )}

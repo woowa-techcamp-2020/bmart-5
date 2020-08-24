@@ -9,6 +9,6 @@ export const BottomBtn = styled.button<{ tag?: string }>`
   color: #fff;
   font-weight: 600;
   border: none;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   ${({ tag }) => tag && `& .price-tag {position: absolute; right: 1rem;`}
 `;

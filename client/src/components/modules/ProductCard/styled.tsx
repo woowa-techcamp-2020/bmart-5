@@ -60,17 +60,25 @@ export const ProductImg = styled.img`
 `;
 
 export const ProductInfo = styled.div`
-  font-size: 1rem;
-  & .item-name {
-    padding: 0.2rem 0;
+  font-size: 2rem;
+  x & .item-name {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
+
   & .price-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
+
+  & .price-row i {
+    margin-left: auto;
+  }
+
   & .item-price {
-    padding: 0.2rem 0;
+    margin: 1rem 0;
     font-weight: 600;
   }
 `;

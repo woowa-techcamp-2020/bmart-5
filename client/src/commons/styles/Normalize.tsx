@@ -7,13 +7,13 @@ const Normalize = createGlobalStyle`
     background: #efefef;
   }
 
-  @media all and (min-width:1024px) {
+  @media (min-width:768px) and all {
       html {
         font-size: 16px;
       }
   }
 
-  @media(min-width:320px) and (max-width:768px)  {
+  @media(min-width:320px) and (max-width:767px)  {
     html {
       font-size: 8px;
     }
@@ -24,6 +24,13 @@ const Normalize = createGlobalStyle`
     max-width: 48rem;
     background: #fff;
   }
+
+  @media all and (max-width:1024px) {
+    body {
+      max-width: 100%;
+    }
+  }
+
   main {
     display: block;
   }

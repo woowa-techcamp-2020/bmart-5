@@ -35,9 +35,9 @@ export const ProductCard: React.FC<Props> = ({ item, className }) => {
         )}
         <div className="like-icon" onClick={onLikeHandler}>
           {Liked ? (
-            <Icon icon={IconType.HEART} size={1.5} />
+            <Icon icon={IconType.HEART} size={3} />
           ) : (
-            <Icon icon={IconType.REG_HEART} size={1.5} />
+            <Icon icon={IconType.REG_HEART} size={3} />
           )}
         </div>
       </div>

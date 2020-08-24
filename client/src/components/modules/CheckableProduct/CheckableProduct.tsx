@@ -40,56 +40,54 @@ export const CheckableProduct: React.FC<Props> = (props) => {
   return (
     <S.CheckableProduct>
       <S.InfoTitle>{props.name}</S.InfoTitle>
-      <S.ProductInfo>
-        <S.InfoNameRow>
-          <S.ChkBoxSection className="left-name-row">
-            <S.Input
-              type="checkbox"
-              id="item-chk"
-              ref={chkBoxRef}
-              onClick={(event: MouseEvent) => {
-                const chkBox = event.target as HTMLInputElement;
-                if (chkBox.checked) props.setCheckedProducts([...props.checkedProducts, product]);
-                else
-                  props.setCheckedProducts([
-                    ...props.checkedProducts.filter((product) => product.id !== props.id),
-                  ]);
-              }}
-              defaultChecked={true}
-            />
-            <S.Label htmlFor="item-chk">{props.name}</S.Label>
-          </S.ChkBoxSection>
-          <S.Span
-            onClick={async (event: MouseEvent) => {
-              event.stopPropagation();
-
-              confirm('장바구니를 삭제하시겠습니까?')
-                ? API.delete(`/cart/product/${props.id}`).then(() => router.reload())
-                : false;
+      <S.InfoNameRow>
+        <S.ChkBoxSection className="left-name-row">
+          <S.Input
+            type="checkbox"
+            id="item-chk"
+            ref={chkBoxRef}
+            onClick={(event: MouseEvent) => {
+              const chkBox = event.target as HTMLInputElement;
+              if (chkBox.checked) props.setCheckedProducts([...props.checkedProducts, product]);
+              else
+                props.setCheckedProducts([
+                  ...props.checkedProducts.filter((product) => product.id !== props.id),
+                ]);
             }}
-          >
-            삭제
-          </S.Span>
-        </S.InfoNameRow>
+            defaultChecked={true}
+          />
+          <S.Label htmlFor="item-chk">{props.name}</S.Label>
+        </S.ChkBoxSection>
+        <S.Span
+          onClick={async (event: MouseEvent) => {
+            event.stopPropagation();
 
-        <S.InfoProductGrid>
-          <S.ProductImg src={props.imgUrl} />
-          <S.PriceAndCount>
+            confirm('장바구니를 삭제하시겠습니까?')
+              ? API.delete(`/cart/product/${props.id}`).then(() => router.reload())
+              : false;
+          }}
+        >
+          삭제
+        </S.Span>
+      </S.InfoNameRow>
+
+      <S.InfoProductGrid>
+        <S.ProductImg src={props.imgUrl} />
+        <S.PriceAndCount>
+          <div>
+            <S.GrayPrice>({discountPrice.toLocaleString()}원)</S.GrayPrice>
             <div>
-              <S.GrayPrice>({discountPrice.toLocaleString()}원)</S.GrayPrice>
-              <div>
-                {props.discount !== 0 && (
-                  <S.RawPriceSpan>{props.price.toLocaleString()}원</S.RawPriceSpan>
-                )}
-                <S.PriceSpan>{discountPrice.toLocaleString()}원</S.PriceSpan>
-              </div>
+              {props.discount !== 0 && (
+                <S.RawPriceSpan>{props.price.toLocaleString()}원</S.RawPriceSpan>
+              )}
+              <S.PriceSpan>{discountPrice.toLocaleString()}원</S.PriceSpan>
             </div>
-            <S.CounterSactor>
-              <CounterBtn count={count} setCount={setCount} />
-            </S.CounterSactor>
-          </S.PriceAndCount>
-        </S.InfoProductGrid>
-      </S.ProductInfo>
+          </div>
+          <S.CounterSactor>
+            <CounterBtn count={count} setCount={setCount} />
+          </S.CounterSactor>
+        </S.PriceAndCount>
+      </S.InfoProductGrid>
     </S.CheckableProduct>
   );
 };
