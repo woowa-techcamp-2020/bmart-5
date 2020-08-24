@@ -1,7 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useInterval } from '@utils/customHooks';
 import * as S from './styled';
-import { CarouselBannerCount } from '@utils/constants';
+
+const bigBannerList = [
+  { src: `./assets/images/banners/big/banner-big-1.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-2.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-3.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-4.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-5.gif`, href: '#' },
+];
+
+const length = bigBannerList.length;
 
 export const CarouselBanner = () => {
   const delay = 3000;
@@ -14,30 +23,46 @@ export const CarouselBanner = () => {
   const indicatorsRef = useRef<Array<HTMLDivElement>>([]);
 
   const carouselBanner = carouselBannerRef.current as HTMLDivElement;
-  const container = containerRef.current as HTMLDivElement;
   const contents = contentsRef.current as HTMLDivElement[];
   const indicators = indicatorsRef.current as HTMLDivElement[];
 
-  useEffect(() => {
-    addTouchEvent();
-    createIntersectionObserver();
-  }, []);
+  const initBannerWidth = (container: HTMLDivElement) => {
+    container.style.scrollBehavior = 'initial';
+    container.scrollLeft += innerWidth;
+  };
 
-  const addTouchEvent = () => {
-    containerRef.current?.addEventListener('touchstart', () => {
+  const removeUselessIndicators = () => {
+    indicators[0].remove();
+    indicators[length + 1].remove();
+  };
+
+  const addEventHandlers = (container: HTMLDivElement) => {
+    container.addEventListener('touchstart', () => {
       setIsRunning(false);
     });
-    containerRef.current?.addEventListener('touchend', () => {
+    container.addEventListener('touchend', () => {
       setIsRunning(true);
+    });
+    container.addEventListener('scroll', () => {
+      addScrollEventHandler(container);
     });
   };
 
   const createIntersectionObserver = () => {
     const carouselBannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setCurrentSlide(() => contents.indexOf(entry.target as HTMLDivElement));
+        if (!entry.isIntersecting) {
+          return;
         }
+        if (contents.indexOf(entry.target as HTMLDivElement) === length + 1) {
+          setCurrentSlide(1);
+          return;
+        }
+        if (contents.indexOf(entry.target as HTMLDivElement) === 0) {
+          setCurrentSlide(length);
+          return;
+        }
+        setCurrentSlide(() => contents.indexOf(entry.target as HTMLDivElement));
       });
     };
 
@@ -53,41 +78,74 @@ export const CarouselBanner = () => {
     });
   };
 
+  const addScrollEventHandler = (container: HTMLDivElement) => {
+    const { scrollWidth, scrollLeft } = container;
+
+    if (scrollWidth - innerWidth - scrollLeft <= 0) {
+      container.style.scrollBehavior = 'initial';
+      container.scrollLeft = innerWidth;
+      container.style.scrollBehavior = 'smooth';
+    }
+    if (scrollLeft <= 0) {
+      container.style.scrollBehavior = 'initial';
+      container.scrollLeft = scrollWidth - 2 * innerWidth;
+      container.style.scrollBehavior = 'smooth';
+    }
+  };
+
+  // Initial Setting
   useEffect(() => {
+    const container = containerRef.current as HTMLDivElement;
+
+    addEventHandlers(container);
+    initBannerWidth(container);
+    removeUselessIndicators();
+    createIntersectionObserver();
+  }, []);
+
+  // Set Indicator
+  useEffect(() => {
+    if (currentSlide === 0) return;
+    if (currentSlide === length + 1) return;
+
     indicators.forEach((indicator) => {
       indicator.classList.remove('current');
     });
     indicators[currentSlide].classList.add('current');
   }, [currentSlide]);
 
+  // Slide to next Banner
   useInterval(
     () => {
-      const containerWidth = CarouselBannerCount * innerWidth;
+      const container = containerRef.current as HTMLDivElement;
+
       container.style.scrollBehavior = 'smooth';
-      container.scrollLeft = (container.scrollLeft + innerWidth) % containerWidth;
+      container.scrollLeft += innerWidth;
     },
     isRunning ? delay : null
   );
 
+  const bannerList =
+    length > 1 ? [bigBannerList[length - 1], ...bigBannerList, bigBannerList[0]] : bigBannerList;
+
   return (
     <S.CarouselBanner ref={carouselBannerRef}>
       <S.SlideList ref={containerRef}>
-        {Array.from({ length: CarouselBannerCount }, (_, idx) => (
+        {bannerList.map((banner, idx) => (
           <S.SlideContent
             className="slide_content"
             ref={(el: HTMLDivElement) => {
               contentsRef.current[idx] = el;
             }}
           >
-            <img
-              className="carousel-banner-image"
-              src={`./assets/images/banners/big/banner-big-${idx + 1}.gif`}
-            />
+            <a href={banner.href}>
+              <img className="carousel-banner-image" src={banner.src} />
+            </a>
           </S.SlideContent>
         ))}
       </S.SlideList>
       <S.IndicatorContainer>
-        {Array.from({ length: CarouselBannerCount }, (_, idx) => (
+        {Array.from({ length: bannerList.length }, (_, idx) => (
           <S.Indicator
             ref={(el: HTMLDivElement) => {
               indicatorsRef.current[idx] = el;

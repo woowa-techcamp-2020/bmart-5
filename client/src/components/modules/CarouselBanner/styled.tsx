@@ -15,7 +15,6 @@ export const SlideList = styled.div`
   -webkit-scroll-snap-type: x mandatory;
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
