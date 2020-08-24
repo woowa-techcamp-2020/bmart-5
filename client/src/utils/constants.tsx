@@ -72,4 +72,4 @@ export const TabViewProductsCount = 4;
 
 export const userId = 1;
 
-export const MainBannerCount = 5;
+export const CarouselBannerCount = 5;

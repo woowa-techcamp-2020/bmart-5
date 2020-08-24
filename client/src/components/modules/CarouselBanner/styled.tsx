@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Banner = styled.div`
+export const CarouselBanner = styled.div`
   margin: auto;
 
   overflow: hidden;
@@ -29,7 +29,7 @@ export const SlideContent = styled.div`
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
-  & .banner-image {
+  & .carousel-banner-image {
     width: 100%;
     height: auto;
   }
