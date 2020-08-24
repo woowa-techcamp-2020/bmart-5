@@ -60,7 +60,9 @@ const { publicRuntimeConfig } = getConfig();
 
 export const env = publicRuntimeConfig.NODE_ENV || 'development';
 
-export const baseURL = publicRuntimeConfig.API_END_POINT || 'http://localhost:3000/api';
+export const baseURL =
+  `${publicRuntimeConfig.API_END_POINT}:${publicRuntimeConfig.API_PORT}/api` ||
+  'http://localhost:3000/api';
 
 export const LatestProductsLimit = 9;
 

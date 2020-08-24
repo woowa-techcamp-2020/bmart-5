@@ -3,7 +3,7 @@ import HttpStatus from 'http-status';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { LoginProvider, User, Cart } from '../models';
-import { jwtSecret, tokenExpiresIn } from '../config/constants';
+import { jwtSecret, tokenExpiresIn, apiEndPoint } from '../config/constants';
 import { JsonResponse } from '../modules/utils';
 import CustomError from '../modules/exception/custom-error';
 
@@ -121,12 +121,11 @@ const googleRedirect = async (req: Request, res: Response, next: NextFunction) =
   console.info(`user ${isCreated ? 'created' : 'found'}: ${user.id}`);
 
   await LoginProvider.findOrCreate({
-    attributes: ['id', 'username', 'email'],
+    attributes: ['id', 'email', 'provider'],
     where: {
-      email: googleUser._json.email,
-      provider: 'google',
+      id: googleUser.id,
     },
-    defaults: { userId: user.id },
+    defaults: { userId: user.id, email: googleUser._json.email, provider: 'google' },
   });
 
   const token = jwt.sign(
@@ -142,7 +141,7 @@ const googleRedirect = async (req: Request, res: Response, next: NextFunction) =
     expires: new Date(Date.now() + 30 * 60 * 1000),
   });
 
-  res.redirect('/');
+  res.redirect(apiEndPoint);
 };
 
 export default {
