@@ -48,7 +48,7 @@ const Normalize = createGlobalStyle`
     font-size: 1em;
   }
   a {
-    background-color: transparent;
+    background-color: #f3f3f3;
   }
   abbr[title] {
     border-bottom: none;

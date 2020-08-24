@@ -61,8 +61,10 @@ const findByUserId = async (req: Request, res: Response, next: NextFunction) => 
       },
     });
     if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${paramId}`, '');
-    req.params.id = cart.id.toString();
-    findByCartId(req, res, next);
+
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `find cart by userId(${paramId})`, cart));
   } catch (err) {
     next(err);
   }
@@ -128,11 +130,11 @@ const purchase = async (req: Request, res: Response, next: NextFunction) => {
     let cart = await Cart.findByPk(paramId);
     if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${paramId}`, '');
     cart.update({ purchasedAt: now });
-    Cart.create({ userId: cart.getDataValue('userId') });
+    const newCart = await Cart.create({ userId: cart.getDataValue('userId') });
 
     res.status(HttpStatus.OK).json(
       JsonResponse(HttpStatus.OK, `cart purchased: ${paramId}`, {
-        completed: true,
+        cartId: newCart.id,
       })
     );
   } catch (err) {

@@ -93,7 +93,7 @@ const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
     const products = [...latestProducts.result];
     return { latestProducts: products };
   } else {
-    console.error(`not defined status code: ${status}`);
+    console.error(`not defined status code: ${latestProducts.status}`);
     return { latestProducts: [] };
   }
 };
@@ -109,7 +109,7 @@ const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
     const products = [...highestOffProducts.result];
     return { highestOffProducts: products };
   } else {
-    console.error(`not defined status code: ${status}`);
+    console.error(`not defined status code: ${highestOffProducts.status}`);
     return { highestOffProducts: [] };
   }
 };

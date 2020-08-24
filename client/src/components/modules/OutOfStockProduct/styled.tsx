@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 export { Label, Input, Span } from '../CheckListHeader/styled';
 
-export const ValidationText = styled.div`
-  font-size: 1.2rem;
-  color: #ff070b;
-  margin auto auto 0 0;
+export const ProductStateText = styled.div`
+  color: black;
+  font-weight: 600;
 `;
 
-export const CheckableProduct = styled.div`
+export const OutOfStockProduct = styled.div`
   display: flex;
   flex-direction: column;
+  color: lightgray;
 `;
 
 export const InfoTitle = styled.div`
@@ -50,6 +50,8 @@ export const ProductImg = styled.img`
   border: 1px solid #ddd;
   width: 100%;
   height: auto;
+  filter: grayscale(100%);
+  opacity: 0.8;
 `;
 
 export const PriceAndCount = styled.div`
@@ -61,12 +63,10 @@ export const PriceAndCount = styled.div`
 `;
 
 export const GrayPrice = styled.div`
-  color: gray;
   margin-bottom: 0.3rem;
 `;
 
 export const RawPriceSpan = styled.span`
-  color: lightgray;
   text-decoration: line-through;
   margin-right: 0.5rem;
 `;
@@ -74,8 +74,4 @@ export const RawPriceSpan = styled.span`
 export const PriceSpan = styled.span`
   font-weight: 600;
   font-size: 2rem;
-`;
-
-export const CounterSactor = styled.div`
-  margin: auto auto 0 0;
 `;

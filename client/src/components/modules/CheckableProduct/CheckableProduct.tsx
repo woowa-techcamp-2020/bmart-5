@@ -1,8 +1,6 @@
 import React, { useState, MouseEvent, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
 import CounterBtn from '@components/atoms/CounterBtn';
 import * as S from './styled';
-import { ProductType } from '@components/templates/CheckListContainer/CheckListContainer';
 import API from '@utils/API';
 
 type Props = {
@@ -14,12 +12,14 @@ type Props = {
   count: number;
   checkedProducts: Array<ProductType>;
   setCheckedProducts: Function;
+  setCartProducts: Function;
+  products: Array<ProductType>;
+  cartProducts: Array<ProductType>;
 };
 
 export const CheckableProduct: React.FC<Props> = (props) => {
   const [count, setCount] = useState<number>(props.count);
-  const router = useRouter();
-  const discountPrice = (props.price * (100 - props.discount)) / 100;
+  let rawPrice = (props.price * (100 + props.discount)) / 100;
   const chkBoxRef = useRef<HTMLInputElement>(null);
   const product = {
     id: props.id,
@@ -28,6 +28,7 @@ export const CheckableProduct: React.FC<Props> = (props) => {
     price: props.price,
     imgUrl: props.imgUrl,
     count: props.count,
+    outOfStockAt: null,
   };
 
   useEffect(() => {
@@ -35,7 +36,16 @@ export const CheckableProduct: React.FC<Props> = (props) => {
     if (props.checkedProducts.length === 0) chkBox.checked = false;
     else if (props.checkedProducts.filter((product) => product.id === props.id).length)
       chkBox.checked = true;
-  }, [props.checkedProducts]);
+
+    if (props.count !== count) {
+      const tmpProducts = props.cartProducts.map((item) => {
+        if (item.id === props.id) item.count = count;
+        return item;
+      });
+      props.setCartProducts([...tmpProducts]);
+      API.patch(`/cart/${props.id}`, { count: count });
+    }
+  }, [props.checkedProducts, count]);
 
   return (
     <S.CheckableProduct>
@@ -63,7 +73,11 @@ export const CheckableProduct: React.FC<Props> = (props) => {
             event.stopPropagation();
 
             confirm('장바구니를 삭제하시겠습니까?')
-              ? API.delete(`/cart/product/${props.id}`).then(() => router.reload())
+              ? API.delete(`/cart/product/${props.id}`).then(() => {
+                  props.setCartProducts(
+                    props.cartProducts.filter((product) => product.id !== props.id)
+                  );
+                })
               : false;
           }}
         >
@@ -72,17 +86,22 @@ export const CheckableProduct: React.FC<Props> = (props) => {
       </S.InfoNameRow>
 
       <S.InfoProductGrid>
-        <S.ProductImg src={props.imgUrl} />
+        <S.ProductImg src={product.imgUrl} />
         <S.PriceAndCount>
           <div>
-            <S.GrayPrice>({discountPrice.toLocaleString()}원)</S.GrayPrice>
+            <S.GrayPrice>({(product.price * count).toLocaleString()}원)</S.GrayPrice>
             <div>
-              {props.discount !== 0 && (
-                <S.RawPriceSpan>{props.price.toLocaleString()}원</S.RawPriceSpan>
+              {product.discount !== 0 && (
+                <S.RawPriceSpan>
+                  {(Math.ceil(rawPrice / 100) * 100 * count).toLocaleString()}원
+                </S.RawPriceSpan>
               )}
-              <S.PriceSpan>{discountPrice.toLocaleString()}원</S.PriceSpan>
+              <S.PriceSpan>{(product.price * count).toLocaleString()}원</S.PriceSpan>
             </div>
           </div>
+          {count === 10 && (
+            <S.ValidationText>해당 상품은 한번에 {count}개까지 구매할 수 있어요.</S.ValidationText>
+          )}
           <S.CounterSactor>
             <CounterBtn count={count} setCount={setCount} />
           </S.CounterSactor>
