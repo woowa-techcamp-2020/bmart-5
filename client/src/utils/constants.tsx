@@ -85,3 +85,5 @@ export const deliveryFee = 1500;
 export const deliveryDiscount = 100;
 
 export const CarouselBannerCount = 5;
+
+export const MaxSubCategoryLimitByCategoryId = 9;
