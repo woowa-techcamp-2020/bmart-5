@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import { ProductType } from '@components/templates/CheckListContainer';
 import API from '@utils/API';
+import { getRawPrice } from '@utils/index';
 
 type Props = {
   id: number;
@@ -43,12 +44,7 @@ export const OutOfStockProduct: React.FC<Props> = (props) => {
             <div>
               {props.discount !== 0 && (
                 <S.RawPriceSpan>
-                  {(
-                    Math.ceil((props.price * (1 + props.discount / 100)) / 100) *
-                    100 *
-                    props.count
-                  ).toLocaleString()}
-                  원
+                  {getRawPrice(props.price, props.discount, props.count)}원
                 </S.RawPriceSpan>
               )}
               <S.PriceSpan>{(props.price * props.count).toLocaleString()}원</S.PriceSpan>
