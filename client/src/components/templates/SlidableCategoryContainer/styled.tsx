@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SlidableCategoryContainer = styled.div`
   width: 100%;
   background-color: white;
+  margin-bottom: 3px;
 
   & .wrapper {
     padding: 0 1rem;
