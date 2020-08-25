@@ -16,6 +16,7 @@ import {
   OrderedCategoriesLimit,
   IconType,
   HeaderMainType,
+  MaxSubCategoryLimitByCategoryId,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -43,10 +44,21 @@ type CategoryArrType = {
   categories: Array<CategoryType>;
 };
 
+type SubCategoryIdArrType = {
+  subCategories: Array<number>;
+};
+
+type CategoryProductArrType = {
+  categoryProducts: Array<ProductType>;
+};
+
+type CategoryProductsArrListType = Array<CategoryProductArrType>;
+
 type Props = {
   categories: Array<CategoryType>;
   latestProducts: Array<ProductType>;
   highestOffProducts: Array<ProductType>;
+  categoryProductsList: CategoryProductsArrListType;
 };
 
 const MainPage: NextPage<Props> = (props) => {
@@ -78,7 +90,13 @@ const MainPage: NextPage<Props> = (props) => {
       <SlidableContainer products={props.latestProducts} />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
-      <SlidableCategoryContainer products={props.highestOffProducts} />
+      {props.categories.map((category, idx) => (
+        <SlidableCategoryContainer
+          key={idx}
+          name={category.name}
+          products={props.categoryProductsList[idx].categoryProducts}
+        />
+      ))}
       <ToastModal />
     </Layout>
   );
@@ -88,7 +106,25 @@ export const getStaticProps: GetStaticProps = async () => {
   const slidalbeResponse = await slidableContainerFetch();
   const tabViewResponse = await tabViewContainerFetch();
   const categoryResponse = await categoryContainerFetch();
-  return { props: { ...slidalbeResponse, ...tabViewResponse, ...categoryResponse } };
+  const subCategoryByCategoryResponse = await Promise.all(
+    categoryResponse.categories.map((category) => {
+      return subCategoryByCategoryFetch(category.id);
+    })
+  );
+  const categoryProductsResponse = await Promise.all(
+    subCategoryByCategoryResponse.map((category) => {
+      return categoryProductsFetch(category.subCategories);
+    })
+  );
+
+  return {
+    props: {
+      ...slidalbeResponse,
+      ...tabViewResponse,
+      ...categoryResponse,
+      categoryProductsList: categoryProductsResponse,
+    },
+  };
 };
 
 const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
@@ -136,6 +172,59 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
     console.error(`not defined status code: ${status}`);
     return { categories: [] };
   }
+};
+
+const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCategoryIdArrType> => {
+  let { status, message, result } = (
+    await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
+  ).data;
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const subCategories = [...result].map((subCategory) => {
+      return subCategory.id;
+    });
+    return { subCategories };
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return { subCategories: [] };
+  }
+};
+
+const categoryProductsFetch = async (
+  subCategories: Array<number>
+): Promise<CategoryProductArrType> => {
+  subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
+  const share = Math.floor(10 / subCategories.length);
+  let remainder = 10 % subCategories.length;
+
+  const limits = subCategories.reduce((acc: Array<number>) => {
+    if (remainder) {
+      remainder--;
+      return [...acc, share + 1];
+    }
+    return [...acc, share];
+  }, []);
+
+  let categoryProducts: Array<ProductType> = [];
+
+  await Promise.all(
+    limits.map(async (cur: number, idx: number, arr: Array<number>) => {
+      let { status, message, result } = (
+        await API.get(`/product/sub/${subCategories[idx]}/${cur}`)
+      ).data;
+      console.info(message);
+      if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+        categoryProducts = [...categoryProducts, ...result];
+        return;
+      } else {
+        console.error(`not defined status code: ${status}`);
+        arr.splice(0);
+        return;
+      }
+    })
+  );
+
+  return { categoryProducts };
 };
 
 export default MainPage;
