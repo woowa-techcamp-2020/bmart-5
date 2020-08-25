@@ -7,15 +7,16 @@ import ContainerHeader from '@components/modules/ContainerHeader';
 type ProductArrType = Array<ProductType>;
 
 type Props = {
+  name: string;
   products: ProductArrType;
 };
 
-export const SlidableCategoryContainer: React.FC<Props> = ({ products }) => {
+export const SlidableCategoryContainer: React.FC<Props> = ({ name, products }) => {
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   return (
     <S.SlidableCategoryContainer>
-      <ContainerHeader moreBtn>밀키트</ContainerHeader>
+      <ContainerHeader moreBtn>{name}</ContainerHeader>
       <div className="wrapper">
         <div className="content">
           {products.map((item: ProductType) => {
