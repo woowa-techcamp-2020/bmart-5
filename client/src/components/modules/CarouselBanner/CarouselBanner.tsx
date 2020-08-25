@@ -26,7 +26,9 @@ export const CarouselBanner = () => {
   const contents = contentsRef.current as HTMLDivElement[];
   const indicators = indicatorsRef.current as HTMLDivElement[];
 
-  const initBannerWidth = (container: HTMLDivElement) => {
+  const initBannerWidth = () => {
+    const container = containerRef.current as HTMLDivElement;
+
     container.style.scrollBehavior = 'initial';
     container.scrollLeft += innerWidth;
   };
@@ -34,18 +36,6 @@ export const CarouselBanner = () => {
   const removeUselessIndicators = () => {
     indicators[0].remove();
     indicators[length + 1].remove();
-  };
-
-  const addEventHandlers = (container: HTMLDivElement) => {
-    container.addEventListener('touchstart', () => {
-      setIsRunning(false);
-    });
-    container.addEventListener('touchend', () => {
-      setIsRunning(true);
-    });
-    container.addEventListener('scroll', () => {
-      addScrollEventHandler(container);
-    });
   };
 
   const createIntersectionObserver = () => {
@@ -78,7 +68,8 @@ export const CarouselBanner = () => {
     });
   };
 
-  const addScrollEventHandler = (container: HTMLDivElement) => {
+  const scrollEventHandler = () => {
+    const container = containerRef.current as HTMLDivElement;
     const { scrollWidth, scrollLeft } = container;
 
     if (scrollWidth - innerWidth - scrollLeft <= 0) {
@@ -95,10 +86,7 @@ export const CarouselBanner = () => {
 
   // Initial Setting
   useEffect(() => {
-    const container = containerRef.current as HTMLDivElement;
-
-    addEventHandlers(container);
-    initBannerWidth(container);
+    initBannerWidth();
     removeUselessIndicators();
     createIntersectionObserver();
   }, []);
@@ -130,7 +118,18 @@ export const CarouselBanner = () => {
 
   return (
     <S.CarouselBanner ref={carouselBannerRef}>
-      <S.SlideList ref={containerRef}>
+      <S.SlideList
+        ref={containerRef}
+        onTouchStart={() => {
+          setIsRunning(false);
+        }}
+        onTouchEnd={() => {
+          setIsRunning(true);
+        }}
+        onScroll={() => {
+          scrollEventHandler();
+        }}
+      >
         {bannerList.map((banner, idx) => (
           <S.SlideContent
             className="slide_content"
