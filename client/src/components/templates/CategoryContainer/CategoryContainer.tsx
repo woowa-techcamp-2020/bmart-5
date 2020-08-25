@@ -45,8 +45,8 @@ export const CategoryContainer = (props: Props) => {
           {
             <CategoryIcon
               key={`more-icon`}
-              width={7}
-              height={9}
+              width={7.5}
+              height={10}
               name={showMoreName}
               url={'./assets/images/categories/more.png'}
               onClick={showMoreClickHandler}

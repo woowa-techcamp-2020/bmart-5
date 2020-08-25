@@ -8,8 +8,9 @@ export const WrapperContainer = styled.div`
 export const CategoryContainer = styled.div`
   display: grid;
   width: 100%;
-  height: 20rem;
-  grid-template-columns: 7.5rem 7.5rem 7.5rem 7.5rem 7.5rem;
-  grid-template-rows: 10rem;
+  height: 24rem;
+  justify-items: center;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 12rem;
   justify-content: center;
 `;
