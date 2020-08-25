@@ -19,8 +19,8 @@ export const SlidableCategoryContainer: React.FC<Props> = ({ name, products }) =
       <ContainerHeader moreBtn>{name}</ContainerHeader>
       <div className="wrapper">
         <div className="content">
-          {products.map((item: ProductType) => {
-            return <ProductCard item={item} className={'main'} />;
+          {products.map((item: ProductType, idx) => {
+            return <ProductCard key={idx} item={item} className={'main'} />;
           })}
         </div>
       </div>
