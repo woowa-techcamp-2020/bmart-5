@@ -2,6 +2,7 @@ import React, { useState, MouseEvent, useEffect, useRef } from 'react';
 import CounterBtn from '@components/atoms/CounterBtn';
 import * as S from './styled';
 import API from '@utils/API';
+import { ProductType } from '@components/templates/CheckListContainer';
 
 type Props = {
   id: number;
@@ -47,6 +48,8 @@ export const CheckableProduct: React.FC<Props> = (props) => {
     }
   }, [props.checkedProducts, count]);
 
+  const chkBoxId = `item-chk-${props.id}`;
+
   return (
     <S.CheckableProduct>
       <S.InfoTitle>{props.name}</S.InfoTitle>
@@ -54,7 +57,7 @@ export const CheckableProduct: React.FC<Props> = (props) => {
         <S.ChkBoxSection className="left-name-row">
           <S.Input
             type="checkbox"
-            id="item-chk"
+            id={chkBoxId}
             ref={chkBoxRef}
             onClick={(event: MouseEvent) => {
               const chkBox = event.target as HTMLInputElement;
@@ -66,7 +69,7 @@ export const CheckableProduct: React.FC<Props> = (props) => {
             }}
             defaultChecked={true}
           />
-          <S.Label htmlFor="item-chk">{props.name}</S.Label>
+          <S.Label htmlFor={chkBoxId}>{props.name}</S.Label>
         </S.ChkBoxSection>
         <S.Span
           onClick={async (event: MouseEvent) => {
