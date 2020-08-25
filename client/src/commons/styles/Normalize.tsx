@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
   html, body, #__next {
-    height: 100%;
+    min-height: 100vh;
   }
   html {
     line-height: 1.15;
@@ -180,6 +180,8 @@ const Normalize = createGlobalStyle`
   [hidden] {
     display: none;
   }
+
+  a:link, a:visited, a:hover { color: black; text-decoration: none;}
 `;
 
 export default Normalize;

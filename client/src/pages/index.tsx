@@ -17,6 +17,7 @@ import {
   HeaderMainType,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
+import { useRouter } from 'next/router';
 
 export type ProductType = {
   id: number;
@@ -47,16 +48,20 @@ type Props = {
   highestOffProducts: Array<ProductType>;
 };
 
-const layoutProps: LayoutProps = {
-  title: 'Bmart Home',
-  headerProps: {
-    main: { type: HeaderMainType.LOGO },
-    right: [IconType.SEARCH, IconType.BARS],
-  },
-};
-
 const MainPage: NextPage<Props> = (props) => {
   const { select } = useContext(Context);
+  const router = useRouter();
+
+  const layoutProps: LayoutProps = {
+    title: 'Bmart Home',
+    headerProps: {
+      main: { type: HeaderMainType.LOGO },
+      right: [
+        { type: IconType.SEARCH, onClick: () => alert('검색') },
+        { type: IconType.BARS, onClick: () => router.replace('/signin') },
+      ],
+    },
+  };
 
   useEffect(() => {
     if (select) {

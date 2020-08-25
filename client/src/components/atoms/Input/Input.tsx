@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react';
 import * as S from './styled';
 
 type Props = {
-  htmlFor: string;
   value: string;
   name: string;
   type: string;
@@ -10,11 +9,17 @@ type Props = {
   onChange: (e: ChangeEvent) => void;
 };
 
-export const Input: React.FC<Props> = ({ htmlFor, value, type, name, placeholder, onChange }) => {
+export const Input: React.FC<Props> = ({ value, type, name, placeholder, onChange }) => {
   return (
     <>
-      <S.Label htmlFor={htmlFor}>{value}</S.Label>
-      <S.Input type={type} name={name} placeholder={placeholder} onChange={onChange} />
+      <S.Label htmlFor={name}>{name}</S.Label>
+      <S.Input
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
     </>
   );
 };

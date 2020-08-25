@@ -1,6 +1,12 @@
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-export const Icon = styled.i<{ size: number }>`
+type Props = {
+  size: number;
+  onClick: (e: MouseEvent) => void;
+};
+
+export const Icon = styled.i<Props>`
   display: flex;
   width: ${(props) => props.size}rem;
   box-sizing: border-box;
@@ -9,4 +15,5 @@ export const Icon = styled.i<{ size: number }>`
     width: 100%;
     height: 100%;
   }
+  cursor: pointer;
 `;
