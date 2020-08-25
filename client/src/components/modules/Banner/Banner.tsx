@@ -23,7 +23,8 @@ export const Banner = () => {
   const contents = contentsRef.current as HTMLDivElement[];
   const indicators = indicatorsRef.current as HTMLDivElement[];
 
-  const initBannerWidth = (container: HTMLDivElement) => {
+  const initBannerWidth = () => {
+    const container = containerRef.current as HTMLDivElement;
     container.style.scrollBehavior = 'initial';
     container.scrollLeft += innerWidth;
   };
@@ -31,12 +32,6 @@ export const Banner = () => {
   const removeUselessIndicators = () => {
     indicators[0].remove();
     indicators[length + 1].remove();
-  };
-
-  const addEventHandlers = (container: HTMLDivElement) => {
-    container.addEventListener('scroll', () => {
-      addScrollEventHandler(container);
-    });
   };
 
   const createIntersectionObserver = () => {
@@ -69,7 +64,8 @@ export const Banner = () => {
     });
   };
 
-  const addScrollEventHandler = (container: HTMLDivElement) => {
+  const scrollEventHandler = () => {
+    const container = containerRef.current as HTMLDivElement;
     const { scrollWidth, scrollLeft } = container;
 
     if (scrollWidth - innerWidth - scrollLeft <= 0) {
@@ -86,10 +82,7 @@ export const Banner = () => {
 
   // Initial Setting
   useEffect(() => {
-    const container = containerRef.current as HTMLDivElement;
-
-    addEventHandlers(container);
-    initBannerWidth(container);
+    initBannerWidth();
     removeUselessIndicators();
     createIntersectionObserver();
   }, []);
@@ -112,7 +105,7 @@ export const Banner = () => {
 
   return (
     <S.Banner ref={BannerRef}>
-      <S.SlideList ref={containerRef}>
+      <S.SlideList ref={containerRef} onScroll={scrollEventHandler}>
         {bannerList.map((banner, idx) => (
           <S.SlideContent
             className="slide_content"
