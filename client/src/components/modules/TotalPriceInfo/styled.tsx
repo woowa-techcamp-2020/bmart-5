@@ -48,7 +48,9 @@ export const CautionRow = styled.div`
 
 export const SubmitRow = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  margin: auto;
   background-color: #f3f3f3;
   padding: 0rem 0 3rem 0;
+  width: 100%;
 `;
