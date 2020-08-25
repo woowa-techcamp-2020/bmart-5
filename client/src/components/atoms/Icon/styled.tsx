@@ -1,14 +1,8 @@
-import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  size: number;
-  onClick: (e: MouseEvent) => void;
-};
-
-export const Icon = styled.i<Props>`
+export const Icon = styled.i<{ size: number }>`
   display: flex;
-  width: ${(props) => props.size}rem;
+  width: ${({ size }) => size}rem;
   box-sizing: border-box;
   cursor: pointer;
   & > svg {

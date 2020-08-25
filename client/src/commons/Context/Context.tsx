@@ -3,7 +3,6 @@ import httpStatus from 'http-status';
 import { ProductType } from '@pages/index';
 import { ProductType as CartProductType } from '@components/templates/CheckListContainer';
 import API from '@utils/API';
-import { userId } from '@utils/constants';
 
 type Props = {
   children: ReactNode;
@@ -77,17 +76,17 @@ export const Provider: React.FC<Props> = (props) => {
   );
 };
 
-const getCartByUserId = async (userId: number) => {
-  const { message, result, status } = (await API.get(`/cart/user/${userId}`)).data;
+// const getCartByUserId = async (userId: number) => {
+//   const { message, result, status } = (await API.get(`/cart/user/${userId}`)).data;
 
-  console.info(message);
-  if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
-    return result;
-  } else {
-    console.error(`not defined status code: ${status}`);
-    return null;
-  }
-};
+//   console.info(message);
+//   if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+//     return result;
+//   } else {
+//     console.error(`not defined status code: ${status}`);
+//     return null;
+//   }
+// };
 
 const cartProductsFetch = async (cartId: number) => {
   const { message, result, status } = (await API.get(`/cart/${cartId}`)).data;
