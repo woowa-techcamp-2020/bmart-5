@@ -10,7 +10,7 @@ import { IconType } from '@utils/constants';
 export type Props = {
   icon: string;
   size: number;
-  onClick: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent) => void;
 };
 
 const findIcon = (iconName: string) => {
@@ -46,9 +46,9 @@ const findIcon = (iconName: string) => {
   }
 };
 
-export const Icon: React.FC<Props> = ({ icon, onClick, ...props }) => {
+export const Icon: React.FC<Props> = ({ icon, size, onClick }) => {
   return (
-    <S.Icon role={icon} onClick={onClick} {...props}>
+    <S.Icon role={icon} size={size} onClick={onClick}>
       {findIcon(icon)}
     </S.Icon>
   );

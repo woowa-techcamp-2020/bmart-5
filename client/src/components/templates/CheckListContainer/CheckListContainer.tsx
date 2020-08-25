@@ -36,7 +36,7 @@ export const CheckListContainer: React.FC<Props> = (props) => {
       <ContainerHeader>일반상품</ContainerHeader>
       {props.products.map((product) => (
         <CheckableProduct
-          key={product.id}
+          key={`cart-${product.id}`}
           id={product.id}
           name={product.name}
           price={product.price}
