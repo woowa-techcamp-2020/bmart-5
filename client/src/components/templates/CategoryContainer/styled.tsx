@@ -10,7 +10,7 @@ export const CategoryContainer = styled.div`
   width: 100%;
   height: 24rem;
   justify-items: center;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 12rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-content: center;
 `;
