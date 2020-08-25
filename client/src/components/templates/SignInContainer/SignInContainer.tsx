@@ -2,6 +2,7 @@ import React, { useState, MouseEvent, ChangeEvent } from 'react';
 import * as S from './styled';
 import BottomBtn from '@components/atoms/BottomBtn';
 import API from '@utils/API';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Input from '@components/atoms/Input';
 import HttpStatus from 'http-status';
@@ -31,6 +32,18 @@ export const SignInContainer: React.FC<Props> = () => {
           placeholder="password"
           onChange={(e: ChangeEvent) => setPassword((e.target as HTMLInputElement).value)}
         />
+        <S.LinkContainer>
+          <Link href="/">
+            <a>
+              <S.Link>이메일 찾기</S.Link>
+            </a>
+          </Link>
+          <Link href="/signup">
+            <a>
+              <S.Link>회원가입</S.Link>
+            </a>
+          </Link>
+        </S.LinkContainer>
       </S.SignInContainer>
       <BottomBtn
         name={'로그인'}

@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
-  html, body {
-    height: 100%;
+  html, body, #__next {
+    min-height: 100vh;
   }
   html {
     line-height: 1.15;
@@ -37,7 +37,6 @@ const Normalize = createGlobalStyle`
   #__next {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
   }
 
   main {

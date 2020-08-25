@@ -15,4 +15,5 @@ export const Icon = styled.i<Props>`
     width: 100%;
     height: 100%;
   }
+  cursor: pointer;
 `;
