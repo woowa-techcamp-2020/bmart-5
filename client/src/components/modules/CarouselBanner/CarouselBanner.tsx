@@ -132,6 +132,7 @@ export const CarouselBanner = () => {
       >
         {bannerList.map((banner, idx) => (
           <S.SlideContent
+            key={idx}
             className="slide_content"
             ref={(el: HTMLDivElement) => {
               contentsRef.current[idx] = el;
@@ -146,6 +147,7 @@ export const CarouselBanner = () => {
       <S.IndicatorContainer>
         {Array.from({ length: bannerList.length }, (_, idx) => (
           <S.Indicator
+            key={idx}
             ref={(el: HTMLDivElement) => {
               indicatorsRef.current[idx] = el;
             }}
