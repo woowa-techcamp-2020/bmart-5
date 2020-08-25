@@ -24,8 +24,7 @@ const Normalize = createGlobalStyle`
 
   body {
     margin: 0 auto;
-    max-width: 48rem;
-    background: #fff;
+    max-width: 48rem; 
   }
 
   @media all and (max-width:1024px) {

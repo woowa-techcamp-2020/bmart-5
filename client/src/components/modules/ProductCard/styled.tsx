@@ -60,6 +60,7 @@ export const ProductImg = styled.img`
 `;
 
 export const ProductInfo = styled.div`
+  margin-top: 1rem;
   font-size: 2rem;
   & .item-name {
     overflow: hidden;

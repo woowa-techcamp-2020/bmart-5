@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const WrapperContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  background-color: white;
 `;
 
 export const CategoryContainer = styled.div`

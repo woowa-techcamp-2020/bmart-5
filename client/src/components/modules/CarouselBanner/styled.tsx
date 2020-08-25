@@ -32,6 +32,9 @@ export const SlideContent = styled.div`
     width: 100%;
     height: auto;
   }
+  & a {
+    background-color: transparent;
+  }
 `;
 
 export const IndicatorContainer = styled.div`

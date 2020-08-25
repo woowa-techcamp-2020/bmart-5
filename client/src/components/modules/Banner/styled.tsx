@@ -5,6 +5,7 @@ export const Banner = styled.div`
 
   overflow: hidden;
   position: relative;
+  margin-top: 3px;
 `;
 
 export const SlideList = styled.div`
@@ -31,6 +32,10 @@ export const SlideContent = styled.div`
   & .banner-image {
     width: 100%;
     height: auto;
+  }
+  & a {
+    height: 0px;
+    background-color: transparent;
   }
 `;
 

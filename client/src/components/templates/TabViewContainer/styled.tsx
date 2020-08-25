@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const TabViewContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 3px;
+  background-color: white;
   & .content {
     padding: 0 1rem;
   }
