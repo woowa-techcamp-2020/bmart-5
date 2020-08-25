@@ -16,7 +16,7 @@ export const SlidableContainer: React.FC<Props> = ({ products }) => {
       <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
       <div className="content">
         {products.map((item: ProductType) => {
-          return <ProductCard item={item} className={'slide'} />;
+          return <ProductCard key={`slidable-${item.id}`} item={item} className={'slide'} />;
         })}
       </div>
     </S.SlidableContainer>

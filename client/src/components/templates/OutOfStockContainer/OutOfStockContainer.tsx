@@ -28,6 +28,7 @@ export const OutOfStockContainer: React.FC<Props> = (props) => {
       {iconIndex === 1 &&
         props.products.map((product) => (
           <OutOfStockProduct
+            key={`out-${product.id}`}
             id={product.id}
             name={product.name}
             discount={product.discount}

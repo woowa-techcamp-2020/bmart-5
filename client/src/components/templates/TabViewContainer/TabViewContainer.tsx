@@ -42,7 +42,7 @@ export const TabViewContainer: React.FC<Props> = ({ products }) => {
         <div className="images-container">
           {products.map((item: ProductType, idx) => {
             return (
-              <S.ImageContainer ref={imageRefs[idx]}>
+              <S.ImageContainer key={`tab-${item.id}`} ref={imageRefs[idx]}>
                 <img id={`${idx}`} src={item.imgUrl} onClick={onTabClickHandler} />
               </S.ImageContainer>
             );
