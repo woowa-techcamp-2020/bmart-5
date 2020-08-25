@@ -126,9 +126,7 @@ export const CarouselBanner = () => {
         onTouchEnd={() => {
           setIsRunning(true);
         }}
-        onScroll={() => {
-          scrollEventHandler();
-        }}
+        onScroll={scrollEventHandler}
       >
         {bannerList.map((banner, idx) => (
           <S.SlideContent
