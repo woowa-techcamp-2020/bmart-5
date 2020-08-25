@@ -6,6 +6,7 @@ require('dotenv').config({
 
 const publicRuntimeConfig = {
   API_END_POINT: process.env.API_END_POINT,
+  API_PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
 };
 

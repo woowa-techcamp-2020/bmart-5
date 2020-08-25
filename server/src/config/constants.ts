@@ -23,6 +23,7 @@ const databaseConfig = {
 
 const migrate = process.env.MIGRATE === 'true' ? true : false;
 const parserLimit = 5000000;
+const apiEndPoint = process.env.API_END_POINT || 'http://localhost';
 
 export {
   env,
@@ -34,4 +35,5 @@ export {
   databaseConfig,
   migrate,
   parserLimit,
+  apiEndPoint,
 };

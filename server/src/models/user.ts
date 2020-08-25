@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
-import LoginProvider from './login-provider';
 import Cart from './cart';
 
 class User extends Model {

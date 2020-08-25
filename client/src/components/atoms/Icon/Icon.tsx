@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import * as S from './styled';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
@@ -10,7 +10,7 @@ import { IconType } from '@utils/constants';
 export type Props = {
   icon: string;
   size: number;
-  onClick?: () => void;
+  onClick: (e: MouseEvent) => void;
 };
 
 const findIcon = (iconName: string) => {

@@ -1,30 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useInterval } from '@utils/customHooks';
 import * as S from './styled';
 
-const smallBannerList = [
-  { src: `./assets/images/banners/small/banner-small-1.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-2.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-3.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-4.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-5.jpg`, href: '#' },
+const bigBannerList = [
+  { src: `./assets/images/banners/big/banner-big-1.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-2.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-3.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-4.gif`, href: '#' },
+  { src: `./assets/images/banners/big/banner-big-5.gif`, href: '#' },
 ];
 
-const length = smallBannerList.length;
+const length = bigBannerList.length;
 
-export const Banner = () => {
+export const CarouselBanner = () => {
+  const delay = 3000;
+  const [isRunning, setIsRunning] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(1);
 
-  const BannerRef = useRef<HTMLDivElement>(null);
+  const carouselBannerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentsRef = useRef<Array<HTMLDivElement>>([]);
   const indicatorsRef = useRef<Array<HTMLDivElement>>([]);
 
-  const Banner = BannerRef.current as HTMLDivElement;
+  const carouselBanner = carouselBannerRef.current as HTMLDivElement;
   const contents = contentsRef.current as HTMLDivElement[];
   const indicators = indicatorsRef.current as HTMLDivElement[];
 
   const initBannerWidth = () => {
     const container = containerRef.current as HTMLDivElement;
+
     container.style.scrollBehavior = 'initial';
     container.scrollLeft += innerWidth;
   };
@@ -35,7 +39,7 @@ export const Banner = () => {
   };
 
   const createIntersectionObserver = () => {
-    const BannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
+    const carouselBannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           return;
@@ -53,11 +57,11 @@ export const Banner = () => {
     };
 
     const options = {
-      root: Banner,
+      root: carouselBanner,
       threshold: 0.9,
     };
 
-    const observer = new IntersectionObserver(BannerObserveHandler, options);
+    const observer = new IntersectionObserver(carouselBannerObserveHandler, options);
 
     contents.forEach((content) => {
       observer.observe(content);
@@ -98,14 +102,32 @@ export const Banner = () => {
     indicators[currentSlide].classList.add('current');
   }, [currentSlide]);
 
+  // Slide to next Banner
+  useInterval(
+    () => {
+      const container = containerRef.current as HTMLDivElement;
+
+      container.style.scrollBehavior = 'smooth';
+      container.scrollLeft += innerWidth;
+    },
+    isRunning ? delay : null
+  );
+
   const bannerList =
-    length > 1
-      ? [smallBannerList[length - 1], ...smallBannerList, smallBannerList[0]]
-      : smallBannerList;
+    length > 1 ? [bigBannerList[length - 1], ...bigBannerList, bigBannerList[0]] : bigBannerList;
 
   return (
-    <S.Banner ref={BannerRef}>
-      <S.SlideList ref={containerRef} onScroll={scrollEventHandler}>
+    <S.CarouselBanner ref={carouselBannerRef}>
+      <S.SlideList
+        ref={containerRef}
+        onTouchStart={() => {
+          setIsRunning(false);
+        }}
+        onTouchEnd={() => {
+          setIsRunning(true);
+        }}
+        onScroll={scrollEventHandler}
+      >
         {bannerList.map((banner, idx) => (
           <S.SlideContent
             key={idx}
@@ -115,7 +137,7 @@ export const Banner = () => {
             }}
           >
             <a href={banner.href}>
-              <img className="banner-image" src={banner.src} />
+              <img className="carousel-banner-image" src={banner.src} />
             </a>
           </S.SlideContent>
         ))}
@@ -130,6 +152,6 @@ export const Banner = () => {
           />
         ))}
       </S.IndicatorContainer>
-    </S.Banner>
+    </S.CarouselBanner>
   );
 };

@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
+  html, body, #__next {
+    min-height: 100vh;
+  }
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -29,6 +32,11 @@ const Normalize = createGlobalStyle`
     body {
       max-width: 100%;
     }
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
   }
 
   main {
@@ -172,6 +180,8 @@ const Normalize = createGlobalStyle`
   [hidden] {
     display: none;
   }
+
+  a:link, a:visited, a:hover { color: black; text-decoration: none;}
 `;
 
 export default Normalize;
