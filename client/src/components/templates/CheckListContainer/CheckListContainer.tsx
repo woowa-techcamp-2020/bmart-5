@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './styled';
 import CheckListHeader from '@components/modules/CheckListHeader';
 import CheckableProduct from '@components/modules/CheckableProduct';
@@ -11,21 +11,26 @@ export type ProductType = {
   discount: number;
   imgUrl: string;
   count: number;
+  outOfStockAt: Date;
 };
 
 type Props = {
+  cartProducts: Array<ProductType>;
   products: Array<ProductType>;
+  checkedProducts: Array<ProductType>;
+  setCheckedProducts: Function;
+  setCartProducts: Function;
 };
 
 export const CheckListContainer: React.FC<Props> = (props) => {
-  const [checkedProducts, setCheckedProducts] = useState<Array<ProductType>>(props.products);
-
   return (
     <S.CheckListContainer>
       <CheckListHeader
-        checkedProducts={checkedProducts}
-        setCheckedProducts={setCheckedProducts}
+        cartProducts={props.cartProducts}
+        checkedProducts={props.checkedProducts}
+        setCheckedProducts={props.setCheckedProducts}
         products={props.products}
+        setCartProducts={props.setCartProducts}
       />
       <S.GrayHorizontal />
       <ContainerHeader>일반상품</ContainerHeader>
@@ -38,8 +43,11 @@ export const CheckListContainer: React.FC<Props> = (props) => {
           discount={product.discount}
           imgUrl={product.imgUrl}
           count={product.count}
-          checkedProducts={checkedProducts}
-          setCheckedProducts={setCheckedProducts}
+          cartProducts={props.cartProducts}
+          checkedProducts={props.checkedProducts}
+          setCheckedProducts={props.setCheckedProducts}
+          setCartProducts={props.setCartProducts}
+          products={props.products}
         />
       ))}
       <S.GrayHorizontal />

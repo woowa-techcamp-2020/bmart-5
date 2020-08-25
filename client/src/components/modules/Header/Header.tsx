@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Router from 'next/router';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import Logo from '@components/atoms/Logo';
@@ -25,13 +25,7 @@ export const Header: React.FC<Props> = (props) => {
   return (
     <S.Header className="header">
       <div className="left-wrap">
-        {props.left && (
-          <Link href="/">
-            <a>
-              <Icon icon={props.left} size={2.2} />
-            </a>
-          </Link>
-        )}
+        {props.left && <Icon icon={props.left} size={2.2} onClick={() => Router.back()} />}
       </div>
       <div className="main-wrap">
         {props.main && (

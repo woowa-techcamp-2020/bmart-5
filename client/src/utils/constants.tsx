@@ -3,6 +3,8 @@ import getConfig from 'next/config';
 export enum IconType {
   ARROW_FORWARD = 'ArrowForward',
   ARROW_LEFT = 'ArrowLeft',
+  ARROW_UP = 'ArrowUP',
+  ARROW_DOWN = 'ArrowDown',
   BARS = 'Bars',
   BASKET = 'Basket',
   CLOSE = 'Close',
@@ -11,8 +13,11 @@ export enum IconType {
   REFRESH = 'Refresh',
   REG_HEART = 'RegHeart',
   SEARCH = 'Search',
+  PLUS = 'Plus',
   'ArrowForward' = ARROW_FORWARD,
   'ArrowLeft' = ARROW_LEFT,
+  'ArrowUP' = ARROW_UP,
+  'ArrowDown' = ARROW_DOWN,
   'Bars' = BARS,
   'Basket' = BASKET,
   'Close' = CLOSE,
@@ -21,6 +26,7 @@ export enum IconType {
   'Refresh' = REFRESH,
   'RegHeart' = REG_HEART,
   'Search' = SEARCH,
+  'Plus' = PLUS,
 }
 
 export enum HeaderMainType {
@@ -73,5 +79,9 @@ export const OrderedCategoriesLimit = 9;
 export const TabViewProductsCount = 4;
 
 export const userId = 1;
+
+export const deliveryFee = 1500;
+
+export const deliveryDiscount = 100;
 
 export const CarouselBannerCount = 5;

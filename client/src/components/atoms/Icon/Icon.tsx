@@ -3,7 +3,8 @@ import * as S from './styled';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
 import { IoMdCloseCircleOutline, IoIosArrowForward } from 'react-icons/io';
-import { RiShoppingBagLine } from 'react-icons/ri';
+import { RiShoppingBagLine, RiArrowUpSLine, RiArrowDownSLine } from 'react-icons/ri';
+import { FiPlus } from 'react-icons/fi';
 import { IconType } from '@utils/constants';
 
 export type Props = {
@@ -18,6 +19,10 @@ const findIcon = (iconName: string) => {
       return <IoIosArrowForward />;
     case IconType.ARROW_LEFT:
       return <FaArrowLeft />;
+    case IconType.ARROW_UP:
+      return <RiArrowUpSLine />;
+    case IconType.ARROW_DOWN:
+      return <RiArrowDownSLine />;
     case IconType.BARS:
       return <FaBars />;
     case IconType.CLOSE:
@@ -34,6 +39,8 @@ const findIcon = (iconName: string) => {
       return <FaUndoAlt />;
     case IconType.NOTIFICATION:
       return <AiOutlineNotification />;
+    case IconType.PLUS:
+      return <FiPlus />;
     default:
       return;
   }
