@@ -8,6 +8,13 @@ import { JsonResponse } from '../modules/utils';
 import REGEX from '@shared/validate';
 import CustomError from '../modules/exception/custom-error';
 
+export type TokenUser = {
+  id: number;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+};
+
 const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
   try {
@@ -27,7 +34,12 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = jwt.sign(
       {
-        data: emailUser.getDataValue('user').dataValues,
+        data: {
+          id: emailUser.getDataValue('user').get('id'),
+          username: emailUser.getDataValue('user').get('username'),
+          email: emailUser.email,
+          isAdmin: emailUser.getDataValue('user').get('isAdmin'),
+        } as TokenUser,
       },
       jwtSecret,
       { expiresIn: tokenExpiresIn }
@@ -39,7 +51,12 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
         expires: new Date(Date.now() + 30 * 60 * 1000),
       })
       .status(HttpStatus.OK)
-      .json(JsonResponse(HttpStatus.OK, `Log in success ${req.body.email}`, { token: token }));
+      .json(
+        JsonResponse(HttpStatus.OK, `Log in success ${req.body.email}`, {
+          token: token,
+          expires: new Date(Date.now() + 30 * 60 * 1000),
+        })
+      );
   } catch (err) {
     next(err);
   }
@@ -92,7 +109,12 @@ const emailSignUp = async (req: Request, res: Response, next: NextFunction) => {
 
       const token = jwt.sign(
         {
-          data: user,
+          data: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            isAdmin: user.isAdmin,
+          } as TokenUser,
         },
         jwtSecret,
         { expiresIn: tokenExpiresIn }
@@ -104,7 +126,10 @@ const emailSignUp = async (req: Request, res: Response, next: NextFunction) => {
         })
         .status(HttpStatus.CREATED)
         .json(
-          JsonResponse(HttpStatus.CREATED, `created user success email(${body.email})`, emailUser)
+          JsonResponse(HttpStatus.CREATED, `created user success email(${body.email})`, {
+            token: token,
+            expires: new Date(Date.now() + 30 * 60 * 1000),
+          })
         );
     }
   } catch (err) {
