@@ -9,6 +9,10 @@ const readData = (file: string) => {
   return JSON.parse(fs.readFileSync(`${__dirname}/${file}`, { encoding: 'utf-8' }));
 };
 
+const readDir = (dir: string) => {
+  return fs.readdirSync(`${__dirname}/${dir}`, { encoding: 'utf-8' });
+};
+
 const createAdminUser = async (body: {
   username: string;
   email: string;
@@ -48,13 +52,11 @@ const bulkData = async () => {
   const subCategoryData = readData('data/sub-category.json');
   await SubCategory.bulkCreate(subCategoryData);
 
-  // create fruit products
-  const fruitProductData = readData('data/fruits.json');
-  await Product.bulkCreate(fruitProductData);
-
-  // create vegetables products
-  const vegetableProductData = readData('data/vegetables.json');
-  await Product.bulkCreate(vegetableProductData);
+  // create products in data/products
+  const files = readDir('data/products');
+  for (const file in files) {
+    await Product.bulkCreate(readData(`data/products/${files[file]}`));
+  }
 
   // create Admin user
   const signupAdminUser = readData('data/user.json');

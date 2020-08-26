@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
 import Cart from './cart';
+import Like from './like';
 
 class User extends Model {
   public id!: number;
@@ -46,6 +47,12 @@ User.hasMany(Cart, {
   sourceKey: 'id',
   foreignKey: { name: 'userId', allowNull: false },
   as: 'carts',
+});
+
+User.hasMany(Like, {
+  sourceKey: 'id',
+  foreignKey: { name: 'userId', allowNull: false },
+  as: 'likes',
 });
 
 export default User;

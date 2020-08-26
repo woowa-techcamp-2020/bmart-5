@@ -18,6 +18,7 @@ import {
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
+// import { EMAIL_REX } from '@shared/validate';
 
 export type ProductType = {
   id: number;
@@ -64,6 +65,7 @@ const MainPage: NextPage<Props> = (props) => {
   };
 
   useEffect(() => {
+    // console.log('regex', EMAIL_REX);
     if (select) {
       (document.querySelector('html') as HTMLElement).style.overflow = 'hidden';
       (document.querySelector('.modal') as HTMLElement).style.display = 'block';
