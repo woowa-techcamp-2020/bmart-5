@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from './styled';
 
 const smallBannerList = [
-  { src: `./assets/images/banners/small/banner-small-1.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-2.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-3.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-4.jpg`, href: '#' },
-  { src: `./assets/images/banners/small/banner-small-5.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-1.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-2.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-3.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-4.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-5.jpg`, href: '#' },
 ];
 
 const length = smallBannerList.length;

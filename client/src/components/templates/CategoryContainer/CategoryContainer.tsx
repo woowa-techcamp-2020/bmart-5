@@ -47,7 +47,7 @@ export const CategoryContainer = (props: Props) => {
             width={7.5}
             height={10}
             name={showMoreName}
-            url={'./assets/images/categories/more.png'}
+            url={'/assets/images/categories/more.png'}
             onClick={showMoreClickHandler}
           />
         }

@@ -164,7 +164,7 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
-      category.url = `./assets/images/categories/main-${category.name}.png`;
+      category.url = `/assets/images/categories/main-${category.name}.png`;
       return category;
     });
     return { categories };
