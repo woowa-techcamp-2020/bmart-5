@@ -54,9 +54,6 @@ const Normalize = createGlobalStyle`
     font-family: monospace, monospace;
     font-size: 1em;
   }
-  a {
-    background-color: #f3f3f3;
-  }
   abbr[title] {
     border-bottom: none;
     text-decoration: underline;
