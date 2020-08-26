@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, MouseEvent } from 'react';
+import React from 'react';
 import * as S from './styled';
 import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
@@ -12,8 +12,6 @@ type Props = {
 };
 
 export const SlidableCategoryContainer: React.FC<Props> = ({ name, products }) => {
-  const [currentTab, setCurrentTab] = useState<number>(0);
-
   return (
     <S.SlidableCategoryContainer>
       <ContainerHeader moreBtn>{name}</ContainerHeader>
