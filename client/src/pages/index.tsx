@@ -208,9 +208,9 @@ const categoryProductsFetch = async (
   let categoryProducts: Array<ProductType> = [];
 
   await Promise.all(
-    limits.map(async (cur: number, idx: number, arr: Array<number>) => {
+    limits.map(async (value: number, idx: number, arr: Array<number>) => {
       let { status, message, result } = (
-        await API.get(`/product/sub/${subCategories[idx]}/${cur}`)
+        await API.get(`/product/sub/${subCategories[idx]}/${value}`)
       ).data;
       console.info(message);
       if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
