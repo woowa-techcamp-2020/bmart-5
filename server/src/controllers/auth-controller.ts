@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { LoginProvider, User, Cart } from '../models';
 import { jwtSecret, tokenExpiresIn, apiEndPoint } from '../config/constants';
 import { JsonResponse } from '../modules/utils';
+import REGEX from '@shared/validate';
 import CustomError from '../modules/exception/custom-error';
 
 const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
@@ -46,8 +47,16 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
 
 const emailSignUp = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  body.password = crypto.createHash('sha256').update(body.password).digest('base64');
+
   try {
+    if (!REGEX.PW_REGEX.test(body.password))
+      throw new CustomError(
+        HttpStatus.BAD_REQUEST,
+        `Validation Error: Password`,
+        'Validation Error: Password'
+      );
+
+    body.password = crypto.createHash('sha256').update(body.password).digest('base64');
     const existsUser = await LoginProvider.findOne({
       attributes: ['id', 'email', 'provider', 'password', 'userId'],
       where: {

@@ -6,10 +6,11 @@ type Props = {
   name: string;
   type: string;
   placeholder: string;
+  message?: string;
   onChange: (e: ChangeEvent) => void;
 };
 
-export const Input: React.FC<Props> = ({ value, type, name, placeholder, onChange }) => {
+export const Input: React.FC<Props> = ({ value, type, name, message, placeholder, onChange }) => {
   return (
     <>
       <S.Label htmlFor={name}>{name}</S.Label>
@@ -20,6 +21,7 @@ export const Input: React.FC<Props> = ({ value, type, name, placeholder, onChang
         placeholder={placeholder}
         onChange={onChange}
       />
+      {message && <S.Message>{message}</S.Message>}
     </>
   );
 };
