@@ -1,12 +1,13 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "../",
     "paths": {
-      "@pages/*": ["src/pages/*"],
-      "@components/*": ["src/components/*"],
-      "@commons/*": ["src/commons/*"],
-      "@utils/*": ["src/utils/*"]
+      "@pages/*": ["client/src/pages/*"],
+      "@components/*": ["client/src/components/*"],
+      "@commons/*": ["client/src/commons/*"],
+      "@utils/*": ["client/src/utils/*"],
+      "@shared/*": ["shared/*"]
     },
     "alwaysStrict": true,
     "isolatedModules": true,
