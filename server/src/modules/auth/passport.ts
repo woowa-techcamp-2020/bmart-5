@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { jwtSecret, googleCredentials } from '@config/constants';
 
 const jwtFromRequest = (req: Request) => {
-  let token = null;
+  let token: string | null = null;
   if (req && req.headers.authorization) {
     token = req.headers.authorization;
     token = token.replace('Basic ', '');

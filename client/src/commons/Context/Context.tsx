@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import { ProductType } from '@pages/index';
 import { ProductType as CartProductType } from '@components/templates/CheckListContainer';
 import API from '@utils/API';
+import { userId } from '@utils/constants';
 
 type Props = {
   children: ReactNode;
@@ -22,6 +23,8 @@ type ContextType = {
   setCartId: Function;
   user: UserType | null;
   setUser: Function;
+  likeProducts: Array<ProductType>;
+  setLikeProducts: Function;
 };
 
 const defaultValue = {
@@ -33,6 +36,8 @@ const defaultValue = {
   setCartId: () => {},
   user: null,
   setUser: () => {},
+  likeProducts: [],
+  setLikeProducts: () => {},
 };
 
 export const Context = React.createContext<ContextType>(defaultValue);
@@ -46,29 +51,22 @@ export const Provider: React.FC<Props> = (props) => {
    * TODO: user token으로 부터 cartId 초기화 해야함
    * */
   const [cartId, setCartId] = useState<number | null>(1);
+  const [likeProducts, setLikeProducts] = useState<Array<ProductType>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (cartId !== null) {
-        const cartProductsResponse = await cartProductsFetch(cartId);
-        const cartProducts = cartProductsResponse.map((item) => {
-          return {
-            id: item.id,
-            name: item.product.name,
-            price: item.product.price,
-            discount: item.product.discount,
-            count: item.count,
-            imgUrl: item.product.imgUrl,
-            outOfStockAt: item.product.outOfStockAt,
-          };
-        });
-
+        const cartProducts = await cartProductsFetch(cartId);
         setCartProducts(cartProducts);
+      }
+      if (userId !== null) {
+        const likeProducts = await likeProductsFetch(userId);
+        setLikeProducts(likeProducts);
       }
     };
 
     fetchData();
-  }, [cartId]);
+  }, [cartId, userId]);
 
   return (
     <Context.Provider
@@ -81,6 +79,8 @@ export const Provider: React.FC<Props> = (props) => {
         setCartId: setCartId,
         user: user,
         setUser: setUser,
+        likeProducts: likeProducts,
+        setLikeProducts: setLikeProducts,
       }}
     >
       {props.children}
@@ -104,8 +104,42 @@ const cartProductsFetch = async (cartId: number) => {
   const { message, result, status } = (await API.get(`/cart/${cartId}`)).data;
 
   console.info(message);
-  if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
-    return [...result];
+  if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+    return [...result].map((item) => {
+      return {
+        id: item.id,
+        name: item.product.name,
+        price: item.product.price,
+        discount: item.product.discount,
+        count: item.count,
+        imgUrl: item.product.imgUrl,
+        outOfStockAt: item.product.outOfStockAt,
+      };
+    });
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
+};
+
+const likeProductsFetch = async (userId: number) => {
+  const { message, result, status } = (await API.get(`/like/${userId}`)).data;
+
+  console.info(message);
+  if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+    return [...result].map((item) => {
+      return {
+        id: item.product.id,
+        name: item.product.name,
+        price: item.product.price,
+        imgUrl: item.product.imgUrl,
+        content: item.product.content,
+        discount: item.product.discount,
+        outOfStockAt: item.product.outOfStockAt,
+        subCategoryId: item.product.subCategoryId,
+        isLiked: true,
+      };
+    });
   } else {
     console.error(`not defined status code: ${status}`);
     return [];

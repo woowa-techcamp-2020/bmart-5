@@ -7,8 +7,8 @@ import { JsonResponse } from '../utils';
 const errorHandler = (error: CustomError, req: Request, res: Response, next: NextFunction) => {
   const status = error.status || HttpStatus.INTERNAL_SERVER_ERROR;
   const message = error.message || 'Something went wrong';
-  logger.error(error.stack);
-  res.status(status).json(JsonResponse(status, message, { error: error.stack }));
+  logger.error(error.message, error.stack);
+  res.status(status).json(JsonResponse(status, message, { error: error.message }));
 };
 
 export default errorHandler;
