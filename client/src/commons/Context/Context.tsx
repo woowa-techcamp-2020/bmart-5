@@ -9,6 +9,11 @@ type Props = {
   children: ReactNode;
 };
 
+type UserType = {
+  cart: Array<CartProductType>;
+  setCart: Function;
+};
+
 type ContextType = {
   select: ProductType | undefined;
   setSelect: Function;
@@ -16,6 +21,8 @@ type ContextType = {
   setCartProducts: Function;
   cartId: number | null;
   setCartId: Function;
+  user: UserType | null;
+  setUser: Function;
   likeProducts: Array<ProductType>;
   setLikeProducts: Function;
 };
@@ -27,6 +34,8 @@ const defaultValue = {
   setCartProducts: () => {},
   cartId: null,
   setCartId: () => {},
+  user: null,
+  setUser: () => {},
   likeProducts: [],
   setLikeProducts: () => {},
 };
@@ -36,6 +45,7 @@ export const Context = React.createContext<ContextType>(defaultValue);
 export const Provider: React.FC<Props> = (props) => {
   const [select, setSelect] = useState<ProductType>();
   const [cartProducts, setCartProducts] = useState<Array<CartProductType>>([]);
+  const [user, setUser] = useState<UserType | null>(null);
 
   /**
    * TODO: user token으로 부터 cartId 초기화 해야함
@@ -67,6 +77,8 @@ export const Provider: React.FC<Props> = (props) => {
         setCartProducts: setCartProducts,
         cartId: cartId,
         setCartId: setCartId,
+        user: user,
+        setUser: setUser,
         likeProducts: likeProducts,
         setLikeProducts: setLikeProducts,
       }}
