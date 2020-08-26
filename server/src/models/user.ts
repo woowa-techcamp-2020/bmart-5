@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
 import Cart from './cart';
+import REGEX from '@shared/validate';
 
 class User extends Model {
   public id!: number;
@@ -23,11 +24,17 @@ User.init(
     username: {
       type: DataTypes.STRING(45),
       allowNull: false,
+      validate: {
+        is: REGEX.NAME_REGEX,
+      },
     },
     email: {
       type: DataTypes.STRING(100),
       unique: true,
       allowNull: false,
+      validate: {
+        is: REGEX.EMAIL_REGEX,
+      },
     },
     imgUrl: {
       type: DataTypes.STRING(200),
