@@ -5,14 +5,15 @@ import CounterBtn from '@components/atoms/CounterBtn';
 import BottomBtn from '@components/atoms/BottomBtn';
 import { Context } from '@commons/Context';
 import API from '@utils/API';
-import { userId } from '@utils/constants';
 import httpStatus from 'http-status';
+import { getCookie } from '@utils/cookie-manager';
 
 export const ToastModal: React.FC = () => {
   const [count, setCount] = useState<number>(1);
   const modalRef = useRef<HTMLDivElement>(null);
   const { select, setSelect, cartProducts, setCartProducts } = useContext(Context);
   const router = useRouter();
+  const token = getCookie('authorization');
 
   const ModalClose = async () => {
     return new Promise((resolve, reject) => {
@@ -54,12 +55,24 @@ export const ToastModal: React.FC = () => {
           tag={`${(select.price * count).toLocaleString()}원`}
           onClick={async (event: MouseEvent) => {
             event.stopPropagation();
+            if (!token) {
+              confirm('로그인 하시겠습니까?') ? router.push('/signin') : false;
+              return;
+            }
+
             const { message, result, status } = (
-              await API.post(`/cart`, {
-                userId: userId,
-                productId: select.id,
-                count: count,
-              })
+              await API.post(
+                `/cart`,
+                {
+                  productId: select.id,
+                  count: count,
+                },
+                {
+                  headers: {
+                    authorization: token,
+                  },
+                }
+              )
             ).data;
             console.info(message, select);
             if (status === httpStatus.CREATED) {

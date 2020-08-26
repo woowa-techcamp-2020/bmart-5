@@ -4,14 +4,17 @@ import { Like, Product } from '../models';
 import CustomError from 'src/modules/exception/custom-error';
 import httpStatus from 'http-status';
 import { JsonResponse } from 'src/modules/utils';
+import { TokenUser } from './auth-controller';
 
 const updateOrCreate = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
+  const user = req.user as TokenUser;
+
   try {
     const response = await Like.findOrCreate({
       attributes: ['id', 'userId', 'productId'],
       where: {
-        userId: body.userId,
+        userId: user.id,
         productId: body.productId,
       },
     });
@@ -31,8 +34,7 @@ const updateOrCreate = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const findByUserId = async (req: Request, res: Response, next: NextFunction) => {
-  const { params } = req;
-  const paramId = params.id;
+  const user = req.user as TokenUser;
 
   try {
     const likes = await Like.findAll({
@@ -40,7 +42,7 @@ const findByUserId = async (req: Request, res: Response, next: NextFunction) => 
       include: { model: Product, as: 'product' },
       where: {
         [Op.and]: [
-          { userId: paramId },
+          { userId: user.id },
           {
             deletedAt: {
               [Op.is]: null,
@@ -62,14 +64,14 @@ const findByUserId = async (req: Request, res: Response, next: NextFunction) => 
 
 const softDeleteLike = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
-  const userId = params.userId;
+  const user = req.user as TokenUser;
   const productId = params.productId;
   const now = new Date();
 
   try {
     const like = await Like.findOne({
       where: {
-        userId: userId,
+        userId: user.id,
         productId: productId,
       },
     });

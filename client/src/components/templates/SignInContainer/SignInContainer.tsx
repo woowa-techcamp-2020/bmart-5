@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, ChangeEvent } from 'react';
+import React, { useState, MouseEvent, ChangeEvent, useContext } from 'react';
 import * as S from './styled';
 import BottomBtn from '@components/atoms/BottomBtn';
 import API from '@utils/API';
@@ -8,6 +8,8 @@ import Input from '@components/atoms/Input';
 import HttpStatus from 'http-status';
 import GoogleLoginBtn from '@components/atoms/GoogleLoginBtn';
 import validateCheck from '@utils/validate';
+import { Context } from '@commons/Context';
+import { setCookie, getCookie } from '@utils/cookie-manager';
 
 type Props = {};
 
@@ -17,6 +19,7 @@ export const SignInContainer: React.FC<Props> = () => {
   const [password, setPassword] = useState<string>('');
   const [emailMsg, setEmailMsg] = useState<string | undefined>(undefined);
   const [passwordMsg, setPasswordMsg] = useState<string | undefined>(undefined);
+  const { setCartId } = useContext(Context);
 
   return (
     <>
@@ -65,7 +68,16 @@ export const SignInContainer: React.FC<Props> = () => {
             ).data;
             if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
               console.info(message);
-              console.info(result); // token
+              setCookie('authorization', result.token, result.expires);
+              setCartId(
+                (
+                  await API.get(`/cart/user/id`, {
+                    headers: {
+                      Authorization: `Basic ${getCookie('authorization')}`,
+                    },
+                  })
+                ).data.result.id
+              );
               router.push('/');
             } else {
               alert('로그인에 실패하였습니다.');

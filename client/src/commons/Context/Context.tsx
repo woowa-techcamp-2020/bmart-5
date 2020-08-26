@@ -3,40 +3,31 @@ import httpStatus from 'http-status';
 import { ProductType } from '@pages/index';
 import { ProductType as CartProductType } from '@components/templates/CheckListContainer';
 import API from '@utils/API';
-import { userId } from '@utils/constants';
+import { getCookie } from '@utils/cookie-manager';
 
 type Props = {
   children: ReactNode;
 };
 
-type UserType = {
-  cart: Array<CartProductType>;
-  setCart: Function;
-};
-
 type ContextType = {
   select: ProductType | undefined;
-  setSelect: Function;
   cartProducts: Array<CartProductType>;
-  setCartProducts: Function;
   cartId: number | null;
-  setCartId: Function;
-  user: UserType | null;
-  setUser: Function;
   likeProducts: Array<ProductType>;
+  setSelect: Function;
+  setCartProducts: Function;
+  setCartId: Function;
   setLikeProducts: Function;
 };
 
 const defaultValue = {
   select: undefined,
-  setSelect: () => {},
   cartProducts: [],
-  setCartProducts: () => {},
   cartId: null,
-  setCartId: () => {},
-  user: null,
-  setUser: () => {},
   likeProducts: [],
+  setSelect: () => {},
+  setCartProducts: () => {},
+  setCartId: () => {},
   setLikeProducts: () => {},
 };
 
@@ -45,28 +36,30 @@ export const Context = React.createContext<ContextType>(defaultValue);
 export const Provider: React.FC<Props> = (props) => {
   const [select, setSelect] = useState<ProductType>();
   const [cartProducts, setCartProducts] = useState<Array<CartProductType>>([]);
-  const [user, setUser] = useState<UserType | null>(null);
-
-  /**
-   * TODO: user token으로 부터 cartId 초기화 해야함
-   * */
-  const [cartId, setCartId] = useState<number | null>(1);
+  const [cartId, setCartId] = useState<number | null>(null);
   const [likeProducts, setLikeProducts] = useState<Array<ProductType>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = getCookie('authorization');
+
+      if (token && cartId === null) {
+        const cartId = (await getCartByToken(token)).id;
+        setCartId(cartId);
+        return;
+      }
+      if (token !== null) {
+        const likeProducts = await likeProductsFetch(token);
+        setLikeProducts(likeProducts);
+      }
       if (cartId !== null) {
         const cartProducts = await cartProductsFetch(cartId);
         setCartProducts(cartProducts);
       }
-      if (userId !== null) {
-        const likeProducts = await likeProductsFetch(userId);
-        setLikeProducts(likeProducts);
-      }
     };
 
     fetchData();
-  }, [cartId, userId]);
+  }, [cartId]);
 
   return (
     <Context.Provider
@@ -77,8 +70,6 @@ export const Provider: React.FC<Props> = (props) => {
         setCartProducts: setCartProducts,
         cartId: cartId,
         setCartId: setCartId,
-        user: user,
-        setUser: setUser,
         likeProducts: likeProducts,
         setLikeProducts: setLikeProducts,
       }}
@@ -88,17 +79,23 @@ export const Provider: React.FC<Props> = (props) => {
   );
 };
 
-// const getCartByUserId = async (userId: number) => {
-//   const { message, result, status } = (await API.get(`/cart/user/${userId}`)).data;
+const getCartByToken = async (token: string) => {
+  const { message, result, status } = (
+    await API.get(`/cart/user/id`, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+  ).data;
 
-//   console.info(message);
-//   if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
-//     return result;
-//   } else {
-//     console.error(`not defined status code: ${status}`);
-//     return null;
-//   }
-// };
+  console.info(message);
+  if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+    return result;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return null;
+  }
+};
 
 const cartProductsFetch = async (cartId: number) => {
   const { message, result, status } = (await API.get(`/cart/${cartId}`)).data;
@@ -122,8 +119,14 @@ const cartProductsFetch = async (cartId: number) => {
   }
 };
 
-const likeProductsFetch = async (userId: number) => {
-  const { message, result, status } = (await API.get(`/like/${userId}`)).data;
+const likeProductsFetch = async (token: string) => {
+  const { message, result, status } = (
+    await API.get(`/like`, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+  ).data;
 
   console.info(message);
   if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
@@ -137,7 +140,6 @@ const likeProductsFetch = async (userId: number) => {
         discount: item.product.discount,
         outOfStockAt: item.product.outOfStockAt,
         subCategoryId: item.product.subCategoryId,
-        isLiked: true,
       };
     });
   } else {
