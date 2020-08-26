@@ -11,58 +11,35 @@ vegetables=$(($base_id+1))
 echo "start product bulk with base_id($base_id)"
 echo "base url for api server: $url"
 
-bodyData="["
-while IFS="|" read -r name category price discount imgUrl;
-do    
-        case $category in
-        채소)
-            category=$vegetables
-            ;;
-        과일)
-            category=$fruits
-            ;;
-        *)
-            echo "Sorry, I don't understand"
-            ;;
-        esac
-        bodyData="${bodyData}{
-            \"name\":\"$name\",
-            \"price\":$price,
-            \"content\":\"\",
-            \"discount\":$discount,
-            \"subCategoryId\":$category,
-            \"imgUrl\":\"$imgUrl\"
-            },"
-done < ./data/fruits.txt
-bodyData="${bodyData:0:$((${#bodyData}-1))}]"
-
-echo ${bodyData} > ./fruits.json
-
-bodyData="["
-while IFS="|" read -r name category price discount imgUrl;
-do    
-        case $category in
-        채소)
-            category=$vegetables
-            ;;
-        과일)
-            category=$fruits
-            ;;
-        *)
-            echo "Sorry, I don't understand"
-            ;;
-        esac
-        bodyData="${bodyData}{
-            \"name\":\"$name\",
-            \"price\":$price,
-            \"content\":\"\",
-            \"discount\":$discount,
-            \"subCategoryId\":$category,
-            \"imgUrl\":\"$imgUrl\"
-            },"
-done < ./data/vegetables.txt
-bodyData="${bodyData:0:$((${#bodyData}-1))}]"
-
-echo ${bodyData} > ./vegetables.json
+dirpath=`dirname $0`
+for textfile in ${dirpath}/data/*
+do
+    echo ...reading file: ${textfile}
+    bodyData="["
+    while IFS="|" read -r name category price discount imgUrl;
+    do    
+            case $category in
+            채소)
+                subCategory=$vegetables
+                ;;
+            과일)
+                subCategory=$fruits
+                ;;
+            *)
+                echo "Sorry, I don't understand"
+                ;;
+            esac
+            bodyData="${bodyData}{
+                \"name\":\"$name\",
+                \"price\":$price,
+                \"content\":\"\",
+                \"discount\":$discount,
+                \"subCategoryId\":$subCategory,
+                \"imgUrl\":\"$imgUrl\"
+                },"
+    done < ${textfile}
+    bodyData="${bodyData:0:$((${#bodyData}-1))}]"
+    echo ${bodyData} > ./json-data/${textfile:7:$((${#textfile}-11))}.json
+done
 
 echo end product bulk
