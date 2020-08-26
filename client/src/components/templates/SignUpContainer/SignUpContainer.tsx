@@ -52,12 +52,13 @@ export const SignUpContainer: React.FC<Props> = () => {
           setNameMsg(validateCheck({ type: 'name', value: name }));
           setEmailMsg(validateCheck({ type: 'email', value: email }));
           setPasswordMsg(validateCheck({ type: 'password', value: password }));
-          if (nameMsg !== undefined && emailMsg !== undefined && passwordMsg !== undefined)
-            await API.post(`/auth/email/signup`, {
+          if (nameMsg === undefined && emailMsg === undefined && passwordMsg === undefined) {
+            API.post(`/auth/email/signup`, {
               username: name,
               email: email,
               password: password,
             }).then(() => router.push('/'));
+          }
         }}
       />
     </>
