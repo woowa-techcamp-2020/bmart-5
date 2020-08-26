@@ -27,7 +27,7 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = jwt.sign(
       {
-        data: emailUser.getDataValue('user'),
+        data: emailUser.getDataValue('user').dataValues,
       },
       jwtSecret,
       { expiresIn: tokenExpiresIn }
@@ -39,7 +39,7 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
         expires: new Date(Date.now() + 30 * 60 * 1000),
       })
       .status(HttpStatus.OK)
-      .json(JsonResponse(HttpStatus.OK, `Log in success ${req.body.email}`, { completed: true }));
+      .json(JsonResponse(HttpStatus.OK, `Log in success ${req.body.email}`, { token: token }));
   } catch (err) {
     next(err);
   }

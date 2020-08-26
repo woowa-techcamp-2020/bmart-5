@@ -56,21 +56,24 @@ export const SignInContainer: React.FC<Props> = () => {
           event.stopPropagation();
           setEmailMsg(validateCheck({ type: 'email', value: email }));
           setPasswordMsg(validateCheck({ type: 'password', value: password }));
-          if (emailMsg !== undefined && passwordMsg !== undefined)
-            await API.post(`/auth/email`, {
-              email: email,
-              password: password,
-            }).then(({ status }) => {
-              if (status === HttpStatus.OK) {
-                console.log(status);
-                router.push('/');
-              } else {
-                alert('로그인에 실패하였습니다.');
-                setEmail('');
-                setPassword('');
-                return;
-              }
-            });
+          if (emailMsg !== undefined && passwordMsg !== undefined) {
+            const { status, message, result } = (
+              await API.post(`/auth/email`, {
+                email: email,
+                password: password,
+             })
+           ).data;
+           if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+             console.info(message);
+             console.info(result); // token
+             router.push('/');
+           } else {
+              alert('로그인에 실패하였습니다.');
+              setEmail('');
+              setPassword('');
+              return;
+           }
+          }
         }}
       />
       <GoogleLoginBtn />

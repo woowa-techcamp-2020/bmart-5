@@ -16,6 +16,7 @@
     "esModuleInterop": true, // import, require 호환
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "noEmit": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true
   }

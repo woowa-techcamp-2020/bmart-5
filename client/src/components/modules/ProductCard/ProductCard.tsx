@@ -1,22 +1,43 @@
-import React, { useState, useContext, MouseEvent } from 'react';
+import React, { useState, useEffect, useContext, MouseEvent } from 'react';
 import * as S from './styled';
-import { IconType } from '@utils/constants';
+import { IconType, userId } from '@utils/constants';
 import Icon from '@components/atoms/Icon';
 import Badge from '@components/atoms/Badge';
 import { ProductType } from '@pages/index';
 import { Context } from '@commons/Context';
+import API from '@utils/API';
 
 type Props = {
   item: ProductType;
+  initLike: boolean;
+  likeProducts: Array<ProductType>;
+  setLikeProducts: Function;
   className: 'slide' | 'grid' | 'main' | 'sale';
 };
 
-export const ProductCard: React.FC<Props> = ({ item, className }) => {
-  const [Liked, setLiked] = useState(false);
+export const ProductCard: React.FC<Props> = ({
+  item,
+  initLike,
+  likeProducts,
+  setLikeProducts,
+  className,
+}) => {
+  const [Liked, setLiked] = useState<boolean>(false);
   const setSelect = useContext(Context).setSelect;
 
-  const onLikeHandler = (event: MouseEvent) => {
+  useEffect(() => {
+    initLike && setLiked(initLike);
+  }, [initLike]);
+
+  const onLikeHandler = async (event: MouseEvent) => {
     event.stopPropagation();
+    if (!Liked) {
+      await API.post(`/like`, { userId: userId, productId: item.id });
+      setLikeProducts({ ...likeProducts, item });
+    } else {
+      await API.delete(`/like/${userId}/${item.id}`);
+      setLikeProducts(likeProducts.filter((product) => product.id !== item.id));
+    }
     setLiked(!Liked);
   };
 
