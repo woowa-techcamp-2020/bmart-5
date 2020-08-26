@@ -24,8 +24,7 @@ const Normalize = createGlobalStyle`
 
   body {
     margin: 0 auto;
-    max-width: 48rem;
-    background: #fff;
+    max-width: 48rem; 
   }
 
   @media all and (max-width:1024px) {
@@ -54,9 +53,6 @@ const Normalize = createGlobalStyle`
   pre {
     font-family: monospace, monospace;
     font-size: 1em;
-  }
-  a {
-    background-color: #f3f3f3;
   }
   abbr[title] {
     border-bottom: none;

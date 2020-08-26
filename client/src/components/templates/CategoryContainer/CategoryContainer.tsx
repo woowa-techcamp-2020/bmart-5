@@ -24,36 +24,34 @@ export const CategoryContainer = (props: Props) => {
   const showMoreName = '더보기';
 
   return (
-    <>
+    <S.WrapperContainer>
       <ContainerHeader>
         {ProductDeliveryDesc({ earliest: props.earliest, latest: props.latest })}
         {' | 24시까지 주문 가능'}
       </ContainerHeader>
-      <S.WrapperContainer>
-        <S.CategoryContainer>
-          {props.categories &&
-            props.categories.map((category: CategoryType) => (
-              <CategoryIcon
-                key={`category-${category.id}`}
-                width={8}
-                height={10}
-                id={category.id}
-                name={category.name}
-                url={category.url}
-              />
-            ))}
-          {
+      <S.CategoryContainer>
+        {props.categories &&
+          props.categories.map((category: CategoryType) => (
             <CategoryIcon
-              key={`more-icon`}
-              width={7}
-              height={9}
-              name={showMoreName}
-              url={'./assets/images/categories/more.png'}
-              onClick={showMoreClickHandler}
+              key={`category-${category.id}`}
+              width={8}
+              height={10}
+              id={category.id}
+              name={category.name}
+              url={category.url}
             />
-          }
-        </S.CategoryContainer>
-      </S.WrapperContainer>
-    </>
+          ))}
+        {
+          <CategoryIcon
+            key={`more-icon`}
+            width={7.5}
+            height={10}
+            name={showMoreName}
+            url={'./assets/images/categories/more.png'}
+            onClick={showMoreClickHandler}
+          />
+        }
+      </S.CategoryContainer>
+    </S.WrapperContainer>
   );
 };

@@ -2,14 +2,16 @@ import styled from 'styled-components';
 
 export const WrapperContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  background-color: white;
 `;
 
 export const CategoryContainer = styled.div`
   display: grid;
   width: 100%;
-  height: 20rem;
-  grid-template-columns: 7.5rem 7.5rem 7.5rem 7.5rem 7.5rem;
-  grid-template-rows: 10rem;
+  height: 24rem;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-content: center;
 `;

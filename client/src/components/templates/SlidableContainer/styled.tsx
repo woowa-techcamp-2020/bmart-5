@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const SlidableContainer = styled.div`
+  margin-top: 3px;
+  background-color: white;
   & .content {
     display: -webkit-box;
     width: 100%;

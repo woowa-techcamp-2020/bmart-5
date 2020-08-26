@@ -7,6 +7,8 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
+  background-color: white;
+
   & > div.left-wrap {
     display: flex;
     justify-content: space-between;
