@@ -12,3 +12,9 @@ export const Input = styled.input<{}>`
   font-size: 2rem;
   border-radius: 0.3rem;
 `;
+
+export const Message = styled.div<{}>`
+  margin: 0.5rem 1.5rem;
+  font-size: 1rem;
+  color: red;
+`;
