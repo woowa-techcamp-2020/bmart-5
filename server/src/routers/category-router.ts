@@ -5,6 +5,7 @@ const router = Router();
 
 router.post('/', CategoryController.create);
 router.get('/:limit', CategoryController.findAll);
+router.get('/', CategoryController.findAll);
 router.put('/:id', CategoryController.update);
 router.delete('/:id', CategoryController.softDelete);
 router.post('/bulkcreate', CategoryController.bulkCreate);

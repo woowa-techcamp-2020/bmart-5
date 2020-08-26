@@ -30,7 +30,7 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
           [Op.is]: null,
         },
       },
-      limit: paramLimit,
+      limit: paramLimit ? paramLimit : undefined,
       order: [['orderWeight', 'ASC']],
     });
     res
