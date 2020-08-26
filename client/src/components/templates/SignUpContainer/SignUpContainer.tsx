@@ -46,7 +46,7 @@ export const SignUpContainer: React.FC<Props> = () => {
             username: name,
             email: email,
             password: password,
-          }).then(() => router.push('/'));
+          }).then(() => router.push('/signin'));
         }}
       />
     </>
