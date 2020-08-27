@@ -30,7 +30,7 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
       {headerType === 'main' && (
         <ContainerHeader
           moreBtn
-          onMoreBtnClickHandler={() => router.replace(`/categories/${categoryId}`)}
+          onMoreBtnClickHandler={() => router.push(`/categories/${categoryId}`)}
         >
           {name}
         </ContainerHeader>

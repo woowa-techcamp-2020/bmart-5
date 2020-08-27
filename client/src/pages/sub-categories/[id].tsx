@@ -34,7 +34,7 @@ const SubCartegoryPage: NextPage<Props> = (props) => {
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
       right: [
         { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.replace('/signin') },
+        { type: IconType.BARS, onClick: () => router.push('/signin') },
       ],
     },
   };

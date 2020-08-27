@@ -43,7 +43,7 @@ const CartegoryPage: NextPage<Props> = (props) => {
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
       right: [
         { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.replace('/signin') },
+        { type: 'Bars', onClick: () => router.push('/signin') },
       ],
     },
   };

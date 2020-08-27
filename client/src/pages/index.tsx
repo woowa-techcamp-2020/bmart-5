@@ -7,6 +7,7 @@ import CategoryContainer, { CategoryType } from '@components/templates/CategoryC
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
+import FetchableContainer from '@components/templates/FetchableContainer';
 import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
@@ -98,6 +99,7 @@ const MainPage: NextPage<Props> = (props) => {
       />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
+      <FetchableContainer title="지금 뭐 먹지?" products={props.latestProducts} />
       {props.categories.map((category, idx) => (
         <ProductsByCategoryContainer
           key={idx}
