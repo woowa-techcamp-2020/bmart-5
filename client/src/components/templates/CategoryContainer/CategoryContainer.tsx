@@ -3,6 +3,7 @@ import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import CategoryIcon from '@components/modules/CategoryIcon';
+import { useRouter } from 'next/router';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -18,6 +19,7 @@ export type CategoryType = {
 };
 
 export const CategoryContainer = (props: Props) => {
+  const router = useRouter();
   const showMoreClickHandler = () => {
     alert('show more');
   };
@@ -39,6 +41,7 @@ export const CategoryContainer = (props: Props) => {
               id={category.id}
               name={category.name}
               url={category.url}
+              onClick={() => router.replace(`/categories/${category.id}`)}
             />
           ))}
         {
