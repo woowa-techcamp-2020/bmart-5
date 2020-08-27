@@ -9,14 +9,15 @@ type ProductArrType = Array<ProductType>;
 
 type Props = {
   products: ProductArrType;
+  title: string;
 };
 
-export const SlidableContainer: React.FC<Props> = ({ products }) => {
+export const SlidableContainer: React.FC<Props> = ({ products, title }) => {
   const { likeProducts, setLikeProducts } = useContext(Context);
 
   return (
     <S.SlidableContainer>
-      <ContainerHeader>Maeng2418님을 위해 준비한 상품</ContainerHeader>
+      <ContainerHeader>{title}</ContainerHeader>
       <div className="content">
         {products.map((item: ProductType) => {
           let initLike = false;

@@ -37,7 +37,9 @@ export const TabViewContainer: React.FC<Props> = ({ products }) => {
 
   return (
     <S.TabViewContainer>
-      <ContainerHeader moreBtn>지금사면 ⚡️번쩍할인</ContainerHeader>
+      <ContainerHeader moreBtn onMoreBtnClickHandler={() => alert('지원 예정')}>
+        지금사면 ⚡️번쩍할인
+      </ContainerHeader>
       <div className="content">
         <div className="images-container">
           {products.map((item: ProductType, idx) => {

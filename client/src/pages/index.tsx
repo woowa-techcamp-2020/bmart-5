@@ -7,7 +7,7 @@ import CategoryContainer, { CategoryType } from '@components/templates/CategoryC
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
-import SlidableCategoryContainer from '@components/templates/SlidableCategoryContainer';
+import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import {
@@ -17,6 +17,7 @@ import {
   IconType,
   HeaderMainType,
   MaxSubCategoryLimitByCategoryId,
+  MaxProductsCountByMainCategoryContainer,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -40,7 +41,7 @@ type HighestOffProductArrType = {
   highestOffProducts: Array<ProductType>;
 };
 
-type CategoryArrType = {
+export type CategoryArrType = {
   categories: Array<CategoryType>;
 };
 
@@ -87,14 +88,16 @@ const MainPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <CarouselBanner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.latestProducts} />
+      <SlidableContainer title="Maeng2418님을 위해 준비한 상품" products={props.latestProducts} />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
       {props.categories.map((category, idx) => (
-        <SlidableCategoryContainer
+        <ProductsByCategoryContainer
           key={idx}
+          categoryId={idx + 1}
           name={category.name}
           products={props.categoryProductsList[idx].categoryProducts}
+          headerType="main"
         />
       ))}
       <ToastModal />
@@ -113,7 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const categoryProductsResponse = await Promise.all(
     subCategoryByCategoryResponse.map((category) => {
-      return categoryProductsFetch(category.subCategories);
+      return categoryProductsFetch(category.subCategories, MaxProductsCountByMainCategoryContainer);
     })
   );
 
@@ -160,11 +163,11 @@ const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
 };
 
 const categoryContainerFetch = async (): Promise<CategoryArrType> => {
-  let { status, message, result } = (await API.get(`/category/${OrderedCategoriesLimit}`)).data;
+  let { status, message, result } = (await API.get(`/category/all/${OrderedCategoriesLimit}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
-      category.url = `./assets/images/categories/main-${category.name}.png`;
+      category.url = `/assets/images/categories/main-${category.name}.png`;
       return category;
     });
     return { categories };
@@ -174,7 +177,9 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   }
 };
 
-const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCategoryIdArrType> => {
+export const subCategoryByCategoryFetch = async (
+  categoryId: number
+): Promise<SubCategoryIdArrType> => {
   let { status, message, result } = (
     await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
   ).data;
@@ -190,12 +195,13 @@ const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCatego
   }
 };
 
-const categoryProductsFetch = async (
-  subCategories: Array<number>
+export const categoryProductsFetch = async (
+  subCategories: Array<number>,
+  limit: number
 ): Promise<CategoryProductArrType> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
-  const share = Math.floor(10 / subCategories.length);
-  let remainder = 10 % subCategories.length;
+  const share = Math.floor(limit / subCategories.length);
+  let remainder = limit % subCategories.length;
 
   const limits = subCategories.reduce((acc: Array<number>) => {
     if (remainder) {
