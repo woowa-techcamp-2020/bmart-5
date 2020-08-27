@@ -60,7 +60,12 @@ export const SignInContainer: React.FC<Props> = () => {
             event.stopPropagation();
             setEmailMsg(validateCheck({ type: 'email', value: email }));
             setPasswordMsg(validateCheck({ type: 'password', value: password }));
-            if (emailMsg === undefined && passwordMsg === undefined) {
+            if (
+              email !== '' &&
+              password !== '' &&
+              emailMsg === undefined &&
+              passwordMsg === undefined
+            ) {
               const { status, message, result } = (
                 await API.post(`/auth/email`, {
                   email: email,
@@ -69,7 +74,16 @@ export const SignInContainer: React.FC<Props> = () => {
               ).data;
               if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
                 console.info(message);
-                console.info(result); // token
+                setCookie('authorization', result.token, result.expires);
+                setCartId(
+                  (
+                    await API.get(`/cart/user/id`, {
+                      headers: {
+                        Authorization: `Basic ${getCookie('authorization')}`,
+                      },
+                    })
+                  ).data.result.id
+                );
                 router.push('/');
               } else {
                 alert('로그인에 실패하였습니다.');

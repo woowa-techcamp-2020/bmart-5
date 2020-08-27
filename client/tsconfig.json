@@ -7,7 +7,8 @@
       "@components/*": ["src/components/*"],
       "@commons/*": ["src/commons/*"],
       "@utils/*": ["src/utils/*"],
-      "@shared/*": ["../shared/*"]
+      "@shared/*": ["../shared/*"],
+      "@animates/*": ["src/animates/*"]
     },
     "alwaysStrict": true,
     "isolatedModules": true,

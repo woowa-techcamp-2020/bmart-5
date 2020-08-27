@@ -2,10 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 import { Context } from '@commons/Context';
 import Layout, { LayoutProps } from '@commons/Layout';
-import { IconType, HeaderMainType, deliveryFee, deliveryDiscount } from '@utils/constants';
+import { HeaderMainType, deliveryFee, deliveryDiscount } from '@utils/constants';
 import CheckListContainer, { ProductType } from '@components/templates/CheckListContainer';
 import OutOfStockContainer from '@components/templates/OutOfStockContainer';
 import TotalPriceContainer from '@components/modules/TotalPriceInfo';
+import { getCookie } from '@utils/cookie-manager';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
@@ -15,8 +17,11 @@ const CartPage: NextPage<Props> = () => {
   const [outOfStockProducts, setOutOfStockProducts] = useState<Array<ProductType>>([]);
   const [checkedProducts, setCheckedProducts] = useState<Array<ProductType>>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const token = getCookie('authorization');
+  const router = useRouter();
 
   useEffect(() => {
+    if (!token) router.replace('/');
     setProducts(cartProducts.filter((product: ProductType) => product.outOfStockAt === null));
     setOutOfStockProducts(
       cartProducts.filter((product: ProductType) => product.outOfStockAt !== null)
@@ -38,7 +43,7 @@ const CartPage: NextPage<Props> = () => {
   const layoutProps: LayoutProps = {
     title: 'Bmart 장바구니',
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: '장바구니' },
     },
   };

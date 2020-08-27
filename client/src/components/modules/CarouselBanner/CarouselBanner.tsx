@@ -3,11 +3,11 @@ import { useInterval } from '@utils/customHooks';
 import * as S from './styled';
 
 const bigBannerList = [
-  { src: `./assets/images/banners/big/banner-big-1.gif`, href: '#' },
-  { src: `./assets/images/banners/big/banner-big-2.gif`, href: '#' },
-  { src: `./assets/images/banners/big/banner-big-3.gif`, href: '#' },
-  { src: `./assets/images/banners/big/banner-big-4.gif`, href: '#' },
-  { src: `./assets/images/banners/big/banner-big-5.gif`, href: '#' },
+  { src: `/assets/images/banners/big/banner-big-1.gif`, href: '#' },
+  { src: `/assets/images/banners/big/banner-big-2.gif`, href: '#' },
+  { src: `/assets/images/banners/big/banner-big-3.gif`, href: '#' },
+  { src: `/assets/images/banners/big/banner-big-4.gif`, href: '#' },
+  { src: `/assets/images/banners/big/banner-big-5.gif`, href: '#' },
 ];
 
 const length = bigBannerList.length;

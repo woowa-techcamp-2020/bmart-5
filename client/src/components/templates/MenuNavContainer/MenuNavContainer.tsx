@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import * as S from './styled';
 import Link from 'next/link';
 import LinkBox from '@components/atoms/LinkBox';
-import { IconType } from '@utils/constants';
-import { Context } from '@commons/Context';
+import { TokenUser } from '@commons/Context/Context';
 
-type Props = {};
+type Props = { user: TokenUser | null };
 
-export const MenuNavContainer: React.FC<Props> = () => {
-  const { user } = useContext(Context);
-
+export const MenuNavContainer: React.FC<Props> = ({ user }) => {
   return (
     <S.MenuNavContainer>
       <S.HomeNav>
@@ -22,14 +19,14 @@ export const MenuNavContainer: React.FC<Props> = () => {
       </S.HomeNav>
       {!user ? (
         <S.TwoRowNav>
-          <LinkBox url="/signin" name="로그인" icon={IconType.VSCSIGNIN} />
-          <LinkBox url="/signup" name="회원가입" icon={IconType.HIOUTLINEUSERADD} />
+          <LinkBox url="/signin" name="로그인" icon={'VscSignIn'} />
+          <LinkBox url="/signup" name="회원가입" icon={'HiOutlineUserAdd'} />
         </S.TwoRowNav>
       ) : (
         <S.TwoRowNav>
-          <LinkBox url="/cart" name="장바구니" icon={IconType.BASKET} />
-          <LinkBox url="/" name="주문내역" icon={IconType.RIFILELISTLINE} />
-          <LinkBox url="/" name="찜한상품" icon={IconType.REG_HEART} />
+          <LinkBox url="/cart" name="장바구니" icon={'Basket'} />
+          <LinkBox url="/" name="주문내역" icon={'RiFileListLine'} />
+          <LinkBox url="/favorite" name="찜한상품" icon={'RegHeart'} />
         </S.TwoRowNav>
       )}
     </S.MenuNavContainer>

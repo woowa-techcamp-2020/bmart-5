@@ -1,41 +1,23 @@
 import getConfig from 'next/config';
 
-export enum IconType {
-  ARROW_FORWARD = 'ArrowForward',
-  ARROW_LEFT = 'ArrowLeft',
-  ARROW_UP = 'ArrowUP',
-  ARROW_DOWN = 'ArrowDown',
-  BARS = 'Bars',
-  BASKET = 'Basket',
-  CLOSE = 'Close',
-  HEART = 'Heart',
-  NOTIFICATION = 'Notification',
-  REFRESH = 'Refresh',
-  REG_HEART = 'RegHeart',
-  SEARCH = 'Search',
-  PLUS = 'Plus',
-  RIFILELISTLINE = 'RiFileListLine',
-  VSCSIGNIN = 'VscSignIn',
-  VSCSIGNOUT = 'VscSignOut',
-  HIOUTLINEUSERADD = 'HiOutlineUserAdd',
-  'ArrowForward' = ARROW_FORWARD,
-  'ArrowLeft' = ARROW_LEFT,
-  'ArrowUP' = ARROW_UP,
-  'ArrowDown' = ARROW_DOWN,
-  'Bars' = BARS,
-  'Basket' = BASKET,
-  'Close' = CLOSE,
-  'Heart' = HEART,
-  'Notification' = NOTIFICATION,
-  'Refresh' = REFRESH,
-  'RegHeart' = REG_HEART,
-  'Search' = SEARCH,
-  'Plus' = PLUS,
-  'RiFileListLine' = RIFILELISTLINE,
-  'VscSignIn' = VSCSIGNIN,
-  'VscSignOut' = VSCSIGNOUT,
-  'HiOutlineUserAdd' = HIOUTLINEUSERADD,
-}
+export type IconType =
+  | 'ArrowForward'
+  | 'ArrowLeft'
+  | 'ArrowUP'
+  | 'ArrowDown'
+  | 'Bars'
+  | 'Basket'
+  | 'Close'
+  | 'Heart'
+  | 'Notification'
+  | 'Refresh'
+  | 'RegHeart'
+  | 'Search'
+  | 'Plus'
+  | 'RiFileListLine'
+  | 'VscSignIn'
+  | 'VscSignOut'
+  | 'HiOutlineUserAdd';
 
 export enum HeaderMainType {
   LOGO = 'Logo',
@@ -96,6 +78,16 @@ export const CarouselBannerCount = 5;
 
 export const MaxSubCategoryLimitByCategoryId = 9;
 
-export const MAX_CATEGORY_COUNT = 28;
+export const MaxCategoryCount = 28;
 
-export const MAX_SUB_CATEGORY_COUNT = 132;
+export const MaxSubCategoryCount = 132;
+
+export const MaxProductsCountByMainCategoryContainer = 10;
+
+export const MaxProductsCountByCategoryPageContainer = 100;
+
+export const MaxProductsCountBySubCategoryPageContainer = 100;
+
+export const CALL_NUMBER = '1600-0025';
+
+export const SERVICE_EMAIL = 'bmart_together@woowahan.com';

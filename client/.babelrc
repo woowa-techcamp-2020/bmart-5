@@ -9,5 +9,13 @@
         "preprocess": false
       }
     ]
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    },
+    "development": {
+      "plugins": []
+    }
+  }
 }

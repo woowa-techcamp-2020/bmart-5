@@ -7,16 +7,17 @@ import CategoryContainer, { CategoryType } from '@components/templates/CategoryC
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
-import SlidableCategoryContainer from '@components/templates/SlidableCategoryContainer';
+import FetchableContainer from '@components/templates/FetchableContainer';
+import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import {
   LatestProductsLimit,
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
-  IconType,
   HeaderMainType,
   MaxSubCategoryLimitByCategoryId,
+  MaxProductsCountByMainCategoryContainer,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -40,12 +41,17 @@ type HighestOffProductArrType = {
   highestOffProducts: Array<ProductType>;
 };
 
-type CategoryArrType = {
+export type CategoryArrType = {
   categories: Array<CategoryType>;
 };
 
-type SubCategoryIdArrType = {
-  subCategories: Array<number>;
+export type SubCategoryType = {
+  id: number;
+  name: string;
+};
+
+export type SubCategoryArrType = {
+  subCategories: Array<SubCategoryType>;
 };
 
 type CategoryProductArrType = {
@@ -62,7 +68,7 @@ type Props = {
 };
 
 const MainPage: NextPage<Props> = (props) => {
-  const { select } = useContext(Context);
+  const { select, user } = useContext(Context);
   const router = useRouter();
 
   const layoutProps: LayoutProps = {
@@ -70,8 +76,8 @@ const MainPage: NextPage<Props> = (props) => {
     headerProps: {
       main: { type: HeaderMainType.LOGO },
       right: [
-        { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.replace('/menu') },
+        { type: 'Search', onClick: () => alert('검색') },
+        { type: 'Bars', onClick: () => router.push('/menu') },
       ],
     },
   };
@@ -87,14 +93,24 @@ const MainPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <CarouselBanner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.latestProducts} />
+      <SlidableContainer
+        title={user ? `${user.username}님을 위해 준비한 상품` : '이런 상품은 어때요?'}
+        products={props.latestProducts}
+      />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
+      <FetchableContainer title="지금 뭐 먹지?" products={props.latestProducts} />
+      <SlidableContainer title="새로 나왔어요" products={props.latestProducts} />
+      <SlidableContainer title="요즘 잘팔려요" products={props.latestProducts} />
+      <FetchableContainer title="지금 필요한 생필품!" products={props.latestProducts} />
+      <Banner />
       {props.categories.map((category, idx) => (
-        <SlidableCategoryContainer
+        <ProductsByCategoryContainer
           key={idx}
+          categoryId={idx + 1}
           name={category.name}
           products={props.categoryProductsList[idx].categoryProducts}
+          headerType="main"
         />
       ))}
       <ToastModal />
@@ -108,12 +124,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const categoryResponse = await categoryContainerFetch();
   const subCategoryByCategoryResponse = await Promise.all(
     categoryResponse.categories.map((category) => {
-      return subCategoryByCategoryFetch(category.id);
+      return subCategoriesByCategoryFetch(category.id);
     })
   );
   const categoryProductsResponse = await Promise.all(
     subCategoryByCategoryResponse.map((category) => {
-      return categoryProductsFetch(category.subCategories);
+      return categoryProductsFetch(category.subCategories, MaxProductsCountByMainCategoryContainer);
     })
   );
 
@@ -160,11 +176,11 @@ const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
 };
 
 const categoryContainerFetch = async (): Promise<CategoryArrType> => {
-  let { status, message, result } = (await API.get(`/category/${OrderedCategoriesLimit}`)).data;
+  let { status, message, result } = (await API.get(`/category/all/${OrderedCategoriesLimit}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
-      category.url = `./assets/images/categories/main-${category.name}.png`;
+      category.url = `/assets/images/categories/main-${category.name}.png`;
       return category;
     });
     return { categories };
@@ -174,28 +190,28 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   }
 };
 
-const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCategoryIdArrType> => {
+export const subCategoriesByCategoryFetch = async (
+  categoryId: number
+): Promise<SubCategoryArrType> => {
   let { status, message, result } = (
     await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
   ).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-    const subCategories = [...result].map((subCategory) => {
-      return subCategory.id;
-    });
-    return { subCategories };
+    return { subCategories: result };
   } else {
     console.error(`not defined status code: ${status}`);
     return { subCategories: [] };
   }
 };
 
-const categoryProductsFetch = async (
-  subCategories: Array<number>
+export const categoryProductsFetch = async (
+  subCategories: Array<SubCategoryType>,
+  limit: number
 ): Promise<CategoryProductArrType> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
-  const share = Math.floor(10 / subCategories.length);
-  let remainder = 10 % subCategories.length;
+  const share = Math.floor(limit / subCategories.length);
+  let remainder = limit % subCategories.length;
 
   const limits = subCategories.reduce((acc: Array<number>) => {
     if (remainder) {
@@ -210,7 +226,7 @@ const categoryProductsFetch = async (
   await Promise.all(
     limits.map(async (value: number, idx: number, arr: Array<number>) => {
       let { status, message, result } = (
-        await API.get(`/product/sub/${subCategories[idx]}/${value}`)
+        await API.get(`/product/sub/${subCategories[idx].id}/${value}`)
       ).data;
       console.info(message);
       if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {

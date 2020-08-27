@@ -25,9 +25,6 @@ User.init(
     username: {
       type: DataTypes.STRING(45),
       allowNull: false,
-      validate: {
-        is: REGEX.NAME_REGEX,
-      },
     },
     email: {
       type: DataTypes.STRING(100),

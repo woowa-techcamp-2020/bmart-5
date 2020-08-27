@@ -1,8 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import * as S from './styled';
 import { ProductDeliveryDesc } from '@utils/constants';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import CategoryIcon from '@components/modules/CategoryIcon';
+import { FadeIn } from '@animates/index';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -18,8 +20,9 @@ export type CategoryType = {
 };
 
 export const CategoryContainer = (props: Props) => {
+  const router = useRouter();
   const showMoreClickHandler = () => {
-    alert('show more');
+    router.push('/menu');
   };
   const showMoreName = '더보기';
 
@@ -29,29 +32,31 @@ export const CategoryContainer = (props: Props) => {
         {ProductDeliveryDesc({ earliest: props.earliest, latest: props.latest })}
         {' | 24시까지 주문 가능'}
       </ContainerHeader>
-      <S.CategoryContainer>
-        {props.categories &&
-          props.categories.map((category: CategoryType) => (
+      <FadeIn>
+        <S.CategoryContainer>
+          {props.categories &&
+            props.categories.map((category: CategoryType, idx: number) => (
+              <CategoryIcon
+                key={idx}
+                width={8}
+                height={10}
+                id={category.id}
+                name={category.name}
+                url={category.url}
+                onClick={() => router.push(`/categories/${category.id}`)}
+              />
+            ))}
+          {
             <CategoryIcon
-              key={`category-${category.id}`}
-              width={8}
+              width={7.5}
               height={10}
-              id={category.id}
-              name={category.name}
-              url={category.url}
+              name={showMoreName}
+              url={'/assets/images/categories/more.png'}
+              onClick={showMoreClickHandler}
             />
-          ))}
-        {
-          <CategoryIcon
-            key={`more-icon`}
-            width={7.5}
-            height={10}
-            name={showMoreName}
-            url={'./assets/images/categories/more.png'}
-            onClick={showMoreClickHandler}
-          />
-        }
-      </S.CategoryContainer>
+          }
+        </S.CategoryContainer>
+      </FadeIn>
     </S.WrapperContainer>
   );
 };

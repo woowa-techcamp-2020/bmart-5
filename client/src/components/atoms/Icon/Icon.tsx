@@ -15,46 +15,46 @@ import { IconType } from '@utils/constants';
 import { HiOutlineUserAdd } from 'react-icons/hi';
 
 export type Props = {
-  icon: string;
+  icon: IconType;
   size: number;
   onClick?: (e: MouseEvent) => void;
 };
 
-const findIcon = (iconName: string) => {
-  switch (IconType[iconName]) {
-    case IconType.ARROW_FORWARD:
+const findIcon = (icon: IconType) => {
+  switch (icon) {
+    case 'ArrowForward':
       return <IoIosArrowForward />;
-    case IconType.ARROW_LEFT:
+    case 'ArrowLeft':
       return <FaArrowLeft />;
-    case IconType.ARROW_UP:
+    case 'ArrowUP':
       return <RiArrowUpSLine />;
-    case IconType.ARROW_DOWN:
+    case 'ArrowDown':
       return <RiArrowDownSLine />;
-    case IconType.BARS:
+    case 'Bars':
       return <FaBars />;
-    case IconType.CLOSE:
+    case 'Close':
       return <IoMdCloseCircleOutline />;
-    case IconType.SEARCH:
+    case 'Search':
       return <FaSearch />;
-    case IconType.BASKET:
+    case 'Basket':
       return <RiShoppingBagLine />;
-    case IconType.REG_HEART:
+    case 'RegHeart':
       return <FaRegHeart />;
-    case IconType.HEART:
+    case 'Heart':
       return <FaHeart />;
-    case IconType.REFRESH:
+    case 'Refresh':
       return <FaUndoAlt />;
-    case IconType.NOTIFICATION:
+    case 'Notification':
       return <AiOutlineNotification />;
-    case IconType.PLUS:
+    case 'Plus':
       return <FiPlus />;
-    case IconType.RIFILELISTLINE:
+    case 'RiFileListLine':
       return <RiFileListLine />;
-    case IconType.VSCSIGNIN:
+    case 'VscSignIn':
       return <VscSignIn />;
-    case IconType.VSCSIGNOUT:
+    case 'VscSignOut':
       return <VscSignOut />;
-    case IconType.HIOUTLINEUSERADD:
+    case 'HiOutlineUserAdd':
       return <HiOutlineUserAdd />;
     default:
       return;
