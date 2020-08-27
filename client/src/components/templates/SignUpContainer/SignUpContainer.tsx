@@ -5,6 +5,7 @@ import API from '@utils/API';
 import { useRouter } from 'next/router';
 import Input from '@components/atoms/Input';
 import validateCheck from '@utils/validate';
+import { setCookie } from '@utils/cookie-manager';
 
 type Props = {};
 
@@ -57,7 +58,11 @@ export const SignUpContainer: React.FC<Props> = () => {
               username: name,
               email: email,
               password: password,
-            }).then(() => router.push('/'));
+            }).then((response) => {
+              const result = response.data.result;
+              setCookie('authorization', result.token, result.expires);
+              router.push('/');
+            });
           }
         }}
       />
