@@ -15,16 +15,12 @@ import { ProductType } from '@pages/index';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import * as S from './styled';
+import { SubCategoryType } from '@pages/index';
 
 type Props = {
   id: number;
   name: string;
   products: Array<ProductType>;
-};
-
-type SubCategoryType = {
-  id: number;
-  name: string;
 };
 
 const SubCartegoryPage: NextPage<Props> = (props) => {
