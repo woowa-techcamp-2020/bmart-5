@@ -1,19 +1,19 @@
-import { useContext } from 'react';
 import { NextComponentType } from 'next';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
-import { Provider, Context } from '@commons/Context';
+import { Provider } from '@commons/Context';
 import { useRouter } from 'next/router';
+import { getCookie } from '@utils/cookie-manager';
 
 const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   Component,
   pageProps,
 }) => {
   const router = useRouter();
-  const { user } = useContext(Context);
+  const token = getCookie('authorization');
   if (
-    (router.pathname.startsWith('/signin') && user !== null) ||
-    (router.pathname.startsWith('/signup') && user !== null) ||
-    (router.pathname.startsWith('/cart') && user === null)
+    (router.pathname.startsWith('/signin') && token !== null) ||
+    (router.pathname.startsWith('/signup') && token !== null) ||
+    (router.pathname.startsWith('/cart') && token === null)
   ) {
     router.replace('/');
   }

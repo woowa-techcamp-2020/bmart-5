@@ -5,6 +5,7 @@ import API from '@utils/API';
 import { useRouter } from 'next/router';
 import Input from '@components/atoms/Input';
 import validateCheck from '@utils/validate';
+import { setCookie } from '@utils/cookie-manager';
 
 type Props = {};
 

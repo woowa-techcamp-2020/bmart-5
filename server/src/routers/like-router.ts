@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import passport from 'passport';
 import { LikeController } from '../controllers';
 
 const router = Router();
 
-router.post('/', LikeController.updateOrCreate);
-router.get('/:id', LikeController.findByUserId);
-router.delete('/:userId/:productId', LikeController.softDeleteLike);
+router.post('/', passport.authenticate('jwt'), LikeController.updateOrCreate);
+router.get('/', passport.authenticate('jwt'), LikeController.findByUserId);
+router.delete('/:productId', passport.authenticate('jwt'), LikeController.softDeleteLike);
 
 export default router;

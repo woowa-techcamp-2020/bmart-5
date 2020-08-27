@@ -4,18 +4,20 @@ import HttpStatus from 'http-status';
 import { Cart, CartProduct, Product } from '../models';
 import { JsonResponse } from '../modules/utils';
 import CustomError from '../modules/exception/custom-error';
+import { TokenUser } from './auth-controller';
 
 //추후에 토큰의 유저 정보를 이용한 api로 수정 필요
 
 const insertCartProduct = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
+  const user = req.user as TokenUser;
 
   try {
     const cart = await Cart.findOne({
       attributes: ['id'],
       where: {
         [Op.and]: [
-          { userId: body.userId },
+          { userId: user.id },
           {
             purchasedAt: {
               [Op.is]: null,
@@ -28,7 +30,6 @@ const insertCartProduct = async (req: Request, res: Response, next: NextFunction
     if (!cart)
       throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with userId: ${body.userId}`, '');
 
-    delete body.userId;
     body.cartId = cart.id;
     const cartProduct = await CartProduct.create(body);
 
@@ -43,15 +44,14 @@ const insertCartProduct = async (req: Request, res: Response, next: NextFunction
 };
 
 const findByUserId = async (req: Request, res: Response, next: NextFunction) => {
-  const { params } = req;
-  const paramId = parseInt(params.id);
+  const user = req.user as TokenUser;
 
   try {
     const cart = await Cart.findOne({
       attributes: ['id'],
       where: {
         [Op.and]: [
-          { userId: paramId },
+          { userId: user.id },
           {
             purchasedAt: {
               [Op.is]: null,
@@ -60,11 +60,11 @@ const findByUserId = async (req: Request, res: Response, next: NextFunction) => 
         ],
       },
     });
-    if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${paramId}`, '');
+    if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${user.id}`, '');
 
     res
       .status(HttpStatus.OK)
-      .json(JsonResponse(HttpStatus.OK, `find cart by userId(${paramId})`, cart));
+      .json(JsonResponse(HttpStatus.OK, `find cart by userId(${user.id})`, cart));
   } catch (err) {
     next(err);
   }
