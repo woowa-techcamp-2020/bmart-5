@@ -74,10 +74,18 @@ export const ProductCard: React.FC<Props> = ({
       <S.ProductCard className={className} onClick={() => onItemClickHandler(item)}>
         <div className="image-container">
           <S.ProductImg src={item.imgUrl} />
-          {className === 'sale' && (
-            <div className="sale-badge">
-              <Badge rate={item.discount} />
+          {item.outOfStockAt !== null && (
+            <div className="sold-out">
+              <div className="black-back"></div>
+              <p>다 팔렸어요</p>
             </div>
+          )}
+          {className === 'sale' && (
+            <>
+              <div className="sale-badge">
+                <Badge rate={item.discount} />
+              </div>
+            </>
           )}
           <div className="like-icon" onClick={onLikeHandler}>
             {Liked ? <Icon icon={'Heart'} size={3} /> : <Icon icon={'RegHeart'} size={3} />}
