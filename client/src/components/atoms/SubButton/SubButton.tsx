@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import { IconType } from '@utils/constants';
