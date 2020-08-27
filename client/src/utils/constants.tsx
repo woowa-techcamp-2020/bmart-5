@@ -103,3 +103,7 @@ export const MaxSubCategoryCount = 132;
 export const MaxProductsCountByMainCategoryContainer = 10;
 
 export const MaxProductsCountByCategoryPageContainer = 100;
+
+export const CALL_NUMBER = '1600-0025';
+
+export const SERVICE_EMAIL = 'bmart_together@woowahan.com';
