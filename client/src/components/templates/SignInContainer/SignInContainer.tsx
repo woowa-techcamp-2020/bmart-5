@@ -60,7 +60,12 @@ export const SignInContainer: React.FC<Props> = () => {
             event.stopPropagation();
             setEmailMsg(validateCheck({ type: 'email', value: email }));
             setPasswordMsg(validateCheck({ type: 'password', value: password }));
-            if (emailMsg === undefined && passwordMsg === undefined) {
+            if (
+              email !== '' &&
+              password !== '' &&
+              emailMsg === undefined &&
+              passwordMsg === undefined
+            ) {
               const { status, message, result } = (
                 await API.post(`/auth/email`, {
                   email: email,
