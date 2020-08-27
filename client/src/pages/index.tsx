@@ -40,7 +40,7 @@ type HighestOffProductArrType = {
   highestOffProducts: Array<ProductType>;
 };
 
-type CategoryArrType = {
+export type CategoryArrType = {
   categories: Array<CategoryType>;
 };
 
@@ -174,7 +174,9 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   }
 };
 
-const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCategoryIdArrType> => {
+export const subCategoryByCategoryFetch = async (
+  categoryId: number
+): Promise<SubCategoryIdArrType> => {
   let { status, message, result } = (
     await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
   ).data;
@@ -190,7 +192,7 @@ const subCategoryByCategoryFetch = async (categoryId: number): Promise<SubCatego
   }
 };
 
-const categoryProductsFetch = async (
+export const categoryProductsFetch = async (
   subCategories: Array<number>
 ): Promise<CategoryProductArrType> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
