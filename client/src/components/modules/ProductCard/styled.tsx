@@ -4,6 +4,7 @@ export const ProductCard = styled.div`
   /* common */
   display: flex;
   flex-direction: column;
+  color: black;
   cursor: pointer;
   & .image-container {
     position: relative;

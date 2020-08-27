@@ -4,6 +4,9 @@ export const WrapperContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 5px;
 `;
 
 export const CategoryContainer = styled.div`
