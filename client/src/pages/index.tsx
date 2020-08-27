@@ -49,7 +49,7 @@ type Props = {
   highestOffProducts: Array<ProductType>;
   whatEatNowProducts: Array<ProductType>;
   latestProducts: Array<ProductType>;
-  hottestOffProducts: Array<ProductType>;
+  hottestProducts: Array<ProductType>;
   nowNeedNeccessaryProducts: Array<ProductType>;
   categoryProductsList: Array<Array<ProductType>>;
 };
