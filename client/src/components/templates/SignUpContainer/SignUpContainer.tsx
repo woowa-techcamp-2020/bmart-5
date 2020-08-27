@@ -57,7 +57,14 @@ export const SignUpContainer: React.FC<Props> = () => {
             setNameMsg(validateCheck({ type: 'name', value: name }));
             setEmailMsg(validateCheck({ type: 'email', value: email }));
             setPasswordMsg(validateCheck({ type: 'password', value: password }));
-            if (nameMsg === undefined && emailMsg === undefined && passwordMsg === undefined) {
+            if (
+              name !== '' &&
+              email !== '' &&
+              password !== '' &&
+              nameMsg === undefined &&
+              emailMsg === undefined &&
+              passwordMsg === undefined
+            ) {
               const { result, message, status } = (
                 await API.post(`/auth/email/signup`, {
                   username: name,
