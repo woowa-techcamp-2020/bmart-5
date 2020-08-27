@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
-import { IconType, HeaderMainType } from '@utils/constants';
+import { HeaderMainType } from '@utils/constants';
 import { useRouter } from 'next/router';
 import FavoriteContainer from '@components/templates/FavoriteContainer';
 import ToastModal from '@components/modules/ToastModal';
@@ -27,11 +27,11 @@ const FavoritePage: NextPage<Props> = (props) => {
   const layoutProps: LayoutProps = {
     title: 'Bmart 찜한상품',
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: '찜한상품' },
       right: [
-        { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.replace('/menu') },
+        { type: 'Search', onClick: () => alert('검색') },
+        { type: 'Bars', onClick: () => router.replace('/menu') },
       ],
     },
   };
