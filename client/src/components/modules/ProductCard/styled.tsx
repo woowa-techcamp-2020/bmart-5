@@ -100,6 +100,7 @@ export const ProductInfo = styled.div`
 `;
 
 export const ProductPriceRow = styled.div`
+  position: relative;
   & .sale-rate {
     font-size: 1em;
     font-weight: 700;
@@ -116,5 +117,10 @@ export const ProductPriceRow = styled.div`
     font-size: 1.2em;
     color: black;
     font-weight: 700;
+  }
+  & i {
+    position: absolute;
+    top: -1rem;
+    right: 1.5rem;
   }
 `;

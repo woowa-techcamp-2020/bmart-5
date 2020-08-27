@@ -37,7 +37,7 @@ export const FetchableContainer: React.FC<Props> = ({ title, products }) => {
           })}
         </div>
         <div className="fetch-button">
-          <Icon icon={IconType.REFRESH} size={2} />
+          <Icon icon={'Refresh'} size={2} />
           <span className="title">{title}</span>
           <span>다른 상품 보기 </span>
           <span className="page-count">

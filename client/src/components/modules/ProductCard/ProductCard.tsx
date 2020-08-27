@@ -96,7 +96,7 @@ export const ProductCard: React.FC<Props> = ({
                 </>
               )}
               <span className="price">{item.price.toLocaleString()}원</span>
-              {className === 'sale' && <Icon icon={'Basket'} size={1.5} />}
+              {className === 'sale' && <Icon icon={'Basket'} size={4} />}
             </S.ProductPriceRow>
           </div>
         </S.ProductInfo>
