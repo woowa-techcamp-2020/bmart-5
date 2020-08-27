@@ -9,15 +9,26 @@ type Props = {
   children: ReactNode;
 };
 
+export type TokenUser = {
+  id: number;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+};
+
 type ContextType = {
   select: ProductType | undefined;
   cartProducts: Array<CartProductType>;
   cartId: number | null;
   likeProducts: Array<ProductType>;
+  user: TokenUser | null;
+  token: string | null;
   setSelect: Function;
   setCartProducts: Function;
   setCartId: Function;
   setLikeProducts: Function;
+  setUser: Function;
+  setToken: Function;
 };
 
 const defaultValue = {
@@ -25,10 +36,14 @@ const defaultValue = {
   cartProducts: [],
   cartId: null,
   likeProducts: [],
+  user: null,
+  token: null,
   setSelect: () => {},
   setCartProducts: () => {},
   setCartId: () => {},
   setLikeProducts: () => {},
+  setUser: () => {},
+  setToken: () => {},
 };
 
 export const Context = React.createContext<ContextType>(defaultValue);
@@ -38,10 +53,17 @@ export const Provider: React.FC<Props> = (props) => {
   const [cartProducts, setCartProducts] = useState<Array<CartProductType>>([]);
   const [cartId, setCartId] = useState<number | null>(null);
   const [likeProducts, setLikeProducts] = useState<Array<ProductType>>([]);
+  const [user, setUser] = useState<TokenUser | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = getCookie('authorization');
+      const newToken = getCookie('authorization');
+      if (token !== newToken) {
+        setToken(newToken);
+        const newUser = await getUserByToken(newToken);
+        setUser(newUser);
+      }
 
       if (token && cartId === null) {
         const cartId = (await getCartByToken(token)).id;
@@ -65,18 +87,41 @@ export const Provider: React.FC<Props> = (props) => {
     <Context.Provider
       value={{
         select: select,
-        setSelect: setSelect,
         cartProducts: cartProducts,
-        setCartProducts: setCartProducts,
         cartId: cartId,
-        setCartId: setCartId,
         likeProducts: likeProducts,
+        user: user,
+        token: token,
+        setSelect: setSelect,
+        setCartProducts: setCartProducts,
+        setCartId: setCartId,
         setLikeProducts: setLikeProducts,
+        setUser: setUser,
+        setToken: setToken,
       }}
     >
       {props.children}
     </Context.Provider>
   );
+};
+
+const getUserByToken = async (token: string | null): Promise<TokenUser | null> => {
+  if (token === null) return null;
+  const { message, result, status } = (
+    await API.get(`/auth`, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+  ).data;
+
+  console.info(message);
+  if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+    return result;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return null;
+  }
 };
 
 const getCartByToken = async (token: string) => {
@@ -89,7 +134,7 @@ const getCartByToken = async (token: string) => {
   ).data;
 
   console.info(message);
-  if (status == httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
+  if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
     return result;
   } else {
     console.error(`not defined status code: ${status}`);

@@ -16,7 +16,7 @@ type Props = {
 };
 
 const MenuPage: NextPage<Props> = (props) => {
-  const { user } = useContext(Context);
+  const { user, setUser, setToken } = useContext(Context);
 
   const layoutProps: LayoutProps = {
     title: 'Bmart 메뉴',
@@ -28,9 +28,9 @@ const MenuPage: NextPage<Props> = (props) => {
 
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
-      <MenuNavContainer />
+      <MenuNavContainer user={user} />
       <CategoryNavContainer categories={props.categories} />
-      {user && <LogOut />}
+      {user && <LogOut setUser={setUser} setToken={setToken} />}
     </Layout>
   );
 };

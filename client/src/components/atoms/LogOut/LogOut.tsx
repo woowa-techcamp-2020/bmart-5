@@ -5,12 +5,17 @@ import { useRouter } from 'next/router';
 import { IconType } from '@utils/constants';
 import LinkBox from '@components/atoms/LinkBox';
 
-type Props = {};
+type Props = {
+  setToken: Function;
+  setUser: Function;
+};
 
 export const LogOut: React.FC<Props> = (props) => {
   const router = useRouter();
   const signOutHandler = () => {
     deleteCookie('authorization');
+    props.setToken(null);
+    props.setUser(null);
     router.push('/');
   };
   return (

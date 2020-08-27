@@ -63,7 +63,7 @@ type Props = {
 };
 
 const MainPage: NextPage<Props> = (props) => {
-  const { select } = useContext(Context);
+  const { select, user } = useContext(Context);
   const router = useRouter();
 
   const layoutProps: LayoutProps = {
@@ -88,7 +88,10 @@ const MainPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <CarouselBanner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer title="Maeng2418님을 위해 준비한 상품" products={props.latestProducts} />
+      <SlidableContainer
+        title={user ? `${user.username}님을 위해 준비한 상품` : '이런 상품은 어때요?'}
+        products={props.latestProducts}
+      />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
       {props.categories.map((category, idx) => (

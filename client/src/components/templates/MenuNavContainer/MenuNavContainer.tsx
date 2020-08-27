@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import * as S from './styled';
 import Link from 'next/link';
 import LinkBox from '@components/atoms/LinkBox';
 import { IconType } from '@utils/constants';
-import { Context } from '@commons/Context';
+import { TokenUser } from '@commons/Context/Context';
 
-type Props = {};
+type Props = { user: TokenUser | null };
 
-export const MenuNavContainer: React.FC<Props> = () => {
-  const { user } = useContext(Context);
-
+export const MenuNavContainer: React.FC<Props> = ({ user }) => {
   return (
     <S.MenuNavContainer>
       <S.HomeNav>
