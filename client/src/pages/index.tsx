@@ -22,10 +22,10 @@ import {
   MaxProductsCountByFetchableContainer,
   WhatEatNowSubCategoryId,
   NowNeedNecessarySubCategoryId,
-  HottestProductsLimit,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
+import DynamicContainer from '@components/templates/DynamicContainer';
 
 export type ProductType = {
   id: number;
@@ -49,7 +49,6 @@ type Props = {
   highestOffProducts: Array<ProductType>;
   whatEatNowProducts: Array<ProductType>;
   latestProducts: Array<ProductType>;
-  hottestProducts: Array<ProductType>;
   nowNeedNeccessaryProducts: Array<ProductType>;
   categoryProductsList: Array<Array<ProductType>>;
 };
@@ -88,7 +87,7 @@ const MainPage: NextPage<Props> = (props) => {
       <Banner />
       <FetchableContainer title="지금 뭐 먹지?" products={props.whatEatNowProducts} />
       <SlidableContainer title="새로 나왔어요" products={props.latestProducts} />
-      <SlidableContainer title="요즘 잘팔려요" products={props.hottestProducts} />
+      <DynamicContainer title="요즘 잘팔려요" />
       <FetchableContainer title="지금 필요한 생필품!" products={props.nowNeedNeccessaryProducts} />
       <Banner />
       {props.categories.map((category, idx) => (
@@ -110,7 +109,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const highestOffProducts = await highestOffProductsFetch();
   const whatEatNowProducts = await whatEatNowProductsFetch();
   const latestProducts = await latestProductsFetch();
-  const hottestProducts = await hottestProductsFetch();
   const nowNeedNeccessaryProducts = await nowNeedNeccessaryProductsFetch();
   const categories = await categoriesFetch();
   const subCategoriesByCategories = await Promise.all(
@@ -130,7 +128,6 @@ export const getStaticProps: GetStaticProps = async () => {
       highestOffProducts,
       whatEatNowProducts,
       latestProducts,
-      hottestProducts,
       nowNeedNeccessaryProducts,
       categories,
       categoryProductsList: categoryProducts,
@@ -196,21 +193,6 @@ const whatEatNowProductsFetch = async (): Promise<Array<ProductType>> => {
 
 const latestProductsFetch = async (): Promise<Array<ProductType>> => {
   let { status, message, result } = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
-
-  console.info(message);
-  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-    const products = [...result];
-    return products;
-  } else {
-    console.error(`not defined status code: ${status}`);
-    return [];
-  }
-};
-
-const hottestProductsFetch = async (): Promise<Array<ProductType>> => {
-  let { status, message, result } = (
-    await API.get(`/product/hottest/${HottestProductsLimit}`)
-  ).data;
 
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
