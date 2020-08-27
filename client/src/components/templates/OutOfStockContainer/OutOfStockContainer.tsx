@@ -6,6 +6,7 @@ import { ProductType } from '../CheckListContainer';
 import { IconType } from '@utils/constants';
 import Icon from '@components/atoms/Icon';
 import OutOfStockProduct from '@components/modules/OutOfStockProduct';
+import { FadeIn } from '@animates/index';
 
 type Props = {
   products: Array<ProductType>;
@@ -25,20 +26,22 @@ export const OutOfStockContainer: React.FC<Props> = (props) => {
       >
         현재 구매 불가 상품
       </ContainerHeader>
-      {iconIndex === 1 &&
-        props.products.map((product, idx: number) => (
-          <OutOfStockProduct
-            key={idx}
-            id={product.id}
-            name={product.name}
-            discount={product.discount}
-            price={product.price}
-            imgUrl={product.imgUrl}
-            count={product.count}
-            setCartProducts={props.setCartProducts}
-            cartProducts={props.cartProducts}
-          />
-        ))}
+      <FadeIn>
+        {iconIndex === 1 &&
+          props.products.map((product, idx: number) => (
+            <OutOfStockProduct
+              key={idx}
+              id={product.id}
+              name={product.name}
+              discount={product.discount}
+              price={product.price}
+              imgUrl={product.imgUrl}
+              count={product.count}
+              setCartProducts={props.setCartProducts}
+              cartProducts={props.cartProducts}
+            />
+          ))}
+      </FadeIn>
       <S.BackToHome onClick={() => Router.back()}>
         <Icon icon={'Plus'} size={2} />
         <span className="moreText">더 담으러 가기</span>
