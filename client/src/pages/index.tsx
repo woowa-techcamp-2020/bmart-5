@@ -160,7 +160,7 @@ const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
 };
 
 const categoryContainerFetch = async (): Promise<CategoryArrType> => {
-  let { status, message, result } = (await API.get(`/category/${OrderedCategoriesLimit}`)).data;
+  let { status, message, result } = (await API.get(`/category/all/${OrderedCategoriesLimit}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
