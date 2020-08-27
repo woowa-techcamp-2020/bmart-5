@@ -11,9 +11,9 @@ export const HistoryContainer: React.FC<Props> = (props) => {
   return (
     <S.HistoryContainer>
       {props.historyList &&
-        props.historyList.map((history, idx) => {
-          <HistoryCard key={idx} />;
-        })}
+        props.historyList.map((history: any, idx: number) => (
+          <HistoryCard history={history} key={idx} />
+        ))}
     </S.HistoryContainer>
   );
 };

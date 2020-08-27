@@ -13,7 +13,14 @@ type Props = {};
 export type HistoryType = {
   id: number;
   purchasedAt: Date;
-  cartProducts: Array<ProductType>;
+  cartProducts: Array<CartProductType>;
+};
+
+export type CartProductType = {
+  id: number;
+  count: number;
+  createdAt: Date;
+  product: ProductType;
 };
 
 const MenuPage: NextPage<Props> = () => {
