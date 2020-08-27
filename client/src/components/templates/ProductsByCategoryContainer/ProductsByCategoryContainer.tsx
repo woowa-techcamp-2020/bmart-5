@@ -7,14 +7,21 @@ import ContainerHeader from '@components/modules/ContainerHeader';
 type ProductArrType = Array<ProductType>;
 
 type Props = {
-  name: string;
+  name?: string;
   products: ProductArrType;
+  headerType: 'main' | 'filter';
 };
 
-export const ProductsByCategoryContainer: React.FC<Props> = ({ name, products }) => {
+export const ProductsByCategoryContainer: React.FC<Props> = ({ name, products, headerType }) => {
   return (
     <S.ProductsByCategoryContainer>
-      <ContainerHeader moreBtn>{name}</ContainerHeader>
+      {headerType === 'main' && <ContainerHeader moreBtn>{name}</ContainerHeader>}
+      {headerType === 'filter' && (
+        <ContainerHeader>
+          <div></div>
+          <div>Filter</div>
+        </ContainerHeader>
+      )}
       <div className="wrapper">
         <div className="content">
           {products.map((item: ProductType, idx) => {

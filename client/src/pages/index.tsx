@@ -95,6 +95,7 @@ const MainPage: NextPage<Props> = (props) => {
           key={idx}
           name={category.name}
           products={props.categoryProductsList[idx].categoryProducts}
+          headerType="main"
         />
       ))}
       <ToastModal />
