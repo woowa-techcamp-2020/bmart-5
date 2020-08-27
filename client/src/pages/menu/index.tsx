@@ -6,7 +6,7 @@ import MenuNavContainer from '@components/templates/MenuNavContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { CategoryType } from '@components/templates/CategoryContainer';
-import { MAX_CATEGORY_COUNT } from '@utils/constants';
+import { MaxCategoryCount } from '@utils/constants';
 import CategoryNavContainer from '@components/templates/CategoryNavContainer';
 import LogOut from '@components/atoms/LogOut';
 import { Context } from '@commons/Context';
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 const categoryContainerFetch = async (): Promise<Props> => {
-  let { status, message, result } = (await API.get(`/category/${MAX_CATEGORY_COUNT}`)).data;
+  let { status, message, result } = (await API.get(`/category/${MaxCategoryCount}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
