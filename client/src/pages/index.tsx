@@ -17,6 +17,7 @@ import {
   IconType,
   HeaderMainType,
   MaxSubCategoryLimitByCategoryId,
+  MaxProductsCountByMainCategoryContainer,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -114,7 +115,7 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const categoryProductsResponse = await Promise.all(
     subCategoryByCategoryResponse.map((category) => {
-      return categoryProductsFetch(category.subCategories);
+      return categoryProductsFetch(category.subCategories, MaxProductsCountByMainCategoryContainer);
     })
   );
 
@@ -194,11 +195,12 @@ export const subCategoryByCategoryFetch = async (
 };
 
 export const categoryProductsFetch = async (
-  subCategories: Array<number>
+  subCategories: Array<number>,
+  limit: number
 ): Promise<CategoryProductArrType> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
-  const share = Math.floor(10 / subCategories.length);
-  let remainder = 10 % subCategories.length;
+  const share = Math.floor(limit / subCategories.length);
+  let remainder = limit % subCategories.length;
 
   const limits = subCategories.reduce((acc: Array<number>) => {
     if (remainder) {
