@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 
 type Props = {
   item: ProductType;
-  initLike: boolean;
   likeProducts: Array<ProductType>;
   setLikeProducts: Function;
   className: 'slide' | 'grid' | 'main' | 'sale';
@@ -19,7 +18,6 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({
   item,
-  initLike,
   likeProducts,
   setLikeProducts,
   className,
@@ -30,8 +28,12 @@ export const ProductCard: React.FC<Props> = ({
   const router = useRouter();
 
   useEffect(() => {
-    initLike && setLiked(initLike);
-  }, [initLike]);
+    if (likeProducts.length) {
+      const isLiked =
+        likeProducts.filter((product) => product.id === item.id).length > 0 ? true : false;
+      if (isLiked !== Liked) setLiked(isLiked);
+    }
+  }, [likeProducts, item]);
 
   const onLikeHandler = async (event: MouseEvent) => {
     event.stopPropagation();
@@ -50,7 +52,7 @@ export const ProductCard: React.FC<Props> = ({
           },
         }
       );
-      setLikeProducts({ ...likeProducts, item });
+      setLikeProducts([...likeProducts, item]);
     } else {
       await API.delete(`/like/${item.id}`, {
         headers: {
