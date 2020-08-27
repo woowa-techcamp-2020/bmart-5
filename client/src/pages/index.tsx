@@ -100,6 +100,10 @@ const MainPage: NextPage<Props> = (props) => {
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
       <FetchableContainer title="지금 뭐 먹지?" products={props.latestProducts} />
+      <SlidableContainer title="새로 나왔어요" products={props.latestProducts} />
+      <SlidableContainer title="요즘 잘팔려요" products={props.latestProducts} />
+      <FetchableContainer title="지금 필요한 생필품!" products={props.latestProducts} />
+      <Banner />
       {props.categories.map((category, idx) => (
         <ProductsByCategoryContainer
           key={idx}
