@@ -43,7 +43,7 @@ export const CategoryContainer = (props: Props) => {
                 id={category.id}
                 name={category.name}
                 url={category.url}
-                onClick={() => router.replace(`/categories/${category.id}`)}
+                onClick={() => router.push(`/categories/${category.id}`)}
               />
             ))}
           {

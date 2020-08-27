@@ -30,11 +30,11 @@ const SubCartegoryPage: NextPage<Props> = (props) => {
   const layoutProps: LayoutProps = {
     title: `${props.name}`,
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
       right: [
-        { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.push('/signin') },
+        { type: 'Search', onClick: () => alert('검색') },
+        { type: 'Bars', onClick: () => router.push('/signin') },
       ],
     },
   };
