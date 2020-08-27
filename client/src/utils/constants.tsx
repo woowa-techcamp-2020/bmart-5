@@ -96,6 +96,10 @@ export const CarouselBannerCount = 5;
 
 export const MaxSubCategoryLimitByCategoryId = 9;
 
-export const MAX_CATEGORY_COUNT = 28;
+export const MaxCategoryCount = 28;
 
-export const MAX_SUB_CATEGORY_COUNT = 132;
+export const MaxSubCategoryCount = 132;
+
+export const MaxProductsCountByMainCategoryContainer = 10;
+
+export const MaxProductsCountByCategoryPageContainer = 100;
