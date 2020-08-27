@@ -33,9 +33,9 @@ export const CategoryContainer = (props: Props) => {
       </ContainerHeader>
       <S.CategoryContainer>
         {props.categories &&
-          props.categories.map((category: CategoryType) => (
+          props.categories.map((category: CategoryType, idx: number) => (
             <CategoryIcon
-              key={`category-${category.id}`}
+              key={idx}
               width={8}
               height={10}
               id={category.id}
@@ -46,7 +46,6 @@ export const CategoryContainer = (props: Props) => {
           ))}
         {
           <CategoryIcon
-            key={`more-icon`}
             width={7.5}
             height={10}
             name={showMoreName}
