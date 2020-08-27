@@ -21,7 +21,7 @@ export const SubCategoryNavContainer: React.FC<Props> = ({ subCategories }) => {
           return (
             <S.SubCategory
               key={`sub-category-nav-${subCategory.id}`}
-              onClick={() => router.replace(`/sub-categories/${subCategory.id}`)}
+              onClick={() => router.push(`/sub-categories/${subCategory.id}`)}
             >
               {subCategory.name}
             </S.SubCategory>

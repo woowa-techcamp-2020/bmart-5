@@ -3,7 +3,6 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
 import {
-  IconType,
   HeaderMainType,
   MaxCategoryCount,
   MaxProductsCountByCategoryPageContainer,
@@ -43,7 +42,7 @@ const CartegoryPage: NextPage<Props> = (props) => {
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
       right: [
         { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.replace('/signin') },
+        { type: 'Bars', onClick: () => router.push('/signin') },
       ],
     },
   };

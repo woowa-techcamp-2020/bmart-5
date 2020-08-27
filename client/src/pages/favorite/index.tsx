@@ -13,7 +13,7 @@ type Props = {
 
 type FavoriteType = {};
 
-const FavoritePage: NextPage<Props> = (props) => {
+const FavoritePage: NextPage<Props> = () => {
   const router = useRouter();
   const { select } = useContext(Context);
 
@@ -31,7 +31,7 @@ const FavoritePage: NextPage<Props> = (props) => {
       main: { type: HeaderMainType.TEXT, content: '찜한상품' },
       right: [
         { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.replace('/menu') },
+        { type: 'Bars', onClick: () => router.push('/menu') },
       ],
     },
   };

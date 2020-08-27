@@ -26,6 +26,7 @@ export const ProductCard: React.FC<Props> = ({
   const setSelect = useContext(Context).setSelect;
   const token = getCookie('authorization');
   const router = useRouter();
+  const rawPrice = (item.price * (100 + item.discount)) / 100;
 
   useEffect(() => {
     if (likeProducts.length) {
@@ -82,11 +83,21 @@ export const ProductCard: React.FC<Props> = ({
             {Liked ? <Icon icon={'Heart'} size={3} /> : <Icon icon={'RegHeart'} size={3} />}
           </div>
         </div>
-        <S.ProductInfo>
+        <S.ProductInfo className={className}>
           <div className="item-name">{item.name}</div>
-          <div className="price-row">
-            <div className="item-price">{item.price}원</div>
-            {className === 'sale' && <Icon icon={'Basket'} size={1.5} />}
+          <div>
+            <S.ProductPriceRow>
+              {item.discount !== 0 && (
+                <>
+                  <span className="sale-rate">{item.discount}%</span>
+                  <span className="raw-price">
+                    {(Math.ceil(rawPrice / 100) * 100).toLocaleString()}원
+                  </span>
+                </>
+              )}
+              <span className="price">{item.price.toLocaleString()}원</span>
+              {className === 'sale' && <Icon icon={'Basket'} size={4} />}
+            </S.ProductPriceRow>
           </div>
         </S.ProductInfo>
       </S.ProductCard>

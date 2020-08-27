@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const ProductsByCategoryContainer = styled.div`
   width: 100%;
   background-color: white;
-  margin-bottom: 3px;
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px;
 
   & .wrapper {
     padding: 0 1rem;

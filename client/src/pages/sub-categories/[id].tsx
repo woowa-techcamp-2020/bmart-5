@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import {
-  IconType,
   HeaderMainType,
   MaxProductsCountBySubCategoryPageContainer,
   MaxSubCategoryCount,
@@ -30,11 +29,11 @@ const SubCartegoryPage: NextPage<Props> = (props) => {
   const layoutProps: LayoutProps = {
     title: `${props.name}`,
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
       right: [
-        { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.replace('/signin') },
+        { type: 'Search', onClick: () => alert('검색') },
+        { type: 'Bars', onClick: () => router.push('/signin') },
       ],
     },
   };

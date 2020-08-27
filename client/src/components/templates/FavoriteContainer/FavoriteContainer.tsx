@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import * as S from './styled';
 import { Context } from '@commons/Context';
 import ProductCard from '@components/modules/ProductCard';
