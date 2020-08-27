@@ -13,7 +13,7 @@ yasik=$(($base_id+5))
 choco=$(($base_id+6))
 ice=$(($base_id+7))
 hair=$(($base_id+8))
-set_menu=$(($base_id+9))
+woowa_recomend=$(($base_id+9))
 bongji=$(($base_id+10))
 dosirak=$(($base_id+11))
 ramen=$(($base_id+12))
@@ -32,7 +32,6 @@ kitchen=$(($base_id+24))
 pet=$(($base_id+25))
 woowa_supply=$(($base_id+26))
 supply=$(($base_id+27))
-woowa_recomend=$(($base_id+28))
 ########################################
 
 echo "start sub category bulk with base_id($base_id)"
