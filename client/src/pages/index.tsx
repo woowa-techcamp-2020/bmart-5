@@ -16,8 +16,13 @@ import {
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
   HeaderMainType,
+  MaxProductsCount,
   MaxSubCategoryLimitByCategoryId,
   MaxProductsCountByMainCategoryContainer,
+  MaxProductsCountByFetchableContainer,
+  WhatEatNowSubCategoryId,
+  NowNeedNecessarySubCategoryId,
+  HottestProductsLimit,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -33,38 +38,20 @@ export type ProductType = {
   imgUrl: string;
 };
 
-type LatestProductArrType = {
-  latestProducts: Array<ProductType>;
-};
-
-type HighestOffProductArrType = {
-  highestOffProducts: Array<ProductType>;
-};
-
-export type CategoryArrType = {
-  categories: Array<CategoryType>;
-};
-
 export type SubCategoryType = {
   id: number;
   name: string;
 };
 
-export type SubCategoryArrType = {
-  subCategories: Array<SubCategoryType>;
-};
-
-type CategoryProductArrType = {
-  categoryProducts: Array<ProductType>;
-};
-
-type CategoryProductsArrListType = Array<CategoryProductArrType>;
-
 type Props = {
   categories: Array<CategoryType>;
-  latestProducts: Array<ProductType>;
+  recommendProducts: Array<ProductType>;
   highestOffProducts: Array<ProductType>;
-  categoryProductsList: CategoryProductsArrListType;
+  whatEatNowProducts: Array<ProductType>;
+  latestProducts: Array<ProductType>;
+  hottestOffProducts: Array<ProductType>;
+  nowNeedNeccessaryProducts: Array<ProductType>;
+  categoryProductsList: Array<Array<ProductType>>;
 };
 
 const MainPage: NextPage<Props> = (props) => {
@@ -95,21 +82,21 @@ const MainPage: NextPage<Props> = (props) => {
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
       <SlidableContainer
         title={user ? `${user.username}님을 위해 준비한 상품` : '이런 상품은 어때요?'}
-        products={props.latestProducts}
+        products={props.recommendProducts}
       />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
-      <FetchableContainer title="지금 뭐 먹지?" products={props.latestProducts} />
+      <FetchableContainer title="지금 뭐 먹지?" products={props.whatEatNowProducts} />
       <SlidableContainer title="새로 나왔어요" products={props.latestProducts} />
-      <SlidableContainer title="요즘 잘팔려요" products={props.latestProducts} />
-      <FetchableContainer title="지금 필요한 생필품!" products={props.latestProducts} />
+      <SlidableContainer title="요즘 잘팔려요" products={props.hottestProducts} />
+      <FetchableContainer title="지금 필요한 생필품!" products={props.nowNeedNeccessaryProducts} />
       <Banner />
       {props.categories.map((category, idx) => (
         <ProductsByCategoryContainer
           key={idx}
           categoryId={idx + 1}
           name={category.name}
-          products={props.categoryProductsList[idx].categoryProducts}
+          products={props.categoryProductsList[idx]}
           headerType="main"
         />
       ))}
@@ -119,63 +106,140 @@ const MainPage: NextPage<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const slidalbeResponse = await slidableContainerFetch();
-  const tabViewResponse = await tabViewContainerFetch();
-  const categoryResponse = await categoryContainerFetch();
-  const subCategoryByCategoryResponse = await Promise.all(
-    categoryResponse.categories.map((category) => {
+  const recommendProducts = await recommendProductsFetch();
+  const highestOffProducts = await highestOffProductsFetch();
+  const whatEatNowProducts = await whatEatNowProductsFetch();
+  const latestProducts = await latestProductsFetch();
+  const hottestProducts = await hottestProductsFetch();
+  const nowNeedNeccessaryProducts = await nowNeedNeccessaryProductsFetch();
+  const categories = await categoriesFetch();
+  const subCategoriesByCategories = await Promise.all(
+    categories.map((category) => {
       return subCategoriesByCategoryFetch(category.id);
     })
   );
-  const categoryProductsResponse = await Promise.all(
-    subCategoryByCategoryResponse.map((category) => {
-      return categoryProductsFetch(category.subCategories, MaxProductsCountByMainCategoryContainer);
+  const categoryProducts = await Promise.all(
+    subCategoriesByCategories.map((subCategories) => {
+      return categoryProductsFetch(subCategories, MaxProductsCountByMainCategoryContainer);
     })
   );
 
   return {
     props: {
-      ...slidalbeResponse,
-      ...tabViewResponse,
-      ...categoryResponse,
-      categoryProductsList: categoryProductsResponse,
+      recommendProducts,
+      highestOffProducts,
+      whatEatNowProducts,
+      latestProducts,
+      hottestProducts,
+      nowNeedNeccessaryProducts,
+      categories,
+      categoryProductsList: categoryProducts,
     },
   };
 };
 
-const slidableContainerFetch = async (): Promise<LatestProductArrType> => {
-  let latestProducts = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
+const recommendProductsFetch = async (): Promise<Array<ProductType>> => {
+  const randoms = Array.from({ length: 10 }, (_) =>
+    Math.floor(Math.random() * MaxProductsCount + 1)
+  );
+  console.log(randoms);
 
-  console.info(latestProducts.message);
-  if (
-    latestProducts.status === HttpStatus.OK ||
-    latestProducts.status === HttpStatus.NOT_MODIFIED
-  ) {
-    const products = [...latestProducts.result];
-    return { latestProducts: products };
+  let recommendProducts: Array<ProductType> = [];
+
+  await Promise.all(
+    randoms.map(async (value: number, _: number, arr: Array<number>) => {
+      let { status, message, result } = (await API.get(`/product/${value}`)).data;
+      console.info(message);
+      if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+        recommendProducts = [...recommendProducts, result];
+        return;
+      } else {
+        console.error(`not defined status code: ${status}`);
+        arr.splice(0);
+        return;
+      }
+    })
+  );
+
+  return recommendProducts;
+};
+
+const highestOffProductsFetch = async (): Promise<Array<ProductType>> => {
+  let { status, message, result } = (
+    await API.get(`/product/highest-off/${HighestOffProductsLimit}`)
+  ).data;
+
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
   } else {
-    console.error(`not defined status code: ${latestProducts.status}`);
-    return { latestProducts: [] };
+    console.error(`not defined status code: ${status}`);
+    return [];
   }
 };
 
-const tabViewContainerFetch = async (): Promise<HighestOffProductArrType> => {
-  let highestOffProducts = (await API.get(`/product/highest-off/${HighestOffProductsLimit}`)).data;
+const whatEatNowProductsFetch = async (): Promise<Array<ProductType>> => {
+  let { status, message, result } = (
+    await API.get(`/product/sub/${WhatEatNowSubCategoryId}/${MaxProductsCountByFetchableContainer}`)
+  ).data;
 
-  console.info(highestOffProducts.message);
-  if (
-    highestOffProducts.status === HttpStatus.OK ||
-    highestOffProducts.status === HttpStatus.NOT_MODIFIED
-  ) {
-    const products = [...highestOffProducts.result];
-    return { highestOffProducts: products };
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
   } else {
-    console.error(`not defined status code: ${highestOffProducts.status}`);
-    return { highestOffProducts: [] };
+    console.error(`not defined status code: ${status}`);
+    return [];
   }
 };
 
-const categoryContainerFetch = async (): Promise<CategoryArrType> => {
+const latestProductsFetch = async (): Promise<Array<ProductType>> => {
+  let { status, message, result } = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
+
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
+};
+
+const hottestProductsFetch = async (): Promise<Array<ProductType>> => {
+  let { status, message, result } = (
+    await API.get(`/product/hottest/${HottestProductsLimit}`)
+  ).data;
+
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
+};
+
+const nowNeedNeccessaryProductsFetch = async (): Promise<Array<ProductType>> => {
+  let { status, message, result } = (
+    await API.get(
+      `/product/sub/${NowNeedNecessarySubCategoryId}/${MaxProductsCountByFetchableContainer}`
+    )
+  ).data;
+
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
+};
+
+const categoriesFetch = async (): Promise<Array<CategoryType>> => {
   let { status, message, result } = (await API.get(`/category/all/${OrderedCategoriesLimit}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
@@ -183,32 +247,32 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
       category.url = `/assets/images/categories/main-${category.name}.png`;
       return category;
     });
-    return { categories };
+    return categories;
   } else {
     console.error(`not defined status code: ${status}`);
-    return { categories: [] };
+    return [];
   }
 };
 
 export const subCategoriesByCategoryFetch = async (
   categoryId: number
-): Promise<SubCategoryArrType> => {
+): Promise<Array<SubCategoryType>> => {
   let { status, message, result } = (
     await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
   ).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-    return { subCategories: result };
+    return result;
   } else {
     console.error(`not defined status code: ${status}`);
-    return { subCategories: [] };
+    return [];
   }
 };
 
 export const categoryProductsFetch = async (
   subCategories: Array<SubCategoryType>,
   limit: number
-): Promise<CategoryProductArrType> => {
+): Promise<Array<ProductType>> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
   const share = Math.floor(limit / subCategories.length);
   let remainder = limit % subCategories.length;
@@ -240,7 +304,7 @@ export const categoryProductsFetch = async (
     })
   );
 
-  return { categoryProducts };
+  return categoryProducts;
 };
 
 export default MainPage;

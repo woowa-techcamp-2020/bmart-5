@@ -80,10 +80,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = Number(params?.id);
   const name = (await categoryInfoFetch(id))?.name;
-  const subCategories = (await subCategoriesByCategoryFetch(id)).subCategories;
-  const products = (
-    await categoryProductsFetch(subCategories, MaxProductsCountByCategoryPageContainer)
-  ).categoryProducts;
+  const subCategories = await subCategoriesByCategoryFetch(id);
+  const products = await categoryProductsFetch(
+    subCategories,
+    MaxProductsCountByCategoryPageContainer
+  );
 
   return { props: { id, name, subCategories, products } };
 };

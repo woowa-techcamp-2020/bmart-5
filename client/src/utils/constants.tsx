@@ -60,13 +60,15 @@ export const baseURL =
   `${publicRuntimeConfig.API_END_POINT}:${publicRuntimeConfig.API_PORT}/api` ||
   'http://localhost:3000/api';
 
-export const LatestProductsLimit = 9;
+export const LatestProductsLimit = 10;
 
 export const HighestOffProductsLimit = 4;
 
 export const OrderedCategoriesLimit = 9;
 
 export const TabViewProductsCount = 4;
+
+export const HottestProductsLimit = 10;
 
 export const userId = 1;
 
@@ -80,7 +82,9 @@ export const MaxSubCategoryLimitByCategoryId = 9;
 
 export const MaxCategoryCount = 28;
 
-export const MaxSubCategoryCount = 132;
+export const MaxSubCategoryCount = 127;
+
+export const MaxProductsCount = 4024;
 
 export const MaxProductsCountByMainCategoryContainer = 10;
 
@@ -91,3 +95,9 @@ export const MaxProductsCountBySubCategoryPageContainer = 100;
 export const CALL_NUMBER = '1600-0025';
 
 export const SERVICE_EMAIL = 'bmart_together@woowahan.com';
+
+export const WhatEatNowSubCategoryId = 44;
+
+export const NowNeedNecessarySubCategoryId = 45;
+
+export const MaxProductsCountByFetchableContainer = 6;
