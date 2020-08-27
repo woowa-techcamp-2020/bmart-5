@@ -8,7 +8,7 @@ import { Context } from '@commons/Context';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import {
-  MaxProductsCountByFetchableContainer,
+  FetchableContainerLimit,
   WhatEatNowSubCategoryId,
   NowNeedNecessarySubCategoryId,
 } from '@utils/constants';
@@ -64,7 +64,7 @@ export const FetchableContainer: React.FC<Props> = ({ title }) => {
 
 const fetchableContainerFetch = async (categoryId: number): Promise<Array<ProductType>> => {
   let { status, message, result } = (
-    await API.get(`/product/sub/${categoryId}/${MaxProductsCountByFetchableContainer}`)
+    await API.get(`/product/sub/${categoryId}/${FetchableContainerLimit}`)
   ).data;
 
   console.info(message);

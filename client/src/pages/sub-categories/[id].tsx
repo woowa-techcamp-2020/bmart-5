@@ -3,7 +3,7 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import {
   HeaderMainType,
-  MaxProductsCountBySubCategoryPageContainer,
+  SubCategoryPageContainerLimit,
   MaxSubCategoryCount,
 } from '@utils/constants';
 import ToastModal from '@components/modules/ToastModal';
@@ -86,7 +86,7 @@ const subCategoryInfoFetch = async (id: number): Promise<SubCategoryType | null>
 
 const productsBySubCategoryFetch = async (id: number): Promise<Array<ProductType> | []> => {
   let { status, message, result } = (
-    await API.get(`/product/sub/${id}/${MaxProductsCountBySubCategoryPageContainer}`)
+    await API.get(`/product/sub/${id}/${SubCategoryPageContainerLimit}`)
   ).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {

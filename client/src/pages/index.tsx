@@ -12,14 +12,12 @@ import ProductsByCategoryContainer from '@components/templates/ProductsByCategor
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import {
-  LatestProductsLimit,
-  HighestOffProductsLimit,
+  SlidableContainerLimit,
+  TabViewContainerLimit,
   OrderedCategoriesLimit,
   HeaderMainType,
-  MaxProductsCount,
   MaxSubCategoryLimitByCategoryId,
-  MaxProductsCountByMainCategoryContainer,
-  HottestProductsLimit,
+  MainCategoryContainerLimit,
 } from '@utils/constants';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
@@ -112,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const categoryProducts = await Promise.all(
     subCategoriesByCategories.map((subCategories) => {
-      return categoryProductsFetch(subCategories, MaxProductsCountByMainCategoryContainer);
+      return categoryProductsFetch(subCategories, MainCategoryContainerLimit);
     })
   );
 
@@ -128,34 +126,23 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const recommendProductsFetch = async (): Promise<Array<ProductType>> => {
-  const randoms = Array.from({ length: 10 }, (_) =>
-    Math.floor(Math.random() * MaxProductsCount + 1)
-  );
-  console.log(randoms);
+  let { status, message, result } = (
+    await API.get(`/product/random/${SlidableContainerLimit}`)
+  ).data;
 
-  let recommendProducts: Array<ProductType> = [];
-
-  await Promise.all(
-    randoms.map(async (value: number, _: number, arr: Array<number>) => {
-      let { status, message, result } = (await API.get(`/product/${value}`)).data;
-      console.info(message);
-      if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-        recommendProducts = [...recommendProducts, result];
-        return;
-      } else {
-        console.error(`not defined status code: ${status}`);
-        arr.splice(0);
-        return;
-      }
-    })
-  );
-
-  return recommendProducts;
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
 };
 
 const highestOffProductsFetch = async (): Promise<Array<ProductType>> => {
   let { status, message, result } = (
-    await API.get(`/product/highest-off/${HighestOffProductsLimit}`)
+    await API.get(`/product/highest-off/${TabViewContainerLimit}`)
   ).data;
 
   console.info(message);
@@ -169,7 +156,9 @@ const highestOffProductsFetch = async (): Promise<Array<ProductType>> => {
 };
 
 const latestProductsFetch = async (): Promise<Array<ProductType>> => {
-  let { status, message, result } = (await API.get(`/product/latest/${LatestProductsLimit}`)).data;
+  let { status, message, result } = (
+    await API.get(`/product/latest/${SlidableContainerLimit}`)
+  ).data;
 
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
