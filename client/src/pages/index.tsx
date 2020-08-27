@@ -45,8 +45,13 @@ export type CategoryArrType = {
   categories: Array<CategoryType>;
 };
 
-type SubCategoryIdArrType = {
-  subCategories: Array<number>;
+export type SubCategoryType = {
+  id: number;
+  name: string;
+};
+
+export type SubCategoryArrType = {
+  subCategories: Array<SubCategoryType>;
 };
 
 type CategoryProductArrType = {
@@ -114,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const categoryResponse = await categoryContainerFetch();
   const subCategoryByCategoryResponse = await Promise.all(
     categoryResponse.categories.map((category) => {
-      return subCategoryByCategoryFetch(category.id);
+      return subCategoriesByCategoryFetch(category.id);
     })
   );
   const categoryProductsResponse = await Promise.all(
@@ -180,18 +185,15 @@ const categoryContainerFetch = async (): Promise<CategoryArrType> => {
   }
 };
 
-export const subCategoryByCategoryFetch = async (
+export const subCategoriesByCategoryFetch = async (
   categoryId: number
-): Promise<SubCategoryIdArrType> => {
+): Promise<SubCategoryArrType> => {
   let { status, message, result } = (
     await API.get(`/sub_category/cat/${categoryId}/${MaxSubCategoryLimitByCategoryId}`)
   ).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-    const subCategories = [...result].map((subCategory) => {
-      return subCategory.id;
-    });
-    return { subCategories };
+    return { subCategories: result };
   } else {
     console.error(`not defined status code: ${status}`);
     return { subCategories: [] };
@@ -199,7 +201,7 @@ export const subCategoryByCategoryFetch = async (
 };
 
 export const categoryProductsFetch = async (
-  subCategories: Array<number>,
+  subCategories: Array<SubCategoryType>,
   limit: number
 ): Promise<CategoryProductArrType> => {
   subCategories.length = subCategories.length > 10 ? 10 : subCategories.length;
@@ -219,7 +221,7 @@ export const categoryProductsFetch = async (
   await Promise.all(
     limits.map(async (value: number, idx: number, arr: Array<number>) => {
       let { status, message, result } = (
-        await API.get(`/product/sub/${subCategories[idx]}/${value}`)
+        await API.get(`/product/sub/${subCategories[idx].id}/${value}`)
       ).data;
       console.info(message);
       if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {

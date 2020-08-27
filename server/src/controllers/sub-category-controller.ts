@@ -20,6 +20,33 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const findById = async (req: Request, res: Response, next: NextFunction) => {
+  const { params } = req;
+  const paramId = parseInt(params.id);
+
+  try {
+    const subCategory = await SubCategory.findAll({
+      attributes: ['id', 'name', 'orderWeight'],
+      where: {
+        [Op.and]: [
+          { id: paramId },
+          {
+            deletedAt: {
+              [Op.is]: null,
+            },
+          },
+        ],
+      },
+      order: [['orderWeight', 'ASC']],
+    });
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `find subCategory by Id: ${paramId}`, subCategory));
+  } catch (err) {
+    next(err);
+  }
+};
+
 const findAll = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
   const paramLimit = parseInt(params.limit);
@@ -146,6 +173,7 @@ const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   create,
+  findById,
   findAll,
   softDelete,
   update,
