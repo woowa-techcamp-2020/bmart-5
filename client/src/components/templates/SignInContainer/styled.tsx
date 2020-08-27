@@ -4,6 +4,7 @@ export const SignInContainer = styled.form<{}>`
   display: flex;
   flex-direction: column;
   background: #fff;
+  flex-grow: 1;
 `;
 
 export const LinkContainer = styled.div`
@@ -20,6 +21,5 @@ export const Link = styled.span`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: auto;
   background: #fff;
 `;

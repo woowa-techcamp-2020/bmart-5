@@ -27,7 +27,7 @@ export const MenuNavContainer: React.FC<Props> = ({ user }) => {
         <S.TwoRowNav>
           <LinkBox url="/cart" name="장바구니" icon={IconType.BASKET} />
           <LinkBox url="/" name="주문내역" icon={IconType.RIFILELISTLINE} />
-          <LinkBox url="/" name="찜한상품" icon={IconType.REG_HEART} />
+          <LinkBox url="/favorite" name="찜한상품" icon={IconType.REG_HEART} />
         </S.TwoRowNav>
       )}
     </S.MenuNavContainer>
