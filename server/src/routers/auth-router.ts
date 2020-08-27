@@ -4,6 +4,7 @@ import { AuthController } from '../controllers';
 
 const router = Router();
 
+router.get('/', passport.authenticate('jwt'), AuthController.isValidToken);
 router.post('/email', AuthController.emailLogin);
 router.post('/email/signup', AuthController.emailSignUp);
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

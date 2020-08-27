@@ -1,16 +1,19 @@
-import React, { useState, MouseEvent, ChangeEvent } from 'react';
+import React, { useState, MouseEvent, ChangeEvent, useContext } from 'react';
 import * as S from './styled';
 import BottomBtn from '@components/atoms/BottomBtn';
 import API from '@utils/API';
 import { useRouter } from 'next/router';
 import Input from '@components/atoms/Input';
 import validateCheck from '@utils/validate';
-import { setCookie } from '@utils/cookie-manager';
+import { setCookie, getCookie } from '@utils/cookie-manager';
+import httpStatus from 'http-status';
+import { Context } from '@commons/Context';
 
 type Props = {};
 
 export const SignUpContainer: React.FC<Props> = () => {
   const router = useRouter();
+  const { setCartId } = useContext(Context);
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -62,11 +65,31 @@ export const SignUpContainer: React.FC<Props> = () => {
               emailMsg === undefined &&
               passwordMsg === undefined
             ) {
-              API.post(`/auth/email/signup`, {
-                username: name,
-                email: email,
-                password: password,
-              }).then(() => router.push('/'));
+              const { result, message, status } = (
+                await API.post(`/auth/email/signup`, {
+                  username: name,
+                  email: email,
+                  password: password,
+                })
+              ).data;
+
+              console.info(message);
+              if (status === httpStatus.CREATED || status === httpStatus.NOT_MODIFIED) {
+                setCookie('authorization', result.token, result.expires);
+                setCartId(
+                  (
+                    await API.get(`/cart/user/id`, {
+                      headers: {
+                        Authorization: `Basic ${getCookie('authorization')}`,
+                      },
+                    })
+                  ).data.result.id
+                );
+                router.push('/');
+              } else {
+                console.error(`${status}: ${result}`);
+                alert('회원가입에 실패하였습니다.');
+              }
             }
           }}
         />
