@@ -94,6 +94,7 @@ const MainPage: NextPage<Props> = (props) => {
       {props.categories.map((category, idx) => (
         <ProductsByCategoryContainer
           key={idx}
+          categoryId={idx + 1}
           name={category.name}
           products={props.categoryProductsList[idx].categoryProducts}
           headerType="main"
