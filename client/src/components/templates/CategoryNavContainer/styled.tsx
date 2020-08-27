@@ -6,36 +6,35 @@ export const CategoryNavContainer = styled.div<{}>`
   flex-grow: 1;
 `;
 
-export const NavContainer = styled.div<{ length: number }>`
+export const NavContainer = styled.div<{}>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: row;
-  border-top: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
-  ${(props) =>
-    props.length % 2 !== 0 &&
-    `&:last-child::after {
-    content: ' ';
-    text-align: center;
-    border-left: 1px solid #dfdfdf;
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
-    padding: 1rem;
-    font-size: 2rem;
-  }`}
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+  & .show {
+    display: block;
+    background: #dfdfdf;
+  }
+  & .hide {
+    display: none;
+  }
 `;
 
 export const Category = styled.div<{}>`
   text-align: center;
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
-  padding: 1rem;
+  border: 1px solid #dfdfdf;
+  padding: 1.5rem;
   font-size: 2rem;
   cursor: pointer;
-  &:nth-child(odd) {
-    border-right: 1px solid #dfdfdf;
-  }
-  &:nth-child(even) {
-    border-left: 1px solid #dfdfdf;
-  }
+  font-weight: 600;
+`;
+
+export const SubCategory = styled.div<{}>`
+  text-align: center;
+  border: 1px solid #dfdfdf;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: ##353535;
 `;
