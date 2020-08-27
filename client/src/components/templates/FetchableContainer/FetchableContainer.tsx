@@ -31,7 +31,7 @@ export const FetchableContainer: React.FC<Props> = ({ title, products }) => {
                 item={item}
                 likeProducts={likeProducts}
                 setLikeProducts={setLikeProducts}
-                className={'main'}
+                className={'grid'}
               />
             );
           })}

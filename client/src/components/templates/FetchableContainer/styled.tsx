@@ -24,8 +24,7 @@ export const FetchableContainer = styled.div<{}>`
     align-items: center;
     font-size: 2rem;
     border-top: 1.5px solid #efefef;
-    padding: 2rem;
-    margin-top: 15px;
+    padding: 16px;
     color: black;
 
     & > * {

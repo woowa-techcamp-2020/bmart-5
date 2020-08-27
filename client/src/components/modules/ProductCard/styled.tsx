@@ -27,6 +27,7 @@ export const ProductCard = styled.div`
   &.slide {
     width: 16rem;
     margin-right: 1rem;
+    margin-bottom: 2rem;
     &:first-child {
       margin-left: 1rem;
     }
@@ -37,6 +38,7 @@ export const ProductCard = styled.div`
 
   /* sale */
   &.sale {
+    margin-bottom: 3rem;
     & .image-container {
       overflow: hidden;
       width: 100%;
@@ -52,6 +54,16 @@ export const ProductCard = styled.div`
       transform: translate(0, -12.5%);
     }
   }
+
+  /* grid */
+  &.grid {
+    margin-bottom: 4rem;
+  }
+
+  /* main */
+  &.main {
+    margin-bottom: 4rem;
+  }
 `;
 
 export const ProductImg = styled.img`
@@ -61,26 +73,48 @@ export const ProductImg = styled.img`
 `;
 
 export const ProductInfo = styled.div`
-  margin-top: 1rem;
-  font-size: 2rem;
+  margin-top: 1em;
+  font-weight: 500;
+
+  &.slide {
+    font-size: 1.6rem;
+  }
+  &.sale {
+    font-size: 2rem;
+  }
+  &.grid {
+    font-size: 1.6rem;
+  }
+  &.main {
+    font-size: 1.9rem;
+  }
+
   & .item-name {
     overflow: hidden;
+    margin-bottom: 6px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
   }
+`;
 
-  & .price-row {
-    display: flex;
+export const ProductPriceRow = styled.div`
+  & .sale-rate {
+    font-size: 1em;
+    font-weight: 700;
+    color: red;
+    margin-right: 1rem;
   }
-
-  & .price-row i {
-    margin-left: auto;
+  & .raw-price {
+    font-size: 1em;
+    color: lightgray;
+    text-decoration: line-through;
+    margin-right: 1rem;
   }
-
-  & .item-price {
-    margin: 1rem 0;
-    font-weight: 600;
+  & .price {
+    font-size: 1.2em;
+    color: black;
+    font-weight: 700;
   }
 `;
