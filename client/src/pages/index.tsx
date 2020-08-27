@@ -87,7 +87,7 @@ const MainPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <CarouselBanner />
       <CategoryContainer earliest={24} latest={50} categories={props.categories} />
-      <SlidableContainer products={props.latestProducts} />
+      <SlidableContainer title="Maeng2418님을 위해 준비한 상품" products={props.latestProducts} />
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
       {props.categories.map((category, idx) => (
