@@ -3,7 +3,6 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
 import {
-  IconType,
   HeaderMainType,
   MaxCategoryCount,
   MaxProductsCountByCategoryPageContainer,

@@ -13,7 +13,7 @@ type Props = {
 
 type FavoriteType = {};
 
-const FavoritePage: NextPage<Props> = (props) => {
+const FavoritePage: NextPage<Props> = () => {
   const router = useRouter();
   const { select } = useContext(Context);
 

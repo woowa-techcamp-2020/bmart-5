@@ -5,7 +5,6 @@ import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import { Context } from '@commons/Context';
-import { IconType } from '@utils/constants';
 
 type ProductArrType = Array<ProductType>;
 
@@ -17,7 +16,7 @@ type Props = {
 export const FetchableContainer: React.FC<Props> = ({ title, products }) => {
   const { likeProducts, setLikeProducts } = useContext(Context);
   const totalSlides = Math.floor(products.length / 6);
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [currentSlide] = useState(1);
 
   return (
     <S.FetchableContainer>

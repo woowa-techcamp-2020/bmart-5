@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import {
-  IconType,
   HeaderMainType,
   MaxProductsCountBySubCategoryPageContainer,
   MaxSubCategoryCount,
