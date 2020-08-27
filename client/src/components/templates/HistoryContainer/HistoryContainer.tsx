@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as S from './styled';
 import HistoryCard from '@components/modules/HistoryCard';
-import { HistoryType } from '@pages/history';
 
 type Props = {
   historyList: any;

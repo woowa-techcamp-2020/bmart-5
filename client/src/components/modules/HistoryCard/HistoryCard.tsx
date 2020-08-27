@@ -26,7 +26,7 @@ export const HistoryCard: React.FC<Props> = ({ history }) => {
   return (
     <S.HistoryCard>
       <S.Date>
-        <img src="./assets/images/logo/bmart-logo.png" alt="bmart-logo" width={'40rem'} />
+        <img src="/assets/images/logo/bmart-logo.png" alt="bmart-logo" width={'40rem'} />
         <span>
           {new Date(history.purchasedAt).getMonth() + 1}/{new Date(history.purchasedAt).getDate()} (
           {day[new Date(history.purchasedAt).getDay()]}) B마트 노원에서 주문한{' '}
