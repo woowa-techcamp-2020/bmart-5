@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
-import { IconType, HeaderMainType } from '@utils/constants';
+import { HeaderMainType } from '@utils/constants';
 import MenuNavContainer from '@components/templates/MenuNavContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
@@ -21,7 +21,7 @@ const MenuPage: NextPage<Props> = (props) => {
   const layoutProps: LayoutProps = {
     title: 'Bmart 메뉴',
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: '메뉴' },
     },
   };

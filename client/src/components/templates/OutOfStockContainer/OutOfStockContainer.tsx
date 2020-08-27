@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const OutOfStockContainer: React.FC<Props> = (props) => {
-  const iconTypes = [IconType.ARROW_DOWN, IconType.ARROW_UP];
+  const iconTypes: IconType[] = ['ArrowDown', 'ArrowUP'];
   const [iconIndex, setIconIndex] = useState<number>(1);
 
   return (
@@ -40,7 +40,7 @@ export const OutOfStockContainer: React.FC<Props> = (props) => {
           />
         ))}
       <S.BackToHome onClick={() => Router.back()}>
-        <Icon icon={IconType.PLUS} size={2} />
+        <Icon icon={'Plus'} size={2} />
         <span className="moreText">더 담으러 가기</span>
       </S.BackToHome>
       <S.GrayHorizontal />
