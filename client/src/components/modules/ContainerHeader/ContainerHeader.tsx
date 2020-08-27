@@ -9,6 +9,7 @@ type Props = {
   moreBtn?: boolean;
   iconType?: IconType;
   onIconClickHandler?: Function;
+  onMoreBtnClickHandler?: Function;
 };
 
 export const ContainerHeader: React.FC<Props> = ({
@@ -16,11 +17,19 @@ export const ContainerHeader: React.FC<Props> = ({
   moreBtn,
   iconType,
   onIconClickHandler,
+  onMoreBtnClickHandler,
 }) => {
   return (
     <S.ContainerHeader>
       {children}
-      {moreBtn && <SubButton withArrow color="#2CC0BD" label="더보기" />}
+      {moreBtn && (
+        <SubButton
+          withArrow
+          color="#2CC0BD"
+          label="더보기"
+          onClick={() => (onMoreBtnClickHandler ? onMoreBtnClickHandler() : false)}
+        />
+      )}
       {iconType && (
         <Icon
           icon={iconType}
