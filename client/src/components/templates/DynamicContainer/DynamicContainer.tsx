@@ -6,7 +6,7 @@ import ContainerHeader from '@components/modules/ContainerHeader';
 import { Context } from '@commons/Context';
 import { FadeIn } from '@animates/index';
 import API from '@utils/API';
-import { HottestProductsLimit } from '@utils/constants';
+import { SlidableContainerLimit } from '@utils/constants';
 import httpStatus from 'http-status';
 
 type Props = {
@@ -19,7 +19,7 @@ export const DynamicContainer: React.FC<Props> = ({ title }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { result, status } = (await API.get(`/product/hottest/${HottestProductsLimit}`)).data;
+      const { result, status } = (await API.get(`/product/hottest/${SlidableContainerLimit}`)).data;
       if (status === httpStatus.OK || status === httpStatus.NOT_MODIFIED) {
         if (products.length !== result.length) {
           setProducts(result);
