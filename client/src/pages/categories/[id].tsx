@@ -14,14 +14,21 @@ import ProductsByCategoryContainer from '@components/templates/ProductsByCategor
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { CategoryType } from '@components/templates/CategoryContainer';
-import { ProductType, subCategoryByCategoryFetch, categoryProductsFetch } from '@pages/index';
+import {
+  ProductType,
+  subCategoriesByCategoryFetch,
+  categoryProductsFetch,
+  SubCategoryType,
+} from '@pages/index';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import * as S from './styled';
+import SubCategoryNavContainer from '@components/templates/SubCategoryNavContainer';
 
 type Props = {
   id: number;
   name: string;
+  subCategories: Array<SubCategoryType>;
   products: Array<ProductType>;
 };
 
@@ -51,6 +58,7 @@ const CartegoryPage: NextPage<Props> = (props) => {
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <Banner />
+      <SubCategoryNavContainer subCategories={props.subCategories} />
       <SlidableContainer title="이 상품 어때요?" products={props.products} />
       <S.ProductsContainerStyle>
         <ProductsByCategoryContainer products={props.products} headerType="filter" />
@@ -73,9 +81,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = Number(params?.id);
   const name = (await categoryInfoFetch(id))?.name;
-  const products = await productsByCategoryFetch(id);
+  const subCategories = (await subCategoriesByCategoryFetch(id)).subCategories;
+  const products = (
+    await categoryProductsFetch(subCategories, MaxProductsCountByCategoryPageContainer)
+  ).categoryProducts;
 
-  return { props: { id, name, products } };
+  return { props: { id, name, subCategories, products } };
 };
 
 const categoryInfoFetch = async (id: number): Promise<CategoryType | null> => {
@@ -87,12 +98,4 @@ const categoryInfoFetch = async (id: number): Promise<CategoryType | null> => {
     console.error(`not defined status code: ${status}`);
     return null;
   }
-};
-
-const productsByCategoryFetch = async (id: number): Promise<Array<ProductType>> => {
-  const subCategories = (await subCategoryByCategoryFetch(id)).subCategories;
-  const categoryProducts = (
-    await categoryProductsFetch(subCategories, MaxProductsCountByCategoryPageContainer)
-  ).categoryProducts;
-  return categoryProducts;
 };
