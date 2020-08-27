@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import FavoriteContainer from '@components/templates/FavoriteContainer';
 import ToastModal from '@components/modules/ToastModal';
 import { Context } from '@commons/Context';
+import CartIcon from '@components/modules/CartIcon';
 
 type Props = {
   favorites: Array<FavoriteType>;
@@ -39,6 +40,7 @@ const FavoritePage: NextPage<Props> = () => {
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <FavoriteContainer />
+      <CartIcon />
       <ToastModal />
     </Layout>
   );

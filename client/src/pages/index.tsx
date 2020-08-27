@@ -6,6 +6,7 @@ import Banner from '@components/modules/Banner';
 import CategoryContainer, { CategoryType } from '@components/templates/CategoryContainer';
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
+import CartIcon from '@components/modules/CartIcon';
 import TabViewContainer from '@components/templates/TabViewContainer';
 import FetchableContainer from '@components/templates/FetchableContainer';
 import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
@@ -93,6 +94,7 @@ const MainPage: NextPage<Props> = (props) => {
           headerType="main"
         />
       ))}
+      <CartIcon />
       <ToastModal />
     </Layout>
   );
