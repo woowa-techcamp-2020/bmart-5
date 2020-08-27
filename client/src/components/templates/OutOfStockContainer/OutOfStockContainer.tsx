@@ -26,9 +26,9 @@ export const OutOfStockContainer: React.FC<Props> = (props) => {
         현재 구매 불가 상품
       </ContainerHeader>
       {iconIndex === 1 &&
-        props.products.map((product) => (
+        props.products.map((product, idx: number) => (
           <OutOfStockProduct
-            key={`out-${product.id}`}
+            key={idx}
             id={product.id}
             name={product.name}
             discount={product.discount}

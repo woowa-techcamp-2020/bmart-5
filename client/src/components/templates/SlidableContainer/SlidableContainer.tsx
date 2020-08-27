@@ -19,18 +19,11 @@ export const SlidableContainer: React.FC<Props> = ({ products, title }) => {
     <S.SlidableContainer>
       <ContainerHeader>{title}</ContainerHeader>
       <div className="content">
-        {products.map((item: ProductType) => {
-          let initLike = false;
-          if (likeProducts.length) {
-            initLike =
-              likeProducts.filter((product) => product.id === item.id).length > 0 ? true : false;
-          }
-
+        {products.map((item: ProductType, idx: number) => {
           return (
             <ProductCard
-              key={`slidable-${item.id}`}
+              key={idx}
               item={item}
-              initLike={initLike}
               likeProducts={likeProducts}
               setLikeProducts={setLikeProducts}
               className={'slide'}

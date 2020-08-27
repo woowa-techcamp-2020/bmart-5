@@ -12,8 +12,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   const token = getCookie('authorization');
   if (
     (router.pathname.startsWith('/signin') && token !== null) ||
-    (router.pathname.startsWith('/signup') && token !== null) ||
-    (router.pathname.startsWith('/cart') && token === null)
+    (router.pathname.startsWith('/signup') && token !== null)
   ) {
     router.replace('/');
   }

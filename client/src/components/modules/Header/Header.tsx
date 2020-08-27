@@ -43,13 +43,8 @@ export const Header: React.FC<Props> = (props) => {
       <div className="right-wrap">
         {props.right && (
           <>
-            {props.right.map((iconType) => (
-              <Icon
-                key={`right-icon-${iconType.type}`}
-                icon={iconType.type}
-                size={2.2}
-                onClick={iconType.onClick}
-              />
+            {props.right.map((iconType, idx) => (
+              <Icon key={idx} icon={iconType.type} size={2.2} onClick={iconType.onClick} />
             ))}
           </>
         )}
