@@ -2,20 +2,19 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
-import { IconType, HeaderMainType } from '@utils/constants';
+import {
+  IconType,
+  HeaderMainType,
+  MaxCategoryCount,
+  MaxProductsCountByCategoryPageContainer,
+} from '@utils/constants';
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { CategoryType } from '@components/templates/CategoryContainer';
-import {
-  CategoryArrType,
-  ProductType,
-  subCategoryByCategoryFetch,
-  categoryProductsFetch,
-} from '@pages/index';
-import { MaxCategoryCount, MaxProductsCountByCategoryPageContainer } from '@utils/constants';
+import { ProductType, subCategoryByCategoryFetch, categoryProductsFetch } from '@pages/index';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import * as S from './styled';
@@ -64,10 +63,8 @@ const CartegoryPage: NextPage<Props> = (props) => {
 export default CartegoryPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const categories = (await categoriesFetch()).categories;
-
-  const paths = categories.map((category) => ({
-    params: { id: category.id.toString() },
+  const paths = Array.from({ length: MaxCategoryCount }, (_, idx) => ({
+    params: { id: (idx + 1).toString() },
   }));
 
   return { paths, fallback: false };
@@ -79,17 +76,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const products = await productsByCategoryFetch(id);
 
   return { props: { id, name, products } };
-};
-
-const categoriesFetch = async (): Promise<CategoryArrType> => {
-  let { status, message, result } = (await API.get(`/category/all/${MaxCategoryCount}`)).data;
-  console.info(message);
-  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
-    return { categories: result };
-  } else {
-    console.error(`not defined status code: ${status}`);
-    return { categories: [] };
-  }
 };
 
 const categoryInfoFetch = async (id: number): Promise<CategoryType | null> => {
