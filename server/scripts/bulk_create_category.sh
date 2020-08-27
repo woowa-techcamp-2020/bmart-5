@@ -9,11 +9,11 @@ curl --location --request POST ${url}/api/category/bulkcreate \
 --header 'Content-Type: application/json' \
 --data-raw '[
         {
-            "name": "샐러드",
+            "name": "과일·샐러드",
             "orderWeight": 10000
         },
         {
-            "name": "계란",
+            "name": "정육·수산·계란",
             "orderWeight": 20000
         },
         {
@@ -21,19 +21,19 @@ curl --location --request POST ${url}/api/category/bulkcreate \
             "orderWeight": 30000
         },
         {
-            "name": "우유",
+            "name": "우유·유제품",
             "orderWeight": 40000
         },
         {
-            "name": "빵",
+            "name": "빵·시리얼·잼",
             "orderWeight": 50000
         },
         {
-            "name": "야식",
+            "name": "분식·야식",
             "orderWeight": 60000
         },
         {
-            "name": "초콜렛",
+            "name": "과자·초콜렛",
             "orderWeight": 70000
         },
         {
@@ -41,7 +41,7 @@ curl --location --request POST ${url}/api/category/bulkcreate \
             "orderWeight": 80000
         },
         {
-            "name": "헤어",
+            "name": "헤어·바디·세안",
             "orderWeight": 90000
         },
         {
