@@ -13,7 +13,7 @@ const Template: Story<Props> = (args) => <Header {...args} />;
 export const Main = Template.bind({});
 Main.args = {
   main: { type: HeaderMainType.LOGO },
-  right: [{ type: 'Search' }, { type: 'Bars' }],
+  right: [{ type: 'Bars' }],
 };
 
 export const BackAndTitle = Template.bind({});
@@ -24,14 +24,7 @@ BackAndTitle.args = {
 export const Category = Template.bind({});
 Category.args = {
   main: { type: HeaderMainType.TEXT, content: '정육・수산・계란' },
-  right: [{ type: 'Search' }, { type: 'Bars' }],
-};
-
-// TODO
-export const SearchBar = Template.bind({});
-SearchBar.args = {
-  main: { type: HeaderMainType.SEARCH_BAR },
-  right: [{ type: 'Search' }],
+  right: [{ type: 'Bars' }],
 };
 
 export const OrderList = Template.bind({});
