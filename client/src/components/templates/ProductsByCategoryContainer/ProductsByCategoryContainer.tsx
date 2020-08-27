@@ -18,8 +18,9 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({ name, products, h
       {headerType === 'main' && <ContainerHeader moreBtn>{name}</ContainerHeader>}
       {headerType === 'filter' && (
         <ContainerHeader>
-          <div></div>
-          <div>Filter</div>
+          <div />
+          {/* TODO Filter 컴포넌트 구현 */}
+          Filter
         </ContainerHeader>
       )}
       <div className="wrapper">
