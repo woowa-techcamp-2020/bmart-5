@@ -48,7 +48,7 @@ cleansing=$(($base_id+40))
 dental_care=$(($base_id+41))
 shaving=$(($base_id+42))
 what_eat_now=$(($base_id+43))
-now_nead_necessary=$(($base_id+44))
+now_need_necessary=$(($base_id+44))
 ########################################
 
 echo "start product bulk with base_id($base_id)"
@@ -203,7 +203,7 @@ do
                 subCategory=$what_eat_now
                 ;;
             "지금 필요한 생필품")
-                subCategory=$now_nead_necessary
+                subCategory=$now_need_necessary
                 ;;
             *)
                 echo "Sorry, I don't understand"
