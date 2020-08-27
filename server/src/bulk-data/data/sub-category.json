@@ -215,448 +215,448 @@
     "categoryId": 9
   },
   {
-    "name": "제대로 한끼 뭐 먹지?",
+    "name": "지금 뭐먹지?",
     "orderWeight": 440000,
     "categoryId": 10
   },
   {
-    "name": "꿀조합 뭐 먹지?",
+    "name": "지금 필요한 생필품",
     "orderWeight": 450000,
     "categoryId": 10
   },
   {
     "name": "시간 없는데 뭐 먹지?",
     "orderWeight": 460000,
-    "categoryId": 10
+    "categoryId": 11
   },
   {
     "name": "국물 땡기는데 뭐 먹지?",
     "orderWeight": 470000,
-    "categoryId": 10
+    "categoryId": 11
   },
   {
     "name": "아침 가볍게 뭐 먹지?",
     "orderWeight": 480000,
-    "categoryId": 10
+    "categoryId": 11
   },
   {
     "name": "안주로 뭐 먹지?",
     "orderWeight": 490000,
-    "categoryId": 10
+    "categoryId": 11
   },
   {
     "name": "간식으로 뭐 먹지?",
     "orderWeight": 500000,
-    "categoryId": 10
+    "categoryId": 11
   },
   {
     "name": "배달이봉다리",
     "orderWeight": 510000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "밥 봉다리",
     "orderWeight": 520000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "간식 봉다리",
     "orderWeight": 530000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "아이스크림 봉다리",
     "orderWeight": 540000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "국·반찬 봉다리",
     "orderWeight": 550000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "라면 봉다리",
     "orderWeight": 560000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "아침 봉다리",
     "orderWeight": 570000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "음료 봉다리",
     "orderWeight": 580000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "즉석밥",
     "orderWeight": 590000,
-    "categoryId": 12
+    "categoryId": 13
   },
   {
     "name": "볶음밥·덮밥",
     "orderWeight": 600000,
-    "categoryId": 12
+    "categoryId": 13
   },
   {
     "name": "컵밥",
     "orderWeight": 610000,
-    "categoryId": 12
+    "categoryId": 13
   },
   {
     "name": "도시락·김밥",
     "orderWeight": 620000,
-    "categoryId": 12
+    "categoryId": 13
   },
   {
     "name": "죽",
     "orderWeight": 630000,
-    "categoryId": 12
+    "categoryId": 13
   },
   {
     "name": "봉지라면",
     "orderWeight": 650000,
-    "categoryId": 13
+    "categoryId": 14
   },
   {
     "name": "컵라면",
     "orderWeight": 660000,
-    "categoryId": 13
+    "categoryId": 14
   },
   {
     "name": "즉석면요리·소면·면",
     "orderWeight": 670000,
-    "categoryId": 13
+    "categoryId": 14
   },
   {
     "name": "국",
     "orderWeight": 680000,
-    "categoryId": 14
+    "categoryId": 15
   },
   {
     "name": "탕·찌게",
     "orderWeight": 690000,
-    "categoryId": 14
+    "categoryId": 15
   },
   {
     "name": "밀키트",
     "orderWeight": 700000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "김치·반찬·젓갈·김",
     "orderWeight": 710000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "햄·어묵·두부·콩나물",
     "orderWeight": 710000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "국수·냉면·파스타",
     "orderWeight": 730000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "만두·돈까스·튀김",
     "orderWeight": 740000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "카레·짜장·스프·죽",
     "orderWeight": 750000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "떡갈비·스테이크",
     "orderWeight": 760000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "해물요리·생선구이",
     "orderWeight": 770000,
-    "categoryId": 15
+    "categoryId": 16
   },
   {
     "name": "생수·얼음",
     "orderWeight": 780000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "커피음료",
     "orderWeight": 790000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "커피믹스·원두·캡슐커피",
     "orderWeight": 800000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "콜라·사이다·탄산음료",
     "orderWeight": 810000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "탄산수",
     "orderWeight": 820000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "스포츠음료·이온음료",
     "orderWeight": 830000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "우유·두유",
     "orderWeight": 840000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "녹차·홍차·코코아",
     "orderWeight": 850000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "과일·야채음료",
     "orderWeight": 860000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "기능성·비타민음료",
     "orderWeight": 870000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "유아음료",
     "orderWeight": 880000,
-    "categoryId": 16
+    "categoryId": 17
   },
   {
     "name": "조미료",
     "orderWeight": 890000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "식용유·기타기름",
     "orderWeight": 900000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "간장·식초",
     "orderWeight": 910000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "밀가루·기타믹스",
     "orderWeight": 920000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "설탕·소금",
     "orderWeight": 930000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "고추장·된장·쌈장",
     "orderWeight": 940000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "소스·드레싱",
     "orderWeight": 950000,
-    "categoryId": 17
+    "categoryId": 18
   },
   {
     "name": "햄·소시지",
     "orderWeight": 960000,
-    "categoryId": 18
+    "categoryId": 19
   },
   {
     "name": "어묵·맛살",
     "orderWeight": 970000,
-    "categoryId": 18
+    "categoryId": 19
   },
   {
     "name": "통조림",
     "orderWeight": 980000,
-    "categoryId": 18
+    "categoryId": 19
   },
   {
     "name": "닭가슴살·샐러드",
     "orderWeight": 990000,
-    "categoryId": 19
+    "categoryId": 20
   },
   {
     "name": "식사대용식",
     "orderWeight": 1000000,
-    "categoryId": 19
+    "categoryId": 20
   },
   {
     "name": "도시락·즉석밥",
     "orderWeight": 1010000,
-    "categoryId": 19
+    "categoryId": 20
   },
   {
     "name": "헬스·뷰티",
     "orderWeight": 1020000,
-    "categoryId": 19
+    "categoryId": 20
   },
   {
     "name": "숙취해소·식품",
     "orderWeight": 1030000,
-    "categoryId": 19
+    "categoryId": 20
   },
   {
     "name": "세탁세제",
     "orderWeight": 1040000,
-    "categoryId": 20
+    "categoryId": 21
   },
   {
     "name": "섬유유연제",
     "orderWeight": 1050000,
-    "categoryId": 20
+    "categoryId": 21
   },
   {
     "name": "주방세제",
     "orderWeight": 1060000,
-    "categoryId": 20
+    "categoryId": 21
   },
   {
     "name": "청소세제",
     "orderWeight": 1070000,
-    "categoryId": 20
+    "categoryId": 21
   },
   {
     "name": "화장지·물티슈",
     "orderWeight": 1080000,
-    "categoryId": 21
+    "categoryId": 22
   },
   {
     "name": "생리대",
     "orderWeight": 1090000,
-    "categoryId": 21
+    "categoryId": 22
   },
   {
     "name": "스킨케어·선케어",
     "orderWeight": 1100000,
-    "categoryId": 22
+    "categoryId": 23
   },
   {
     "name": "마스크팩",
     "orderWeight": 1110000,
-    "categoryId": 22
+    "categoryId": 23
   },
   {
     "name": "메이크업·소품",
     "orderWeight": 1130000,
-    "categoryId": 22
+    "categoryId": 23
   },
   {
     "name": "청소용품",
     "orderWeight": 1140000,
-    "categoryId": 23
+    "categoryId": 24
   },
   {
     "name": "욕실용품",
     "orderWeight": 1150000,
-    "categoryId": 23
+    "categoryId": 24
   },
   {
     "name": "방충·살충제",
     "orderWeight": 1160000,
-    "categoryId": 23
+    "categoryId": 24
   },
   {
     "name": "방향·제습제",
     "orderWeight": 1170000,
-    "categoryId": 23
+    "categoryId": 24
   },
   {
     "name": "의약외품·마스크",
     "orderWeight": 1190000,
-    "categoryId": 24
+    "categoryId": 25
   },
   {
     "name": "양말·스타킹",
     "orderWeight": 1200000,
-    "categoryId": 24
+    "categoryId": 25
   },
   {
     "name": "멀티탭·충전기·케이블",
     "orderWeight": 1210000,
-    "categoryId": 24
+    "categoryId": 25
   },
   {
     "name": "건전지·전구",
     "orderWeight": 1220000,
-    "categoryId": 24
+    "categoryId": 25
   },
   {
     "name": "기타잡화",
     "orderWeight": 1230000,
-    "categoryId": 24
+    "categoryId": 25
   },
   {
     "name": "주방용품·소모품",
     "orderWeight": 1240000,
-    "categoryId": 25
+    "categoryId": 26
   },
   {
     "name": "일회용품",
     "orderWeight": 1250000,
-    "categoryId": 25
+    "categoryId": 26
   },
   {
     "name": "사료",
     "orderWeight": 1270000,
-    "categoryId": 26
+    "categoryId": 27
   },
   {
     "name": "간식",
     "orderWeight": 1280000,
-    "categoryId": 26
+    "categoryId": 27
   },
   {
     "name": "반려용품",
     "orderWeight": 1290000,
-    "categoryId": 26
+    "categoryId": 27
   },
   {
     "name": "헤어·바디",
     "orderWeight": 1300000,
-    "categoryId": 27
+    "categoryId": 28
   },
   {
     "name": "배민 사무용품",
     "orderWeight": 1310000,
-    "categoryId": 27
+    "categoryId": 28
   },
   {
     "name": "주방·파티용품",
     "orderWeight": 1320000,
-    "categoryId": 27
+    "categoryId": 28
   },
   {
     "name": "패션·뷰티·소품",
     "orderWeight": 1330000,
-    "categoryId": 27
+    "categoryId": 28
   },
   {
     "name": "필기류",
     "orderWeight": 1340000,
-    "categoryId": 28
+    "categoryId": 29
   },
   {
     "name": "노트·메모지",
     "orderWeight": 1350000,
-    "categoryId": 28
+    "categoryId": 29
   },
   {
     "name": "사무용품",
     "orderWeight": 1360000,
-    "categoryId": 28
+    "categoryId": 29
   }
 ]

@@ -32,6 +32,7 @@ kitchen=$(($base_id+24))
 pet=$(($base_id+25))
 woowa_supply=$(($base_id+26))
 supply=$(($base_id+27))
+woowa_recomend=$(($base_id+28))
 ########################################
 
 echo "start sub category bulk with base_id($base_id)"
@@ -256,14 +257,14 @@ curl --location --request POST $url/api/sub_category/bulkcreate \
         \"categoryId\": $hair
     },
     {
-        \"name\": \"제대로 한끼 뭐 먹지?\",
+        \"name\": \"지금 뭐먹지?\",
         \"orderWeight\": 440000,
-        \"categoryId\": $set_menu
+        \"categoryId\": $woowa_recomend
     },
     {
-        \"name\": \"꿀조합 뭐 먹지?\",
+        \"name\": \"지금 필요한 생필품\",
         \"orderWeight\": 450000,
-        \"categoryId\": $set_menu
+        \"categoryId\": $woowa_recomend
     },
     {
         \"name\": \"시간 없는데 뭐 먹지?\",
