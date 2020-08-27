@@ -86,6 +86,10 @@ export const MaxSubCategoryCount = 127;
 
 export const MaxProductsCount = 4024;
 
+export const MaxWhatEatNowProductsCount = 36;
+
+export const MaxNowNeedNeccessaryProductsCount = 18;
+
 export const MaxProductsCountByMainCategoryContainer = 10;
 
 export const MaxProductsCountByCategoryPageContainer = 100;
