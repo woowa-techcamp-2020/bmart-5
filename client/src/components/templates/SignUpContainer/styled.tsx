@@ -11,5 +11,4 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 0;
 `;

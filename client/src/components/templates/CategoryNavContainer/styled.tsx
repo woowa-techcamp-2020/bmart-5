@@ -9,8 +9,9 @@ export const CategoryNavContainer = styled.div<{}>`
 export const NavContainer = styled.div<{ length: number }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
+  grid-auto-flow: row;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
   ${(props) =>
     props.length % 2 !== 0 &&
     `&:last-child::after {
