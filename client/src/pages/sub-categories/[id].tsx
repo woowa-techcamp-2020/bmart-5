@@ -15,6 +15,7 @@ import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import * as S from '@commons/styles/ProductsContainerStyled';
 import { SubCategoryType } from '@pages/index';
+import CartIcon from '@components/modules/CartIcon';
 
 type Props = {
   id: number;
@@ -51,6 +52,7 @@ const SubCartegoryPage: NextPage<Props> = (props) => {
         <ProductsByCategoryContainer products={props.products} headerType="filter" />
       </S.ProductsContainerStyle>
       <ToastModal />
+      <CartIcon />
     </Layout>
   );
 };
