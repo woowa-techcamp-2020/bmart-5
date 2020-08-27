@@ -36,6 +36,7 @@ const Normalize = createGlobalStyle`
   #__next {
     display: flex;
     flex-direction: column;
+    background: #dfdfdf;
   }
 
   main {

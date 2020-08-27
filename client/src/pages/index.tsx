@@ -14,7 +14,6 @@ import {
   LatestProductsLimit,
   HighestOffProductsLimit,
   OrderedCategoriesLimit,
-  IconType,
   HeaderMainType,
   MaxSubCategoryLimitByCategoryId,
   MaxProductsCountByMainCategoryContainer,
@@ -76,8 +75,8 @@ const MainPage: NextPage<Props> = (props) => {
     headerProps: {
       main: { type: HeaderMainType.LOGO },
       right: [
-        { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.push('/menu') },
+        { type: 'Search', onClick: () => alert('검색') },
+        { type: 'Bars', onClick: () => router.push('/menu') },
       ],
     },
   };

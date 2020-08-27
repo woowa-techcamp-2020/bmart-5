@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 import { Context } from '@commons/Context';
 import Layout, { LayoutProps } from '@commons/Layout';
-import { IconType, HeaderMainType, deliveryFee, deliveryDiscount } from '@utils/constants';
+import { HeaderMainType, deliveryFee, deliveryDiscount } from '@utils/constants';
 import CheckListContainer, { ProductType } from '@components/templates/CheckListContainer';
 import OutOfStockContainer from '@components/templates/OutOfStockContainer';
 import TotalPriceContainer from '@components/modules/TotalPriceInfo';
@@ -43,7 +43,7 @@ const CartPage: NextPage<Props> = () => {
   const layoutProps: LayoutProps = {
     title: 'Bmart 장바구니',
     headerProps: {
-      left: IconType.ARROW_LEFT,
+      left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: '장바구니' },
     },
   };

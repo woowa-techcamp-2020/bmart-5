@@ -39,7 +39,7 @@ export const ModalBG = styled.div`
 
 export const ModalHeader = styled.div`
   display: flex;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #dfdfdf;
 
   & .title {
     text-align: center;

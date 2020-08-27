@@ -11,7 +11,7 @@ export type MainType = {
 };
 
 export type RightBtnType = {
-  type: string;
+  type: IconType;
   onClick?: () => void;
 };
 
