@@ -14,7 +14,7 @@ import HttpStatus from 'http-status';
 import { ProductType } from '@pages/index';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
-import * as S from './styled';
+import * as S from '@commons/styles/ProductsContainerStyled';
 import { SubCategoryType } from '@pages/index';
 
 type Props = {

@@ -22,7 +22,7 @@ import {
 } from '@pages/index';
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
-import * as S from './styled';
+import * as S from '@commons/styles/ProductsContainerStyled';
 import SubCategoryNavContainer from '@components/templates/SubCategoryNavContainer';
 
 type Props = {
