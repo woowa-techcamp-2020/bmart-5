@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const FavoriteContainer = styled.div<{}>`
   background-color: white;
   padding: 1rem;
+  flex-grow: 1;
 `;
 
 export const Contents = styled.div`
