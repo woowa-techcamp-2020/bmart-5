@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const SoldOut = styled.div``;
+
 export const ProductCard = styled.div`
   /* common */
   display: flex;
@@ -9,6 +11,31 @@ export const ProductCard = styled.div`
   & .image-container {
     position: relative;
   }
+
+  & .sold-out {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    div {
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background-color: black;
+    }
+    p {
+      position: absolute;
+      font-size: 3rem;
+      color: white;
+      font-weight: 600;
+      top: 100%;
+      transform: translate(8%, -370%);
+    }
+  }
+
   & .sale-badge {
     position: absolute;
     top: 6%;
@@ -45,6 +72,13 @@ export const ProductCard = styled.div`
       position: relative;
       padding-top: 75%;
     }
+
+    & .sold-out {
+      p {
+        transform: translate(115%, -630%);
+      }
+    }
+
     & img {
       position: absolute;
       top: 0;
@@ -58,11 +92,21 @@ export const ProductCard = styled.div`
   /* grid */
   &.grid {
     margin-bottom: 4rem;
+    & .sold-out {
+      p {
+        transform: translate(2%, -350%);
+      }
+    }
   }
 
   /* main */
   &.main {
     margin-bottom: 4rem;
+    & .sold-out {
+      p {
+        transform: translate(30%, -450%);
+      }
+    }
   }
 `;
 

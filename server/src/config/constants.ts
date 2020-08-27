@@ -12,7 +12,7 @@ const googleCredentials = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
   callback: process.env.GOOGLE_CALLBACK || '',
 };
-const tokenExpiresIn = '30m';
+const tokenExpiresIn = '2h';
 
 const databaseConfig = {
   database: env === 'production' ? (process.env.PROD_DB as string) : (process.env.DEV_DB as string),

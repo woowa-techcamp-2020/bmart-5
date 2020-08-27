@@ -61,14 +61,14 @@ const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
 
     res
       .cookie('authorization', token, {
-        // 30 분 뒤 만료
-        expires: new Date(Date.now() + 30 * 60 * 1000),
+        // 2 시간 뒤 만료
+        expires: new Date(Date.now() + 120 * 60 * 1000),
       })
       .status(HttpStatus.OK)
       .json(
         JsonResponse(HttpStatus.OK, `Log in success ${req.body.email}`, {
           token: token,
-          expires: new Date(Date.now() + 30 * 60 * 1000),
+          expires: new Date(Date.now() + 120 * 60 * 1000),
         })
       );
   } catch (err) {
@@ -135,14 +135,14 @@ const emailSignUp = async (req: Request, res: Response, next: NextFunction) => {
       );
       res
         .cookie('authorization', token, {
-          // 30 분 뒤 만료
-          expires: new Date(Date.now() + 30 * 60 * 1000),
+          // 2 시간 뒤 만료
+          expires: new Date(Date.now() + 120 * 60 * 1000),
         })
         .status(HttpStatus.CREATED)
         .json(
           JsonResponse(HttpStatus.CREATED, `created user success email(${body.email})`, {
             token: token,
-            expires: new Date(Date.now() + 30 * 60 * 1000),
+            expires: new Date(Date.now() + 120 * 60 * 1000),
           })
         );
     }
@@ -185,8 +185,8 @@ const googleRedirect = async (req: Request, res: Response, next: NextFunction) =
   );
 
   res.cookie('authorization', token, {
-    // 30 분 뒤 만료
-    expires: new Date(Date.now() + 30 * 60 * 1000),
+    // 2 시간 뒤 만료
+    expires: new Date(Date.now() + 120 * 60 * 1000),
   });
 
   res.redirect(apiEndPoint);
