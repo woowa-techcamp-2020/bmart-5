@@ -2,17 +2,20 @@ import styled from 'styled-components';
 export { Label, Input, Span } from '../CheckListHeader/styled';
 
 export const ProductStateText = styled.div`
+  background-color: white;
   color: black;
   font-weight: 600;
 `;
 
 export const OutOfStockProduct = styled.div`
   display: flex;
+  background-color: white;
   flex-direction: column;
   color: lightgray;
 `;
 
 export const InfoTitle = styled.div`
+  background-color: white;
   font-size: 2rem;
   font-weight: 600;
   display: -webkit-box;
@@ -25,6 +28,7 @@ export const InfoTitle = styled.div`
 
 export const InfoNameRow = styled.div`
   display: flex;
+  background-color: white;
   font-size: 2rem;
   flex-direction: row;
   justify-content: space-between;
@@ -33,6 +37,7 @@ export const InfoNameRow = styled.div`
 
 export const ChkBoxSection = styled.div`
   overflow: hidden;
+  background-color: white;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -42,6 +47,7 @@ export const ChkBoxSection = styled.div`
 
 export const InfoProductGrid = styled.div`
   display: grid;
+  background-color: white;
   grid-template-columns: 33% auto;
   margin: 0.5rem 1rem 1rem 1rem;
 `;
@@ -56,6 +62,7 @@ export const ProductImg = styled.img`
 
 export const PriceAndCount = styled.div`
   display: flex;
+  background-color: white;
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
@@ -63,6 +70,7 @@ export const PriceAndCount = styled.div`
 `;
 
 export const GrayPrice = styled.div`
+  background-color: white;
   margin-bottom: 0.3rem;
 `;
 
