@@ -23,12 +23,14 @@ type ContextType = {
   likeProducts: Array<ProductType>;
   user: TokenUser | null;
   token: string | null;
+  clickToggle: boolean;
   setSelect: Function;
   setCartProducts: Function;
   setCartId: Function;
   setLikeProducts: Function;
   setUser: Function;
   setToken: Function;
+  setClickToggle: Function;
 };
 
 const defaultValue = {
@@ -38,12 +40,14 @@ const defaultValue = {
   likeProducts: [],
   user: null,
   token: null,
+  clickToggle: false,
   setSelect: () => {},
   setCartProducts: () => {},
   setCartId: () => {},
   setLikeProducts: () => {},
   setUser: () => {},
   setToken: () => {},
+  setClickToggle: () => {},
 };
 
 export const Context = React.createContext<ContextType>(defaultValue);
@@ -55,6 +59,7 @@ export const Provider: React.FC<Props> = (props) => {
   const [likeProducts, setLikeProducts] = useState<Array<ProductType>>([]);
   const [user, setUser] = useState<TokenUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [clickToggle, setClickToggle] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,12 +97,14 @@ export const Provider: React.FC<Props> = (props) => {
         likeProducts: likeProducts,
         user: user,
         token: token,
+        clickToggle: clickToggle,
         setSelect: setSelect,
         setCartProducts: setCartProducts,
         setCartId: setCartId,
         setLikeProducts: setLikeProducts,
         setUser: setUser,
         setToken: setToken,
+        setClickToggle: setClickToggle,
       }}
     >
       {props.children}

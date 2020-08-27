@@ -23,7 +23,7 @@ export const ProductCard: React.FC<Props> = ({
   className,
 }) => {
   const [Liked, setLiked] = useState<boolean>(false);
-  const setSelect = useContext(Context).setSelect;
+  const { setSelect, setClickToggle, clickToggle } = useContext(Context);
   const token = getCookie('authorization');
   const router = useRouter();
   const rawPrice = (item.price * (100 + item.discount)) / 100;
@@ -67,6 +67,7 @@ export const ProductCard: React.FC<Props> = ({
 
   const onItemClickHandler = async (item: ProductType) => {
     setSelect(item);
+    setClickToggle(!clickToggle);
     await API.patch(`/product/click/${item.id}`);
   };
 
