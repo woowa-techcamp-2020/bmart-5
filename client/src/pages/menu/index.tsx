@@ -6,7 +6,7 @@ import MenuNavContainer from '@components/templates/MenuNavContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import { CategoryType } from '@components/templates/CategoryContainer';
-import { MaxCategoryCount } from '@utils/constants';
+import { MaxCategoryCount, MaxSubCategoryCount } from '@utils/constants';
 import CategoryNavContainer from '@components/templates/CategoryNavContainer';
 import LogOut from '@components/atoms/LogOut';
 import { Context } from '@commons/Context';
@@ -14,6 +14,22 @@ import ToastModal from '@components/modules/ToastModal';
 
 type Props = {
   categories: Array<CategoryType>;
+  subCategories: Array<SubCategoryType>;
+};
+
+type SubCategoryType = {
+  id: number;
+  name: string;
+  orderWeight: number;
+  categoryId: number;
+};
+
+type CategoryArrType = {
+  categories: Array<CategoryType>;
+};
+
+type SubCategoryArrType = {
+  subCategories: Array<SubCategoryType>;
 };
 
 const MenuPage: NextPage<Props> = (props) => {
@@ -30,7 +46,7 @@ const MenuPage: NextPage<Props> = (props) => {
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <MenuNavContainer user={user} />
-      <CategoryNavContainer categories={props.categories} />
+      <CategoryNavContainer categories={props.categories} subCategories={props.subCategories} />
       {user && <LogOut setUser={setUser} setToken={setToken} />}
       <ToastModal />
     </Layout>
@@ -39,15 +55,17 @@ const MenuPage: NextPage<Props> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const categoryResponse = await categoryContainerFetch();
+  const subCategoryResponse = await subCategoryContainerFetch();
 
   return {
     props: {
       ...categoryResponse,
+      ...subCategoryResponse,
     },
   };
 };
-const categoryContainerFetch = async (): Promise<Props> => {
-  let { status, message, result } = (await API.get(`/category/${MaxCategoryCount}`)).data;
+const categoryContainerFetch = async (): Promise<CategoryArrType> => {
+  let { status, message, result } = (await API.get(`/category/all/${MaxCategoryCount}`)).data;
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
     const categories = [...result].map((category) => {
@@ -58,6 +76,22 @@ const categoryContainerFetch = async (): Promise<Props> => {
   } else {
     console.error(`not defined status code: ${status}`);
     return { categories: [] };
+  }
+};
+
+const subCategoryContainerFetch = async (): Promise<SubCategoryArrType> => {
+  let { status, message, result } = (
+    await API.get(`/sub_category/all/${MaxSubCategoryCount}`)
+  ).data;
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const subCategories = [...result].map((subCategory) => {
+      return subCategory;
+    });
+    return { subCategories };
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return { subCategories: [] };
   }
 };
 
