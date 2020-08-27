@@ -8,6 +8,7 @@ type Props = {
   backgroundColor?: string;
   label: string;
   withArrow?: boolean;
+  onClick?: (e: MouseEvent) => void;
 };
 
 export const SubButton: React.FC<Props> = ({
@@ -15,9 +16,10 @@ export const SubButton: React.FC<Props> = ({
   backgroundColor,
   label,
   withArrow = false,
+  onClick,
 }) => {
   return (
-    <S.SubButton style={{ color, backgroundColor }}>
+    <S.SubButton style={{ color, backgroundColor }} onClick={onClick}>
       <div>{label}</div>
       {withArrow && <Icon icon={IconType.ARROW_FORWARD} size={1} />}
     </S.SubButton>
