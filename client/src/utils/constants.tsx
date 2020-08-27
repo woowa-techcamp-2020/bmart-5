@@ -14,6 +14,10 @@ export enum IconType {
   REG_HEART = 'RegHeart',
   SEARCH = 'Search',
   PLUS = 'Plus',
+  RIFILELISTLINE = 'RiFileListLine',
+  VSCSIGNIN = 'VscSignIn',
+  VSCSIGNOUT = 'VscSignOut',
+  HIOUTLINEUSERADD = 'HiOutlineUserAdd',
   'ArrowForward' = ARROW_FORWARD,
   'ArrowLeft' = ARROW_LEFT,
   'ArrowUP' = ARROW_UP,
@@ -27,6 +31,10 @@ export enum IconType {
   'RegHeart' = REG_HEART,
   'Search' = SEARCH,
   'Plus' = PLUS,
+  'RiFileListLine' = RIFILELISTLINE,
+  'VscSignIn' = VSCSIGNIN,
+  'VscSignOut' = VSCSIGNOUT,
+  'HiOutlineUserAdd' = HIOUTLINEUSERADD,
 }
 
 export enum HeaderMainType {
@@ -87,3 +95,7 @@ export const deliveryDiscount = 100;
 export const CarouselBannerCount = 5;
 
 export const MaxSubCategoryLimitByCategoryId = 9;
+
+export const MAX_CATEGORY_COUNT = 28;
+
+export const MAX_SUB_CATEGORY_COUNT = 132;

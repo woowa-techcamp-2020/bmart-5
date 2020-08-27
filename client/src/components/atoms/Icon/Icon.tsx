@@ -3,9 +3,16 @@ import * as S from './styled';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
 import { IoMdCloseCircleOutline, IoIosArrowForward } from 'react-icons/io';
-import { RiShoppingBagLine, RiArrowUpSLine, RiArrowDownSLine } from 'react-icons/ri';
+import {
+  RiShoppingBagLine,
+  RiArrowUpSLine,
+  RiArrowDownSLine,
+  RiFileListLine,
+} from 'react-icons/ri';
 import { FiPlus } from 'react-icons/fi';
+import { VscSignIn, VscSignOut } from 'react-icons/vsc';
 import { IconType } from '@utils/constants';
+import { HiOutlineUserAdd } from 'react-icons/hi';
 
 export type Props = {
   icon: string;
@@ -41,6 +48,14 @@ const findIcon = (iconName: string) => {
       return <AiOutlineNotification />;
     case IconType.PLUS:
       return <FiPlus />;
+    case IconType.RIFILELISTLINE:
+      return <RiFileListLine />;
+    case IconType.VSCSIGNIN:
+      return <VscSignIn />;
+    case IconType.VSCSIGNOUT:
+      return <VscSignOut />;
+    case IconType.HIOUTLINEUSERADD:
+      return <HiOutlineUserAdd />;
     default:
       return;
   }
