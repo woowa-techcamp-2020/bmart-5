@@ -11,9 +11,9 @@ type Props = {
   products: ProductArrType;
 };
 
-export const SlidableCategoryContainer: React.FC<Props> = ({ name, products }) => {
+export const ProductsByCategoryContainer: React.FC<Props> = ({ name, products }) => {
   return (
-    <S.SlidableCategoryContainer>
+    <S.ProductsByCategoryContainer>
       <ContainerHeader moreBtn>{name}</ContainerHeader>
       <div className="wrapper">
         <div className="content">
@@ -22,6 +22,6 @@ export const SlidableCategoryContainer: React.FC<Props> = ({ name, products }) =
           })}
         </div>
       </div>
-    </S.SlidableCategoryContainer>
+    </S.ProductsByCategoryContainer>
   );
 };

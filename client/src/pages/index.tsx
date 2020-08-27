@@ -7,7 +7,7 @@ import CategoryContainer, { CategoryType } from '@components/templates/CategoryC
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import TabViewContainer from '@components/templates/TabViewContainer';
-import SlidableCategoryContainer from '@components/templates/SlidableCategoryContainer';
+import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
 import API from '@utils/API';
 import HttpStatus from 'http-status';
 import {
@@ -91,7 +91,7 @@ const MainPage: NextPage<Props> = (props) => {
       <TabViewContainer products={props.highestOffProducts} />
       <Banner />
       {props.categories.map((category, idx) => (
-        <SlidableCategoryContainer
+        <ProductsByCategoryContainer
           key={idx}
           name={category.name}
           products={props.categoryProductsList[idx].categoryProducts}
