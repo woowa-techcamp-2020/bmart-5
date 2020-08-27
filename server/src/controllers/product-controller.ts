@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 import HttpStatus from 'http-status';
 import { Product } from '../models';
 import { JsonResponse } from '../modules/utils';
@@ -171,7 +171,7 @@ const findBySubCategoryId = async (req: Request, res: Response, next: NextFuncti
         ],
       },
       limit: paramLimit,
-      order: [['createdAt', 'DESC']],
+      order: Sequelize.literal('rand()'),
     });
     res
       .status(HttpStatus.OK)
