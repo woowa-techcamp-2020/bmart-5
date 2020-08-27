@@ -6,6 +6,7 @@ const router = Router();
 
 router.post('/', passport.authenticate('jwt'), CartController.insertCartProduct);
 
+router.get('/purchase/all', passport.authenticate('jwt'), CartController.findAllPurchase);
 router.get('/user/id', passport.authenticate('jwt'), CartController.findByUserId);
 router.get('/:id', CartController.findByCartId);
 

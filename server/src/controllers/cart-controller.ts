@@ -183,6 +183,55 @@ const softDeleteCart = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
+const findAllPurchase = async (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user as TokenUser;
+  try {
+    const cart = await Cart.findAll({
+      attributes: ['id', 'purchasedAt'],
+      include: [
+        {
+          model: CartProduct,
+          as: 'cartProducts',
+          attributes: ['id', 'count', 'createdAt'],
+          where: {
+            deletedAt: {
+              [Op.is]: null,
+            },
+          },
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              attributes: ['id', 'name', 'price', 'discount', 'createdAt'],
+            },
+          ],
+        },
+      ],
+      where: {
+        [Op.and]: [
+          { userId: user.id },
+          {
+            deletedAt: {
+              [Op.is]: null,
+            },
+          },
+          {
+            purchasedAt: {
+              [Op.not]: null,
+            },
+          },
+        ],
+      },
+    });
+
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `found all purchase products: ${cart.length}`, cart));
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   insertCartProduct,
   findByUserId,
@@ -191,4 +240,5 @@ export default {
   purchase,
   softDeleteCartProduct,
   softDeleteCart,
+  findAllPurchase,
 };
