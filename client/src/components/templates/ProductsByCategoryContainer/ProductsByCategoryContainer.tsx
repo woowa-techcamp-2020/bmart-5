@@ -5,6 +5,7 @@ import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import { useRouter } from 'next/router';
 import { Context } from '@commons/Context';
+import { FadeIn } from '@animates/index';
 
 type ProductArrType = Array<ProductType>;
 
@@ -41,21 +42,23 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
           Filter
         </ContainerHeader>
       )}
-      <div className="wrapper">
-        <div className="content">
-          {products.map((item: ProductType, idx: number) => {
-            return (
-              <ProductCard
-                key={idx}
-                item={item}
-                likeProducts={likeProducts}
-                setLikeProducts={setLikeProducts}
-                className={'main'}
-              />
-            );
-          })}
+      <FadeIn>
+        <div className="wrapper">
+          <div className="content">
+            {products.map((item: ProductType, idx: number) => {
+              return (
+                <ProductCard
+                  key={idx}
+                  item={item}
+                  likeProducts={likeProducts}
+                  setLikeProducts={setLikeProducts}
+                  className={'main'}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </FadeIn>
     </S.ProductsByCategoryContainer>
   );
 };

@@ -8,6 +8,7 @@ import { Context } from '@commons/Context';
 import API from '@utils/API';
 import { getCookie } from '@utils/cookie-manager';
 import { useRouter } from 'next/router';
+import { ScaleIn } from '@animates/index';
 
 type Props = {
   item: ProductType;
@@ -69,30 +70,32 @@ export const ProductCard: React.FC<Props> = ({
   };
 
   return item ? (
-    <S.ProductCard className={className} onClick={() => onItemClickHandler(item)}>
-      <div className="image-container">
-        <S.ProductImg src={item.imgUrl} />
-        {className === 'sale' && (
-          <div className="sale-badge">
-            <Badge rate={item.discount} />
-          </div>
-        )}
-        <div className="like-icon" onClick={onLikeHandler}>
-          {Liked ? (
-            <Icon icon={IconType.HEART} size={3} />
-          ) : (
-            <Icon icon={IconType.REG_HEART} size={3} />
+    <ScaleIn>
+      <S.ProductCard className={className} onClick={() => onItemClickHandler(item)}>
+        <div className="image-container">
+          <S.ProductImg src={item.imgUrl} />
+          {className === 'sale' && (
+            <div className="sale-badge">
+              <Badge rate={item.discount} />
+            </div>
           )}
+          <div className="like-icon" onClick={onLikeHandler}>
+            {Liked ? (
+              <Icon icon={IconType.HEART} size={3} />
+            ) : (
+              <Icon icon={IconType.REG_HEART} size={3} />
+            )}
+          </div>
         </div>
-      </div>
-      <S.ProductInfo>
-        <div className="item-name">{item.name}</div>
-        <div className="price-row">
-          <div className="item-price">{item.price}원</div>
-          {className === 'sale' && <Icon icon={IconType.BASKET} size={1.5} />}
-        </div>
-      </S.ProductInfo>
-    </S.ProductCard>
+        <S.ProductInfo>
+          <div className="item-name">{item.name}</div>
+          <div className="price-row">
+            <div className="item-price">{item.price}원</div>
+            {className === 'sale' && <Icon icon={IconType.BASKET} size={1.5} />}
+          </div>
+        </S.ProductInfo>
+      </S.ProductCard>
+    </ScaleIn>
   ) : (
     <></>
   );

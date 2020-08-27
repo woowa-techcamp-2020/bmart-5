@@ -77,7 +77,7 @@ const MainPage: NextPage<Props> = (props) => {
       main: { type: HeaderMainType.LOGO },
       right: [
         { type: IconType.SEARCH, onClick: () => alert('검색') },
-        { type: IconType.BARS, onClick: () => router.replace('/menu') },
+        { type: IconType.BARS, onClick: () => router.push('/menu') },
       ],
     },
   };
