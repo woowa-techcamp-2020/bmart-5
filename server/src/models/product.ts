@@ -6,8 +6,9 @@ class Product extends Model {
   public id!: number;
   public name!: string;
   public price!: number;
-  content!: string;
-  discount!: number;
+  public content!: string;
+  public discount!: number;
+  public clicks!: number;
   public outOfStockAt!: Date | null;
   public deletedAt!: Date | null;
   public readonly createdAt!: Date;
@@ -35,6 +36,11 @@ Product.init(
       allowNull: false,
     },
     discount: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    clicks: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       defaultValue: 0,

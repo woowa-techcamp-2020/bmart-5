@@ -33,7 +33,7 @@ curl --location --request POST ${url}/api/category/bulkcreate \
             "orderWeight": 60000
         },
         {
-            "name": "과자·초콜렛",
+            "name": "과자·초콜릿",
             "orderWeight": 70000
         },
         {
@@ -45,8 +45,8 @@ curl --location --request POST ${url}/api/category/bulkcreate \
             "orderWeight": 90000
         },
         {
-            "name": "세트",
-            "orderWeight": 100000
+            "name": "배민추천",
+            "orderWeight": 290000
         },
         {
             "name": "봉지",

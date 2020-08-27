@@ -65,8 +65,9 @@ export const ProductCard: React.FC<Props> = ({
     setLiked(!Liked);
   };
 
-  const onItemClickHandler = (item: ProductType) => {
+  const onItemClickHandler = async (item: ProductType) => {
     setSelect(item);
+    await API.patch(`/product/click/${item.id}`);
   };
 
   return item ? (

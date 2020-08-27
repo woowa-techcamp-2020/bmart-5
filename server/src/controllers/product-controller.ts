@@ -23,6 +23,7 @@ const findLatest = async (req: Request, res: Response, next: NextFunction) => {
         'price',
         'content',
         'discount',
+        'clicks',
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
@@ -55,6 +56,7 @@ const findHighestOff = async (req: Request, res: Response, next: NextFunction) =
         'price',
         'content',
         'discount',
+        'clicks',
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
@@ -78,6 +80,42 @@ const findHighestOff = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
+const findHottest = async (req: Request, res: Response, next: NextFunction) => {
+  const { params } = req;
+  const paramLimit = parseInt(params.limit);
+
+  try {
+    const products = await Product.findAll({
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'clicks',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
+      where: {
+        deletedAt: {
+          [Op.is]: null,
+        },
+      },
+      limit: paramLimit,
+      order: [
+        ['clicks', 'DESC'],
+        ['outOfStockAt', 'ASC'],
+      ],
+    });
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `find product list with limit: ${paramLimit}`, products));
+  } catch (err) {
+    next(err);
+  }
+};
+
 const findById = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
   const paramId = parseInt(params.id);
@@ -90,6 +128,7 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
         'price',
         'content',
         'discount',
+        'clicks',
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
@@ -116,6 +155,7 @@ const findBySubCategoryId = async (req: Request, res: Response, next: NextFuncti
         'price',
         'content',
         'discount',
+        'clicks',
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
@@ -218,6 +258,24 @@ const setOutOfStock = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+const incrementClicks = async (req: Request, res: Response, next: NextFunction) => {
+  const { params } = req;
+  const paramId = parseInt(params.id);
+
+  try {
+    const product = await Product.findByPk(paramId);
+    if (!product)
+      throw new CustomError(HttpStatus.BAD_REQUEST, `no product with id ${paramId}`, '');
+    product.update({ clicks: product.clicks + 1 });
+
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `product's click count is updated: ${paramId}`, product));
+  } catch (err) {
+    next(err);
+  }
+};
+
 const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
 
@@ -236,11 +294,13 @@ const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
 export default {
   findLatest,
   findHighestOff,
+  findHottest,
   findById,
   findBySubCategoryId,
   create,
   update,
   softDelete,
   setOutOfStock,
+  incrementClicks,
   bulkCreate,
 };
