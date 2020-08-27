@@ -15,6 +15,20 @@ export type TokenUser = {
   isAdmin: boolean;
 };
 
+const isValidToken = async (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user as TokenUser;
+  console.log(user);
+  try {
+    if (user) {
+      res
+        .status(HttpStatus.OK)
+        .json(JsonResponse(HttpStatus.OK, `valificated user ${user.username}`, user));
+    } else throw new CustomError(HttpStatus.BAD_REQUEST, 'not valid token', '');
+  } catch (err) {
+    next(err);
+  }
+};
+
 const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
   try {
@@ -141,7 +155,7 @@ const googleRedirect = async (req: Request, res: Response, next: NextFunction) =
   const googleUser: any = req.user;
 
   const response = await User.findOrCreate({
-    attributes: ['id', 'username', 'email'],
+    attributes: ['id', 'username', 'email', 'isAdmin'],
     where: {
       email: googleUser._json.email,
     },
@@ -179,6 +193,7 @@ const googleRedirect = async (req: Request, res: Response, next: NextFunction) =
 };
 
 export default {
+  isValidToken,
   emailSignUp,
   emailLogin,
   googleRedirect,
