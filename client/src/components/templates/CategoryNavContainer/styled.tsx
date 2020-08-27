@@ -8,6 +8,7 @@ export const CategoryNavContainer = styled.div<{}>`
 export const NavContainer = styled.div<{ length: number }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row;
   border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
   ${(props) =>
@@ -23,7 +24,7 @@ export const NavContainer = styled.div<{ length: number }>`
   }`}
 `;
 
-export const Category = styled.div<{ idx: number }>`
+export const Category = styled.div<{}>`
   text-align: center;
   border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
