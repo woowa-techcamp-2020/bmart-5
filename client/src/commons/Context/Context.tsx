@@ -65,13 +65,13 @@ export const Provider: React.FC<Props> = (props) => {
         setUser(newUser);
       }
 
-      if (token && cartId === null) {
-        const cartId = (await getCartByToken(token)).id;
+      if (newToken && cartId === null) {
+        const cartId = (await getCartByToken(newToken)).id;
         setCartId(cartId);
         return;
       }
-      if (token !== null) {
-        const likeProducts = await likeProductsFetch(token);
+      if (newToken !== null) {
+        const likeProducts = await likeProductsFetch(newToken);
         setLikeProducts(likeProducts);
       }
       if (cartId !== null) {

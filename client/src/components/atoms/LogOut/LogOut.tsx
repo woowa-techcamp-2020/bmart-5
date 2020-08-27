@@ -18,8 +18,10 @@ export const LogOut: React.FC<Props> = (props) => {
     router.push('/');
   };
   return (
-    <S.LogOut onClick={signOutHandler}>
-      <LinkBox url="/signin" name="로그아웃" icon={'VscSignOut'} />
-    </S.LogOut>
+    <S.LogOutContainer>
+      <S.LogOut onClick={signOutHandler}>
+         <LinkBox url="/signin" name="로그아웃" icon={'VscSignOut'} />
+      </S.LogOut>
+    </S.LogOutContainer>
   );
 };

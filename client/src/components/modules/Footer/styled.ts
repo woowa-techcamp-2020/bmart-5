@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Footer = styled.footer`
-  background-color: #efefef;
+  background-color: #dfdfdf;
   padding-bottom: 4rem;
 `;
 
 export const ButtonContainer = styled.div`
-  background-color: #efefef;
+  background-color: #dfdfdf;
   margin: 2rem 1rem;
   display: flex;
   flex-direction: column;
