@@ -40,10 +40,7 @@ const CartegoryPage: NextPage<Props> = (props) => {
     headerProps: {
       left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: `${props.name}` },
-      right: [
-        { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.push('/signin') },
-      ],
+      right: [{ type: 'Bars', onClick: () => router.push('/signin') }],
     },
   };
 
