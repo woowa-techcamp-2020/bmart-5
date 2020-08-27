@@ -6,6 +6,8 @@ import { IconType, HeaderMainType, deliveryFee, deliveryDiscount } from '@utils/
 import CheckListContainer, { ProductType } from '@components/templates/CheckListContainer';
 import OutOfStockContainer from '@components/templates/OutOfStockContainer';
 import TotalPriceContainer from '@components/modules/TotalPriceInfo';
+import { getCookie } from '@utils/cookie-manager';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
@@ -15,8 +17,11 @@ const CartPage: NextPage<Props> = () => {
   const [outOfStockProducts, setOutOfStockProducts] = useState<Array<ProductType>>([]);
   const [checkedProducts, setCheckedProducts] = useState<Array<ProductType>>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const token = getCookie('authorization');
+  const router = useRouter();
 
   useEffect(() => {
+    if (!token) router.replace('/');
     setProducts(cartProducts.filter((product: ProductType) => product.outOfStockAt === null));
     setOutOfStockProducts(
       cartProducts.filter((product: ProductType) => product.outOfStockAt !== null)
