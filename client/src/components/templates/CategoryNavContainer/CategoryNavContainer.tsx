@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import * as S from './styled';
 
 type Props = {
@@ -64,7 +65,10 @@ export const CategoryNavContainer: React.FC<Props> = ({ categories, subCategorie
                         className={`category-${subcategory.categoryId} hide`}
                         key={subCategoryIdx}
                       >
-                        {subcategory.name}
+                        {' '}
+                        <Link href={`sub-categories/${subcategory.id}`}>
+                          <a>{subcategory.name}</a>
+                        </Link>
                       </S.SubCategory>
                     );
                   })}
