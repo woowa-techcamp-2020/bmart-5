@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as S from './styled';
 import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import { useRouter } from 'next/router';
+import { Context } from '@commons/Context';
 
 type ProductArrType = Array<ProductType>;
 
@@ -20,6 +21,7 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
   products,
   headerType,
 }) => {
+  const { likeProducts, setLikeProducts } = useContext(Context);
   const router = useRouter();
 
   return (
@@ -41,8 +43,16 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
       )}
       <div className="wrapper">
         <div className="content">
-          {products.map((item: ProductType, idx) => {
-            return <ProductCard key={idx} item={item} className={'main'} />;
+          {products.map((item: ProductType, idx: number) => {
+            return (
+              <ProductCard
+                key={idx}
+                item={item}
+                likeProducts={likeProducts}
+                setLikeProducts={setLikeProducts}
+                className={'main'}
+              />
+            );
           })}
         </div>
       </div>
