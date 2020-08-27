@@ -22,7 +22,7 @@ export const CartIcon: React.FC<Props> = () => {
   return (
     <S.CartIcon onClick={onCartIconClickHandler}>
       <Icon icon={'Basket'} size={5}></Icon>
-      <S.Badge>{cartProducts.length}</S.Badge>
+      <S.Badge>{cartProducts.reduce((prev, cur) => prev + cur.count, 0)}</S.Badge>
     </S.CartIcon>
   );
 };
