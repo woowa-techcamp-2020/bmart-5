@@ -10,6 +10,7 @@ import { MaxCategoryCount } from '@utils/constants';
 import CategoryNavContainer from '@components/templates/CategoryNavContainer';
 import LogOut from '@components/atoms/LogOut';
 import { Context } from '@commons/Context';
+import ToastModal from '@components/modules/ToastModal';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -31,6 +32,7 @@ const MenuPage: NextPage<Props> = (props) => {
       <MenuNavContainer user={user} />
       <CategoryNavContainer categories={props.categories} />
       {user && <LogOut setUser={setUser} setToken={setToken} />}
+      <ToastModal />
     </Layout>
   );
 };

@@ -14,7 +14,7 @@ export const HomeNav = styled.div<{}>`
 
 export const TwoRowNav = styled.div`
   display: flex;
-  border: 2px solid #efefef;
+  border: 2px solid #dfdfdf;
   border-radius: 0.3rem;
   margin: 2rem;
   justify-content: space-evenly;
