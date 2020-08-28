@@ -46,7 +46,7 @@ curl --location --request POST ${url}/api/category/bulkcreate \
         },
         {
             "name": "배민추천",
-            "orderWeight": 290000
+            "orderWeight": 100000
         },
         {
             "name": "봉지",
