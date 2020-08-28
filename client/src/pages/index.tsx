@@ -53,7 +53,7 @@ const MainPage: NextPage<Props> = (props) => {
   const router = useRouter();
 
   const layoutProps: LayoutProps = {
-    title: 'Bmart Home',
+    title: 'Bmart 5팀 Home',
     headerProps: {
       main: { type: HeaderMainType.LOGO },
       right: [{ type: 'Bars', onClick: () => router.push('/menu') }],
@@ -139,10 +139,10 @@ const recommendProductsFetch = async (): Promise<Array<ProductType>> => {
   }
 };
 
-const highestOffProductsFetch = async (): Promise<Array<ProductType>> => {
-  let { status, message, result } = (
-    await API.get(`/product/highest-off/${TabViewContainerLimit}`)
-  ).data;
+export const highestOffProductsFetch = async (
+  limit: number = TabViewContainerLimit
+): Promise<Array<ProductType>> => {
+  let { status, message, result } = (await API.get(`/product/highest-off/${limit}`)).data;
 
   console.info(message);
   if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {

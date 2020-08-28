@@ -37,9 +37,8 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
       )}
       {headerType === 'filter' && (
         <ContainerHeader>
+          {/* TODO Filter 기능 구현 */}
           <div />
-          {/* TODO Filter 컴포넌트 구현 */}
-          Filter
         </ContainerHeader>
       )}
       <FadeIn>

@@ -84,9 +84,13 @@ export const MaxCategoryCount = 28;
 
 export const MaxSubCategoryCount = 127;
 
-export const CategoryPageContainerLimit = 100;
+export const CategoryPageMainContainerLimit = 100;
+
+export const CategoryPageSlideContainerLimit = 10;
 
 export const SubCategoryPageContainerLimit = 100;
+
+export const HighestOffProductsLimit = 100;
 
 export const CALL_NUMBER = '1600-0025';
 
