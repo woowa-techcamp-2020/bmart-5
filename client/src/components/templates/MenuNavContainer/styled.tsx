@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const MenuNavContainer = styled.div<{}>`
   background: #fff;
+  padding-top: 2rem;
 `;
 
 export const HomeNav = styled.div<{}>`
