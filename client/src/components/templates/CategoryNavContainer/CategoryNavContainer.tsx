@@ -26,6 +26,8 @@ export const CategoryNavContainer: React.FC<Props> = ({ categories, subCategorie
 
   const showSubCategory = (index: number) => {
     ref.current.forEach((i) => ((i as HTMLElement).style.background = '#fff'));
+    ref.current.forEach((i) => ((i as HTMLElement).style.fontWeight = 'normal'));
+    ref.current[index].style.fontWeight = '600';
     ref.current[index].style.background = '#dfdfdf';
     document
       .querySelectorAll('.show')
