@@ -2,6 +2,10 @@
 
 모바일 B마트 5팀 - 김명성, 이종구, 추연호
 
+
+## 시연
+![ezgif com-resize](https://user-images.githubusercontent.com/46251629/91518570-860bb080-e92b-11ea-94ea-3dbd0b1a267b.gif)
+
 ## 기술 스택
 
 ![title](https://img.shields.io/badge/-React-61DAFB?&logo=React&logoColor=white)
@@ -130,6 +134,3 @@ yarn dev
 ## 데이터베이스 ERD
 
 <img src="./assets/erd.png" alt="ERD" />
-
-## 시연
-https://im7.ezgif.com/tmp/ezgif-7-236ceafff75d.gif
