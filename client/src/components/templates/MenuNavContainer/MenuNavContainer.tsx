@@ -16,6 +16,7 @@ export const MenuNavContainer: React.FC<Props> = ({ user }) => {
             {'으로 가기 >'}
           </a>
         </Link>
+        {user && <span>{user?.username}님</span>}
       </S.HomeNav>
       {!user ? (
         <S.TwoRowNav>

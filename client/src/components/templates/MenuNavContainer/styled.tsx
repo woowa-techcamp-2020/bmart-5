@@ -6,6 +6,8 @@ export const MenuNavContainer = styled.div<{}>`
 `;
 
 export const HomeNav = styled.div<{}>`
+  display: flex;
+  justify-content: space-evenly;
   font-size: 2rem;
   & span {
     font-weight: 600;
