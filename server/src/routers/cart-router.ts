@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { CartController } from '../controllers';
+import passport from 'passport';
 
 const router = Router();
 
-router.post('/', CartController.insertCartProduct);
+router.post('/', passport.authenticate('jwt'), CartController.insertCartProduct);
 
-router.get('/user/:id', CartController.findByUserId);
+router.get('/purchase/all', passport.authenticate('jwt'), CartController.findAllPurchase);
+router.get('/user/id', passport.authenticate('jwt'), CartController.findByUserId);
 router.get('/:id', CartController.findByCartId);
 
 router.patch('/:id', CartController.updateCount);

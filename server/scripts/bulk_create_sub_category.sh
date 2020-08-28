@@ -13,7 +13,7 @@ yasik=$(($base_id+5))
 choco=$(($base_id+6))
 ice=$(($base_id+7))
 hair=$(($base_id+8))
-set_menu=$(($base_id+9))
+woowa_recommend=$(($base_id+9))
 bongji=$(($base_id+10))
 dosirak=$(($base_id+11))
 ramen=$(($base_id+12))
@@ -256,14 +256,14 @@ curl --location --request POST $url/api/sub_category/bulkcreate \
         \"categoryId\": $hair
     },
     {
-        \"name\": \"제대로 한끼 뭐 먹지?\",
+        \"name\": \"지금 뭐먹지?\",
         \"orderWeight\": 440000,
-        \"categoryId\": $set_menu
+        \"categoryId\": $woowa_recommend
     },
     {
-        \"name\": \"꿀조합 뭐 먹지?\",
+        \"name\": \"지금 필요한 생필품\",
         \"orderWeight\": 450000,
-        \"categoryId\": $set_menu
+        \"categoryId\": $woowa_recommend
     },
     {
         \"name\": \"시간 없는데 뭐 먹지?\",

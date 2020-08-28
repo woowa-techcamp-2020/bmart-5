@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
 import User from './user';
+import REGEX from '@shared/validate';
 
 class LoginProvider extends Model {
   public id!: string;
@@ -21,6 +22,9 @@ LoginProvider.init(
     email: {
       type: DataTypes.STRING(100),
       allowNull: false,
+      validate: {
+        is: REGEX.EMAIL_REGEX,
+      },
     },
     provider: {
       type: DataTypes.STRING(45),

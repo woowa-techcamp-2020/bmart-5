@@ -1,7 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../modules/database';
-import LoginProvider from './login-provider';
 import Cart from './cart';
+import Like from './like';
+import REGEX from '@shared/validate';
 
 class User extends Model {
   public id!: number;
@@ -29,6 +30,9 @@ User.init(
       type: DataTypes.STRING(100),
       unique: true,
       allowNull: false,
+      validate: {
+        is: REGEX.EMAIL_REGEX,
+      },
     },
     imgUrl: {
       type: DataTypes.STRING(200),
@@ -47,6 +51,12 @@ User.hasMany(Cart, {
   sourceKey: 'id',
   foreignKey: { name: 'userId', allowNull: false },
   as: 'carts',
+});
+
+User.hasMany(Like, {
+  sourceKey: 'id',
+  foreignKey: { name: 'userId', allowNull: false },
+  as: 'likes',
 });
 
 export default User;

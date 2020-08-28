@@ -215,38 +215,13 @@
     "categoryId": 9
   },
   {
-    "name": "제대로 한끼 뭐 먹지?",
+    "name": "지금 뭐먹지?",
     "orderWeight": 440000,
     "categoryId": 10
   },
   {
-    "name": "꿀조합 뭐 먹지?",
+    "name": "지금 필요한 생필품",
     "orderWeight": 450000,
-    "categoryId": 10
-  },
-  {
-    "name": "시간 없는데 뭐 먹지?",
-    "orderWeight": 460000,
-    "categoryId": 10
-  },
-  {
-    "name": "국물 땡기는데 뭐 먹지?",
-    "orderWeight": 470000,
-    "categoryId": 10
-  },
-  {
-    "name": "아침 가볍게 뭐 먹지?",
-    "orderWeight": 480000,
-    "categoryId": 10
-  },
-  {
-    "name": "안주로 뭐 먹지?",
-    "orderWeight": 490000,
-    "categoryId": 10
-  },
-  {
-    "name": "간식으로 뭐 먹지?",
-    "orderWeight": 500000,
     "categoryId": 10
   },
   {
@@ -282,12 +257,12 @@
   {
     "name": "아침 봉다리",
     "orderWeight": 570000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "음료 봉다리",
     "orderWeight": 580000,
-    "categoryId": 11
+    "categoryId": 12
   },
   {
     "name": "즉석밥",

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ToastModal = styled.div<{}>`
   display: none;
-  font-size: 16px;
+  font-size: 2rem;
   z-index: 2;
 `;
 
@@ -19,6 +19,12 @@ export const ModalContainer = styled.div`
   z-index: 1500;
   opacity: 1;
   border-radius: 0.5rem 0.5rem 0 0;
+
+  @media all and (max-width: 1024px) {
+    & {
+      max-width: 64rem;
+    }
+  }
 `;
 
 export const ModalBG = styled.div`
@@ -28,12 +34,12 @@ export const ModalBG = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 11;
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #dfdfdf;
 
   & .title {
     text-align: center;
@@ -70,21 +76,26 @@ export const ModalContent = styled.div`
   }
 
   & .item-detail div:nth-child(1) {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
 
   & .item-detail div:nth-child(2) {
     margin: 0.5rem 0;
     color: #afafaf;
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 
   & .item-detail div:nth-child(3) {
     margin-top: auto;
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 
   & .counter {
-    margin: auto 2rem auto auto;
+    margin: auto 2rem auto 1rem;
   }
 `;

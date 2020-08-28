@@ -12,7 +12,7 @@ const googleCredentials = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
   callback: process.env.GOOGLE_CALLBACK || '',
 };
-const tokenExpiresIn = '30m';
+const tokenExpiresIn = '2h';
 
 const databaseConfig = {
   database: env === 'production' ? (process.env.PROD_DB as string) : (process.env.DEV_DB as string),
@@ -23,6 +23,7 @@ const databaseConfig = {
 
 const migrate = process.env.MIGRATE === 'true' ? true : false;
 const parserLimit = 5000000;
+const apiEndPoint = process.env.API_END_POINT || 'http://localhost';
 
 export {
   env,
@@ -34,4 +35,5 @@ export {
   databaseConfig,
   migrate,
   parserLimit,
+  apiEndPoint,
 };

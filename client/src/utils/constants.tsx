@@ -1,27 +1,23 @@
 import getConfig from 'next/config';
 
-export enum IconType {
-  ARROW_FORWARD = 'ArrowForward',
-  ARROW_LEFT = 'ArrowLeft',
-  BARS = 'Bars',
-  BASKET = 'Basket',
-  CLOSE = 'Close',
-  HEART = 'Heart',
-  NOTIFICATION = 'Notification',
-  REFRESH = 'Refresh',
-  REG_HEART = 'RegHeart',
-  SEARCH = 'Search',
-  'ArrowForward' = ARROW_FORWARD,
-  'ArrowLeft' = ARROW_LEFT,
-  'Bars' = BARS,
-  'Basket' = BASKET,
-  'Close' = CLOSE,
-  'Heart' = HEART,
-  'Notification' = NOTIFICATION,
-  'Refresh' = REFRESH,
-  'RegHeart' = REG_HEART,
-  'Search' = SEARCH,
-}
+export type IconType =
+  | 'ArrowForward'
+  | 'ArrowLeft'
+  | 'ArrowUP'
+  | 'ArrowDown'
+  | 'Bars'
+  | 'Basket'
+  | 'Close'
+  | 'Heart'
+  | 'Notification'
+  | 'Refresh'
+  | 'RegHeart'
+  | 'Search'
+  | 'Plus'
+  | 'RiFileListLine'
+  | 'VscSignIn'
+  | 'VscSignOut'
+  | 'HiOutlineUserAdd';
 
 export enum HeaderMainType {
   LOGO = 'Logo',
@@ -60,16 +56,46 @@ const { publicRuntimeConfig } = getConfig();
 
 export const env = publicRuntimeConfig.NODE_ENV || 'development';
 
-export const baseURL = publicRuntimeConfig.API_END_POINT || 'http://localhost:3000/api';
+export const baseURL =
+  `${publicRuntimeConfig.API_END_POINT}:${publicRuntimeConfig.API_PORT}/api` ||
+  'http://localhost:3000/api';
 
-export const LatestProductsLimit = 9;
+export const SlidableContainerLimit = 10;
 
-export const HighestOffProductsLimit = 4;
+export const TabViewContainerLimit = 4;
+
+export const FetchableContainerLimit = 6;
 
 export const OrderedCategoriesLimit = 9;
 
-export const TabViewProductsCount = 4;
+export const MainCategoryContainerLimit = 10;
 
 export const userId = 1;
 
-export const MainBannerCount = 5;
+export const deliveryFee = 1500;
+
+export const deliveryDiscount = 100;
+
+export const CarouselBannerCount = 5;
+
+export const MaxSubCategoryLimitByCategoryId = 9;
+
+export const MaxCategoryCount = 28;
+
+export const MaxSubCategoryCount = 127;
+
+export const CategoryPageMainContainerLimit = 100;
+
+export const CategoryPageSlideContainerLimit = 10;
+
+export const SubCategoryPageContainerLimit = 100;
+
+export const HighestOffProductsLimit = 100;
+
+export const CALL_NUMBER = '1600-0025';
+
+export const SERVICE_EMAIL = 'bmart_together@woowahan.com';
+
+export const WhatEatNowSubCategoryId = 44;
+
+export const NowNeedNecessarySubCategoryId = 45;

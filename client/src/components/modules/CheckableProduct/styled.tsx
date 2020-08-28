@@ -1,34 +1,49 @@
 import styled from 'styled-components';
 export { Label, Input, Span } from '../CheckListHeader/styled';
 
+export const ValidationText = styled.div`
+  font-size: 1.2rem;
+  color: #ff070b;
+  margin auto auto 0 0;
+`;
+
 export const CheckableProduct = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const ProductInfo = styled.div`
-  font-size: 1rem;
-`;
-
 export const InfoTitle = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  margin: 10px 16px;
+  font-size: 2rem;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 1rem;
 `;
 
 export const InfoNameRow = styled.div`
   display: flex;
+  font-size: 2rem;
   flex-direction: row;
   justify-content: space-between;
-  margin: 5px 16px;
+  margin: 0.5rem 1rem;
 `;
 
-export const ChkBoxSection = styled.span``;
+export const ChkBoxSection = styled.div`
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 39rem;
+  text-overflow: ellipsis;
+`;
 
 export const InfoProductGrid = styled.div`
   display: grid;
   grid-template-columns: 33% auto;
-  margin: 5px 16px 16px 16px;
+  margin: 0.5rem 1rem 1rem 1rem;
 `;
 
 export const ProductImg = styled.img`
@@ -41,23 +56,24 @@ export const PriceAndCount = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0px 10px;
+  margin: 1rem;
+  font-size: 2rem;
 `;
 
 export const GrayPrice = styled.div`
   color: gray;
-  margin-bottom: 3px;
+  margin-bottom: 0.3rem;
 `;
 
 export const RawPriceSpan = styled.span`
   color: lightgray;
   text-decoration: line-through;
-  margin-right: 5px;
+  margin-right: 0.5rem;
 `;
 
 export const PriceSpan = styled.span`
   font-weight: 600;
-  font-size: 18px;
+  font-size: 2rem;
 `;
 
 export const CounterSactor = styled.div`

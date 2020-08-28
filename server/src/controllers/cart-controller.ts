@@ -4,18 +4,20 @@ import HttpStatus from 'http-status';
 import { Cart, CartProduct, Product } from '../models';
 import { JsonResponse } from '../modules/utils';
 import CustomError from '../modules/exception/custom-error';
+import { TokenUser } from './auth-controller';
 
 //추후에 토큰의 유저 정보를 이용한 api로 수정 필요
 
 const insertCartProduct = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
+  const user = req.user as TokenUser;
 
   try {
     const cart = await Cart.findOne({
       attributes: ['id'],
       where: {
         [Op.and]: [
-          { userId: body.userId },
+          { userId: user.id },
           {
             purchasedAt: {
               [Op.is]: null,
@@ -28,7 +30,6 @@ const insertCartProduct = async (req: Request, res: Response, next: NextFunction
     if (!cart)
       throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with userId: ${body.userId}`, '');
 
-    delete body.userId;
     body.cartId = cart.id;
     const cartProduct = await CartProduct.create(body);
 
@@ -43,15 +44,14 @@ const insertCartProduct = async (req: Request, res: Response, next: NextFunction
 };
 
 const findByUserId = async (req: Request, res: Response, next: NextFunction) => {
-  const { params } = req;
-  const paramId = parseInt(params.id);
+  const user = req.user as TokenUser;
 
   try {
     const cart = await Cart.findOne({
       attributes: ['id'],
       where: {
         [Op.and]: [
-          { userId: paramId },
+          { userId: user.id },
           {
             purchasedAt: {
               [Op.is]: null,
@@ -60,9 +60,11 @@ const findByUserId = async (req: Request, res: Response, next: NextFunction) => 
         ],
       },
     });
-    if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${paramId}`, '');
-    req.params.id = cart.id.toString();
-    findByCartId(req, res, next);
+    if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${user.id}`, '');
+
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `find cart by userId(${user.id})`, cart));
   } catch (err) {
     next(err);
   }
@@ -128,11 +130,11 @@ const purchase = async (req: Request, res: Response, next: NextFunction) => {
     let cart = await Cart.findByPk(paramId);
     if (!cart) throw new CustomError(HttpStatus.BAD_REQUEST, `no cart with id ${paramId}`, '');
     cart.update({ purchasedAt: now });
-    Cart.create({ userId: cart.getDataValue('userId') });
+    const newCart = await Cart.create({ userId: cart.getDataValue('userId') });
 
     res.status(HttpStatus.OK).json(
       JsonResponse(HttpStatus.OK, `cart purchased: ${paramId}`, {
-        completed: true,
+        cartId: newCart.id,
       })
     );
   } catch (err) {
@@ -181,6 +183,55 @@ const softDeleteCart = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
+const findAllPurchase = async (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user as TokenUser;
+  try {
+    const cart = await Cart.findAll({
+      attributes: ['id', 'purchasedAt'],
+      include: [
+        {
+          model: CartProduct,
+          as: 'cartProducts',
+          attributes: ['id', 'count', 'createdAt'],
+          where: {
+            deletedAt: {
+              [Op.is]: null,
+            },
+          },
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              attributes: ['id', 'name', 'price', 'discount', 'createdAt'],
+            },
+          ],
+        },
+      ],
+      where: {
+        [Op.and]: [
+          { userId: user.id },
+          {
+            deletedAt: {
+              [Op.is]: null,
+            },
+          },
+          {
+            purchasedAt: {
+              [Op.not]: null,
+            },
+          },
+        ],
+      },
+    });
+
+    res
+      .status(HttpStatus.OK)
+      .json(JsonResponse(HttpStatus.OK, `found all purchase products: ${cart.length}`, cart));
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   insertCartProduct,
   findByUserId,
@@ -189,4 +240,5 @@ export default {
   purchase,
   softDeleteCartProduct,
   softDeleteCart,
+  findAllPurchase,
 };

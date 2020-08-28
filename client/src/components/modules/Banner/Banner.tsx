@@ -1,58 +1,135 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useInterval } from '@utils/customHooks';
 import * as S from './styled';
-import { MainBannerCount } from '@utils/constants';
+
+const smallBannerList = [
+  { src: `/assets/images/banners/small/banner-small-1.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-2.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-3.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-4.jpg`, href: '#' },
+  { src: `/assets/images/banners/small/banner-small-5.jpg`, href: '#' },
+];
+
+const length = smallBannerList.length;
 
 export const Banner = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const delay = 2000;
-  const [isRunning, setIsRunning] = useState(true);
-  const slideRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(1);
 
-  useEffect(() => {
-    const slideList = slideRef.current;
-    if (!slideList) return;
+  const BannerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentsRef = useRef<Array<HTMLDivElement>>([]);
+  const indicatorsRef = useRef<Array<HTMLDivElement>>([]);
 
-    slideList.addEventListener('touchstart', () => {
-      setIsRunning(false);
+  const Banner = BannerRef.current as HTMLDivElement;
+  const contents = contentsRef.current as HTMLDivElement[];
+  const indicators = indicatorsRef.current as HTMLDivElement[];
+
+  const initBannerWidth = () => {
+    const container = containerRef.current as HTMLDivElement;
+    container.style.scrollBehavior = 'initial';
+    container.scrollLeft += innerWidth;
+  };
+
+  const removeUselessIndicators = () => {
+    indicators[0].remove();
+    indicators[length + 1].remove();
+  };
+
+  const createIntersectionObserver = () => {
+    const BannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        if (contents.indexOf(entry.target as HTMLDivElement) === length + 1) {
+          setCurrentSlide(1);
+          return;
+        }
+        if (contents.indexOf(entry.target as HTMLDivElement) === 0) {
+          setCurrentSlide(length);
+          return;
+        }
+        setCurrentSlide(() => contents.indexOf(entry.target as HTMLDivElement));
+      });
+    };
+
+    const options = {
+      root: Banner,
+      threshold: 0.9,
+    };
+
+    const observer = new IntersectionObserver(BannerObserveHandler, options);
+
+    contents.forEach((content) => {
+      observer.observe(content);
     });
-    slideList.addEventListener('touchend', () => {
-      setIsRunning(true);
-    });
-  });
+  };
 
+  const scrollEventHandler = () => {
+    const container = containerRef.current as HTMLDivElement;
+    const { scrollWidth, scrollLeft } = container;
+
+    if (scrollWidth - innerWidth - scrollLeft <= 0) {
+      container.style.scrollBehavior = 'initial';
+      container.scrollLeft = innerWidth;
+      container.style.scrollBehavior = 'smooth';
+    }
+    if (scrollLeft <= 0) {
+      container.style.scrollBehavior = 'initial';
+      container.scrollLeft = scrollWidth - 2 * innerWidth;
+      container.style.scrollBehavior = 'smooth';
+    }
+  };
+
+  // Initial Setting
   useEffect(() => {
-    const slideList = slideRef.current;
-    if (!slideList) return;
+    initBannerWidth();
+    removeUselessIndicators();
+    createIntersectionObserver();
+  }, []);
 
-    slideList.style.transform = `translateX(-${100 * currentSlide}%)`;
+  // Set Indicator
+  useEffect(() => {
+    if (currentSlide === 0) return;
+    if (currentSlide === length + 1) return;
+
+    indicators.forEach((indicator) => {
+      indicator.classList.remove('current');
+    });
+    indicators[currentSlide].classList.add('current');
   }, [currentSlide]);
 
-  useInterval(
-    () => {
-      if (currentSlide === MainBannerCount - 1) {
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
-    },
-    isRunning ? delay : null
-  );
+  const bannerList =
+    length > 1
+      ? [smallBannerList[length - 1], ...smallBannerList, smallBannerList[0]]
+      : smallBannerList;
 
   return (
-    <S.Banner>
-      <S.SlideBox className="slide_box">
-        <S.SlideList className="slide_list" ref={slideRef}>
-          {Array.from({ length: MainBannerCount }, (_, idx) => (
-            <div className="slide_content">
-              <img
-                className="banner-image"
-                src={`./assets/images/banners/big/banner-big-${idx + 1}.gif`}
-              />
-            </div>
-          ))}
-        </S.SlideList>
-      </S.SlideBox>
+    <S.Banner ref={BannerRef}>
+      <S.SlideList ref={containerRef} onScroll={scrollEventHandler}>
+        {bannerList.map((banner, idx) => (
+          <S.SlideContent
+            key={idx}
+            className="slide_content"
+            ref={(el: HTMLDivElement) => {
+              contentsRef.current[idx] = el;
+            }}
+          >
+            <a href={banner.href}>
+              <img className="banner-image" src={banner.src} />
+            </a>
+          </S.SlideContent>
+        ))}
+      </S.SlideList>
+      <S.IndicatorContainer>
+        {Array.from({ length: bannerList.length }, (_, idx) => (
+          <S.Indicator
+            key={idx}
+            ref={(el: HTMLDivElement) => {
+              indicatorsRef.current[idx] = el;
+            }}
+          />
+        ))}
+      </S.IndicatorContainer>
     </S.Banner>
   );
 };

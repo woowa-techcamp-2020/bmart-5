@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Router from 'next/router';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import Logo from '@components/atoms/Logo';
@@ -10,33 +10,28 @@ export type MainType = {
   content?: string;
 };
 
+export type RightBtnType = {
+  type: IconType;
+  onClick?: () => void;
+};
+
 export type Props = {
   left?: IconType;
   main?: MainType;
-  right?: Array<string>;
-};
-
-const onClickRightBtn = () => {
-  alert('right btn');
+  right?: Array<RightBtnType>;
 };
 
 export const Header: React.FC<Props> = (props) => {
   return (
     <S.Header className="header">
       <div className="left-wrap">
-        {props.left && (
-          <Link href="/">
-            <a>
-              <Icon icon={props.left} size={1.1} />
-            </a>
-          </Link>
-        )}
+        {props.left && <Icon icon={props.left} size={2.2} onClick={() => Router.back()} />}
       </div>
       <div className="main-wrap">
         {props.main && (
           <>
             {props.main.type === HeaderMainType.LOGO ? (
-              <Logo alt="logo" src="logo" size={4} />
+              <Logo alt="logo" src="logo" size={8} />
             ) : props.main.type === HeaderMainType.SEARCH_BAR ? (
               `--검색 인풋 구현--`
             ) : (
@@ -48,8 +43,8 @@ export const Header: React.FC<Props> = (props) => {
       <div className="right-wrap">
         {props.right && (
           <>
-            {props.right.map((iconType) => (
-              <Icon icon={iconType} size={1.1} onClick={onClickRightBtn} />
+            {props.right.map((iconType, idx) => (
+              <Icon key={idx} icon={iconType.type} size={2.2} onClick={iconType.onClick} />
             ))}
           </>
         )}

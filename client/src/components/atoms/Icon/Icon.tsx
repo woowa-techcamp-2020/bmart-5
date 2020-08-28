@@ -1,47 +1,69 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import * as S from './styled';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { FaArrowLeft, FaSearch, FaBars, FaRegHeart, FaHeart, FaUndoAlt } from 'react-icons/fa';
 import { IoMdCloseCircleOutline, IoIosArrowForward } from 'react-icons/io';
-import { RiShoppingBagLine } from 'react-icons/ri';
+import {
+  RiShoppingBagLine,
+  RiArrowUpSLine,
+  RiArrowDownSLine,
+  RiFileListLine,
+} from 'react-icons/ri';
+import { FiPlus } from 'react-icons/fi';
+import { VscSignIn, VscSignOut } from 'react-icons/vsc';
 import { IconType } from '@utils/constants';
+import { HiOutlineUserAdd } from 'react-icons/hi';
 
 export type Props = {
-  icon: string;
+  icon: IconType;
   size: number;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent) => void;
 };
 
-const findIcon = (iconName: string) => {
-  switch (IconType[iconName]) {
-    case IconType.ARROW_FORWARD:
+const findIcon = (icon: IconType) => {
+  switch (icon) {
+    case 'ArrowForward':
       return <IoIosArrowForward />;
-    case IconType.ARROW_LEFT:
+    case 'ArrowLeft':
       return <FaArrowLeft />;
-    case IconType.BARS:
+    case 'ArrowUP':
+      return <RiArrowUpSLine />;
+    case 'ArrowDown':
+      return <RiArrowDownSLine />;
+    case 'Bars':
       return <FaBars />;
-    case IconType.CLOSE:
+    case 'Close':
       return <IoMdCloseCircleOutline />;
-    case IconType.SEARCH:
+    case 'Search':
       return <FaSearch />;
-    case IconType.BASKET:
+    case 'Basket':
       return <RiShoppingBagLine />;
-    case IconType.REG_HEART:
+    case 'RegHeart':
       return <FaRegHeart />;
-    case IconType.HEART:
+    case 'Heart':
       return <FaHeart />;
-    case IconType.REFRESH:
+    case 'Refresh':
       return <FaUndoAlt />;
-    case IconType.NOTIFICATION:
+    case 'Notification':
       return <AiOutlineNotification />;
+    case 'Plus':
+      return <FiPlus />;
+    case 'RiFileListLine':
+      return <RiFileListLine />;
+    case 'VscSignIn':
+      return <VscSignIn />;
+    case 'VscSignOut':
+      return <VscSignOut />;
+    case 'HiOutlineUserAdd':
+      return <HiOutlineUserAdd />;
     default:
       return;
   }
 };
 
-export const Icon: React.FC<Props> = ({ icon, onClick, ...props }) => {
+export const Icon: React.FC<Props> = ({ icon, size, onClick }) => {
   return (
-    <S.Icon role={icon} onClick={onClick} {...props}>
+    <S.Icon role={icon} size={size} onClick={onClick}>
       {findIcon(icon)}
     </S.Icon>
   );

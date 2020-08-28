@@ -9,115 +9,115 @@ curl --location --request POST ${url}/api/category/bulkcreate \
 --header 'Content-Type: application/json' \
 --data-raw '[
         {
-            "name": "salad",
+            "name": "과일·샐러드",
             "orderWeight": 10000
         },
         {
-            "name": "egg",
+            "name": "정육·수산·계란",
             "orderWeight": 20000
         },
         {
-            "name": "mealkit",
+            "name": "밀키트",
             "orderWeight": 30000
         },
         {
-            "name": "milk",
+            "name": "우유·유제품",
             "orderWeight": 40000
         },
         {
-            "name": "bread",
+            "name": "빵·시리얼·잼",
             "orderWeight": 50000
         },
         {
-            "name": "yasik",
+            "name": "분식·야식",
             "orderWeight": 60000
         },
         {
-            "name": "choco",
+            "name": "과자·초콜릿",
             "orderWeight": 70000
         },
         {
-            "name": "ice",
+            "name": "아이스크림",
             "orderWeight": 80000
         },
         {
-            "name": "hair",
+            "name": "헤어·바디·세안",
             "orderWeight": 90000
         },
         {
-            "name": "set_menu",
+            "name": "배민추천",
             "orderWeight": 100000
         },
         {
-            "name": "bongji",
+            "name": "봉지",
             "orderWeight": 110000
         },
         {
-            "name": "dosirak",
+            "name": "도시락",
             "orderWeight": 120000
         },
         {
-            "name": "ramen",
+            "name": "라면",
             "orderWeight": 130000
         },
         {
-            "name": "soup",
+            "name": "국",
             "orderWeight": 140000
         },
         {
-            "name": "cook",
+            "name": "요리",
             "orderWeight": 150000
         },
         {
-            "name": "water",
+            "name": "물",
             "orderWeight": 160000
         },
         {
-            "name": "sauce",
+            "name": "소스",
             "orderWeight": 170000
         },
         {
-            "name": "ham",
+            "name": "햄",
             "orderWeight": 180000
         },
         {
-            "name": "healthy",
+            "name": "건강",
             "orderWeight": 190000
         },
         {
-            "name": "detergent",
+            "name": "세제",
             "orderWeight": 200000
         },
         {
-            "name": "tissue",
+            "name": "티슈",
             "orderWeight": 210000
         },
         {
-            "name": "beauty",
+            "name": "뷰티",
             "orderWeight": 220000
         },
         {
-            "name": "clean",
+            "name": "청소",
             "orderWeight": 230000
         },
         {
-            "name": "fashion",
+            "name": "패션",
             "orderWeight": 240000
         },
         {
-            "name": "kitchen",
+            "name": "주방",
             "orderWeight": 250000
         },
         {
-            "name": "pet",
+            "name": "반려동물",
             "orderWeight": 260000
         },
         {
-            "name": "woowa_supply",
+            "name": "배민문방구",
             "orderWeight": 270000
         },
         {
-            "name": "supply",
+            "name": "문구",
             "orderWeight": 280000
         }
     ]'

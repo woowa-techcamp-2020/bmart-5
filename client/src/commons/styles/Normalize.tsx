@@ -1,19 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
 const Normalize = createGlobalStyle`
+  html, body, #__next {
+    min-height: 100vh;
+  }
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     background: #efefef;
   }
 
-  @media all and (min-width:1024px) {
+  @media (min-width:768px) and all {
       html {
         font-size: 16px;
       }
   }
 
-  @media(min-width:320px) and (max-width:768px)  {
+  @media(max-width:767px)  {
     html {
       font-size: 8px;
     }
@@ -21,9 +24,21 @@ const Normalize = createGlobalStyle`
 
   body {
     margin: 0 auto;
-    max-width: 48rem;
-    background: #fff;
+    max-width: 48rem; 
   }
+
+  @media all and (max-width:1024px) {
+    body {
+      max-width: 100%;
+    }
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    background: #dfdfdf;
+  }
+
   main {
     display: block;
   }
@@ -39,9 +54,6 @@ const Normalize = createGlobalStyle`
   pre {
     font-family: monospace, monospace;
     font-size: 1em;
-  }
-  a {
-    background-color: transparent;
   }
   abbr[title] {
     border-bottom: none;
@@ -165,6 +177,8 @@ const Normalize = createGlobalStyle`
   [hidden] {
     display: none;
   }
+
+  a:link, a:visited, a:hover { color: black; text-decoration: none;}
 `;
 
 export default Normalize;
