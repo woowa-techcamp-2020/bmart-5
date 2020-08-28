@@ -46,7 +46,7 @@ export const TotalPriceInfo: React.FC<Props> = (props) => {
       </S.CautionRow>
       <S.SubmitRow>
         <BottomBtn
-          name={`${props.totalCount} 배달 주문하기`}
+          name={`${props.totalCount}개 배달 주문하기`}
           tag={`${props.totalPrice.toLocaleString()}원 `}
           onClick={async (event: MouseEvent) => {
             event.stopPropagation();
