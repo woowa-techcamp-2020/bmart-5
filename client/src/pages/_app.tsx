@@ -12,7 +12,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   const router = useRouter();
   const token = getCookie('authorization');
 
-  Router.events.on('routeChangeStart', (url) => NProgress.start());
+  Router.events.on('routeChangeStart', () => NProgress.start());
   Router.events.on('routeChangeComplete', () => NProgress.done());
   Router.events.on('routeChangeError', () => NProgress.done());
 
