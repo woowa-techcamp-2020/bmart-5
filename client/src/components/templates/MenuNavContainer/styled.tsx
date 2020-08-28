@@ -9,14 +9,15 @@ export const HomeNav = styled.div<{}>`
   & span {
     font-weight: 600;
   }
-  margin: 2rem;
+  padding: 1rem;
 `;
 
 export const TwoRowNav = styled.div`
   display: flex;
   border: 2px solid #dfdfdf;
   border-radius: 0.3rem;
-  margin: 2rem;
+  margin: 2rem 2rem 0 2rem;
+  padding-bottom: 1rem;
   justify-content: space-evenly;
 `;
 

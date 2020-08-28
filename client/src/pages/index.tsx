@@ -56,10 +56,7 @@ const MainPage: NextPage<Props> = (props) => {
     title: 'Bmart Home',
     headerProps: {
       main: { type: HeaderMainType.LOGO },
-      right: [
-        { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.push('/menu') },
-      ],
+      right: [{ type: 'Bars', onClick: () => router.push('/menu') }],
     },
   };
 
