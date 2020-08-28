@@ -16,6 +16,7 @@ export const CartIcon = styled.div<{}>`
   & i {
     color: white;
   }
+  z-index: 100;
 `;
 
 export const Badge = styled.div<{}>`

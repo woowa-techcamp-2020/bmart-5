@@ -16,7 +16,7 @@ const Normalize = createGlobalStyle`
       }
   }
 
-  @media(min-width:320px) and (max-width:767px)  {
+  @media(max-width:767px)  {
     html {
       font-size: 8px;
     }
