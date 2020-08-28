@@ -16,6 +16,8 @@ export const Header = styled.header`
   align-items: center;
   padding: 2rem 0;
   background-color: white;
+  color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 2px 10px;
 
   & > div.left-wrap {
     display: flex;
