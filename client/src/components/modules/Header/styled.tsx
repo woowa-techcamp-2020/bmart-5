@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
   display: flex;
   min-height: 4rem;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 0;
   background-color: white;
 
   & > div.left-wrap {
     display: flex;
     justify-content: space-between;
+    margin-left: 2rem;
   }
   & > div.main-wrap {
     display: flex;
@@ -26,7 +29,7 @@ export const Header = styled.header`
     display: flex;
     justify-content: space-between;
     & > :last-child {
-      margin-left: 2rem;
+      margin-right: 2rem;
     }
   }
 `;

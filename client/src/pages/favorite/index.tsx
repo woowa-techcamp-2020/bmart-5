@@ -30,10 +30,7 @@ const FavoritePage: NextPage<Props> = () => {
     headerProps: {
       left: 'ArrowLeft',
       main: { type: HeaderMainType.TEXT, content: '찜한상품' },
-      right: [
-        { type: 'Search', onClick: () => alert('검색') },
-        { type: 'Bars', onClick: () => router.push('/menu') },
-      ],
+      right: [{ type: 'Bars', onClick: () => router.push('/menu') }],
     },
   };
 

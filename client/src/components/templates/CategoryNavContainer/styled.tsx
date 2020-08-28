@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CategoryNavContainer = styled.div<{}>`
   background: #fff;
-  margin: 1rem 0;
+  padding: 1rem 0;
   flex-grow: 1;
 `;
 
