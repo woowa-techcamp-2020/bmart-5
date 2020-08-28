@@ -1,22 +1,39 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import * as S from './styled';
 import Icon from '@components/atoms/Icon';
 import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import { Context } from '@commons/Context';
-
-type ProductArrType = Array<ProductType>;
+import API from '@utils/API';
+import HttpStatus from 'http-status';
+import {
+  FetchableContainerLimit,
+  WhatEatNowSubCategoryId,
+  NowNeedNecessarySubCategoryId,
+} from '@utils/constants';
 
 type Props = {
   title: string;
-  products: ProductArrType;
 };
 
-export const FetchableContainer: React.FC<Props> = ({ title, products }) => {
+export const FetchableContainer: React.FC<Props> = ({ title }) => {
   const { likeProducts, setLikeProducts } = useContext(Context);
-  const totalSlides = Math.floor(products.length / 6);
-  const [currentSlide] = useState(1);
+  const [products, setProducts] = useState<Array<ProductType>>([]);
+  const subCategoryId =
+    title === '지금 뭐 먹지?' ? WhatEatNowSubCategoryId : NowNeedNecessarySubCategoryId;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setProducts(await fetchableContainerFetch(subCategoryId));
+    };
+
+    fetchData();
+  }, []);
+
+  const onFetchButtonClickHandler = async () => {
+    setProducts(await fetchableContainerFetch(subCategoryId));
+  };
 
   return (
     <S.FetchableContainer>
@@ -35,16 +52,27 @@ export const FetchableContainer: React.FC<Props> = ({ title, products }) => {
             );
           })}
         </div>
-        <div className="fetch-button">
+        <div className="fetch-button" onClick={onFetchButtonClickHandler}>
           <Icon icon={'Refresh'} size={2} />
           <span className="title">{title}</span>
           <span>다른 상품 보기 </span>
-          <span className="page-count">
-            <span className="current-count">{currentSlide}</span>/
-            <span className="total-count">{totalSlides}</span>
-          </span>
         </div>
       </div>
     </S.FetchableContainer>
   );
+};
+
+const fetchableContainerFetch = async (categoryId: number): Promise<Array<ProductType>> => {
+  let { status, message, result } = (
+    await API.get(`/product/sub/${categoryId}/${FetchableContainerLimit}`)
+  ).data;
+
+  console.info(message);
+  if (status === HttpStatus.OK || status === HttpStatus.NOT_MODIFIED) {
+    const products = [...result];
+    return products;
+  } else {
+    console.error(`not defined status code: ${status}`);
+    return [];
+  }
 };

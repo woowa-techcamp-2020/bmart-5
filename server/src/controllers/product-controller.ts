@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 import HttpStatus from 'http-status';
 import { Product } from '../models';
 import { JsonResponse } from '../modules/utils';
@@ -10,6 +10,45 @@ import CustomError from '../modules/exception/custom-error';
  * 중복된 코드가 많아 리펙토링이 가능합니다.
  * 그대로 둬서 네이밍에 가치를 둬야하는지 고민해봐야합니다.
  */
+
+const findRandom = async (req: Request, res: Response, next: NextFunction) => {
+  const { params } = req;
+  const paramLimit = parseInt(params.limit);
+
+  try {
+    const products = await Product.findAll({
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'content',
+        'discount',
+        'clicks',
+        'imgUrl',
+        'subCategoryId',
+        'outOfStockAt',
+      ],
+      where: {
+        deletedAt: {
+          [Op.is]: null,
+        },
+      },
+      limit: paramLimit,
+      order: Sequelize.literal('rand()'),
+    });
+    res
+      .status(HttpStatus.OK)
+      .json(
+        JsonResponse(
+          HttpStatus.OK,
+          `find product list by random with limit: ${paramLimit}`,
+          products
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
+};
 
 const findLatest = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
@@ -171,7 +210,7 @@ const findBySubCategoryId = async (req: Request, res: Response, next: NextFuncti
         ],
       },
       limit: paramLimit,
-      order: [['createdAt', 'DESC']],
+      order: Sequelize.literal('rand()'),
     });
     res
       .status(HttpStatus.OK)
@@ -292,6 +331,7 @@ const bulkCreate = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
+  findRandom,
   findLatest,
   findHighestOff,
   findHottest,

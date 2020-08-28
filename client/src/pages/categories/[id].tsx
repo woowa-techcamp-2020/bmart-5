@@ -2,11 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
-import {
-  HeaderMainType,
-  MaxCategoryCount,
-  MaxProductsCountByCategoryPageContainer,
-} from '@utils/constants';
+import { HeaderMainType, MaxCategoryCount, CategoryPageContainerLimit } from '@utils/constants';
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
@@ -23,6 +19,7 @@ import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import * as S from '@commons/styles/ProductsContainerStyled';
 import SubCategoryNavContainer from '@components/templates/SubCategoryNavContainer';
+import CartIcon from '@components/modules/CartIcon';
 
 type Props = {
   id: number;
@@ -59,6 +56,7 @@ const CartegoryPage: NextPage<Props> = (props) => {
       <S.ProductsContainerStyle>
         <ProductsByCategoryContainer products={props.products} headerType="filter" />
       </S.ProductsContainerStyle>
+      <CartIcon />
       <ToastModal />
     </Layout>
   );
@@ -78,10 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = Number(params?.id);
   const name = (await categoryInfoFetch(id))?.name;
   const subCategories = await subCategoriesByCategoryFetch(id);
-  const products = await categoryProductsFetch(
-    subCategories,
-    MaxProductsCountByCategoryPageContainer
-  );
+  const products = await categoryProductsFetch(subCategories, CategoryPageContainerLimit);
 
   return { props: { id, name, subCategories, products } };
 };
