@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import * as S from '@commons/styles/ProductsContainerStyled';
 import { SubCategoryType } from '@pages/index';
 import CartIcon from '@components/modules/CartIcon';
+import Tung from '@components/atoms/Tung';
 
 type Props = {
   id: number;
@@ -45,9 +46,15 @@ const SubCartegoryPage: NextPage<Props> = (props) => {
 
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
-      <S.ProductsContainerStyle>
-        <ProductsByCategoryContainer products={props.products} headerType="filter" />
-      </S.ProductsContainerStyle>
+      {props.products.length > 0 ? (
+        <S.ProductsContainerStyle>
+          <ProductsByCategoryContainer products={props.products} headerType="filter" />
+        </S.ProductsContainerStyle>
+      ) : (
+        <div style={{ margin: '2rem 0' }}>
+          <Tung />
+        </div>
+      )}
       <ToastModal />
       <CartIcon />
     </Layout>

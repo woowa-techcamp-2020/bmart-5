@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 import * as S from '@commons/styles/ProductsContainerStyled';
 import SubCategoryNavContainer from '@components/templates/SubCategoryNavContainer';
 import CartIcon from '@components/modules/CartIcon';
+import Tung from '@components/atoms/Tung';
 
 type Props = {
   id: number;
@@ -52,10 +53,16 @@ const CartegoryPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <Banner />
       <SubCategoryNavContainer subCategories={props.subCategories} />
-      <SlidableContainer title="이 상품 어때요?" products={props.products} />
-      <S.ProductsContainerStyle>
-        <ProductsByCategoryContainer products={props.products} headerType="filter" />
-      </S.ProductsContainerStyle>
+      {props.products.length > 0 ? (
+        <>
+          <SlidableContainer title="이 상품 어때요?" products={props.products} />
+          <S.ProductsContainerStyle>
+            <ProductsByCategoryContainer products={props.products} headerType="filter" />
+          </S.ProductsContainerStyle>
+        </>
+      ) : (
+        <Tung />
+      )}
       <CartIcon />
       <ToastModal />
     </Layout>
