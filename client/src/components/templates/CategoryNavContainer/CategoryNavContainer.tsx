@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import Link from 'next/link';
 import * as S from './styled';
+import { useRouter } from 'next/router';
 
 type Props = {
   categories: Array<CategoryType>;
@@ -22,6 +22,7 @@ type SubCategoryType = {
 export const CategoryNavContainer: React.FC<Props> = ({ categories, subCategories }) => {
   let twoArr: number[] = [];
   const ref = useRef<Array<HTMLDivElement>>([]);
+  const router = useRouter();
 
   const showSubCategory = (index: number) => {
     ref.current.forEach((i) => ((i as HTMLElement).style.background = '#fff'));
@@ -64,11 +65,9 @@ export const CategoryNavContainer: React.FC<Props> = ({ categories, subCategorie
                       <S.SubCategory
                         className={`category-${subcategory.categoryId} hide`}
                         key={subCategoryIdx}
+                        onClick={() => router.push(`sub-categories/${subcategory.id}`)}
                       >
-                        {' '}
-                        <Link href={`sub-categories/${subcategory.id}`}>
-                          <a>{subcategory.name}</a>
-                        </Link>
+                        {subcategory.name}
                       </S.SubCategory>
                     );
                   })}
