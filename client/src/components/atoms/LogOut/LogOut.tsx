@@ -7,6 +7,7 @@ import LinkBox from '@components/atoms/LinkBox';
 type Props = {
   setToken: Function;
   setUser: Function;
+  setCartId: Function;
 };
 
 export const LogOut: React.FC<Props> = (props) => {
@@ -15,12 +16,13 @@ export const LogOut: React.FC<Props> = (props) => {
     deleteCookie('authorization');
     props.setToken(null);
     props.setUser(null);
+    props.setCartId(null);
     router.push('/');
   };
   return (
     <S.LogOutContainer>
       <S.LogOut onClick={signOutHandler}>
-         <LinkBox url="/signin" name="로그아웃" icon={'VscSignOut'} />
+        <LinkBox url="/signin" name="로그아웃" icon={'VscSignOut'} />
       </S.LogOut>
     </S.LogOutContainer>
   );

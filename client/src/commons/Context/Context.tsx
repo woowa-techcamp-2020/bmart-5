@@ -83,6 +83,9 @@ export const Provider: React.FC<Props> = (props) => {
         const cartProducts = await cartProductsFetch(cartId);
         setCartProducts(cartProducts);
       }
+      if (cartId === null && token === null && cartProducts.length > 0) {
+        setCartProducts([]);
+      }
     };
 
     fetchData();

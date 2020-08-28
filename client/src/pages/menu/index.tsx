@@ -33,7 +33,7 @@ type SubCategoryArrType = {
 };
 
 const MenuPage: NextPage<Props> = (props) => {
-  const { user, setUser, setToken } = useContext(Context);
+  const { user, setUser, setToken, setCartId } = useContext(Context);
 
   const layoutProps: LayoutProps = {
     title: 'Bmart 메뉴',
@@ -47,7 +47,7 @@ const MenuPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <MenuNavContainer user={user} />
       <CategoryNavContainer categories={props.categories} subCategories={props.subCategories} />
-      {user && <LogOut setUser={setUser} setToken={setToken} />}
+      {user && <LogOut setUser={setUser} setToken={setToken} setCartId={setCartId} />}
       <ToastModal />
     </Layout>
   );
