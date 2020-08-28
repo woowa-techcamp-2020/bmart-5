@@ -130,3 +130,6 @@ yarn dev
 ## 데이터베이스 ERD
 
 <img src="./assets/erd.png" alt="ERD" />
+
+## 시연
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/46251629/91518002-28c32f80-e92a-11ea-9c7e-b84a4679fe8b.gif)
