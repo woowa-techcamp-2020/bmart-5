@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Footer = styled.footer`
   background-color: #dfdfdf;
   padding-bottom: 4rem;
+  position: relative;
+  top: 8rem;
 `;
 
 export const ButtonContainer = styled.div`
