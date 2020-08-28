@@ -6,6 +6,8 @@ export const FetchableContainer = styled.div<{}>`
   margin-bottom: 10px;
   color: rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 5px;
+  box-sizing: border-box;
+  padding: 0 1rem;
 
   & .wrapper {
     padding: 0 1rem;

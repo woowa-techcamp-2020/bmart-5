@@ -4,6 +4,7 @@ export const CheckListContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+
   & .content {
     padding: 0 1rem;
   }

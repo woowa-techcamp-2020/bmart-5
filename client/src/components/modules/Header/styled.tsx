@@ -9,7 +9,7 @@ export const Header = styled.header`
     }
   }
   width: 100%;
-  z-index: 9999;
+  z-index: 10;
   display: flex;
   min-height: 4rem;
   justify-content: space-between;

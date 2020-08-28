@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const TotalPriceInfo = styled.div`
-background-color: white;
-display: flex;
+  background-color: white;
+  display: flex;
   flex-direction: column;
   font-size: 2rem;
-  padding 3rem 0 0 0;
+  padding: 3rem 0 0 0;
 `;
 
 export const PriceRow = styled.div`
