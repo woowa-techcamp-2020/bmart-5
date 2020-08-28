@@ -5,6 +5,7 @@ import { ProductType } from '@pages/index';
 import ContainerHeader from '@components/modules/ContainerHeader';
 import { TabViewContainerLimit } from '@utils/constants';
 import { Context } from '@commons/Context';
+import { useRouter } from 'next/router';
 
 type ProductArrType = Array<ProductType>;
 
@@ -15,6 +16,7 @@ type Props = {
 export const TabViewContainer: React.FC<Props> = ({ products }) => {
   const { likeProducts, setLikeProducts } = useContext(Context);
   const [currentTab, setCurrentTab] = useState<number>(0);
+  const router = useRouter();
   const imageRefs = Array.from({ length: TabViewContainerLimit }, () =>
     useRef<HTMLDivElement>(null)
   );
@@ -40,7 +42,12 @@ export const TabViewContainer: React.FC<Props> = ({ products }) => {
 
   return (
     <S.TabViewContainer>
-      <ContainerHeader moreBtn onMoreBtnClickHandler={() => alert('지원 예정')}>
+      <ContainerHeader
+        moreBtn
+        onMoreBtnClickHandler={() => {
+          router.push('/hotdeal');
+        }}
+      >
         지금사면 ⚡️번쩍할인
       </ContainerHeader>
       <div className="content">

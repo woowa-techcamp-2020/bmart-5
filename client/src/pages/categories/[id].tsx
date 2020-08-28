@@ -2,7 +2,12 @@ import React, { useEffect, useContext } from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Layout, { LayoutProps } from '@commons/Layout';
 import Banner from '@components/modules/Banner';
-import { HeaderMainType, MaxCategoryCount, CategoryPageContainerLimit } from '@utils/constants';
+import {
+  HeaderMainType,
+  MaxCategoryCount,
+  CategoryPageSlideContainerLimit,
+  CategoryPageMainContainerLimit,
+} from '@utils/constants';
 import SlidableContainer from '@components/templates/SlidableContainer';
 import ToastModal from '@components/modules/ToastModal';
 import ProductsByCategoryContainer from '@components/templates/ProductsByCategoryContainer';
@@ -26,7 +31,8 @@ type Props = {
   id: number;
   name: string;
   subCategories: Array<SubCategoryType>;
-  products: Array<ProductType>;
+  mainProducts: Array<ProductType>;
+  slideProducts: Array<ProductType>;
 };
 
 const CartegoryPage: NextPage<Props> = (props) => {
@@ -53,11 +59,11 @@ const CartegoryPage: NextPage<Props> = (props) => {
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
       <Banner />
       <SubCategoryNavContainer subCategories={props.subCategories} />
-      {props.products.length > 0 ? (
+      {props.mainProducts.length > 0 ? (
         <>
-          <SlidableContainer title="이 상품 어때요?" products={props.products} />
+          <SlidableContainer title="이 상품 어때요?" products={props.slideProducts} />
           <S.ProductsContainerStyle>
-            <ProductsByCategoryContainer products={props.products} headerType="filter" />
+            <ProductsByCategoryContainer products={props.mainProducts} headerType="filter" />
           </S.ProductsContainerStyle>
         </>
       ) : (
@@ -83,9 +89,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = Number(params?.id);
   const name = (await categoryInfoFetch(id))?.name;
   const subCategories = await subCategoriesByCategoryFetch(id);
-  const products = await categoryProductsFetch(subCategories, CategoryPageContainerLimit);
+  const slideProducts = await categoryProductsFetch(subCategories, CategoryPageSlideContainerLimit);
+  const mainProducts = await categoryProductsFetch(subCategories, CategoryPageMainContainerLimit);
 
-  return { props: { id, name, subCategories, products } };
+  return { props: { id, name, subCategories, slideProducts, mainProducts } };
 };
 
 const categoryInfoFetch = async (id: number): Promise<CategoryType | null> => {
