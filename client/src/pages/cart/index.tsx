@@ -17,6 +17,7 @@ const CartPage: NextPage<Props> = () => {
   const [outOfStockProducts, setOutOfStockProducts] = useState<Array<ProductType>>([]);
   const [checkedProducts, setCheckedProducts] = useState<Array<ProductType>>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalCount, setTotalCount] = useState<number>(0);
   const token = getCookie('authorization');
   const router = useRouter();
 
@@ -28,6 +29,15 @@ const CartPage: NextPage<Props> = () => {
     );
     setCheckedProducts(
       cartProducts.filter((product: ProductType) => product.outOfStockAt === null)
+    );
+    setTotalCount(
+      cartProducts.reduce((prev, cur) => {
+        if (cur.outOfStockAt === null) {
+          return prev + cur.count;
+        } else {
+          return prev;
+        }
+      }, 0)
     );
     setTotalPrice(
       cartProducts.reduce((prev, cur) => {
@@ -63,6 +73,7 @@ const CartPage: NextPage<Props> = () => {
         setCartProducts={setCartProducts}
       />
       <TotalPriceContainer
+        totalCount={totalCount}
         totalPrice={totalPrice}
         deliveryFee={deliveryFee}
         deliveryDiscount={deliveryDiscount}

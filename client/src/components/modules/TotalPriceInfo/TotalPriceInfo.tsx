@@ -7,6 +7,7 @@ import BottomBtn from '@components/atoms/BottomBtn';
 import API from '@utils/API';
 
 type Props = {
+  totalCount: number;
   totalPrice: number;
   deliveryFee: number;
   deliveryDiscount: number;
@@ -45,7 +46,7 @@ export const TotalPriceInfo: React.FC<Props> = (props) => {
       </S.CautionRow>
       <S.SubmitRow>
         <BottomBtn
-          name={'배달 주문하기'}
+          name={`${props.totalCount} 배달 주문하기`}
           tag={`${props.totalPrice.toLocaleString()}원 `}
           onClick={async (event: MouseEvent) => {
             event.stopPropagation();
