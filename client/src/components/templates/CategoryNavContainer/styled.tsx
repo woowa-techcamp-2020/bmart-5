@@ -27,7 +27,6 @@ export const Category = styled.div<{}>`
   padding: 1.5rem;
   font-size: 2rem;
   cursor: pointer;
-  font-weight: 600;
 `;
 
 export const SubCategory = styled.div<{}>`
