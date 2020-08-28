@@ -34,25 +34,27 @@ export const CheckListContainer: React.FC<Props> = (props) => {
         setCartProducts={props.setCartProducts}
       />
       <S.GrayHorizontal />
-      <ContainerHeader>일반상품</ContainerHeader>
-      <FadeIn>
-        {props.products.map((product, idx: number) => (
-          <CheckableProduct
-            key={idx}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            discount={product.discount}
-            imgUrl={product.imgUrl}
-            count={product.count}
-            cartProducts={props.cartProducts}
-            checkedProducts={props.checkedProducts}
-            setCheckedProducts={props.setCheckedProducts}
-            setCartProducts={props.setCartProducts}
-            products={props.products}
-          />
-        ))}
-      </FadeIn>
+      <div className="content">
+        <ContainerHeader>일반상품</ContainerHeader>
+        <FadeIn>
+          {props.products.map((product, idx: number) => (
+            <CheckableProduct
+              key={idx}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              discount={product.discount}
+              imgUrl={product.imgUrl}
+              count={product.count}
+              cartProducts={props.cartProducts}
+              checkedProducts={props.checkedProducts}
+              setCheckedProducts={props.setCheckedProducts}
+              setCartProducts={props.setCartProducts}
+              products={props.products}
+            />
+          ))}
+        </FadeIn>
+      </div>
       <S.GrayHorizontal />
     </S.CheckListContainer>
   );

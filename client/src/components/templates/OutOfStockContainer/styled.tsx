@@ -3,7 +3,11 @@ import { GrayHorizontal, CheckListContainer } from '../CheckListContainer/styled
 
 export { GrayHorizontal };
 
-export const OutOfStockContainer = styled(CheckListContainer)``;
+export const OutOfStockContainer = styled(CheckListContainer)`
+  & .content {
+    padding: 0 1rem;
+  }
+`;
 
 export const BackToHome = styled.div`
   display: flex;

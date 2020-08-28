@@ -7,6 +7,7 @@ export const CheckListHeader = styled.div`
   font-size: 2rem;
   font-weight: 600;
   margin: 1rem 1rem;
+  padding: 0 1rem;
 `;
 
 export const CheckBoxSection = styled.div``;

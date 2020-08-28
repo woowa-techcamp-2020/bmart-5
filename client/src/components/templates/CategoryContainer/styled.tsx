@@ -7,6 +7,7 @@ export const WrapperContainer = styled.div`
   margin-bottom: 10px;
   color: rgba(0, 0, 0, 0.25);
   box-shadow: 0px 2px 5px;
+  padding: 0 1rem;
 `;
 
 export const CategoryContainer = styled.div`

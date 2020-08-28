@@ -89,7 +89,6 @@ export const ToastModal: React.FC = () => {
                 },
               ]);
               await ModalClose();
-              router.push('/cart');
             } else {
               alert(`not defined status code ${status}`);
               ModalClose();
