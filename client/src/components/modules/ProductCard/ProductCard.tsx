@@ -34,7 +34,7 @@ export const ProductCard: React.FC<Props> = ({
         likeProducts.filter((product) => product.id === item.id).length > 0 ? true : false;
       if (isLiked !== Liked) setLiked(isLiked);
     }
-  }, [likeProducts, item]);
+  }, [likeProducts, item, Liked]);
 
   const onLikeHandler = async (event: MouseEvent) => {
     event.stopPropagation();
