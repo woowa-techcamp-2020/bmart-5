@@ -17,7 +17,6 @@ export type TokenUser = {
 
 const isValidToken = async (req: Request, res: Response, next: NextFunction) => {
   const user = req.user as TokenUser;
-  console.log(user);
   try {
     if (user) {
       res
