@@ -40,6 +40,15 @@ export enum ProductDetailInfoTitle {
   COUNTRY_OF_ORIGIN = '원산지표시',
 }
 
+export enum FilterType {
+  DEFAULT = '기본 정렬순',
+  POPULAR = '인기 상품순',
+  PRICE_HIGH = '금액 높은순',
+  PRICE_LOW = '금액 낮은순',
+  RECENTLY = '신규 상품순',
+  DISCOUNTED = '할인율 순',
+}
+
 export const ProductDeliveryDesc = (data: { earliest: number; latest: number }) => {
   return `배달시간 ${data.earliest}~${data.latest}분 예상`;
 };

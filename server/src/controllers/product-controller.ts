@@ -27,6 +27,8 @@ const findRandom = async (req: Request, res: Response, next: NextFunction) => {
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
+        'clicks',
       ],
       where: {
         deletedAt: {
@@ -66,6 +68,8 @@ const findLatest = async (req: Request, res: Response, next: NextFunction) => {
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
+        'clicks',
       ],
       where: {
         deletedAt: {
@@ -99,6 +103,7 @@ const findHighestOff = async (req: Request, res: Response, next: NextFunction) =
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
       ],
       where: {
         deletedAt: {
@@ -135,6 +140,7 @@ const findHottest = async (req: Request, res: Response, next: NextFunction) => {
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
       ],
       where: {
         deletedAt: {
@@ -171,6 +177,7 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
       ],
     });
     res
@@ -198,6 +205,7 @@ const findBySubCategoryId = async (req: Request, res: Response, next: NextFuncti
         'imgUrl',
         'subCategoryId',
         'outOfStockAt',
+        'createdAt',
       ],
       where: {
         [Op.and]: [
