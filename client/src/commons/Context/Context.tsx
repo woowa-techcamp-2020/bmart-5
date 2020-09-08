@@ -195,6 +195,8 @@ const likeProductsFetch = async (token: string) => {
         discount: item.product.discount,
         outOfStockAt: item.product.outOfStockAt,
         subCategoryId: item.product.subCategoryId,
+        clicks: item.product.clicks,
+        createdAt: item.product.createdAt,
       };
     });
   } else {
