@@ -32,7 +32,9 @@ export type ProductType = {
   discount: number;
   outOfStockAt: Date | null;
   subCategoryId: number;
+  createdAt: string;
   imgUrl: string;
+  clicks: number;
 };
 
 export type SubCategoryType = {

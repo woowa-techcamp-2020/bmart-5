@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import * as S from './styled';
 import ProductCard from '@components/modules/ProductCard';
 import { ProductType } from '@pages/index';
@@ -6,6 +6,7 @@ import ContainerHeader from '@components/modules/ContainerHeader';
 import { useRouter } from 'next/router';
 import { Context } from '@commons/Context';
 import { FadeIn } from '@animates/index';
+import FilterSelect from '@components/atoms/FilterSelect';
 
 type ProductArrType = Array<ProductType>;
 
@@ -23,7 +24,12 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
   headerType,
 }) => {
   const { likeProducts, setLikeProducts } = useContext(Context);
+  const [items, setItems] = useState<Array<ProductType>>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    setItems(products);
+  }, [products]);
 
   return (
     <S.ProductsByCategoryContainer>
@@ -37,14 +43,13 @@ export const ProductsByCategoryContainer: React.FC<Props> = ({
       )}
       {headerType === 'filter' && (
         <ContainerHeader>
-          {/* TODO Filter 기능 구현 */}
-          <div />
+          <FilterSelect items={items} setItems={setItems} />
         </ContainerHeader>
       )}
       <FadeIn>
         <div className="wrapper">
           <div className="content">
-            {products.map((item: ProductType, idx: number) => {
+            {items.map((item: ProductType, idx: number) => {
               return (
                 <ProductCard
                   key={idx}
