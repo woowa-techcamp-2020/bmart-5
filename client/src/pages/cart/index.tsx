@@ -8,6 +8,7 @@ import OutOfStockContainer from '@components/templates/OutOfStockContainer';
 import TotalPriceContainer from '@components/modules/TotalPriceInfo';
 import { getCookie } from '@utils/cookie-manager';
 import { useRouter } from 'next/router';
+import Tung from '@components/atoms/Tung';
 
 type Props = {};
 
@@ -60,24 +61,30 @@ const CartPage: NextPage<Props> = () => {
 
   return (
     <Layout title={layoutProps.title} headerProps={layoutProps.headerProps}>
-      <CheckListContainer
-        cartProducts={cartProducts}
-        products={products}
-        checkedProducts={checkedProducts}
-        setCheckedProducts={setCheckedProducts}
-        setCartProducts={setCartProducts}
-      />
-      <OutOfStockContainer
-        products={outOfStockProducts}
-        cartProducts={cartProducts}
-        setCartProducts={setCartProducts}
-      />
-      <TotalPriceContainer
-        totalCount={totalCount}
-        totalPrice={totalPrice}
-        deliveryFee={deliveryFee}
-        deliveryDiscount={deliveryDiscount}
-      />
+      {cartProducts.length > 0 ? (
+        <>
+          <CheckListContainer
+            cartProducts={cartProducts}
+            products={products}
+            checkedProducts={checkedProducts}
+            setCheckedProducts={setCheckedProducts}
+            setCartProducts={setCartProducts}
+          />
+          <OutOfStockContainer
+            products={outOfStockProducts}
+            cartProducts={cartProducts}
+            setCartProducts={setCartProducts}
+          />
+          <TotalPriceContainer
+            totalCount={totalCount}
+            totalPrice={totalPrice}
+            deliveryFee={deliveryFee}
+            deliveryDiscount={deliveryDiscount}
+          />
+        </>
+      ) : (
+        <Tung />
+      )}
     </Layout>
   );
 };
