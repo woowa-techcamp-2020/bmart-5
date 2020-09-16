@@ -24,7 +24,7 @@ export type CartProductType = {
 };
 
 const MenuPage: NextPage<Props> = () => {
-  const [history, setHistory] = useState<Array<HistoryType>>();
+  const [history, setHistory] = useState<Array<HistoryType>>([]);
   const layoutProps: LayoutProps = {
     title: 'Bmart 주문내역',
     headerProps: {
@@ -48,9 +48,7 @@ const MenuPage: NextPage<Props> = () => {
   );
 };
 
-export const historyContainerFetch = async (
-  token: string | null
-): Promise<Array<HistoryType> | undefined> => {
+export const historyContainerFetch = async (token: string | null): Promise<Array<HistoryType>> => {
   let { message, result, status } = (
     await API.get(`/cart/purchase/all`, {
       headers: {
@@ -63,7 +61,7 @@ export const historyContainerFetch = async (
     return result;
   } else {
     console.error(`not defined status code: ${status}`);
-    return;
+    return [];
   }
 };
 
