@@ -12,25 +12,19 @@ const Normalize = createGlobalStyle`
 
   @media (min-width:768px) and all {
       html {
-        font-size: 16px;
+        font-size: 1rem;
       }
   }
 
   @media(max-width:767px)  {
     html {
-      font-size: 8px;
+      font-size: 0.5rem;
     }
   }
 
   body {
     margin: 0 auto;
     max-width: 48rem; 
-  }
-
-  @media all and (max-width:1024px) {
-    body {
-      max-width: 100%;
-    }
   }
 
   #__next {

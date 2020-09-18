@@ -3,11 +3,6 @@ import styled from 'styled-components';
 export const Header = styled.header`
   position: fixed;
   max-width: 48rem;
-  @media all and (max-width: 1024px) {
-    & {
-      max-width: 100%;
-    }
-  }
   width: 100%;
   z-index: 10;
   display: flex;
