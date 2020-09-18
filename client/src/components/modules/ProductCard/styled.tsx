@@ -20,7 +20,7 @@ export const ProductCard = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    div {
+    .black-back {
       width: 100%;
       height: 100%;
       opacity: 0.5;
@@ -28,11 +28,11 @@ export const ProductCard = styled.div`
     }
     p {
       position: absolute;
-      font-size: 3rem;
+      font-size: 2rem;
       color: white;
       font-weight: 600;
       top: 100%;
-      transform: translate(8%, -370%);
+      transform: translate(25%, -500%);
     }
   }
 
@@ -73,12 +73,6 @@ export const ProductCard = styled.div`
       padding-top: 75%;
     }
 
-    & .sold-out {
-      p {
-        transform: translate(115%, -630%);
-      }
-    }
-
     & img {
       position: absolute;
       top: 0;
@@ -87,6 +81,13 @@ export const ProductCard = styled.div`
       height: auto;
       transform: translate(0, -12.5%);
     }
+
+    & .sold-out {
+      p {
+        font-size: 6rem;
+        transform: translate(20%, -400%);
+      }
+    }
   }
 
   /* grid */
@@ -94,7 +95,7 @@ export const ProductCard = styled.div`
     margin-bottom: 4rem;
     & .sold-out {
       p {
-        transform: translate(2%, -350%);
+        transform: translate(15%, -450%);
       }
     }
   }
@@ -104,7 +105,7 @@ export const ProductCard = styled.div`
     margin-bottom: 4rem;
     & .sold-out {
       p {
-        transform: translate(30%, -450%);
+        font-size: 2.8rem;
       }
     }
   }
