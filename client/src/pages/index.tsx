@@ -23,6 +23,11 @@ import {
 import { Context } from '@commons/Context';
 import { useRouter } from 'next/router';
 import DynamicContainer from '@components/templates/DynamicContainer';
+import smoothscroll from 'smoothscroll-polyfill';
+
+if (typeof window !== 'undefined') {
+  smoothscroll.polyfill();
+}
 
 export type ProductType = {
   id: number;

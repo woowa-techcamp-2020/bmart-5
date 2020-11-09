@@ -29,8 +29,8 @@ export const CarouselBanner = () => {
   const initBannerWidth = () => {
     const container = containerRef.current as HTMLDivElement;
 
-    container.style.scrollBehavior = 'initial';
-    container.scrollLeft += innerWidth;
+    const left = container.scrollLeft + innerWidth;
+    container.scroll({ left, behavior: 'auto' });
   };
 
   const removeUselessIndicators = () => {
@@ -73,13 +73,11 @@ export const CarouselBanner = () => {
     const { scrollWidth, scrollLeft } = container;
 
     if (scrollWidth - innerWidth - scrollLeft <= 0) {
-      container.style.scrollBehavior = 'initial';
-      container.scrollLeft = innerWidth;
+      container.scroll({ left: innerWidth, behavior: 'auto' });
       container.style.scrollBehavior = 'smooth';
     }
     if (scrollLeft <= 0) {
-      container.style.scrollBehavior = 'initial';
-      container.scrollLeft = scrollWidth - 2 * innerWidth;
+      container.scroll({ left: scrollWidth - 2 * innerWidth, behavior: 'auto' });
       container.style.scrollBehavior = 'smooth';
     }
   };
@@ -107,8 +105,8 @@ export const CarouselBanner = () => {
     () => {
       const container = containerRef.current as HTMLDivElement;
 
-      container.style.scrollBehavior = 'smooth';
-      container.scrollLeft += innerWidth;
+      const left = container.scrollLeft + innerWidth;
+      container.scroll({ left, behavior: 'smooth' });
     },
     isRunning ? delay : null
   );
