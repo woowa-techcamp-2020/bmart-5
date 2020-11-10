@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+type StyledIndicatorProps = {
+  isCurrent: boolean;
+  isCloned: boolean;
+};
 
 export const CarouselBanner = styled.div`
   margin: auto;
@@ -55,10 +60,18 @@ export const Indicator = styled.div`
   background-color: rgba(255, 255, 255, 0.4);
   transition: background-color 300ms;
 
-  &.current {
-    background-color: #ffffff;
-    box-shadow: 0 0 0 1px #ffffff;
-  }
+  ${(props: StyledIndicatorProps) =>
+    props.isCurrent &&
+    css`
+      background-color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff;
+    `};
+
+  ${(props: StyledIndicatorProps) =>
+    props.isCloned &&
+    css`
+      display: none;
+    `};
 
   &:last-child {
     margin-right: 0;

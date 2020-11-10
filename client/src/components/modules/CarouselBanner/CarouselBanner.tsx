@@ -20,23 +20,16 @@ export const CarouselBanner = () => {
   const carouselBannerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentsRef = useRef<Array<HTMLDivElement>>([]);
-  const indicatorsRef = useRef<Array<HTMLDivElement>>([]);
-
-  const carouselBanner = carouselBannerRef.current as HTMLDivElement;
-  const contents = contentsRef.current as HTMLDivElement[];
-  const indicators = indicatorsRef.current as HTMLDivElement[];
 
   const initBannerWidth = () => {
     const container = containerRef.current as HTMLDivElement;
     container.scroll({ left: innerWidth, behavior: 'auto' });
   };
 
-  const removeUselessIndicators = () => {
-    indicators[0].remove();
-    indicators[length + 1].remove();
-  };
-
   const createIntersectionObserver = () => {
+    const carouselBanner = carouselBannerRef.current as HTMLDivElement;
+    const contents = contentsRef.current as HTMLDivElement[];
+
     const carouselBannerObserveHandler = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
@@ -86,20 +79,8 @@ export const CarouselBanner = () => {
   // Initial Setting
   useEffect(() => {
     initBannerWidth();
-    removeUselessIndicators();
     createIntersectionObserver();
   }, []);
-
-  // Set Indicator
-  useEffect(() => {
-    if (currentSlide === 0) return;
-    if (currentSlide === length + 1) return;
-
-    indicators.forEach((indicator) => {
-      indicator.classList.remove('current');
-    });
-    indicators[currentSlide].classList.add('current');
-  }, [currentSlide]);
 
   // Slide to next Banner
   useInterval(
@@ -118,12 +99,8 @@ export const CarouselBanner = () => {
     <S.CarouselBanner ref={carouselBannerRef}>
       <S.SlideList
         ref={containerRef}
-        onTouchStart={() => {
-          setIsRunning(false);
-        }}
-        onTouchEnd={() => {
-          setIsRunning(true);
-        }}
+        onTouchStart={() => setIsRunning(false)}
+        onTouchEnd={() => setIsRunning(true)}
         onScroll={scrollEventHandler}
       >
         {bannerList.map((banner, idx) => (
@@ -144,9 +121,8 @@ export const CarouselBanner = () => {
         {Array.from({ length: bannerList.length }, (_, idx) => (
           <S.Indicator
             key={idx}
-            ref={(el: HTMLDivElement) => {
-              indicatorsRef.current[idx] = el;
-            }}
+            isCurrent={idx === currentSlide}
+            isCloned={idx === 0 || idx === bannerList.length - 1}
           />
         ))}
       </S.IndicatorContainer>
