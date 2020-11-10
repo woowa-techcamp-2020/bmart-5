@@ -21,6 +21,22 @@ export const CarouselBanner = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentsRef = useRef<Array<HTMLDivElement>>([]);
 
+  // Initial Setting
+  useEffect(() => {
+    initBannerWidth();
+    createIntersectionObserver();
+  }, []);
+
+  // Slide to next Banner
+  useInterval(
+    () => {
+      const container = containerRef.current as HTMLDivElement;
+      const left = container.scrollLeft + innerWidth;
+      container.scroll({ left, behavior: 'smooth' });
+    },
+    isRunning ? delay : null
+  );
+
   const initBannerWidth = () => {
     const container = containerRef.current as HTMLDivElement;
     container.scroll({ left: innerWidth, behavior: 'auto' });
@@ -64,33 +80,21 @@ export const CarouselBanner = () => {
     const { scrollWidth, scrollLeft } = container;
 
     // Last banner to First Banner
-    if (scrollWidth - innerWidth - scrollLeft === 0) {
+    if (scrollWidth - innerWidth - scrollLeft <= 0) {
       container.scroll({ left: innerWidth, behavior: 'auto' });
       return;
     }
 
     // First banner to Last Banner
-    if (scrollLeft === 0) {
+    if (scrollLeft <= 0) {
       container.scroll({ left: scrollWidth - 2 * innerWidth, behavior: 'auto' });
       return;
     }
   };
 
-  // Initial Setting
-  useEffect(() => {
-    initBannerWidth();
-    createIntersectionObserver();
-  }, []);
-
-  // Slide to next Banner
-  useInterval(
-    () => {
-      const container = containerRef.current as HTMLDivElement;
-      const left = container.scrollLeft + innerWidth;
-      container.scroll({ left, behavior: 'smooth' });
-    },
-    isRunning ? delay : null
-  );
+  const touchEventHandler = ({ nativeEvent }: React.TouchEvent<HTMLDivElement>) => {
+    nativeEvent.type === 'touchstart' ? setIsRunning(false) : setIsRunning(true);
+  };
 
   const bannerList =
     length > 1 ? [bigBannerList[length - 1], ...bigBannerList, bigBannerList[0]] : bigBannerList;
@@ -99,8 +103,8 @@ export const CarouselBanner = () => {
     <S.CarouselBanner ref={carouselBannerRef}>
       <S.SlideList
         ref={containerRef}
-        onTouchStart={() => setIsRunning(false)}
-        onTouchEnd={() => setIsRunning(true)}
+        onTouchStart={touchEventHandler}
+        onTouchEnd={touchEventHandler}
         onScroll={scrollEventHandler}
       >
         {bannerList.map((banner, idx) => (
